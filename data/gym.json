@@ -1,0 +1,177 @@
+{
+  "membresias": [
+    {
+      "id": 1,
+      "nombre": "Básica",
+      "precio": 120.00,
+      "descripcion": "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
+      "duracion": 30,
+      "estado": true
+    },
+    {
+      "id": 2,
+      "nombre": "Premium",
+      "precio": 300.00,
+      "descripcion": "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
+      "duracion": 90,
+      "estado": true
+    }
+  ],
+
+  "rutinas": [
+    {
+      "id": 1,
+      "nombre": "Fuerza Básica",
+      "duracion": 60,
+      "descripcion": "Entrenamiento enfocado en ejercicios de fuerza para todo el cuerpo.",
+      "estado": true
+    },
+    {
+      "id": 2,
+      "nombre": "Cardio Intensivo",
+      "duracion": 45,
+      "descripcion": "Rutina de alta intensidad para mejorar la resistencia cardiovascular.",
+      "estado": true
+    }
+  ],
+
+  "detalle_rutinas": [
+    {
+      "id": 1,
+      "rutina_id": 1,
+      "ejercicio": "Sentadillas",
+      "series": 4,
+      "repeticiones": 12,
+      "dias": ["Lunes", "Miércoles", "Viernes"],
+      "descanso": "60",
+      "calorias": 200
+    },
+    {
+      "id": 2,
+      "rutina_id": 2,
+      "ejercicio": "Cinta de correr",
+      "series": 1,
+      "repeticiones": 1,
+      "dias": ["Martes", "Jueves", "Sábado"],
+      "descanso": "N/A",
+      "calorias": 450
+    }
+  ],
+
+  "socios": [
+    {
+      "id": 1,
+      "nombre": "Laura",
+      "apellido": "Fernández",
+      "dni": "74859632",
+      "fecha_ingreso": "2023-05-12",
+      "telefono": "987654321",
+      "correo": "laura.fernandez@example.com",
+      "fecha_nacimiento": "1995-08-20",
+      "altura": 1.68,
+      "peso": 60.5,
+      "genero": "F",
+      "imagen": "img/clase-1.jpg",
+      "membresia_id": 2,
+      "rutina_id": 5
+    },
+    {
+      "id": 2,
+      "nombre": "Carlos",
+      "apellido": "Ramírez",
+      "dni": "65214897",
+      "fecha_ingreso": "2024-01-08",
+      "telefono": "912345678",
+      "correo": "carlos.ramirez@example.com",
+      "fecha_nacimiento": "1990-11-05",
+      "altura": 1.75,
+      "peso": 78.2,
+      "genero": "M",
+      "membresia_id": 1,
+      "rutina_id": 3
+    }
+  ],
+
+  "clases": [
+    {
+      "id": 1,
+      "nombre": "Yoga Avanzado",
+      "descripcion": "Clase enfocada en respiración y flexibilidad.",
+      "duracion": 30,
+      "fecha": "2025-09-01",
+      "hora": "11:00",
+      "capacidad": 20,
+      "estado": "Programado",
+      "imagen": "img/clase-1.jpg",
+      "entrenador_id": 1
+    },
+    {
+      "id": 2,
+      "nombre": "Pilates Intermedio",
+      "descripcion": "Ejercicios de fortalecimiento y postura.",
+      "duracion": 30,
+      "fecha": "2025-09-10",
+      "hora": "13:00",
+      "capacidad": 15,
+      "estado": "Finalizado",
+      "imagen": "img/clase-2.jpg",
+      "entrenador_id": 1
+    },
+    {
+      "id": 3,
+      "nombre": "Baile Zumba",
+      "descripcion": "Ejercicios de cardio.",
+      "duracion": 30,
+      "fecha": "2025-09-02",
+      "hora": "14:00",
+      "capacidad": 15,
+      "estado": "Programado",
+      "imagen": "img/clase-2.jpg",
+      "entrenador_id": 2
+    }
+  ],
+
+  "empleados": [
+    {
+      "id": 1,
+      "nombre": "Max",
+      "apellido": "Occon",
+      "dni": "71597686",
+      "fecha_ingreso": "2023-06-15",
+      "telefono": "987654321",
+      "correo": "max.occon@example.com",
+      "fecha_nacimiento": "1990-04-22",
+      "rol_id": 4
+    },
+    {
+      "id": 2,
+      "nombre": "Franco",
+      "apellido": "Colapinto",
+      "dni": "73527486",
+      "fecha_ingreso": "2023-06-15",
+      "telefono": "987654321",
+      "correo": "franquito@example.com",
+      "fecha_nacimiento": "1990-04-22",
+      "rol_id": 4
+    }
+  ],
+
+  "roles": [
+    {
+      "id": 1,
+      "nombre": "Administrador"
+    },
+    {
+      "id": 2,
+      "nombre": "Asesor"
+    },
+    {
+      "id": 3,
+      "nombre": "Recepcionista"
+    },
+    {
+      "id": 4,
+      "nombre": "Entrenador"
+    }
+  ]
+}

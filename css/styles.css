@@ -3,3 +3,6 @@
 
 /* Componentes */
 @import './components/_sidedbar.css';
+
+/* Layout */
+@import './layout/_clase.css';
