@@ -1,8 +1,7 @@
 export async function getGym() {
+  const response = await fetch("/data/gym.json");
 
-    const response = await fetch('/data/gym.json')
+  const gym = await response.json();
 
-    const gym = await response.json()
-
-    return gym
+  return gym;
 }
