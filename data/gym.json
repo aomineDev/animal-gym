@@ -173,5 +173,25 @@
       "id": 4,
       "nombre": "Entrenador"
     }
+  ],
+  "boleta": [
+    {
+      "id":1,
+      "fechaEmicion":"20025-05-12",
+      "socio_id":"Leonardo Murillo",
+      "membresia_id":"Premiun",
+      "opGrabada":200,
+      "igv":36,
+      "importeTotal":236
+    },
+    {
+      "id":1,
+      "fechaEmicion":"20025-05-12",
+      "socio_id":"Leonardo Murillo",
+      "membresia_id":"Premiun",
+      "opGrabada":200,
+      "igv":36,
+      "importeTotal":236
+    }
   ]
 }
