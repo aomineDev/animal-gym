@@ -1,11 +1,3 @@
-body {
-    background-color: #efefef !important; 
-}
-
-.card {
-    background-color: #ffffff;
-}
-
 .card-img-top {        
   transition: transform 0.5s ease;
 }

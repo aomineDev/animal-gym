@@ -6,7 +6,7 @@
       "precio": 120.00,
       "descripcion": "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
       "duracion": 30,
-      "estado": true
+      "estado": "true"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "precio": 300.00,
       "descripcion": "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
       "duracion": 90,
-      "estado": true
+      "estado": "true"
     }
   ],
 
@@ -141,6 +141,7 @@
       "telefono": "987654321",
       "correo": "max.occon@example.com",
       "fecha_nacimiento": "1990-04-22",
+      "clave": "123",
       "rol_id": 4
     },
     {
@@ -152,6 +153,7 @@
       "telefono": "987654321",
       "correo": "franquito@example.com",
       "fecha_nacimiento": "1990-04-22",
+      "clave": "1234",
       "rol_id": 4
     }
   ],

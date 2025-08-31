@@ -2,9 +2,11 @@ import { card, modalDetailClase, btnDelete, formCrearClase } from '../dom.js'
 import { renderDetailCard, renderClaseCard } from '../render.js'
 import { objectClase } from '../objeto.js'
 
-export const renderSelectedCardEvent = (clases) => {
+export const renderSelectedCardEvent = (clases, empleados) => {
 
     card.addEventListener("click", e => {
+        let claseCompleta = objectClase(clases, empleados)
+
         const btn = e.target.closest("[data-id]")
         if (!btn) return
 
@@ -13,13 +15,13 @@ export const renderSelectedCardEvent = (clases) => {
 
         // Detalle
         if (e.target.closest("[data-bs-target='#verClase']")) {
-            const clase = clases.find(c => c.id === id)
-            if (clase) renderDetailCard(clase, modalDetailClase)
+            claseCompleta = claseCompleta.find(c => c.id === id)
+            if (claseCompleta) renderDetailCard(claseCompleta, modalDetailClase)
         }
 
         // Editar
         if (e.target.closest("[data-bs-target='#editarClase']")) {
-            const clase = clases.find(c => c.id === id)
+            //const clase = clases.find(c => c.id === id)
 
         }
 
@@ -31,8 +33,16 @@ export const renderSelectedCardEvent = (clases) => {
 
     btnDelete.addEventListener("click", () => {
         const id = parseInt(btnDelete.getAttribute("data-id"))
-        clases = clases.filter(c => c.id !== id)
-        renderClaseCard(clases, card)
+
+        //eliminar del array
+        const index = clases.findIndex(c => c.id === id)
+        if (index !== -1) {
+            clases.splice(index, 1)
+        }
+
+        //renderizar
+        const claseCompleta = objectClase(clases, empleados)
+        renderClaseCard(claseCompleta, card)
 
         // cerrar el modal 
         const modal = bootstrap.Modal.getInstance(document.getElementById("eliminarClase"))
@@ -44,6 +54,10 @@ export const createClaseFormEvents = (clases, empleados) => {
 
     formCrearClase.addEventListener("submit", (e) => {
         e.preventDefault()
+
+        if (!formCrearClase.checkValidity()) {
+            return
+        }
 
         const data = new FormData(formCrearClase)
 
@@ -65,11 +79,12 @@ export const createClaseFormEvents = (clases, empleados) => {
 
         //volvemos a renderizar
         renderClaseCard(claseCompleta, card)
-        renderSelectedCardEvent(claseCompleta)
+        renderSelectedCardEvent(clases, empleados)
 
         const modal = bootstrap.Modal.getInstance(document.getElementById("crearClase"))
         modal.hide()
         formCrearClase.reset()
+        formCrearClase.classList.remove("was-validated")
     })
 
 }
