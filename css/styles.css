@@ -1,2 +1,8 @@
-@import url('./components/_sidedbar.css');
-@import url('./layout/_clase.css');
+/* Global */
+@import './global/_global.css';
+
+/* Componentes */
+@import './components/_sidedbar.css';
+
+/* Layout */
+@import './layout/_clase.css';
