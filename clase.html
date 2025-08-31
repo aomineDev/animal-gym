@@ -19,7 +19,7 @@
             </div>
             <nav class="sidebar-body">
                 <ul class="sidebar-items">
-                    <li class="sidebar-item active"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
+                    <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
                                     class="bi bi-house-fill"></i></span>Inicio</a></li>
                     <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
                                     class="bi bi-person-badge-fill"></i></span>Socios</a></li>
@@ -29,7 +29,7 @@
                                     class="bi bi-person-fill"></i></i></span>Empleados</a></li>
                     <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
                                     class="bi bi-person-arms-up"></i></i></span>Rutinas</a></li>
-                    <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
+                    <li class="sidebar-item active"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
                                     class="bi bi-book-fill"></i></span>Clases</a></li>
                     <li class="sidebar-item"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
                                     class="bi bi-receipt"></i></span>Boletas</a></li>
@@ -193,49 +193,13 @@
     <script type="module" src="js/clase/main.js"></script>
     <script type="module" src="js/validate/form.js"></script>
     <script>
-        const options1 = {
-            series: [{
-                name: 'Ingresos',
-                data: [12100, 9850, 10570, 13560, 12610, 10580, 11630, 9600, 11660, 10680]
-            }],
-            chart: {
-                height: 350,
-                type: 'area'
-            },
-            dataLabels: {
-                enabled: false
-            },
-            stroke: {
-                curve: 'smooth'
-            },
-            xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return "$ " + val
-                    }
-                },
-            },
-        };
+        function toggleSidebar() {
+            document.querySelector('.app').classList.toggle('sidebar-open');
+        }
 
-        const chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
-        chart1.render();
-
-        const options2 = {
-            series: [44, 55, 13, 43, 22],
-            chart: {
-                type: 'pie',
-            },
-            legend: {
-                position: 'bottom'
-            },
-            labels: ['Membresia A', 'Membresia B', 'Membresia C', 'Membresia D', 'Membresia E'],
-        };
-
-        const chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
-        chart2.render();
+        function closeSidebar() {
+            document.querySelector('.app').classList.remove('sidebar-open');
+        }
     </script>
 </body>
 

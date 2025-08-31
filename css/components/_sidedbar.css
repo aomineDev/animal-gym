@@ -163,11 +163,6 @@
   }
 }
 
-.card {
-  border: none;
-  box-shadow: 0px 0px 35px 0px rgba(154, 161, 171, 0.15);
-}
-
 @media (max-width: 1023px) {
   .sidebar {
     z-index: 3;
