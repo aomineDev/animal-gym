@@ -1,5 +1,5 @@
 import { card, modalDetailClase, btnDelete, formCrearClase } from '../dom.js'
-import { renderDetailCard, renderClaseCard } from '../render.js'
+import { renderDetailCard, renderClaseCard, renderEditForm } from '../render.js'
 import { objectClase } from '../objeto.js'
 
 export const renderSelectedCardEvent = (clases, empleados) => {
@@ -21,8 +21,9 @@ export const renderSelectedCardEvent = (clases, empleados) => {
 
         // Editar
         if (e.target.closest("[data-bs-target='#editarClase']")) {
-            //const clase = clases.find(c => c.id === id)
-
+            claseCompleta = claseCompleta.find(c => c.id === id)
+            renderEditForm(claseCompleta)
+            console.log("estas en editar con " + claseCompleta.entrenador.nombre)
         }
 
         // Eliminar 
