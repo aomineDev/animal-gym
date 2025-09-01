@@ -98,6 +98,8 @@ export const editClaseFormEvents = (claseCompleta, clases, empleados) => {
 
         const data = new FormData(formEditarClase);
 
+        console.log(data)
+
         if (!claseCompleta) return;
 
         const updatedClase = {
