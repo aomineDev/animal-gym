@@ -8,3 +8,4 @@ export const selectEditarEntrenador = document.getElementById("select_editar")
 
 export const formCrearClase = document.querySelector("#crearClase form")
 export const formEditarClase = document.getElementById("editarClaseForm")
+

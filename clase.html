@@ -102,8 +102,7 @@
                                 name="descripcion" id="descripcion" class="form-control" rows="3"
                                 placeholder="Escribe una breve descripción de la clase" required></textarea> </div>
                         <div class="mb-3"> <label for="duracion" class="form-label">Duración (minutos)</label>
-                            <input type="number" name="duracion" id="duracion" class="form-control" min="1" step="5"
-                                required>
+                            <input type="number" name="duracion" id="duracion" class="form-control" min="1" required>
                         </div>
                         <div class="mb-3"> <label for="fecha" class="form-label">Fecha</label> <input type="date"
                                 name="fecha" id="fecha" class="form-control" required> </div>
@@ -163,7 +162,8 @@
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Clase</h1> <button type="button"
                         class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="editarClaseForm">
+                <div class="modal-body">
+                    <form id="editarClaseForm" class="row needs-validation" novalidate></form>
                 </div>
             </div>
         </div>

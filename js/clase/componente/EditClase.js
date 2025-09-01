@@ -1,6 +1,6 @@
 export function EditClase({ id, nombre, descripcion, entrenador, fecha, hora, duracion, estado, capacidad }) {
   return /*html*/ `
-    <form id="formClase" class="row needs-validation" novalidate>
+    
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre de la clase</label>
         <input type="text" name="nombre" class="form-control" required value="${nombre}">
@@ -13,7 +13,7 @@ export function EditClase({ id, nombre, descripcion, entrenador, fecha, hora, du
 
       <div class="mb-3">
         <label for="duracion" class="form-label">Duración (minutos)</label>
-        <input type="number" name="duracion" class="form-control" min="1" step="5" required value="${duracion}">
+        <input type="number" name="duracion" class="form-control" min="1" required value="${duracion}">
       </div>
 
       <div class="mb-3">
@@ -41,8 +41,7 @@ export function EditClase({ id, nombre, descripcion, entrenador, fecha, hora, du
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary col-5 ms-3">Actualizar clase</button>
-    </form>
+      <button type="submit" class="btn btn-primary col-5 ms-3" data-id=${id}>Actualizar clase</button>
   `
 
 }

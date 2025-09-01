@@ -1,4 +1,4 @@
-import { card, modalDetailClase, btnDelete, formCrearClase } from '../dom.js'
+import { card, modalDetailClase, btnDelete, formCrearClase, formEditarClase } from '../dom.js'
 import { renderDetailCard, renderClaseCard, renderEditForm } from '../render.js'
 import { objectClase } from '../objeto.js'
 
@@ -23,7 +23,7 @@ export const renderSelectedCardEvent = (clases, empleados) => {
         if (e.target.closest("[data-bs-target='#editarClase']")) {
             claseCompleta = claseCompleta.find(c => c.id === id)
             renderEditForm(claseCompleta)
-            console.log("estas en editar con " + claseCompleta.entrenador.nombre)
+            editClaseFormEvents(claseCompleta, clases, empleados)
         }
 
         // Eliminar 
@@ -84,8 +84,48 @@ export const createClaseFormEvents = (clases, empleados) => {
 
         const modal = bootstrap.Modal.getInstance(document.getElementById("crearClase"))
         modal.hide()
+
         formCrearClase.reset()
         formCrearClase.classList.remove("was-validated")
+    })
+
+}
+
+export const editClaseFormEvents = (claseCompleta, clases, empleados) => {
+
+    formEditarClase.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        const data = new FormData(formEditarClase);
+
+        if (!claseCompleta) return;
+
+        const updatedClase = {
+            ...claseCompleta,
+            nombre: data.get("nombre"),
+            descripcion: data.get("descripcion"),
+            duracion: parseInt(data.get("duracion")),
+            fecha: data.get("fecha"),
+            hora: data.get("hora"),
+            capacidad: parseInt(data.get("capacidad")),
+            estado: claseCompleta.estado,
+            imagen: "img/default.jpg",
+            entrenador_id: parseInt(data.get("entrenador"))
+        }
+
+        const index = clases.findIndex(c => c.id === claseCompleta.id)
+        if (index !== -1) {
+            clases[index] = updatedClase
+        }
+
+        // Volver a renderizar
+        renderClaseCard(objectClase(clases, empleados), card)
+
+        console.log(updatedClase.nombre)
+
+        const modal = bootstrap.Modal.getInstance(document.getElementById("editarClase"))
+        modal.hide()
+
     })
 
 }

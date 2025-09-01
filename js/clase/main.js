@@ -12,7 +12,6 @@ async function init() {
 
     //crearClase
     createClaseFormEvents(store.gym.clases, store.gym.empleados)
-
     //renderizar cartas
     renderClaseCard(objectClase(store.gym.clases, store.gym.empleados),
         card, card)
