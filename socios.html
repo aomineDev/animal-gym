@@ -48,6 +48,7 @@
         </div>
         <div class="main-body">
           <div class="container">
+
             <!-- PRINCIPAL -->
             <div class="d-flex justify-content-between align-items-center mb-4">
               <h2><i class="bi bi-people me-2"></i>Gestión de Socios</h2>
@@ -97,71 +98,8 @@
                     <th>Acciones</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><img src="https://picsum.photos/50?random=1" class="profile-img"></td>
-                    <td>Juan Pérez</td>
-                    <td>juanperez@example.com</td>
-                    <td>+51 987654321</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>Plan Básico Mensual</td>
-                    <td>01/03/2024</td>
-                    <td>
-                      <div class="dropdown">
-                        <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                          <i class="bi bi-three-dots-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                              data-bs-target="#perfilSocioModal">
-                              <i class="bi bi-eye me-2"></i>Ver perfil
-                            </a></li>
-                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#socioModal">
-                              <i class="bi bi-pencil me-2"></i>Editar
-                            </a></li>
-                          <li>
-                            <hr class="dropdown-divider">
-                          </li>
-                          <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                              data-bs-target="#confirmDeleteModal">
-                              <i class="bi bi-trash me-2"></i>Eliminar
-                            </a></li>
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><img src="https://picsum.photos/50?random=2" class="profile-img"></td>
-                    <td>María García</td>
-                    <td>mariagarcia@example.com</td>
-                    <td>+51 976543210</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>Plan Premium Anual</td>
-                    <td>15/01/2024</td>
-                    <td>
-                      <div class="dropdown">
-                        <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                          <i class="bi bi-three-dots-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                              data-bs-target="#perfilSocioModal">
-                              <i class="bi bi-eye me-2"></i>Ver perfil
-                            </a></li>
-                          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#socioModal">
-                              <i class="bi bi-pencil me-2"></i>Editar
-                            </a></li>
-                          <li>
-                            <hr class="dropdown-divider">
-                          </li>
-                          <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                              data-bs-target="#confirmDeleteModal">
-                              <i class="bi bi-trash me-2"></i>Eliminar
-                            </a></li>
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
+                <tbody id="socioItem">
+                 
 
                 </tbody>
               </table>
@@ -252,7 +190,7 @@
                     <div class="col-12 col-lg-4">
                       <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                          <img src="https://picsum.photos/120?random=1" class="profile-img-large mb-3">
+                          <img src="https://picsum.photos/100?random=1" class="profile-img-large mb-3">
                           <h5 class="card-title mb-0">Juan Pérez</h5>
                           <p class="text-muted">Membresía Activa</p>
 
@@ -362,15 +300,15 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-outline-primary">
-            <i class="bi bi-pencil me-2"></i>Editar Información
-          </button>
-          <button type="button" class="btn btn-outline-success">
-            <i class="bi bi-file-earmark-text me-2"></i>Generar Reporte
-          </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div> -->
+                        <!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary">
+                          <i class="bi bi-pencil me-2"></i>Editar Información
+                        </button>
+                        <button type="button" class="btn btn-outline-success">
+                          <i class="bi bi-file-earmark-text me-2"></i>Generar Reporte
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      </div> -->
               </div>
             </div>
           </div>
@@ -545,8 +483,10 @@
 
 
   </script>
-  <script src="./js/validate/form.js">
+  <!-- <script src="./js/validate/form.js"> -->
   </script>
+
+  <script src="./js/socios/main.js" type="module"></script>
 </body>
 
 </html>

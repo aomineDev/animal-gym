@@ -1,0 +1,1 @@
+export const contentSocios  = document.getElementById('socioItem');
