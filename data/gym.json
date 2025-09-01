@@ -6,7 +6,7 @@
       "precio": 120.00,
       "descripcion": "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
       "duracion": 30,
-      "estado": "activo"
+      "estado": true
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "precio": 300.00,
       "descripcion": "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
       "duracion": 90,
-      "estado": "inactivo"
+      "estado": true
     }
   ],
 
@@ -194,6 +194,7 @@
       "telefono": "987654321",
       "correo": "max.occon@example.com",
       "fecha_nacimiento": "1990-04-22",
+      "clave": "123",
       "rol_id": 4
     },
     {
@@ -205,6 +206,7 @@
       "telefono": "987654321",
       "correo": "franquito@example.com",
       "fecha_nacimiento": "1990-04-22",
+      "clave": "1234",
       "rol_id": 4
     }
   ],
@@ -225,6 +227,26 @@
     {
       "id": 4,
       "nombre": "Entrenador"
+    }
+  ],
+  "boleta": [
+    {
+      "id":1,
+      "fechaEmicion":"20025-05-12",
+      "socio_id":"Leonardo Murillo",
+      "membresia_id":"Premiun",
+      "opGrabada":200,
+      "igv":36,
+      "importeTotal":236
+    },
+    {
+      "id":1,
+      "fechaEmicion":"20025-05-12",
+      "socio_id":"Leonardo Murillo",
+      "membresia_id":"Premiun",
+      "opGrabada":200,
+      "igv":36,
+      "importeTotal":236
     }
   ]
 }

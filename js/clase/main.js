@@ -10,20 +10,17 @@ async function init() {
 
     store.gym = await getGym()
 
-    //Objeto clase completo
-    const clases = objectClase(store.gym.clases, store.gym.empleados)
-
     //crearClase
     createClaseFormEvents(store.gym.clases, store.gym.empleados)
-
     //renderizar cartas
-    renderClaseCard(clases, card)
+    renderClaseCard(objectClase(store.gym.clases, store.gym.empleados),
+        card, card)
 
     //El select del entrenador (Crear)
     renderEntrenadoresSelect(selectEntrenador, store.gym.empleados, store.gym.roles)
 
     //Dropdown
-    renderSelectedCardEvent(clases)
+    renderSelectedCardEvent(store.gym.clases, store.gym.empleados)
 
 }
 

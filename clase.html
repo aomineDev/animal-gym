@@ -50,17 +50,19 @@
                 </div>
                 <div class="main-body">
                     <div class="container">
-                        <div class="row min-vh-100">
+                        <div class="row">
+
+                            <!-- centro -->
+                            <div class="col-12 mt-3 mx-3 h-0">
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearClase"><i
+                                        class="bi bi-plus" id="btnAbrirCrear"></i>Crear
+                                    clase</button>
+                            </div>
 
                             <!-- Iquierda -->
                             <div class="section__filter d-none d-lg-block col-lg-3">
                                 <div class="w-90 mx-auto mt-4">
-                                    <div class="col-12">
-                                        <button class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#crearClase"><i class="bi bi-plus"
-                                                id="btnAbrirCrear"></i>Crear clase</button>
-                                    </div>
-                                    <div class="bg-white p-4 rounded-4 mt-3">
+                                    <div class="bg-white p-4 rounded-4 mt-3 shadow">
                                         <form class="form__filter"></form>
                                     </div>
                                 </div>
@@ -68,7 +70,8 @@
 
                             <!-- Drecha -->
                             <div class="col-12 col-lg-9">
-                                <div class="row px-4" id="section__card"></div>
+                                <div class="row px-4" id="section__card">
+                                </div>
                             </div>
                         </div>
 
@@ -99,8 +102,7 @@
                                 name="descripcion" id="descripcion" class="form-control" rows="3"
                                 placeholder="Escribe una breve descripción de la clase" required></textarea> </div>
                         <div class="mb-3"> <label for="duracion" class="form-label">Duración (minutos)</label>
-                            <input type="number" name="duracion" id="duracion" class="form-control" min="1" step="5"
-                                required>
+                            <input type="number" name="duracion" id="duracion" class="form-control" min="1" required>
                         </div>
                         <div class="mb-3"> <label for="fecha" class="form-label">Fecha</label> <input type="date"
                                 name="fecha" id="fecha" class="form-control" required> </div>
@@ -110,13 +112,27 @@
                                 type="number" name="capacidad" id="capacidad" class="form-control" min="1" required>
                         </div>
                         <div class="mb-4"> <label for="entrenador" class="form-label">Entrenador</label> <select
-                                name="entrenador" id="entrenador" class="form-select" required>
+                                name="entrenador" class="form-select" id="select_crear" required>
                                 <option value="">Seleccione un entrenador</option>
-
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Crear clase</button>
+                        <button type="submit" class="btn btn-primary col-5 ms-3">Crear clase</button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Filtro -->
+    <div class="modal fade" id="filtroModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filtrar Clases</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="form__filter"></form>
                 </div>
             </div>
         </div>
@@ -138,21 +154,20 @@
         </div>
     </div>
 
-    <!-- Modal Filtro -->
-    <div class="modal fade" id="filtroModal" tabindex="-1" aria-hidden="true">
+    <!-- Modal Editar -->
+    <div class="modal fade" id="editarClase" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content rounded-4">
                 <div class="modal-header">
-                    <h5 class="modal-title">Filtrar Clases</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Clase</h1> <button type="button"
+                        class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="form__filter"></form>
+                    <form id="editarClaseForm" class="row needs-validation" novalidate></form>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Modal Eliminar -->
     <div class="modal fade" id="eliminarClase" tabindex="-1" aria-hidden="true">
 

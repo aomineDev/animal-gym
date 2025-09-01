@@ -1,5 +1,5 @@
 export function ClaseCard({ id, nombre, estado }) {
-    return /*html*/ `
+  return /*html*/ `
     <div class="col-12 col-md-6 col-xl-4">
       <div class="mt-4 border-0 card overflow-hidden rounded-4">
         <div class="overflow-hidden">
@@ -36,7 +36,7 @@ export function ClaseCard({ id, nombre, estado }) {
                     class="dropdown-item" 
                     href="#" 
                     data-bs-toggle="modal"
-                    data-bs-target="#biClase"
+                    data-bs-target="#editarClase"
                     data-id=${id}>
                     Editar
                   </a>
