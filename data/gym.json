@@ -25,14 +25,14 @@
       "nombre": "Fuerza Básica",
       "duracion": 60,
       "descripcion": "Entrenamiento enfocado en ejercicios de fuerza para todo el cuerpo.",
-      "estado": true
+      "estado": "Activo"
     },
     {
       "id": 2,
       "nombre": "Cardio Intensivo",
       "duracion": 45,
       "descripcion": "Rutina de alta intensidad para mejorar la resistencia cardiovascular.",
-      "estado": true
+      "estado": "Activo"
     }
   ],
   "detalle_rutinas": [

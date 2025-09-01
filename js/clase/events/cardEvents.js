@@ -128,7 +128,7 @@ export const editClaseFormEvents = (claseCompleta, clases, empleados) => {
         const modal = bootstrap.Modal.getInstance(document.getElementById("editarClase"))
         modal.hide()
 
-    })
+    }, { once: true })
 
 }
 

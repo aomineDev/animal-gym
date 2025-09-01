@@ -3,22 +3,22 @@ import { renderEditarForm, renderMembresiaCard } from "../render.js";
 
 
 
-export function selectedCardEvent(membresias){
-  contentMembresia.addEventListener('click', (e) =>{
+export function selectedCardEvent(membresias) {
+  contentMembresia.addEventListener('click', (e) => {
     const boton = e.target.closest("[data-id]");//rastrea el dom para encontra el data--id
-    if(!boton){
+    if (!boton) {
       return;
     }
     console.log("selected card event estoy ene l evento");
 
     const id = parseInt(boton.getAttribute("data-id"));
-    if(e.target.closest("[data-bs-target=\"#membresiaModal\"]")){
-      const membresia = membresias.find(item => item.id===id);
-      if(membresia){
+    if (e.target.closest("[data-bs-target=\"#membresiaModal\"]")) {
+      const membresia = membresias.find(item => item.id === id);
+      if (membresia) {
         console.log(membresia.id);
         renderEditarForm(membresia);
         editarMembresiaFormEvents(membresia, membresias);
-        
+
 
       }
 
@@ -34,14 +34,14 @@ export function selectedCardEvent(membresias){
 
 
 
-export function editarMembresiaFormEvents(item, membresias){
-  editarMembresiaForm.addEventListener('submit', (e)=>{
-    
+export function editarMembresiaFormEvents(item, membresias) {
+  editarMembresiaForm.addEventListener('submit', (e) => {
+
     e.preventDefault();
 
     const data = new FormData(editarMembresiaForm);
     console.log(data);
-    if(!membresias){
+    if (!membresias) {
       return;
     }
     console.log(item.nombre);
@@ -57,7 +57,7 @@ export function editarMembresiaFormEvents(item, membresias){
     };
     console.log(actualizarMembresia.nombre);
     const index = membresias.findIndex(c => c.id === item.id);
-    if(index!== -1){
+    if (index !== -1) {
       membresias[index] = actualizarMembresia;
     }
     console.log(membresias);
@@ -71,5 +71,5 @@ export function editarMembresiaFormEvents(item, membresias){
 
 
 
-  })
+  }, { once: true })
 } 
