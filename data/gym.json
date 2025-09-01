@@ -19,7 +19,6 @@
       "estado": false
     }
   ],
-
   "rutinas": [
     {
       "id": 1,
@@ -36,7 +35,6 @@
       "estado": true
     }
   ],
-
   "detalle_rutinas": [
     {
       "id": 1,
@@ -44,7 +42,11 @@
       "ejercicio": "Sentadillas",
       "series": 4,
       "repeticiones": 12,
-      "dias": ["Lunes", "Miércoles", "Viernes"],
+      "dias": [
+        "Lunes",
+        "Miércoles",
+        "Viernes"
+      ],
       "descanso": "60",
       "calorias": 200
     },
@@ -54,12 +56,15 @@
       "ejercicio": "Cinta de correr",
       "series": 1,
       "repeticiones": 1,
-      "dias": ["Martes", "Jueves", "Sábado"],
+      "dias": [
+        "Martes",
+        "Jueves",
+        "Sábado"
+      ],
       "descanso": "N/A",
       "calorias": 450
     }
   ],
-
   "socios": [
     {
       "id": 1,
@@ -146,7 +151,6 @@
       "rutina_id": 4
     }
   ],
-
   "clases": [
     {
       "id": 1,
@@ -185,13 +189,12 @@
       "entrenador_id": 2
     }
   ],
-
   "empleados": [
     {
       "id": 1,
       "nombre": "Max",
       "apellido": "Occon",
-      "dni": "71597686",
+      "dni": "12121212",
       "fecha_ingreso": "2023-06-15",
       "telefono": "987654321",
       "correo": "max.occon@example.com",
@@ -210,9 +213,19 @@
       "fecha_nacimiento": "1990-04-22",
       "clave": "1234",
       "rol_id": 4
+    },
+    {
+      "id": 3,
+      "nombre": "Franco",
+      "apellido": "Colapinto",
+      "dni": "73527486",
+      "fecha_ingreso": "2023-06-15",
+      "telefono": "987654321",
+      "correo": "franquito@example.com",
+      "fecha_nacimiento": "1990-04-22",
+      "rol_id": 4
     }
   ],
-
   "roles": [
     {
       "id": 1,
@@ -233,22 +246,26 @@
   ],
   "boleta": [
     {
-      "id":1,
-      "fechaEmicion":"20025-05-12",
-      "socio_id":"Leonardo Murillo",
-      "membresia_id":"Premiun",
-      "opGrabada":200,
-      "igv":36,
-      "importeTotal":236
+      "id": 1,
+      "fechaEmision": "2025-05-12",
+      "socio_id": "Leonardo Murillo",
+      "dni": "65214897",
+      "telefono": "912345678",
+      "menbresia_id": "Premiun",
+      "opGrabada": 200,
+      "igv": 36,
+      "importeTotal": 236
     },
     {
-      "id":1,
-      "fechaEmicion":"20025-05-12",
-      "socio_id":"Leonardo Murillo",
-      "membresia_id":"Premiun",
-      "opGrabada":200,
-      "igv":36,
-      "importeTotal":236
+      "id": 1,
+      "fechaEmision": "2025-05-12",
+      "socio_id": "Leonardo Murillo",
+      "dni": "71597686",
+      "telefono": "987654321",
+      "menbresia_id": "Premiun",
+      "opGrabada": 200,
+      "igv": 36,
+      "importeTotal": 236
     }
   ]
 }
