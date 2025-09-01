@@ -3,27 +3,38 @@ export function boletaCard({
   id,
   fechaEmision,
   socio_id,
+  dni,
+  telefono,
   menbresia_id,
   opGrabada,
   igv,
   importeTotal,
 }) {
-  return /*html*/ ` 
-    <div class="card-body">
+  return /*html*/ `  
+    <div class="card shadow mt-5 mb-5 p-5">
                 <!-- Encabezado -->
-                <div class="text-center mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div>
                   <h4 class="fw-bold">Gimnasio Animal Gym</h4>
-                  <p class="mb-0">Av. Siempre Viva 123</p>
-                  <p class="mb-0">Tel: (01) 555-1234</p>
-                  <hr />
-                  <h5 class="fw-bold">BOLETA DE VENTA</h5>
-                </div>
+                  </div>
+                  <div>
+                  <img src="img/logo.jpg" alt="logo" style="height:90px;">
+                  </div>
 
+         
+                </div>
+         <hr />
+                  <h5 class="fw-bold text-center">BOLETA DE VENTA</h5>
                 <!-- Datos principales -->
                 <div class="mb-3">
-                  <p><strong>Fecha de emisión:</strong>${fechaEmision}</p>
-                  <p><strong>Socio:</strong>${socio_id}</p>
-                  <p><strong>Membresía:</strong>${menbresia_id}</p>
+                  <p><strong>Boleta N° </strong> ${id}</p>
+                
+                  <p><strong>Fecha de emisión:</strong> ${fechaEmision}</p>
+                  <p><strong>Socio:</strong> ${socio_id}</p>
+                  <p><strong>Dni:</strong> ${dni}</p>
+                  <p><strong>Telefono:</strong> ${telefono}</p>
+ 
+                  <p><strong>Membresía:</strong> ${menbresia_id}</p>
                 </div>
 
                 <!-- Totales -->
@@ -51,6 +62,6 @@ export function boletaCard({
                   <p class="mb-0">¡Gracias por confiar en nosotros!</p>
                   <small>Este documento no tiene validez tributaria</small>
                 </div>
-              </div>
+    </div>
         `;
 }
