@@ -5,7 +5,8 @@
       "nombre": "Básica",
       "precio": 120.00,
       "descripcion": "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
-      "duracion": 30,
+      "fecha_inicio":"2023-05-12",
+      "fecha_final":"2023-06-12",
       "estado": true
     },
     {
@@ -13,8 +14,9 @@
       "nombre": "Premium",
       "precio": 300.00,
       "descripcion": "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
-      "duracion": 90,
-      "estado": true
+      "fecha_inicio":"2025-05-12",
+      "fecha_final":"2026-05-12",
+      "estado": false
     }
   ],
 
@@ -94,12 +96,12 @@
     },
     {
       "id": 3,
-      "nombre": "Carlos",
-      "apellido": "Ramírez",
+      "nombre": "Juan",
+      "apellido": "Garcia",
       "dni": "75684219",
       "fecha_ingreso": "2024-01-18",
       "telefono": "912345678",
-      "correo": "carlos.ramirez@example.com",
+      "correo": "juan.garcia@example.com",
       "fecha_nacimiento": "1992-03-10",
       "altura": 1.75,
       "foto_perfil": "https://picsum.photos/50?random=2",

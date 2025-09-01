@@ -12,10 +12,10 @@ export function MembresiaCard({id, nombre, precio, descripcion, duracion, estado
                 <i class="bi bi-three-dots-vertical fs-5"></i>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verMembresiaModal" id="detalleId${id}">
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verMembresiaModal" id="membresia-detalle" data-id="${id}">
                   <i class="bi bi-eye me-2"></i>Ver detalles
                 </a></li>
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#membresiaModal">
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#membresiaModal" data-id="${id}">
                   <i class="bi bi-pencil me-2"></i>Editar
                 </a></li>
                 <li><hr class="dropdown-divider"></li>

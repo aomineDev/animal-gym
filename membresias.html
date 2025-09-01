@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animal Gym | </title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
- <div class="app">
+  <div class="app">
     <div class="sidebar">
       <div class="sidebar-header">
         <h2>Animal Gym</h2>
       </div>
       <nav class="sidebar-body">
         <ul class="sidebar-items">
-          <li class="sidebar-item"><a href="home.html" class="sidebar-link"><span class="sidebar-link-icon"><i class="bi bi-house-fill"></i></span>Inicio</a></li>
-          <li class="sidebar-item"><a href="socios.html" class="sidebar-link"><span class="sidebar-link-icon"><i class="bi bi-person-badge-fill"></i></span>Socios</a></li>
-          <li class="sidebar-item active"><a href="membresias.html" class="sidebar-link"><span class="sidebar-link-icon"><i class="bi bi-person-vcard-fill"></i></i></span>Membresias</a></li>
-          <li class="sidebar-item"><a href="empleados.html" class="sidebar-link"><span class="sidebar-link-icon"><i class="bi bi-person-fill"></i></i></span>Empleados</a></li>
-          <li class="sidebar-item"><a href="rutinas.html" class="sidebar-link"><span class="sidebar-link-icon"><i class="bi bi-person-arms-up"></i></i></span>Rutinas</a></li>
-          <li class="sidebar-item"><a href="clase.html" class="sidebar-link"><span class="sidebar-link-icon"><i class="bi bi-book-fill"></i></span>Clases</a></li>
-          <li class="sidebar-item"><a href="boleta.html" class="sidebar-link"><span class="sidebar-link-icon"><i class="bi bi-receipt"></i></span>Boletas</a></li>
+          <li class="sidebar-item"><a href="home.html" class="sidebar-link"><span class="sidebar-link-icon"><i
+                  class="bi bi-house-fill"></i></span>Inicio</a></li>
+          <li class="sidebar-item"><a href="socios.html" class="sidebar-link"><span class="sidebar-link-icon"><i
+                  class="bi bi-person-badge-fill"></i></span>Socios</a></li>
+          <li class="sidebar-item active"><a href="membresias.html" class="sidebar-link"><span
+                class="sidebar-link-icon"><i class="bi bi-person-vcard-fill"></i></i></span>Membresias</a></li>
+          <li class="sidebar-item"><a href="empleados.html" class="sidebar-link"><span class="sidebar-link-icon"><i
+                  class="bi bi-person-fill"></i></i></span>Empleados</a></li>
+          <li class="sidebar-item"><a href="rutinas.html" class="sidebar-link"><span class="sidebar-link-icon"><i
+                  class="bi bi-person-arms-up"></i></i></span>Rutinas</a></li>
+          <li class="sidebar-item"><a href="clase.html" class="sidebar-link"><span class="sidebar-link-icon"><i
+                  class="bi bi-book-fill"></i></span>Clases</a></li>
+          <li class="sidebar-item"><a href="boleta.html" class="sidebar-link"><span class="sidebar-link-icon"><i
+                  class="bi bi-receipt"></i></span>Boletas</a></li>
         </ul>
       </nav>
 
@@ -41,32 +51,32 @@
 
 
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-      <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Membresías</h2>
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membresiaModal">
-        <i class="bi bi-plus-circle me-2"></i>Nueva Membresía
-      </button>
-    </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Membresías</h2>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membresiaModal">
+                <i class="bi bi-plus-circle me-2"></i>Nueva Membresía
+              </button>
+            </div>
 
-    <div class="row g-4" id="content-membresias">
-      
-
-    </div>
-  </div>
+            <div class="row g-4" id="content-membresias">
 
 
-
-
-
-
+            </div>
           </div>
+
+
+
+
+
+
         </div>
-      </main>
     </div>
+    </main>
   </div>
-  
-<!-- Modal fuera del container -->\
- 
+  </div>
+
+  <!-- Modal fuera del container -->\
+
   <!-- Modal Nueva/Editar Membresía -->
   <div class="modal fade" id="membresiaModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -76,181 +86,19 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form class="row g-3 needs-validation" novalidate>
-            <div class="col-md-6">
-              <label class="form-label">Nombre del Plan</label>
-              <div class="input-group">
-                <input type="text" class="form-control" value="Plan Básico Mensual" required>
-                
-              </div>
-              <div class="valid-feedback">Nombre válido</div>
-              <div class="invalid-feedback">Ingrese un nombre válido (mínimo 3 caracteres)</div>
-            </div>
+          <form class="row g-3 needs-validation" id="editarMembresiaForm" novalidate>
 
-            <div class="col-md-3">
-              <label class="form-label">Precio Regular (S/)</label>
-              <div class="input-group">
-                <input type="number" class="form-control" value="120" min="1" step="0.01" required>
-                
-              </div>
-              <div class="valid-feedback">Precio válido</div>
-              <div class="invalid-feedback">Ingrese un precio válido</div>
-            </div>
-
-            <div class="col-md-3">
-              <label class="form-label">Precio Promocional (S/)</label>
-              <div class="input-group">
-                <input type="number" class="form-control" value="100" min="0" step="0.01">
-                
-              </div>
-              <div class="valid-feedback">Precio promocional válido</div>
-              <div class="invalid-feedback">Debe ser menor al precio regular</div>
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label">Duración (días)</label>
-              <div class="input-group">
-                <input type="number" class="form-control" value="30" min="1" required>
-                
-              </div>
-              <div class="valid-feedback">Duración válida</div>
-              <div class="invalid-feedback">Ingrese una duración válida</div>
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label">Fecha Inicio</label>
-              <div class="input-group">
-                <input type="date" class="form-control" value="2025-01-01" required>
-                
-              </div>
-              <div class="valid-feedback">Fecha válida</div>
-              <div class="invalid-feedback">Seleccione una fecha válida</div>
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label">Fecha Final</label>
-              <div class="input-group">
-                <input type="date" class="form-control" value="2025-12-31" readonly>
-                <span class="input-group-text">
-                  <i class="bi bi-calendar-check"></i>
-                </span>
-              </div>
-              <small class="text-muted">Calculada automáticamente</small>
-            </div>
-
-            <div class="col-12">
-              <label class="form-label">Descripción</label>
-              <div class="input-group">
-                <textarea class="form-control" rows="3" required>Acceso libre a todas las máquinas, área de cardio y pesas. Incluye casillero personal y acceso a duchas.</textarea>
-                
-              </div>
-              <div class="valid-feedback">Descripción válida</div>
-              <div class="invalid-feedback">Ingrese una descripción (mínimo 10 caracteres)</div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Estado</label>
-              <select class="form-select" required>
-                <option value="">Seleccione...</option>
-                <option value="activo" selected>Activo</option>
-                <option value="inactivo">Inactivo</option>
-              </select>
-              <div class="valid-feedback">Estado válido</div>
-              <div class="invalid-feedback">Seleccione un estado</div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Capacidad Máxima</label>
-              <div class="input-group">
-                <input type="number" class="form-control" value="100" min="1" required>
-                
-              </div>
-              <div class="valid-feedback">Capacidad válida</div>
-              <div class="invalid-feedback">Ingrese una capacidad válida</div>
-            </div>
-
-            <div class="col-12">
-              <div class="alert alert-info">
-                <i class="bi bi-info-circle me-2"></i>
-                <strong>Socios inscritos actualmente:</strong> 35
-              </div>
-            </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Guardar</button>
+
         </div>
       </div>
     </div>
   </div>
 
   <!-- Modal Ver Detalles Membresía -->
-  <div class="modal fade" id="verMembresiaModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Detalles de Membresía - Plan Básico Mensual</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label fw-bold">Nombre</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">Plan Básico Mensual</p>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label fw-bold">Precio Regular</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">S/ 120</p>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label fw-bold">Precio Promocional</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light text-success fw-bold">S/ 100</p>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-bold">Duración</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">30 días</p>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-bold">Fecha Inicio</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">01/01/2025</p>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-bold">Fecha Final</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">31/12/2025</p>
-            </div>
-            <div class="col-12">
-              <label class="form-label fw-bold">Descripción</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">Acceso libre a todas las máquinas, área de cardio y pesas. Incluye casillero personal y acceso a duchas.</p>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-bold">Estado</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">
-                <span class="badge bg-success">Activo</span>
-              </p>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-bold">Capacidad</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">100 socios</p>
-            </div>
-            <div class="col-md-4">
-              <label class="form-label fw-bold">Socios Inscritos</label>
-              <p class="form-control-plaintext border rounded p-2 bg-light">
-                <span class="text-primary fw-bold">35</span>
-                <small class="text-muted">(35% ocupación)</small>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#membresiaModal">
-            <i class="bi bi-pencil me-2"></i>Editar
-          </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Modal Confirmación Eliminar -->
   <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
@@ -282,16 +130,19 @@
 
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-   <script>
-    function toggleSidebar() {
-      document.querySelector('.app').classList.toggle('sidebar-open');
-    }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"></script>
+    <script>
+      function toggleSidebar() {
+        document.querySelector('.app').classList.toggle('sidebar-open');
+      }
 
-    function closeSidebar() {
-      document.querySelector('.app').classList.remove('sidebar-open');
-    }
-  </script>
-  <script src="./js/membresias/main.js" type="module"></script>
+      function closeSidebar() {
+        document.querySelector('.app').classList.remove('sidebar-open');
+      }
+    </script>
+    <script src="./js/membresias/main.js" type="module"></script>
 </body>
+
 </html>
