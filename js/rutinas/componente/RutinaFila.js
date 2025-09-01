@@ -19,7 +19,8 @@ export const RutinaFila = ({ id, nombre, duracion, estado }) => {
                 class="dropdown-item" 
                 href="#" 
                 data-bs-toggle="modal"
-                data-bs-target="#perfilSocioModal" 
+                data-bs-target="#detallesRutinaModal" 
+                data-id="${id}"
               >
                 <i class="bi bi-eye me-2"></i>Ver detalle
               </a>
@@ -53,5 +54,3 @@ export const RutinaFila = ({ id, nombre, duracion, estado }) => {
     </tr>
   `
 }
-
-/** FALTA MODIFICAR LOS TARGET DELOS MODALES */
