@@ -6,7 +6,7 @@
       "precio": 120.00,
       "descripcion": "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
       "duracion": 30,
-      "estado": true
+      "estado": "activo"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "precio": 300.00,
       "descripcion": "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
       "duracion": 90,
-      "estado": true
+      "estado": "inactivo"
     }
   ],
 
@@ -69,6 +69,7 @@
       "correo": "laura.fernandez@example.com",
       "fecha_nacimiento": "1995-08-20",
       "altura": 1.68,
+      "foto_perfil":"https://picsum.photos/50?random=1",
       "peso": 60.5,
       "genero": "F",
       "imagen": "img/clase-1.jpg",
@@ -85,10 +86,62 @@
       "correo": "carlos.ramirez@example.com",
       "fecha_nacimiento": "1990-11-05",
       "altura": 1.75,
+      "foto_perfil":"https://picsum.photos/100?random=1",
       "peso": 78.2,
       "genero": "M",
       "membresia_id": 1,
       "rutina_id": 3
+    },
+    {
+      "id": 3,
+      "nombre": "Carlos",
+      "apellido": "Ramírez",
+      "dni": "75684219",
+      "fecha_ingreso": "2024-01-18",
+      "telefono": "912345678",
+      "correo": "carlos.ramirez@example.com",
+      "fecha_nacimiento": "1992-03-10",
+      "altura": 1.75,
+      "foto_perfil": "https://picsum.photos/50?random=2",
+      "peso": 72.3,
+      "genero": "M",
+      "imagen": "img/clase-2.jpg",
+      "membresia_id": 1,
+      "rutina_id": 3
+    },
+    {
+      "id": 4,
+      "nombre": "Mariana",
+      "apellido": "Lopez",
+      "dni": "78452136",
+      "fecha_ingreso": "2023-11-05",
+      "telefono": "998877665",
+      "correo": "mariana.lopez@example.com",
+      "fecha_nacimiento": "1998-07-25",
+      "altura": 1.62,
+      "foto_perfil": "https://picsum.photos/50?random=3",
+      "peso": 55.8,
+      "genero": "F",
+      "imagen": "img/clase-3.jpg",
+      "membresia_id": 3,
+      "rutina_id": 2
+    },
+    {
+      "id": 5,
+      "nombre": "Andrés",
+      "apellido": "Torres",
+      "dni": "76985412",
+      "fecha_ingreso": "2024-03-02",
+      "telefono": "934567812",
+      "correo": "andres.torres@example.com",
+      "fecha_nacimiento": "1990-12-15",
+      "altura": 1.80,
+      "foto_perfil": "https://picsum.photos/50?random=4",
+      "peso": 80.1,
+      "genero": "M",
+      "imagen": "img/clase-4.jpg",
+      "membresia_id": 2,
+      "rutina_id": 4
     }
   ],
 
