@@ -1,18 +1,20 @@
 import { loginForm } from "../dom.js";
 import { inputDNI, inputPassword } from "../dom.js";
+import { setUser } from "../../service.js";
 
 export const validationCredentialEvents = (empleados) => {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const isValid = empleados.some(
+        const user = empleados.find(
             (empleado) =>
                 empleado.dni === inputDNI.value &&
                 empleado.clave === inputPassword.value
         );
 
-        if (isValid) {
-            window.location.href = "home.html";
+        if (user) {
+            setUser(user)
+            window.location.href = "home.html"
         } else {
             console.log("error")
         }

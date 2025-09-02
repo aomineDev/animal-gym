@@ -52,7 +52,8 @@
         <div class="main-header">
           <button class="btn btn-outline-dark" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
           <div>
-            <span>Admin</span>
+            <span id="username">Admin</span>
+            <button class="btn btn-outline-danger btn-sm" id="logoutBtn">Cerrar Sesión</button>
           </div>
         </div>
         <div class="main-body">
@@ -172,6 +173,8 @@
     const chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
     chart2.render();
   </script>
+
+  <script src="js/home/main.js" type="module"></script>
 </body>
 
 </html>

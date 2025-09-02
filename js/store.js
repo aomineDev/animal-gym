@@ -1,5 +1,6 @@
 const store = {
-    gym: {}
+    gym: {},
+    user: {}
 }
 
 export default store
