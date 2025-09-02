@@ -15,8 +15,8 @@ export function boletaCard({
 
     <div>
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <div><h4 class="fw-bold">Gimnasio Animal Gym</h4></div>
-        <div><img src="img/logo.jpg" alt="logo" style="height:90px;"></div>
+        <div class="caja-titulo"><h4 class="fw-bold">Gimnasio Animal Gym</h4></div>
+        <div><img src="img/logo.jpg" alt="logo"  class="logos"></div>
       </div>
       <hr />
       <div class="mb-3">
@@ -28,7 +28,7 @@ export function boletaCard({
         <p><strong>Membresía:</strong> ${menbresia_id}</p>
       </div>
       <div class="row justify-content-end">
-        <div class="col-12 col-sm-6 totales">
+        <div class="col-12 col-sm-6 totales caja-importe">
           <table class="table table-borderless text-center text-sm-end">
             <tr><th>Op. Grabadas:</th><td>${opGrabada}</td></tr>
             <tr><th>IGV (18%):</th><td>${igv}</td></tr>
