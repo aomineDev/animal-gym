@@ -24,7 +24,6 @@ async function init() {
 
     //Dropdown
     renderSelectedCardEvent(clases)
-
 }
 
 renderFilter(form)
