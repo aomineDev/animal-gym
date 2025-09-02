@@ -1,0 +1,59 @@
+.workout-grid .img-wrap img {
+  transition: all .3s ease-in-out;
+}
+
+.workout-grid .img-wrap img:hover {
+  transform: scale(1.03);
+  filter: brightness(0.8);
+}
+
+.workout-detail {
+  background: #fff;
+  border-radius: 0 0 .75rem .75rem;
+}
+
+.is-valid {
+  border-color: #198754;
+}
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.valid-feedback {
+  display: none;
+  color: #198754;
+}
+
+.invalid-feedback {
+  display: none;
+  color: #dc3545;
+}
+
+.is-valid~.valid-feedback {
+  display: block;
+}
+
+.is-invalid~.invalid-feedback {
+  display: block;
+}
+
+.input-group .form-control.is-valid {
+  border-right: none;
+}
+
+.input-group .form-control.is-invalid {
+  border-right: none;
+}
+
+.input-group-text.success {
+  background-color: #d1e7dd;
+  border-color: #198754;
+  color: #198754;
+}
+
+.input-group-text.danger {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #dc3545;
+}
