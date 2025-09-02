@@ -1,8 +1,8 @@
-export function filaTable({ id, nombre, apellido, dni, fecha_ingreso, telefono, correo, fecha_nacimiento, rol_id }) {
+export function filaTable({ nombre, apellido, dni, fecha_ingreso, telefono, correo, fecha_nacimiento, rol_id }) {
   /*html*/
   return `
   <tr>
-    <td>${id}</td>
+        <td><img src="img/emp.png" class="profile-img"></td>
       <td>${nombre}</td>
       <td>${apellido}</td>
       <td>${dni}</td>
@@ -26,15 +26,18 @@ export function filaTable({ id, nombre, apellido, dni, fecha_ingreso, telefono, 
             class="dropdown-item"
             href="#"
             onclick="editarFila(this)";
-            >Editar</a
+            ><i class="bi bi-pencil me-2"></i>Editar</a
           >
         </li>
+          <li>
+              <hr class="dropdown-divider">
+            </li>
         <li>
           <a
             class="dropdown-item text-danger"
             href="#"
             onclick="borrarFila(this)"
-            >Eliminar</a
+            ><i class="bi bi-trash me-2"></i>Eliminar</a
           >
         </li>
       </ul>

@@ -5,8 +5,8 @@
       "nombre": "Básica",
       "precio": 120.00,
       "descripcion": "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
-      "fecha_inicio":"2023-05-12",
-      "fecha_final":"2023-06-12",
+      "fecha_inicio": "2023-05-12",
+      "fecha_final": "2023-06-12",
       "estado": true
     },
     {
@@ -14,8 +14,8 @@
       "nombre": "Premium",
       "precio": 300.00,
       "descripcion": "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
-      "fecha_inicio":"2025-05-12",
-      "fecha_final":"2026-05-12",
+      "fecha_inicio": "2025-05-12",
+      "fecha_final": "2026-05-12",
       "estado": false
     }
   ],
@@ -76,7 +76,7 @@
       "correo": "laura.fernandez@example.com",
       "fecha_nacimiento": "1995-08-20",
       "altura": 1.68,
-      "foto_perfil":"https://picsum.photos/50?random=1",
+      "foto_perfil": "https://picsum.photos/50?random=1",
       "peso": 60.5,
       "genero": "F",
       "imagen": "img/clase-1.jpg",
@@ -93,7 +93,7 @@
       "correo": "carlos.ramirez@example.com",
       "fecha_nacimiento": "1990-11-05",
       "altura": 1.75,
-      "foto_perfil":"https://picsum.photos/100?random=1",
+      "foto_perfil": "https://picsum.photos/100?random=1",
       "peso": 78.2,
       "genero": "M",
       "membresia_id": 1,
@@ -141,6 +141,23 @@
       "fecha_ingreso": "2024-03-02",
       "telefono": "934567812",
       "correo": "andres.torres@example.com",
+      "fecha_nacimiento": "1990-12-15",
+      "altura": 1.80,
+      "foto_perfil": "https://picsum.photos/50?random=4",
+      "peso": 80.1,
+      "genero": "M",
+      "imagen": "img/clase-4.jpg",
+      "membresia_id": 2,
+      "rutina_id": 4
+    },
+    {
+      "id": 6,
+      "nombre": "asdas",
+      "apellido": "Torres",
+      "dni": "76985412",
+      "fecha_ingreso": "2024-03-02",
+      "telefono": "934567812",
+      "correo": "andres.asasdasdsa@example.com",
       "fecha_nacimiento": "1990-12-15",
       "altura": 1.80,
       "foto_perfil": "https://picsum.photos/50?random=4",
@@ -257,15 +274,26 @@
       "importeTotal": 236
     },
     {
-      "id": 1,
+      "id": 2,
       "fechaEmision": "2025-05-12",
-      "socio_id": "Leonardo Murillo",
+      "socio_id": "Rocio",
+      "dni": "71597686",
+      "telefono": "987654321",
+      "menbresia_id": "Premiun",
+      "opGrabada": 123,
+      "igv": 36,
+      "importeTotal": 3333
+    },
+    {
+      "id": 3,
+      "fechaEmision": "2025-05-12",
+      "socio_id": "Juanito alimaña",
       "dni": "71597686",
       "telefono": "987654321",
       "menbresia_id": "Premiun",
       "opGrabada": 200,
       "igv": 36,
-      "importeTotal": 236
+      "importeTotal": 136
     }
   ]
 }

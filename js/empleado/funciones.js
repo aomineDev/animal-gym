@@ -6,8 +6,6 @@ import {
 } from "../empleado/dom.js";
 import { filaTable } from "./componentes/filaTable.js";
 let fila = null;
-let id = 0;
-
 //abrir modal
 export function abrirModal() {
     limpiarEstilos();
@@ -101,10 +99,10 @@ export function guardarEmpleado_valido() {
         formularioEmpleado.reset(); // Limpiar formulario
         cerrarModal(); // Cerrar modal
     } else {
-        id++;
+
         let row = document.createElement("tr")
         //componenete usado menos codigo
-        row.innerHTML = filaTable({ id, nombre, apellido, dni, fecha_ingreso: fechaIngreso, telefono, correo, fecha_nacimiento: fechaNacimiento, rol_id: rol });
+        row.innerHTML = filaTable({ nombre, apellido, dni, fecha_ingreso: fechaIngreso, telefono, correo, fecha_nacimiento: fechaNacimiento, rol_id: rol });
         tablaContenedor.appendChild(row);
         formularioEmpleado.reset();
         cerrarModal();
