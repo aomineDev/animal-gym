@@ -71,11 +71,6 @@
               </div>
             </div>
 
-            <!-- filtrar -->
-            <button type="submit" class="btn btn-danger">
-              <i class="bi bi-funnel-fill"></i>
-            </button>
-            <!-- modal + formulario -->
 
             <!-- Tabla de los empleados-->
             <div class="table-responsive mt-4">
@@ -132,7 +127,7 @@
       </main>
     </div>
   </div>
-  <!-- modal -->
+  <!-- modal + formulario -->
   <div class="modal fade" tabindex="-1" id="modal">
     <div class="modal-dialog modal-dialog-centered" id="modal-hijo">
       <div class="modal-content">
@@ -145,47 +140,56 @@
           <!-- formulario del modal -->
           <form id="formEmpleado" class="row g-2 needs-validation" novalidate>
             <div class="col-12 mb-3">
-              <input type="text" id="nombre" class="form-control" placeholder="Nombre" required />
+              <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" pattern="[a-z]+"
+                title="Solo letras minusculas" required />
             </div>
             <div class="col-12 mb-3">
-              <input type="text" id="apellido" class="form-control" placeholder="Apellido" required />
+              <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido"
+                pattern="[a-z]+" required />
             </div>
             <div class="col-12 mb-3">
-              <input type="text" id="dni" class="form-control" placeholder="Dni" required />
+              <input type="text" id="dni" class="form-control" name="dni" placeholder="Dni" pattern="[0-9]{8}"
+                required />
             </div>
             <div class="col-12 mb-3">
               <label for="">Fecha de registro</label>
-              <input type="date" id="fechaRegistro" class="form-control" placeholder="Fecha de registro" required />
+              <input type="date" id="fechaRegistro" class="form-control" name="fecha_ingreso"
+                placeholder="Fecha de registro" required />
             </div>
             <div class="col-12 mb-3">
-              <input type="text" id="telefono" class="form-control" placeholder="Numero de telefono" required max="9" />
+              <input type="tel" id="telefono" class="form-control" name="telefono" placeholder="Numero de telefono"
+                pattern="9[0-9]{8}" required />
             </div>
             <div class="col-12 mb-3">
-              <input type="text" id="correo" class="form-control" placeholder="Correo" required />
+              <input type="email" id="correo" class="form-control" name="correo" placeholder="Correo"
+                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
             </div>
             <div class="col-12 mb-3">
               <label for="">Fecha de nacimiento</label>
-              <input type="date" id="fechaNacimiento" class="form-control" placeholder="Fecha de nacimiento" required />
+              <input type="date" id="fechaNacimiento" class="form-control" name="fecha_nacimiento"
+                placeholder="Fecha de nacimiento" required />
             </div>
             <div class="col-12 mb-3">
-              <select name="rol" class="form-select" id="rol">
-                <option value="null">Seleccion un rol</option>
+              <select name="rol_id" class="form-select" id="rol" required>
+                <option value="">Seleccion un rol..</option>
                 <option value="Recepcionista">Recepcionista</option>
                 <option value="Entrenador">Entrenador</option>
                 <option value="Cajero">Cajero</option>
               </select>
             </div>
+
+            <div class="modal-footer">
+              <!-- boton cerrar modal + boton guardar empleado  -->
+              <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary" id="guardarEmpleado">
+                Guardar
+              </button>
+            </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <!-- boton cerrar modal + boton guardar empleado  -->
-          <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
-          <button type="button" class="btn btn-primary" id="guardarEmpleado">
-            Guardar
-          </button>
-        </div>
+
       </div>
     </div>
   </div>
@@ -203,6 +207,7 @@
     }
   </script>
   <script src="./js/empleado/main.js" type="module"></script>
+  <script src="js/validate/form.js"></script>
 </body>
 
 </html>
