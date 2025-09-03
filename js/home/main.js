@@ -1,15 +1,16 @@
 import { requireAuth } from '../util.js'
 import { clearUser, getUser } from '../service.js'
 
+requireAuth()
+
 function init() {
-  requireAuth()
 
 	const user = getUser()
 
 	document.getElementById('username').textContent = user.nombre + ' ' + user.apellido
 }
 
-init()
+document.addEventListener('DOMContentLoaded', init)
 
 document.getElementById('logoutBtn').addEventListener('click', () => {
 	clearUser()

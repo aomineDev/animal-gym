@@ -19,8 +19,6 @@
       </div>
       <nav class="sidebar-body">
         <ul class="sidebar-items">
-          <!-- <li class="sidebar-item active"><a href="#" class="sidebar-link"><span class="sidebar-link-icon"><i
-                  class="bi bi-house-fill"></i></span>Inicio</a></li> -->
           <!-- <li class="sidebar-item sidebar-collapse-item"><a class="sidebar-link" data-bs-toggle="collapse" href="#sidebarItem2" role="button" aria-expanded="false" aria-controls="sidebarItem2"><span><span class="sidebar-link-icon"><i class="bi bi-person"></i></span>Item 2</span><i class="bi bi-chevron-right"></i></a></li>
           <li class="sidebar-subitems collapse" id="sidebarItem2">
             <ul class="sidebar-items">
@@ -49,13 +47,21 @@
     <div class="main-container">
       <main class="main">
         <div class="main-overlay" onclick="closeSidebar()"></div>
-        <div class="main-header">
-          <button class="btn btn-outline-dark" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
-          <div>
-            <span id="username">Admin</span>
-            <button class="btn btn-outline-danger btn-sm" id="logoutBtn">Cerrar Sesión</button>
+        <nav class="main-navbar navbar navbar-light bg-light">
+          <div class="container py-2">
+            <button class="navbar-toggler" type="button" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+            <div class="navbar-user dropdown">
+              <img src="img/main/avatar.jpg" alt="user avatar"
+                class="navbar-user-image d-inline-block rounded-circle me-2">
+              <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                <span id="username">Admin</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li></li><button class="dropdown-item text-danger" id="logoutBtn">Cerrar Sesión</button></li>
+              </ul>
+            </div>
           </div>
-        </div>
+        </nav>
         <div class="main-body">
           <div class="container">
             <h2 class="mt-4">Reporte</h2>
@@ -74,7 +80,7 @@
                 <div class="card card-flat">
                   <div class="card-body">
                     <h5 class="text-primary">Ingresos</h5>
-                    <h3 class="my-4">$ 10,210</h3>
+                    <h3 class="my-4">$ 11,660</h3>
                     <p class="text-success mb-0"><i class="bi bi-arrow-up-short"></i> 2%</p>
                     <p class="text-muted mb-0">Desde el ultimo mes</p>
                   </div>
@@ -83,9 +89,9 @@
               <div class="col-md">
                 <div class="card card-flat">
                   <div class="card-body">
-                    <h5 class="text-primary">Socios</h5>
-                    <h3 class="my-4">102</h3>
-                    <p class="text-success mb-0"><i class="bi bi-arrow-up-short"></i> 4.1%</p>
+                    <h5 class="text-primary">Membresias canceladas</h5>
+                    <h3 class="my-4">12</h3>
+                    <p class="text-danger mb-0"><i class="bi bi-arrow-down-short"></i> 2.7%</p>
                     <p class="text-muted mb-0">Desde el ultimo mes</p>
                   </div>
                 </div>
@@ -132,7 +138,7 @@
     const options1 = {
       series: [{
         name: 'Ingresos',
-        data: [12100, 9850, 10570, 13560, 12610, 10580, 11630, 9600, 11660, 10680]
+        data: [12100, 9850, 10570, 13560, 12610, 10580, 11630, 9600, 11660]
       }],
       chart: {
         height: 350,
@@ -145,7 +151,7 @@
         curve: 'smooth'
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
       },
       tooltip: {
         y: {
@@ -160,14 +166,14 @@
     chart1.render();
 
     const options2 = {
-      series: [44, 55, 13, 43, 22],
+      series: [44, 55, 13, 43, 22, 12],
       chart: {
         type: 'pie',
       },
       legend: {
         position: 'bottom'
       },
-      labels: ['Membresia A', 'Membresia B', 'Membresia C', 'Membresia D', 'Membresia E'],
+      labels: ['Básica', 'Premium', 'Estudiantil', 'Corporativa', 'Familiar', 'VIP Anual'],
     };
 
     const chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
