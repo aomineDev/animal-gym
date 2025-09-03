@@ -1,6 +1,6 @@
 export function ModalEditar({id, nombre, precio, descripcion, fecha_inicio, fecha_final, estado}){
   return /*html*/`
-    <div class="col-md-6">
+      <div class="col-md-6">
               <label class="form-label">Nombre del Plan</label>
               <div class="input-group">
                 <input type="text" class="form-control" value="${nombre}" name="nombre" required>
@@ -13,7 +13,7 @@ export function ModalEditar({id, nombre, precio, descripcion, fecha_inicio, fech
             <div class="col-md-3">
               <label class="form-label">Precio Regular (S/)</label>
               <div class="input-group">
-                <input type="number" class="form-control" name=precio value="${precio}" min="1" step="0.01" required>
+                <input type="number" class="form-control" name="precio" value="${precio}" min="1" step="0.01" required>
                 
               </div>
               <div class="valid-feedback">Precio válido</div>
