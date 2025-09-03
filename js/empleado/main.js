@@ -1,22 +1,21 @@
-import { tablaContenedor, btnAñadirEmpleado, btnGuardarEmpleado, inputBusqueda, cerrar } from "../empleado/dom.js";
-import { renderFilas } from "../empleado/render.js";
+import { tablaContenedor, btnAñadirEmpleado, modal, inputBusqueda, crearRol, selectEditar } from "../empleado/dom.js";
+import { renderFilas, renderEmpleadosPorRol } from "../empleado/render.js";
 import { getGym } from "../service.js";
 import store from "../store.js";
-import { abrirModal, guardarEmpleado_valido, busquedaDinamica, cerrarModal } from "../empleado/funciones.js";
-import { agregarEmpleado } from "./events/agregarEmpleadoEvents.js";
-//Añadir empleado(abrir modal)
-btnAñadirEmpleado.addEventListener('click', abrirModal);
-//guardar empleado con las validaciones 
-//btnGuardarEmpleado.addEventListener('click', guardarEmpleado_valido)
-//cerrrar modal
-//cerrar.addEventListener('click', cerrarModal);
-//busqueda
-inputBusqueda.addEventListener("input", busquedaDinamica);
-//renderizar las filas del storage
+import { objetEmpleado } from "./objeto.js";
+import { agregarEmpleado, renderSelectedCardEvent, abrirModal } from "./events/empleadoEvents.js";
+
 async function init() {
+
     store.gym = await getGym();
-    renderFilas(store.gym.empleados, tablaContenedor);
-    agregarEmpleado(store.gym.empleados, tablaContenedor)
+    renderFilas(objetEmpleado(store.gym.empleados, store.gym.roles), tablaContenedor, tablaContenedor);
+    renderSelectedCardEvent(store.gym.empleados, store.gym.roles);
+    agregarEmpleado(store.gym.empleados, store.gym.roles)
+    //mostrar los nombres de los roles en el select dinamicamente
+    renderEmpleadosPorRol(crearRol, store.gym.roles)
+
+    abrirModal(modal);
+
 }
 window.addEventListener('load', init);
 

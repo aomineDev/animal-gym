@@ -1,4 +1,4 @@
-export function filaTable({ nombre, apellido, dni, fecha_ingreso, telefono, correo, fecha_nacimiento, rol_id }) {
+export function filaTable({ id, nombre, apellido, dni, fecha_ingreso, telefono, correo, fecha_nacimiento, rolNombre }) {
   /*html*/
   return `
   <tr>
@@ -10,7 +10,7 @@ export function filaTable({ nombre, apellido, dni, fecha_ingreso, telefono, corr
       <td>${telefono}</td>
       <td>${correo}</td>
       <td>${fecha_nacimiento}</td>
-      <td>${rol_id}</td>
+      <td>${rolNombre}</td>
      <td>
                <div class="dropdown">
                   <button
@@ -25,8 +25,11 @@ export function filaTable({ nombre, apellido, dni, fecha_ingreso, telefono, corr
           <a
             class="dropdown-item"
             href="#"
-            onclick="editarFila(this)";
-            ><i class="bi bi-pencil me-2"></i>Editar</a
+                                data-bs-toggle="modal"
+
+             data-bs-target="#editar"
+                data-id="${id}">
+            <i class="bi bi-pencil me-2"></i>Editar</a
           >
         </li>
           <li>
@@ -35,9 +38,12 @@ export function filaTable({ nombre, apellido, dni, fecha_ingreso, telefono, corr
         <li>
           <a
             class="dropdown-item text-danger"
-            href="#"
-            onclick="borrarFila(this)"
-            ><i class="bi bi-trash me-2"></i>Eliminar</a
+                                data-bs-toggle="modal"
+
+             data-bs-target="#eliminar"
+             href="#"
+                data-id="${id}">
+            <i class="bi bi-trash me-2"></i>Eliminar</a
           >
         </li>
       </ul>
