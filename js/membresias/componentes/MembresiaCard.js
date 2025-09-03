@@ -1,7 +1,15 @@
-export function MembresiaCard({id, nombre, precio, descripcion, duracion, estado}){
+export function MembresiaCard({id, nombre, precio, descripcion, fecha_inicio,fecha_final, estado}){//duracion
+  const inicio = new Date(fecha_inicio.split("-"));
+  const fin = new Date(fecha_final.split("-"));
+  const duracion = Math.ceil((fin - inicio) / (1000 * 60 * 60 * 24));
+
+  const estados = estado 
+    ? { texto: "Activo", clase: "bg-success" } 
+    : { texto: "Inactivo", clase: "bg-secondary", card:"opacity-50" };
+  
   return /*html*/`
     <!-- Membresía 1 - Plan Básico Mensual -->
-      <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+      <div class="col-12 col-md-6 col-lg-4 col-xxl-3 ${estados.card}">
         <div class="workout-grid shadow-sm">
           <div class="img-wrap position-relative">
             <!-- <a href="#" class="btn-wishlist position-absolute top-0 start-0 m-2 z-3">
@@ -12,9 +20,9 @@ export function MembresiaCard({id, nombre, precio, descripcion, duracion, estado
                 <i class="bi bi-three-dots-vertical fs-5"></i>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verMembresiaModal" id="membresia-detalle" data-id="${id}">
+                <!--<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verMembresiaModal" id="membresia-detalle" data-id="${id}">
                   <i class="bi bi-eye me-2"></i>Ver detalles
-                </a></li>
+                </a></li>-->
                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#membresiaModal" data-id="${id}">
                   <i class="bi bi-pencil me-2"></i>Editar
                 </a></li>
@@ -33,15 +41,15 @@ export function MembresiaCard({id, nombre, precio, descripcion, duracion, estado
               <h5 class="fw-semibold mb-2">${nombre}</h5>
             </a>
             <h6 class="fw-semibold text-secondary">
-              S/ 100
-              <small class="text-decoration-line-through text-muted ms-1">S/ ${precio}</small>
+              S/ ${precio}
+              <small class="text-decoration-line-through text-muted ms-1">S/ ${precio+precio*0.25}</small>
               <span class="ms-2 small text-muted">
                 <i class="bi bi-clock"></i> ${duracion} dias
               </span>
             </h6>
             <p class="small text-muted mb-2">${descripcion}</p>
             <div class="d-flex justify-content-between align-items-center">
-              <span class="badge bg-success">${estado}</span>
+              <span class="badge ${estados.clase}">${estados.texto}</span>
               <small class="text-muted">35/100 socios</small>
             </div>
           </div>

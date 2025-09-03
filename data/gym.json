@@ -16,8 +16,44 @@
       "descripcion": "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
       "fecha_inicio": "2025-05-12",
       "fecha_final": "2026-05-12",
+      "estado": true
+    },
+    {
+      "id": 3,
+      "nombre": "Estudiantil",
+      "precio": 90.00,
+      "descripcion": "Membresía con descuento para estudiantes. Acceso a pesas, cardio y clases seleccionadas.",
+      "fecha_inicio": "2024-03-01",
+      "fecha_final": "2024-06-01",
       "estado": false
-    }
+    },
+    {
+      "id": 4,
+      "nombre": "Familiar",
+      "precio": 500.00,
+      "descripcion": "Membresía grupal para hasta 4 personas. Acceso total a todas las áreas del gimnasio.",
+      "fecha_inicio": "2024-09-15",
+      "fecha_final": "2025-09-15",
+      "estado": true
+    },
+    {
+      "id": 5,
+      "nombre": "Corporativa",
+      "precio": 1200.00,
+      "descripcion": "Pensada para empresas. Acceso para hasta 10 colaboradores con beneficios especiales.",
+      "fecha_inicio": "2023-01-10",
+      "fecha_final": "2023-12-10",
+      "estado": true
+    },
+    {
+      "id": 6,
+      "nombre": "VIP Anual",
+      "precio": 800.00,
+      "descripcion": "Membresía exclusiva con acceso ilimitado, entrenador personal y área VIP.",
+      "fecha_inicio": "2025-01-01",
+      "fecha_final": "2026-01-01",
+      "estado": true
+    } 
   ],
   "rutinas": [
     {
@@ -76,12 +112,13 @@
       "correo": "laura.fernandez@example.com",
       "fecha_nacimiento": "1995-08-20",
       "altura": 1.68,
-      "foto_perfil": "https://picsum.photos/50?random=1",
+      "foto_perfil": "img/socios/s3.jpg",
       "peso": 60.5,
       "genero": "F",
       "imagen": "img/clase-1.jpg",
       "membresia_id": 2,
-      "rutina_id": 5
+      "rutina_id": 5,
+      "estado":"activo"
     },
     {
       "id": 2,
@@ -93,11 +130,12 @@
       "correo": "carlos.ramirez@example.com",
       "fecha_nacimiento": "1990-11-05",
       "altura": 1.75,
-      "foto_perfil": "https://picsum.photos/100?random=1",
+      "foto_perfil": "img/socios/s1.jpg",
       "peso": 78.2,
       "genero": "M",
       "membresia_id": 1,
-      "rutina_id": 3
+      "rutina_id": 3,
+      "estado":"activo"
     },
     {
       "id": 3,
@@ -109,12 +147,13 @@
       "correo": "juan.garcia@example.com",
       "fecha_nacimiento": "1992-03-10",
       "altura": 1.75,
-      "foto_perfil": "https://picsum.photos/50?random=2",
+      "foto_perfil": "img/socios/s2.jpg",
       "peso": 72.3,
       "genero": "M",
       "imagen": "img/clase-2.jpg",
       "membresia_id": 1,
-      "rutina_id": 3
+      "rutina_id": 3,
+      "estado":"vencido"
     },
     {
       "id": 4,
@@ -126,12 +165,13 @@
       "correo": "mariana.lopez@example.com",
       "fecha_nacimiento": "1998-07-25",
       "altura": 1.62,
-      "foto_perfil": "https://picsum.photos/50?random=3",
+      "foto_perfil": "img/socios/s5.jpg",
       "peso": 55.8,
       "genero": "F",
       "imagen": "img/clase-3.jpg",
       "membresia_id": 3,
-      "rutina_id": 2
+      "rutina_id": 2,
+      "estado":"activo"
     },
     {
       "id": 5,
@@ -143,29 +183,31 @@
       "correo": "andres.torres@example.com",
       "fecha_nacimiento": "1990-12-15",
       "altura": 1.80,
-      "foto_perfil": "https://picsum.photos/50?random=4",
+      "foto_perfil": "img/socios/s4.jpg",
       "peso": 80.1,
       "genero": "M",
       "imagen": "img/clase-4.jpg",
       "membresia_id": 2,
-      "rutina_id": 4
+      "rutina_id": 4,
+      "estado":"vencido"
     },
     {
       "id": 6,
-      "nombre": "asdas",
+      "nombre": "Javier",
       "apellido": "Torres",
       "dni": "76985412",
       "fecha_ingreso": "2024-03-02",
       "telefono": "934567812",
-      "correo": "andres.asasdasdsa@example.com",
+      "correo": "andres.torres@example.com",
       "fecha_nacimiento": "1990-12-15",
       "altura": 1.80,
-      "foto_perfil": "https://picsum.photos/50?random=4",
+      "foto_perfil": "img/socios/s7.jpg",
       "peso": 80.1,
       "genero": "M",
       "imagen": "img/clase-4.jpg",
       "membresia_id": 2,
-      "rutina_id": 4
+      "rutina_id": 4,
+      "estado":"inactivo"
     }
   ],
   "clases": [

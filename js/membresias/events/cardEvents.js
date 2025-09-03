@@ -29,11 +29,6 @@ export function selectedCardEvent(membresias) {
 
 
 
-
-
-
-
-
 export function editarMembresiaFormEvents(item, membresias) {
   editarMembresiaForm.addEventListener('submit', (e) => {
 
@@ -55,21 +50,18 @@ export function editarMembresiaFormEvents(item, membresias) {
       fecha_final: data.get('fecha_final'),
       estado: data.get('estado')
     };
-    console.log(actualizarMembresia.nombre);
+    // console.log(actualizarMembresia.nombre);
     const index = membresias.findIndex(c => c.id === item.id);
     if (index !== -1) {
       membresias[index] = actualizarMembresia;
     }
-    console.log(membresias);
+    // console.log(membresias);
     renderMembresiaCard(membresias, contentMembresia);
 
-    //cerra modal
+    //cerrar modal
     const modal = bootstrap.Modal.getInstance(document.getElementById("membresiaModal"));
     editarMembresiaForm.innerHTML = "";
     modal.hide();
-
-
-
 
   }, { once: true })
 } 

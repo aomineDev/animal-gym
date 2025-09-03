@@ -11,8 +11,6 @@ async function init(){
   store.gym = await getGym();//contenido del json
   renderMembresiaCard(store.gym.membresias, contentMembresia);
 
-
-  
   selectedCardEvent(store.gym.membresias);
   
 
