@@ -40,12 +40,21 @@
     <div class="main-container">
       <main class="main">
         <div class="main-overlay" onclick="closeSidebar()"></div>
-        <div class="main-header">
-          <button class="btn btn-outline-dark" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
-          <div>
-            <span>Admin</span>
+        <nav class="main-navbar navbar navbar-light bg-light">
+          <div class="container py-2">
+            <button class="navbar-toggler" type="button" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+            <div class="navbar-user dropdown">
+              <img src="img/main/avatar.jpg" alt="user avatar"
+                class="navbar-user-image d-inline-block rounded-circle me-2">
+              <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                <span id="username">Admin</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li></li><button class="dropdown-item text-danger" id="logoutBtn">Cerrar Sesión</button></li>
+              </ul>
+            </div>
           </div>
-        </div>
+        </nav>
         <div class="main-body">
           <div class="container my-4">
 

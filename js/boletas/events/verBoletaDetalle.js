@@ -1,5 +1,9 @@
 import { contenedorTablaBoleta, } from "../dom.js"
 import { renderBoleta } from "../render.js"
+
+
+
+
 export const verBoletaDetalle = (boletas, container) => {
     contenedorTablaBoleta.addEventListener('click', e => {
         console.log("")

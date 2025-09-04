@@ -53,7 +53,7 @@
       "fecha_inicio": "2025-01-01",
       "fecha_final": "2026-01-01",
       "estado": true
-    } 
+    }
   ],
   "rutinas": [
     {
@@ -118,7 +118,7 @@
       "imagen": "img/clase-1.jpg",
       "membresia_id": 2,
       "rutina_id": 5,
-      "estado":"activo"
+      "estado": "activo"
     },
     {
       "id": 2,
@@ -135,7 +135,7 @@
       "genero": "M",
       "membresia_id": 1,
       "rutina_id": 3,
-      "estado":"activo"
+      "estado": "activo"
     },
     {
       "id": 3,
@@ -153,7 +153,7 @@
       "imagen": "img/clase-2.jpg",
       "membresia_id": 1,
       "rutina_id": 3,
-      "estado":"vencido"
+      "estado": "vencido"
     },
     {
       "id": 4,
@@ -171,7 +171,7 @@
       "imagen": "img/clase-3.jpg",
       "membresia_id": 3,
       "rutina_id": 2,
-      "estado":"activo"
+      "estado": "activo"
     },
     {
       "id": 5,
@@ -189,7 +189,7 @@
       "imagen": "img/clase-4.jpg",
       "membresia_id": 2,
       "rutina_id": 4,
-      "estado":"vencido"
+      "estado": "vencido"
     },
     {
       "id": 6,
@@ -207,7 +207,7 @@
       "imagen": "img/clase-4.jpg",
       "membresia_id": 2,
       "rutina_id": 4,
-      "estado":"inactivo"
+      "estado": "inactivo"
     }
   ],
   "clases": [
@@ -301,10 +301,6 @@
     {
       "id": 4,
       "nombre": "Entrenador"
-    },
-    {
-      "id": 5,
-      "nombre": "basurero"
     }
   ],
   "boletas": [
@@ -315,6 +311,7 @@
       "dni": "65214897",
       "telefono": "912345678",
       "menbresia_id": "Premiun",
+      "metodoDePago": "Tajeta",
       "opGrabada": 200,
       "igv": 36,
       "importeTotal": 236
@@ -326,6 +323,7 @@
       "dni": "71597686",
       "telefono": "987654321",
       "menbresia_id": "Premiun",
+      "metodoDePago": "Tajeta",
       "opGrabada": 123,
       "igv": 36,
       "importeTotal": 3333
@@ -337,6 +335,7 @@
       "dni": "71597686",
       "telefono": "987654321",
       "menbresia_id": "Premiun",
+      "metodoDePago": "Tajeta",
       "opGrabada": 200,
       "igv": 36,
       "importeTotal": 136

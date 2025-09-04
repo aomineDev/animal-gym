@@ -4,6 +4,9 @@ import { getGym } from "../service.js";
 import store from "../store.js";
 import { objetEmpleado } from "./objeto.js";
 import { agregarEmpleado, renderSelectedCardEvent, abrirModal } from "./events/empleadoEvents.js";
+import { requireAuth } from '../util.js'
+
+requireAuth()
 
 async function init() {
 
