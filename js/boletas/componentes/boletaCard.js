@@ -9,6 +9,7 @@ export function boletaCard({
   opGrabada,
   igv,
   importeTotal,
+  metodoDePago
 }) {
   return /*html*/ `  
 
@@ -26,13 +27,15 @@ export function boletaCard({
         <p><strong>DNI:</strong> ${dni}</p>
         <p><strong>Teléfono:</strong> ${telefono}</p>
         <p><strong>Membresía:</strong> ${menbresia_id}</p>
+                <p><strong>Metodo de pago:</strong> ${metodoDePago}</p>
+
       </div>
       <div class="row justify-content-end">
         <div class="col-12 col-sm-6 totales caja-importe">
           <table class="table table-borderless text-center text-sm-end">
             <tr><th>Op. Grabadas:</th><td>${opGrabada}</td></tr>
             <tr><th>IGV (18%):</th><td>${igv}</td></tr>
-            <tr class="table-active"><th>Importe Total:</th><td class="fw-bold">${importeTotal}</td></tr>
+            <tr class="table-active"><th>Importe Total:</th><td class="fw-bold">S/  ${importeTotal}</td></tr>
           </table>
         </div>
       </div>

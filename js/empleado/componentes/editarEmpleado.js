@@ -31,7 +31,7 @@ export function editarEmpleado({ id, nombre, apellido, dni, fecha_ingreso, telef
                 placeholder="Fecha de nacimiento" required value="${fecha_nacimiento}" />
             </div>
             <div class="col-12 mb-3">
-              <select name="rol_id" class="form-select" id="selectEditar" required>
+              <select name="rol_id" class="form-select crearRol"  required>
                 <option value="">Seleccion un rol..</option>
                 <option value="${rolNombre}" selected>${rolNombre}</option>
               

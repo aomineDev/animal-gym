@@ -39,7 +39,7 @@
     <div class="main-container">
       <main class="main">
         <div class="main-overlay" onclick="closeSidebar()"></div>
-         <nav class="main-navbar navbar navbar-light bg-light">
+        <nav class="main-navbar navbar navbar-light bg-light">
           <div class="container py-2">
             <button class="navbar-toggler" type="button" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
             <div class="navbar-user dropdown">
@@ -58,7 +58,8 @@
           <div class="container">
             <!-- titulo -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <h2> <i class="bi bi-card-heading"></i> Gestión de boletas</h2>
+              <h2> <i class="bi bi-receipt"></i>
+                Gestión de boletas</h2>
             </div>
 
 
@@ -66,7 +67,8 @@
               <table class="table table-hover align-middle">
                 <thead class="table-light">
                   <tr class="text-center">
-                    <th>Fecha de emicion</th>
+                    <th>Boleta N°</th>
+                    <th>Fecha de emisióm</th>
                     <th>Socio</th>
                     <th>Dni</th>
                     <th>Numero de telefono</th>
@@ -78,10 +80,6 @@
                 </tbody>
               </table>
             </div>
-
-
-
-
           </div>
         </div>
       </main>
@@ -89,9 +87,7 @@
   </div>
   </div>
   <!-- /modal/ -->
-  <!-- <div class="modal fade" id="boletaModal" tabindex="-1" aria-labelledby="boletaModalLabel" aria-hidden="true">
-
-  </div> -->
+  </div>
   <div class="modal fade" id="boletaModal" tabindex="-1" aria-labelledby="boletaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content shadow">
@@ -99,7 +95,7 @@
           <h5 class="modal-title fw-bold" id="boletaModalLabel">Boleta de Venta</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
-        <div class="modal-body" id="modalBodyBoleta">
+        <div class="modal-body p-5" id="modalBodyBoleta">
           <!-- Aquí se inyectará dinámicamente solo el contenido de la boleta -->
         </div>
         <div class="modal-footer">

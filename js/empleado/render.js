@@ -16,14 +16,17 @@ export const renderEditarEmpleado = (empleado) => {
     formEditarEmpleado.innerHTML += editarEmpleado(empleado)
 
 }
-//selecciona un rol
-export const renderEmpleadosPorRol = (crearRol, roles) => {
-    crearRol.innerHTML = `<option value="">Seleccione un rol</option>`
 
-    roles.forEach(rol => {
-        const option = document.createElement("option")
-        option.value = rol.id // valor será el id del rol
-        option.textContent = rol.nombre // lo que verá el usuario
-        crearRol.appendChild(option)
-    })
+//renderizar los roles de empledaos en
+export const renderEmpleadosPorRol = (crearRol, roles) => {
+    crearRol.forEach(select => {
+        select.innerHTML = `<option value="">Seleccione un rol</option>`;
+
+        roles.forEach(rol => {
+            const option = document.createElement("option");
+            option.value = rol.id;
+            option.textContent = rol.nombre;
+            select.appendChild(option);
+        });
+    });
 }
