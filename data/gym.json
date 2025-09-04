@@ -277,10 +277,11 @@
       "id": 3,
       "nombre": "Franco",
       "apellido": "Colapinto",
-      "dni": "73527486",
+      "dni": "12345678",
       "fecha_ingreso": "2023-06-15",
       "telefono": "987654321",
       "correo": "franquito@example.com",
+      "clave": "123",
       "fecha_nacimiento": "1990-04-22",
       "rol_id": 4
     }
