@@ -6,7 +6,7 @@ import store from "../store.js";
 
 import { selectedCardEvent } from "./events/cardEvents.js";
 
-import { requireAuth } from '../util.js'
+import { requireAuth, logout } from '../util.js'
 
 requireAuth()
 
@@ -20,3 +20,5 @@ async function init(){
 }
 
 window.addEventListener('load', init);
+
+document.getElementById('logoutBtn').addEventListener('click', logout)

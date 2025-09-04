@@ -1,4 +1,4 @@
-import { getUser } from  './service.js'
+import { getUser, clearUser } from  './service.js'
 
 export function requireAuth() {
   const user = getUser()
@@ -6,4 +6,9 @@ export function requireAuth() {
   if (user == null) {
     window.location.href = "login.html"
   } 
+}
+
+export function logout() {
+  clearUser()
+	window.location.href = "login.html"
 }
