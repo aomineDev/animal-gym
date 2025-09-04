@@ -14,6 +14,6 @@ export const btnGuardarEmpleado = document.getElementById("guardarEmpleado");
 //formulario
 export const formularioEmpleado = document.getElementById("formEmpleado");
 //selecciona un rol 
-export const crearRol = document.getElementById("crearRol");
+export const crearRol = document.querySelectorAll(".crearRol");
 //selecciona un rol de editar
 export const selectEditar = document.getElementById("selectEditar")

@@ -3,11 +3,12 @@ export function filaBoleta({ id, fechaEmision, socio_id, dni, telefono, menbresi
   return `
     
     <tr>
+      <td>${id}</td>
       <td>${fechaEmision}</td>
       <td>${socio_id}</td>
       <td>${dni}</td>
-    <td>+51 ${telefono}</td>
-        <td>${importeTotal}</td>
+      <td>${telefono}</td>
+        <td>S/  ${importeTotal}</td>
 
 
       <td>
