@@ -1,0 +1,7 @@
+.body_client {
+    background-color: var(--dark-lighten);
+}
+
+.navbar {
+    background-color: var(--dark) !important;
+}
