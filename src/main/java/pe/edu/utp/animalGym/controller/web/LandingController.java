@@ -9,6 +9,7 @@ public class LandingController {
   @GetMapping("/")
   public String index(Model model) {
     model.addAttribute("content", "landing :: content");
+    model.addAttribute("content", "landing :: modal");
 
     return "index";
   }
