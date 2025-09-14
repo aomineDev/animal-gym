@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+
+<body>
+  <th:block th:fragment="content">
+    <section class="container d-flex justify-content-center align-items-center min-vh-100">
+      <div class="row bg-white w-75 rounded-4 shadow">
+
+        <div class="content-logo col d-none d-lg-block col-md-5 col-lg-6 bg-black rounded-4 d-flex">
+          <img class="img-fluid" src="img/logo.jpg" alt="logo Animal Gym">
+        </div>
+
+        <div class="col-12 col-lg-6 p-4">
+          <div class="text-center">
+            <h2 class="fw-bold text-center mt-3 mb-2">Bienvenido</h2>
+            <p>Listos para darle la bienvenida a nuestros socios y seguir construyendo un lugar donde
+              la energía y la disciplina nos unan.</p>
+
+            <p class="mt-4">Ingresa tus datos para <b>iniciar sesión.</b></p>
+          </div>
+
+          <form action="" class="row needs-validation" id="loginForm" novalidate>
+
+            <div class="mb-3">
+              <label for="dni" class="form-label">DNI</label>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="dni" id="dni" pattern="[0-9]{8}"
+                  placeholder="Ingresa tu DNI" required>
+                <span class="input-group-text">
+                  <i class="bi bi-person"></i>
+                </span>
+                <div class="invalid-feedback">
+                  <i class="bi bi-exclamation-triangle mx-2"></i> Campo obligatorio, ingresa 8 dígitos
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" name="password"
+                  placeholder="Ingresa tu contraseña" required>
+                <span class="input-group-text">
+                  <i class="bi bi-eye-slash-fill"></i>
+                </span>
+                <div class="invalid-feedback">
+                  <i class="bi bi-exclamation-triangle mx-2"></i>Campo obligatorio
+                </div>
+              </div>
+            </div>
+            <div class="d-grid mb-3">
+              <button class="btn btn-primary" type="submit">Iniciar sesion</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+  </th:block>
+
+  <th:block th:fragment="modal">
+    <div class="toast-container position-fixed toast-login-container">
+      <div id="toast-login" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            Crendenciales incorrectas
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </th:block>
+</body>
+
+</html>

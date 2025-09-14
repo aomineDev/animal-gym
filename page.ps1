@@ -15,4 +15,4 @@ if (-not (Test-Path $templatePath)) {
 
 Copy-Item $templatePath $outputPath
 
-Write-Host "Archivo creado: templates/$outputPath.html"
+Write-Host "Archivo creado: templates/$name.html"

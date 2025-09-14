@@ -10,7 +10,7 @@ public class HomeController {
   public String home(Model model) {
     model.addAttribute("title", "Animal GYM | Home");
     model.addAttribute("content", "home :: content");
-    model.addAttribute("modal", "home :: content");
+    model.addAttribute("modal", "home :: modal");
     model.addAttribute("activePage", "home");
 
     return "layout";
