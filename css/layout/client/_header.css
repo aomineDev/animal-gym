@@ -1,0 +1,10 @@
+@media (max-width: 576px) {
+    .carousel-caption h1 {
+        font-size: 1.8rem;
+    }
+
+    .carousel-caption .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
