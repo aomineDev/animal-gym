@@ -2,6 +2,10 @@
     background-color: var(--dark-lighten);
 }
 
-.navbar {
-    background-color: var(--dark) !important;
+.text-white {
+    color: white !important;
+}
+
+.bg-red-gym {
+    background-color: var(--red) !important;
 }
