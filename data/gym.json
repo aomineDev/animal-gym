@@ -104,8 +104,8 @@
   "socios": [
     {
       "id": 1,
-      "nombre": "Laura",
-      "apellido": "Fernández",
+      "nombre": "Laura Maria",
+      "apellido": "Fernández Alarcon",
       "dni": "74859632",
       "fecha_ingreso": "2023-05-12",
       "telefono": "987654321",
@@ -122,8 +122,8 @@
     },
     {
       "id": 2,
-      "nombre": "Carlos",
-      "apellido": "Ramírez",
+      "nombre": "Carlos Rodrigo",
+      "apellido": "Ramírez Vertiz",
       "dni": "65214897",
       "fecha_ingreso": "2024-01-08",
       "telefono": "912345678",
@@ -139,8 +139,8 @@
     },
     {
       "id": 3,
-      "nombre": "Juan",
-      "apellido": "Garcia",
+      "nombre": "Juan Daniel",
+      "apellido": "Garcia Tupacyupanqui",
       "dni": "75684219",
       "fecha_ingreso": "2024-01-18",
       "telefono": "912345678",

@@ -5,7 +5,7 @@ export function MembresiaCard({id, nombre, precio, descripcion, fecha_inicio,fec
 
   const estados = estado 
     ? { texto: "Activo", clase: "bg-success" } 
-    : { texto: "Inactivo", clase: "bg-secondary", card:"opacity-50" };
+    : { texto: "Inactivo", clase: "bg-secondary" };
   
   return /*html*/`
     <!-- Membresía 1 - Plan Básico Mensual -->
@@ -33,7 +33,7 @@ export function MembresiaCard({id, nombre, precio, descripcion, fecha_inicio,fec
               </ul>
             </div>
             <a href="#">
-              <img src="https://picsum.photos/600/400?random=1" alt="" class="w-100 rounded-3">
+              <img src="https://picsum.photos/600/400?random" alt="" class="w-100 rounded-3">
             </a>
           </div>
           <div class="workout-detail p-3">

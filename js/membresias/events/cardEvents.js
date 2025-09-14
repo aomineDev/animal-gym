@@ -3,6 +3,8 @@ import { renderEditarForm, renderMembresiaCard } from "../render.js";
 
 
 
+
+
 export function selectedCardEvent(membresias) {
   contentMembresia.addEventListener('click', (e) => {
     const boton = e.target.closest("[data-id]");//rastrea el dom para encontra el data--id
@@ -18,8 +20,6 @@ export function selectedCardEvent(membresias) {
         console.log(membresia.id);
         renderEditarForm(membresia);
         editarMembresiaFormEvents(membresia, membresias);
-
-
       }
 
     }
@@ -65,3 +65,5 @@ export function editarMembresiaFormEvents(item, membresias) {
 
   }, { once: true })
 } 
+
+

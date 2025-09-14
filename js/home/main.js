@@ -1,5 +1,5 @@
-import { requireAuth } from '../util.js'
-import { clearUser, getUser } from '../service.js'
+import { requireAuth , logout } from '../util.js'
+import {  getUser } from '../service.js'
 
 requireAuth()
 
@@ -12,7 +12,4 @@ function init() {
 
 document.addEventListener('DOMContentLoaded', init)
 
-document.getElementById('logoutBtn').addEventListener('click', () => {
-	clearUser()
-	window.location.href = "login.html"
-})
+document.getElementById('logoutBtn').addEventListener('click', logout)

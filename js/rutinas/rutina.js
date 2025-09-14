@@ -5,7 +5,7 @@ import store from "../store.js"
 import { agregarRutinaEvents } from "./events/agrearRutinaEvents.js";
 import { selectedFilaEvents } from "./events/filaEvents.js";
 
-import { requireAuth } from '../util.js'
+import { requireAuth, logout } from '../util.js'
 
 requireAuth()
 
@@ -20,3 +20,6 @@ async function init() {
 }
 
 window.addEventListener('load', init)
+
+document.getElementById('logoutBtn').addEventListener('click', logout)
+

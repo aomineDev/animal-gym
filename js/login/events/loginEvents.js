@@ -21,10 +21,21 @@ function handleLoginSubmit(e) {
 		setUser(user)
 		window.location.href = "home.html"
 	} else {
-		alert("Credenciales incorrectas")
+		document.querySelector('.needs-validation').classList.remove('was-validated')
+		inputPassword.value = ''
+
+		const toastLiveExample = document.getElementById('toast-login')
+		const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+		toastBootstrap.show()
+		// inputPassword.classList.add('is-invalid')
 	}
 }
 
+function handleInput(evt) {
+		inputPassword.classList.remove('is-invalid')
+}
+
 export default function registerLoginEvents() {
+	// inputPassword.addEventListener('input', handleInput)
 	loginForm.addEventListener("submit", handleLoginSubmit)
 }

@@ -5,7 +5,7 @@ import store from "../store.js"
 
 import { objectClase } from './objeto.js'
 import { renderSelectedCardEvent, createClaseFormEvents } from './events/cardEvents.js'
-import { requireAuth } from '../util.js'
+import { requireAuth, logout } from '../util.js'
 
 requireAuth()
 
@@ -29,3 +29,5 @@ async function init() {
 
 renderFilter(form)
 window.addEventListener('load', init)
+document.getElementById('logoutBtn').addEventListener('click', logout)
+

@@ -4,7 +4,7 @@ import { getGym } from "../service.js";
 import store from "../store.js";
 import { objetEmpleado } from "./objeto.js";
 import { agregarEmpleado, renderSelectedCardEvent, abrirModal } from "./events/empleadoEvents.js";
-import { requireAuth } from '../util.js'
+import { requireAuth, logout } from '../util.js'
 
 requireAuth()
 
@@ -22,4 +22,5 @@ async function init() {
 }
 window.addEventListener('load', init);
 
+document.getElementById('logoutBtn').addEventListener('click', logout)
 
