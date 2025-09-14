@@ -5,7 +5,8 @@
 @import './components/_sidedbar.css';
 
 /* Layout */
-@import './layout/_clase.css';
-@import './layout/_socios.css';
-@import './layout/_membresias.css';
-@import './layout/_boleta.css';
+@import './layout/admin/_boleta.css';
+@import './layout/admin/_clase.css';
+@import './layout/admin/_membresias.css';
+@import './layout/admin/_reporte.css';
+@import './layout/admin/_socios.css';
