@@ -4,9 +4,14 @@
 /* Componentes */
 @import './components/_sidedbar.css';
 
+/* Utilities */
+@import './utilities/variables.css';
+
 /* Layout */
 @import './layout/admin/_boleta.css';
 @import './layout/admin/_clase.css';
 @import './layout/admin/_membresias.css';
 @import './layout/admin/_reporte.css';
 @import './layout/admin/_socios.css';
+
+@import './layout/client/_navbar.css';
