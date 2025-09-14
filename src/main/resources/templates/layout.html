@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title}">Animal GYM</title>
+  <link rel="icon" type="image/x-icon" href="./img/icongym.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+  <div class="app">
+    <div class="sidebar">
+      <header class="sidebar-header">
+        <h2>Animal Gym</h2>
+      </header>
+      <nav class="sidebar-body">
+        <ul class="sidebar-items">
+          <!-- <li class="sidebar-item sidebar-collapse-item"><a class="sidebar-link" data-bs-toggle="collapse" href="#sidebarItem2" role="button" aria-expanded="false" aria-controls="sidebarItem2"><span><span class="sidebar-link-icon"><i class="bi bi-person"></i></span>Item 2</span><i class="bi bi-chevron-right"></i></a></li>
+          <li class="sidebar-subitems collapse" id="sidebarItem2">
+            <ul class="sidebar-items">
+              <li class="sidebar-item"><a href="#" class="sidebar-link">Membresias</a></li>
+              <li class="sidebar-item"><a href="#" class="sidebar-link">Subitem 2</a></li>
+            </ul>
+          </li> -->
+          <li class="sidebar-item" th:classappend="${activePage == 'home'} ? ' active'">
+            <a class="sidebar-link" th:href="@{/home}">
+              <span class="sidebar-link-icon"><i class="bi bi-house-fill"></i></span>Inicio
+            </a>
+          </li>
+          <li class="sidebar-item" th:classappend="${activePage == 'socios'} ? ' active'">
+            <a th:href="@{/socios}" class="sidebar-link">
+              <span class="sidebar-link-icon"><i class="bi bi-person-badge-fill"></i></span>Socios
+            </a>
+          </li>
+          <li class="sidebar-item" th:classappend="${activePage == 'membresias'} ? ' active'">
+            <a th:href="@{/membresias}" class="sidebar-link">
+              <span class="sidebar-link-icon"><i class="bi bi-person-vcard-fill"></i></span>Membresias
+            </a>
+          </li>
+          <li class="sidebar-item" th:classappend="${activePage == 'empleados'} ? ' active'">
+            <a th:href="@{/empleados}" class="sidebar-link">
+              <span class="sidebar-link-icon"><i class="bi bi-person-fill"></i></span>Empleados
+            </a>
+          </li>
+          <li class="sidebar-item" th:classappend="${activePage == 'rutinas'} ? ' active'">
+            <a th:href="@{/rutinas}" class="sidebar-link">
+              <span class="sidebar-link-icon"><i class="bi bi-person-arms-up"></i></span>Rutinas
+            </a>
+          </li>
+          <li class="sidebar-item" th:classappend="${activePage == 'clases'} ? ' active'">
+            <a th:href="@{/clases}" class="sidebar-link">
+              <span class="sidebar-link-icon"><i class="bi bi-book-fill"></i></span>Clases
+            </a>
+          </li>
+          <li class="sidebar-item" th:classappend="${activePage == 'boletas'} ? ' active'">
+            <a th:href="@{/boletas}" class="sidebar-link">
+              <span class="sidebar-link-icon"><i class="bi bi-receipt"></i></span>Boletas
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="main-container">
+      <main class="main">
+        <div class="main-overlay" onclick="closeSidebar()"></div>
+        <nav class="main-navbar navbar navbar-light bg-light">
+          <div class="container py-2">
+            <button class="navbar-toggler" type="button" onclick="openSidebar()"><i class="bi bi-list"></i></button>
+            <div class="navbar-user dropdown">
+              <img th:src="@{/img/navbar/avatar.jpg}" alt="user avatar"
+                class="navbar-user-image d-inline-block rounded-circle me-2">
+              <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                <span id="username">Admin</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li></li><button class="dropdown-item text-danger" id="logoutBtn">Cerrar Sesión</button></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="main-body">
+          <div class="container">
+            <div th:replace="~{__${content}__}"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div th:replace="~{__${modal}__}"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script>
+    function openSidebar() {
+      document.querySelector('.app').classList.add('sidebar-open');
+    }
+
+    function closeSidebar() {
+      document.querySelector('.app').classList.remove('sidebar-open');
+    }
+  </script>
+</body>
+
+</html>
