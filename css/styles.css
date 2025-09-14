@@ -10,3 +10,6 @@
 @import './layout/admin/_membresias.css';
 @import './layout/admin/_reporte.css';
 @import './layout/admin/_socios.css';
+
+/* class & contact */
+@import url('./layout/client/_clases.css');
