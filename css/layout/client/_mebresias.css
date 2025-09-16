@@ -1,35 +1,37 @@
-      .card {
-          transition: all 0.3s ease;
-          /* suaviza el efecto */
-      }
+/*color de las cartas*/
+.custom-card {
+    background-color: #0A0A0A;
+    border: 1px solid #2c2c2c;
+    min-width: 280px;
+    /* Mantiene tamaño uniforme */
+    max-width: 400px;
+}
 
-      .card:hover {
-          transform: scale(1);
-          border-color: #dc3535 !important;
-      }
+/*color del boton*/
+.color-btn {
+    background-color: #444444;
+}
 
-      .custom-card {
-          background-color: #0A0A0A;
-          border: 1px solid #2c2c2c;
-          min-width: 280px;
-          /* Mantiene tamaño uniforme */
-          max-width: 300px;
-      }
 
-      .custom-card .card-body {
-          color: red;
-      }
+.custom-card hr {
+    opacity: 0.5;
+}
 
-      .custom-card hr {
-          opacity: 0.3;
-      }
+/* Scroll más elegante */
+.overflow-auto::-webkit-scrollbar {
+    height: 8px;
+}
 
-      /* Scroll más elegante */
-      .overflow-auto::-webkit-scrollbar {
-          height: 8px;
-      }
+.overflow-auto::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border-radius: 10px;
+}
 
-      .overflow-auto::-webkit-scrollbar-thumb {
-          background: #dc3545;
-          border-radius: 10px;
-      }
+.btn-mebresias {
+    transition: all 0.3s ease;
+
+}
+
+.btn-mebresias:hover {
+    background-color: var(--red) !important;
+}
