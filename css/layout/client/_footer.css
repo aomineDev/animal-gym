@@ -1,22 +1,28 @@
-@media (max-width:320px) {
+/* @media (max-width:320px) {
     .caja-img {
         display: flex;
         flex-direction: column;
         margin-bottom: 60px;
     }
-}
+} */
 
-@media (max-width:413px) {
+/* @media (max-width:413px) {
     .caja-img {
         display: flex;
         flex-direction: column;
         margin-bottom: 60px;
     }
-}
+} */
 
 @media (max-width:575px) {
+    .caja-img {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 60px;
+
+    }
 
     .container-fooder {
-        padding: 40px;
+        padding: 10px;
     }
 }
