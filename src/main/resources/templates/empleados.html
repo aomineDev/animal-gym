@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+
+<body>
+    <th:block th:fragment="content">
+        <div class="container">
+
+            <!-- gestion empleado + icono -->
+            <div class="mb-4">
+                <h2><i class="bi bi-people me-2"></i>Gestión de empleados</h2>
+            </div>
+
+            <!--Buscador + select rol + nuevo empleado-->
+            <div class="row g-3 mb-5">
+
+                <div class="col-md-4 col-12">
+                    <input type="text" class="form-control" id="buscarEmpleadoPorNombre"
+                        placeholder="Buscar por nombre">
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <select name="rol_id" class="form-select crearRol" required>
+                        <option value="">Seleccion un rol..</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <button type="submit" class="btn btn-primary w-100" id="añadirEmpleado">
+                        <i class="bi bi-person-plus me-2"></i>Nuevo empleado
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Tabla de los empleados-->
+            <div class="table-responsive mt-4">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr class="text-center">
+                            <th>Foto</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>DNI</th>
+                            <th>Fecha de ingreso</th>
+                            <th>Numero de telefono</th>
+                            <th>Correo</th>
+                            <th>Fecha de nacimiento</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaEmpleados" class="text-center">
+                        <!-- aqui iran las filas -->
+                    </tbody>
+                </table>
+                <!-- paginacion -->
+                <div class="mt-4">
+                    <nav aria-label="Paginación de empleados">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                            </li>
+                            <li class="page-item active">
+                                <a class="page-link" href="#">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">3</a>
+                            </li>
+                            <li class="page-item">
+                                <span class="page-link">...</span>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">5</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </th:block>
+
+    <th:block th:fragment="modal">
+    </th:block>
+</body>
+
+</html>

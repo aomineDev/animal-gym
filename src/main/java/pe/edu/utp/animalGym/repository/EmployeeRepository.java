@@ -10,7 +10,7 @@ import pe.edu.utp.animalGym.model.Employee;
 
 @Repository
 public class EmployeeRepository {
-    private List<Employee> employeeList = new ArrayList<>();
+    private List<Employee> employeeList = new ArrayList<>(List.of(new Employee(1500, "Mensual", "Ingeniero")));
 
     private Integer nextId = 1;
 
