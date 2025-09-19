@@ -1,5 +1,6 @@
 package pe.edu.utp.animalGym.repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,24 @@ import pe.edu.utp.animalGym.model.Employee;
 
 @Repository
 public class EmployeeRepository {
-    private List<Employee> employeeList = new ArrayList<>(List.of(new Employee(1500, "Mensual", "Ingeniero")));
+
+    private List<Employee> employeeList = new ArrayList<>(
+
+            List.of(new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                    "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500, "Anual",
+                    "xxx"),
+                    new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                            "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
+                            "Anual",
+                            "xxx"),
+                    new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                            "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
+                            "Anual",
+                            "xxx"),
+                    new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                            "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
+                            "Anual",
+                            "xxx")));
 
     private Integer nextId = 1;
 
