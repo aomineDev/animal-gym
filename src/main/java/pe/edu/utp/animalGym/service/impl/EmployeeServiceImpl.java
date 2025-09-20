@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.animalGym.model.Employee;
 import pe.edu.utp.animalGym.repository.EmployeeRepository;
 import pe.edu.utp.animalGym.service.EmployeeService;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
     // traer la instancia
     @Autowired

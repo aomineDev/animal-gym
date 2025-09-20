@@ -22,5 +22,4 @@ public class Person {
     private String email;
     private LocalDate fechaNacimiento;
     private LocalDate fechaIngreso;
-
 }
