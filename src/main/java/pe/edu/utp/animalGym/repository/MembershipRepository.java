@@ -1,5 +1,6 @@
 package pe.edu.utp.animalGym.repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,11 @@ import pe.edu.utp.animalGym.model.Membership;
 @Repository
 public class MembershipRepository {
 
-    private List<Membership> membershipList = new ArrayList<>();
+    private List<Membership> membershipList = new ArrayList<>(
+            List.of(new Membership(1, "Platinium", "Ejercicio del mejor", 28, 299, 200, LocalDate.of(2022, 12, 12),
+                    LocalDate.of(2000, 12, 9)),
+                    new Membership(1, "Basico", "Ejercicio", 30, 300, 150, LocalDate.of(2025, 4, 12),
+                            LocalDate.of(2025, 12, 19))));
     private Integer nextId = 1;
 
     public List<Membership> findAll() {

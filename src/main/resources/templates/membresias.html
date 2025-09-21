@@ -4,9 +4,194 @@
 
 <body>
     <th:block th:fragment="content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Membresías</h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membresiaModal">
+                <i class="bi bi-plus-circle me-2"></i>Nueva Membresía
+            </button>
+        </div>
+
+        <div class="row g-4" id="content-membresias">
+            <div class="col-12 col-md-6 col-lg-4 col-xxl-3 ${estados.card}"
+                th:each="membresia: ${detalleCardMenbresia}">
+                <div class="workout-grid shadow-sm">
+                    <div class="img-wrap position-relative">
+                        <!-- <a href="#" class="btn-wishlist position-absolute top-0 start-0 m-2 z-3">
+              <i class="bi bi-heart-fill text-white fs-5"></i>
+            </a> -->
+                        <div class="dropdown position-absolute top-0 end-0 m-2 z-3">
+                            <a href="#" class="btn-wishlist text-white" data-bs-toggle="dropdown">
+                                <i class="bi bi-three-dots-vertical fs-5"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!--<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verMembresiaModal" id="membresia-detalle" data-id="${id}">
+                  <i class="bi bi-eye me-2"></i>Ver detalles
+                </a></li>-->
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#membresiaModal" data-id="${id}">
+                                        <i class="bi bi-pencil me-2"></i>Editar
+                                    </a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#confirmDeleteModal">
+                                        <i class="bi bi-trash me-2"></i>Eliminar
+                                    </a></li>
+                            </ul>
+                        </div>
+                        <a href="#">
+                            <img src="https://picsum.photos/600/400?random" alt="" class="w-100 rounded-3">
+                        </a>
+                    </div>
+                    <div class="workout-detail p-3">
+                        <a href="#" class="text-decoration-none">
+                            <h5 class="fw-semibold mb-2" th:text="${membresia.nombre}"></h5>
+                        </a>
+                        <h6 class="fw-semibold text-secondary" th:text="${membresia.precioOferta}">
+
+                            <small class="text-decoration-line-through text-muted ms-1"
+                                th:text="${membresia.precio}"></small>
+                            <span class="ms-2 small text-muted" th:text="${membresia.duracion}">
+                                <i class="bi bi-clock"></i></span>
+                        </h6>
+                        <p class="small text-muted mb-2" th:text="${membresia.descripcion}"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge ${estados.clase}"></span>
+                            <small class="text-muted">35/100 socios</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </th:block>
 
     <th:block th:fragment="modal">
+        <div class="modal fade" id="membresiaModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nueva Membresía</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" id="editarMembresiaForm" novalidate>
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre del Plan</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="${nombre}" name="nombre" required>
+
+                                </div>
+                                <div class="valid-feedback">Nombre válido</div>
+                                <div class="invalid-feedback">Ingrese un nombre válido (mínimo 3 caracteres)</div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label">Precio Regular (S/)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="precio" value="${precio}" min="1"
+                                        step="0.01" required>
+
+                                </div>
+                                <div class="valid-feedback">Precio válido</div>
+                                <div class="invalid-feedback">Ingrese un precio válido</div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label">Precio Promocional (S/)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" value="100" min="0" step="0.01">
+
+                                </div>
+                                <div class="valid-feedback">Precio promocional válido</div>
+                                <div class="invalid-feedback">Debe ser menor al precio regular</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Duración (días)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" value="" min="1" required>
+
+                                </div>
+                                <div class="valid-feedback">Duración válida</div>
+                                <div class="invalid-feedback">Ingrese una duración válida</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Fecha Inicio</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="fecha_inicio" value="${fecha_inicio}"
+                                        required>
+
+                                </div>
+                                <div class="valid-feedback">Fecha válida</div>
+                                <div class="invalid-feedback">Seleccione una fecha válida</div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Fecha Final</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" name="fecha_final" value="${fecha_final}"
+                                        readonly>
+                                    <span class="input-group-text">
+                                        <i class="bi bi-calendar-check"></i>
+                                    </span>
+                                </div>
+                                <small class="text-muted">Calculada automáticamente</small>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Descripción</label>
+                                <div class="input-group">
+                                    <textarea class="form-control" rows="3" name="descripcion"
+                                        required>${descripcion}</textarea>
+
+                                </div>
+                                <div class="valid-feedback">Descripción válida</div>
+                                <div class="invalid-feedback">Ingrese una descripción (mínimo 10 caracteres)</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Estado</label>
+                                <select class="form-select" required>
+                                    <option value="" name="estado">Seleccione...</option>
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                                <div class="valid-feedback">Estado válido</div>
+                                <div class="invalid-feedback">Seleccione un estado</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Capacidad Máxima</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" value="100" min="1" required>
+
+                                </div>
+                                <div class="valid-feedback">Capacidad válida</div>
+                                <div class="invalid-feedback">Ingrese una capacidad válida</div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    <strong>Socios inscritos actualmente:</strong> 35
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="button" class="btn btn-secondary w-25 m-1"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary w-25 m-1" data-id="${id}">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </th:block>
 </body>
 
