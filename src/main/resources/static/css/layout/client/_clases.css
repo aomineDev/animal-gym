@@ -1,0 +1,34 @@
+ /* :root {
+   --pastel-red: #ff1f1f;
+
+ } */
+
+ .class-card {
+   height: 280px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+ }
+
+ .class-card:hover {
+   transform: translateY(-5px);
+ }
+
+ .class-overlay {
+   transition: all 0.3s ease;
+   opacity: 0;
+ }
+
+ .class-card:hover .class-overlay {
+   opacity: 1;
+ }
+
+ .floating-info {
+   margin-left: -50px;
+   z-index: 10;
+ }
+
+ @media (max-width: 768px) {
+   .floating-info {
+     margin-left: 0;
+   }
+ }

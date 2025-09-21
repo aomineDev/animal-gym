@@ -15,3 +15,7 @@
 @import './layout/admin/_socios.css';
 
 @import './layout/client/_navbar.css';
+@import './layout/client/_clases.css';
+@import './layout/client/_header.css';
+@import './layout/client/_mebresias.css';
+@import './layout/client/_footer.css';

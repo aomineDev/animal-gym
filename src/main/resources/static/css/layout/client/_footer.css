@@ -1,0 +1,28 @@
+.btb-redes {
+    background-color: var(--red)
+}
+
+@media (max-width:575px) {
+    .caja-img {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 60px;
+
+    }
+
+    .container-fooder {
+        padding: 10px;
+    }
+}
+
+
+@media (max-width:768px) {
+    .container-fooder {
+        text-align: center;
+    }
+
+    .container-redes {
+        display: flex;
+        justify-content: center;
+    }
+}
