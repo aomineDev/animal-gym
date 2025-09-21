@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.animalGym.model.Membership;
 import pe.edu.utp.animalGym.repository.MembershipRepository;
 import pe.edu.utp.animalGym.service.MembershipService;
 
+@Service
 public class MembershipServiceImpl implements MembershipService {
     // tienes que traer la instancia
     @Autowired
