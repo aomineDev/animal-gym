@@ -6,28 +6,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.edu.utp.animalGym.service.impl.EmpleadoServiceImpl;
+import pe.edu.utp.animalGym.service.impl.RolServiceImpl;
 
 @Controller
 public class EmpleadoController {
     @Autowired
-    private EmpleadoServiceImpl service;
+    private EmpleadoServiceImpl serviceEmpleado;
+
+    @Autowired
+    private RolServiceImpl serviceRol;
 
     @GetMapping("/empleados")
 
     public String employee(Model model) {
         model.addAttribute("content", "empleados :: content");
 
-        // // // modal Actulizar empleado
-        model.addAttribute("modal1", "empleados :: modalActualizarEmpleado");
-        // modal elimianr empleado
-        model.addAttribute("modal2", "empleados :: modalEliminarEmpleado");
-        // modal añadir empleado
-        model.addAttribute("modal3", "empleados :: modalAñadirEmpleado");
-
+        // Modales
+        model.addAttribute("modal", "empleados :: modals");
         model.addAttribute("activePage", "empleados");
 
         // pintar empleados en la tabla
-        model.addAttribute("empleadoTabla", service.findAll());
+        model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
+        // pintar el rol
+        model.addAttribute("contenedorRol", serviceRol.findAll());
         // guardarDatos
         return "layout";
     }

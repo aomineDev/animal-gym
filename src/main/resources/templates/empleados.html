@@ -21,7 +21,9 @@
 
                 <div class="col-md-4 col-12">
                     <select name="rol_id" class="form-select crearRol" required>
-                        <option value="">Seleccion un rol..</option>
+                        <option value="">Seleccione un rol...</option>
+                        <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}" th:text="${rol.nombre}">
+                        </option>
                     </select>
                 </div>
 
@@ -37,6 +39,7 @@
             <!-- Tabla de los empleados-->
             <div class="table-responsive mt-4">
                 <table class="table table-hover align-middle">
+                    <!-- cabezeras de la tabla -->
                     <thead class="table-light">
                         <tr class="text-center">
                             <th>Dni</th>
@@ -53,6 +56,7 @@
                             <th>Rol</th>
                         </tr>
                     </thead>
+                    <!-- contenido de la tabla -->
                     <tbody id="tablaEmpleados" class="text-center">
                         <tr th:each="empleado: ${empleadoTabla}">
                             <td th:text="${empleado.dni}"></td>
@@ -124,11 +128,18 @@
         </div>
 
     </th:block>
+    <th:block th:fragment="modals">
+        <!-- verDetalles de boleta -->
+        <!-- <div th:replace="empleados :: modalAñadirEmpleado"></div> -->
+        <div th:replace="empleados :: modalAñadirEmpleado"></div>
+        <div th:replace="empleados :: modalEliminarEmpleado"></div>
+        <div th:replace="empleados :: modalActualizarEmpleado"></div>
+    </th:block>
     <!-- modal añadir empleado -->
     <th:block th:fragment="modalAñadirEmpleado">
         <div class="modal fade" tabindex="-1" id="modalAñadirEmpleado">
-            <div class="modal-dialog modal-dialog-centered" id="modal-hijo">
-                <div class="modal-content">
+            <div class="modal-dialog modal-dialog-centered modal-lg" id="modal-hijo">
+                <div class="modal-content rounded-4">
                     <div class="modal-header">
                         <h5 class="modal-title text-center w-100">Agregar Empleado</h5>
                         <!-- boton agregar empleado abrira el modal -->
@@ -136,82 +147,104 @@
                             id="close"></button>
                     </div>
                     <div class="modal-body">
-                        formulario del modal
-                        <form th:action="@{/empleados}" th:object="${empleado}" id="formEmpleado"
-                            class="row g-2 needs-validation" novalidate method="post">
+                        <!-- formulario del modal -->
+                        <form id="formEmpleado" class="row g-2 needs-validation" novalidate method="post">
                             <!-- dni -->
-                            <div class="col-12 mb-3">
-                                <input th:field="*{dni}" type="text" id="dni" class="form-control" name="dni"
-                                    placeholder="Dni" pattern="[0-9]{8}" required />
-                            </div>
-                            <!-- nombre -->
-                            <div class="col-12 mb-3">
-                                <input th:field="*{nombre}" type="text" id="nombre" name="nombre" class="form-control"
-                                    placeholder="Nombre" pattern="[a-z]+" required />
-                            </div>
-                            <!-- apellido -->
-                            <div class="col-12 mb-3">
-                                <input th:field="*{apellido}" type="text" id="apellido" name="apellido"
-                                    class="form-control" placeholder="Apellido" pattern="[a-z]+" required />
-                            </div>
-                            <!-- telefono -->
-                            <div class="col-12 mb-3">
-                                <input th:field="*{telefono}" type="tel" id="telefono" class="form-control"
-                                    name="telefono" placeholder="Numero de telefono" pattern="9[0-9]{8}" required />
-                            </div>
-                            <!-- genero -->
-                            <div class="col-12 mb-3">
-                                <input th:field="*{genero}" type="text" id="genero" class="form-control" name="genero"
-                                    placeholder="Genero" required />
-                            </div>
-                            <!-- email -->
-                            <div class="col-12 mb-3">
-                                <input th:field="*{email}" type="email" id="email" class="form-control" name="correo"
-                                    placeholder="Correo" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="dni" class="form-label">Dni</label>
+                                <input type="text" id="dni" class="form-control" name="dni" pattern="[0-9]{8}"
                                     required />
                             </div>
+                            <!-- file -->
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="file" class="form-label">Foto del empleado</label>
+                                <input type="file" id="file" class="form-control" name="file" required>
+                            </div>
+                            <!-- nombre -->
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control" pattern="[a-z]+"
+                                    required />
+                            </div>
+                            <!-- apellido -->
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="apellido" class="form-label">Apellido</label>
+
+                                <input type="text" id="apellido" name="apellido" class="form-control" pattern="[a-z]+"
+                                    required />
+                            </div>
+                            <!-- telefono -->
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="telefono" class="form-label"></label>
+                                <input type="tel" id="telefono" class="form-control" name="telefono" pattern="9[0-9]{8}"
+                                    required />
+                            </div>
+                            <!-- genero -->
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="genero" class="form-label">Genero</label>
+
+                                <input type="text" id="genero" class="form-control" name="genero" required />
+                            </div>
+                            <!-- email -->
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="correo" class="form-label">Correo electronico</label>
+
+                                <input type="email" id="email" class="form-control" name="correo"
+                                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
+                            </div>
                             <!-- fecha de nacimiento -->
-                            <div class="col-12 mb-3">
-                                <label for="">Fecha de nacimiento</label>
-                                <input th:field="*{fechaNacimiento}" type="date" id="fechaNacimiento"
-                                    class="form-control" name="fecha_nacimiento" placeholder="Fecha de nacimiento"
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="" class="form-label">Fecha de nacimiento</label>
+                                <input type="date" id="fechaNacimiento" class="form-control" name="fecha_nacimiento"
                                     required />
                             </div>
                             <!-- Fecha de registro -->
-                            <div class="col-12 mb-3">
-                                <label for="">Fecha de registro</label>
-                                <input th:field="*{fechaIngreso}" type="date" id="fechaRegistro" class="form-control"
-                                    name="fecha_ingreso" placeholder="Fecha de registro" required />
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="" class="form-label">Fecha de registro</label>
+                                <input type="date" id="fechaRegistro" class="form-control" name="fecha_ingreso"
+                                    required />
                             </div>
                             <!-- Fecha de salario -->
-                            <div class="col-12 mb-3">
-                                <label for="">Salario</label>
-                                <input th:field="*{salario}" type="number" id="salario" class="form-control"
-                                    name="salario" placeholder="salario" required />
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="salario" class="form-label">Salario</label>
+                                <input type="number" id="salario" class="form-control" name="salario" required />
                             </div>
                             <!--Tipo de contrato -->
-                            <div class="col-12 mb-3">
-                                <label for="">Tipo de contrato</label>
-                                <input th:field="*{tipoContrato}" type="text" id="tipoContrato" class="form-control"
-                                    name="tipoContrato" placeholder="Tipo de contrato" required />
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="" class="form-label">Tipo de contrato</label>
+                                <input type="text" id="tipoContrato" class="form-control" name="tipoContrato"
+                                    required />
                             </div>
                             <!-- especialiad -->
-                            <div class="col-12 mb-3">
-                                <label for="">Especialidad</label>
-                                <input th:field="*{especialidad}" type="text" id="especialidad" class="form-control"
-                                    name="especialidad" placeholder="Especialidad" required />
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="" class="form-label">Especialidad</label>
+                                <input type="text" id="especialidad" class="form-control" name="especialidad"
+                                    required />
                             </div>
 
 
 
-                            <div class="col-12 mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label for="rol_id" class="form-label">Rol</label>
                                 <select name="rol_id" class="form-select crearRol" required>
-                                    <option value="">Seleccion un rol..</option>
-
-
+                                    <option value="">Seleccione un rol...</option>
+                                    <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
+                                        th:text="${rol.nombre}">
+                                    </option>
                                 </select>
                             </div>
-
+                            <!-- usuario -->
+                            <!-- <div class="col-md-6 mb-3 mb-3">
+                                <label for="" class="form-label">Usuario</label>
+                                <input type="text" id="especialidad" class="form-control" name="especialidad"
+                                    required />
+                            </div> -->
+                            <!-- contraseña -->
+                            <div class="col-md-6 mb-3 mb-3">
+                                <label for="" class="form-label">Ingrese su contraseña</label>
+                                <input type="password" id="contraseña" class="form-control" name="contraseña"
+                                    required />
+                            </div>
                             <div class="modal-footer">
                                 <!-- boton cerrar modal + boton guardar empleado  -->
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -225,7 +258,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </th:block>
     <!-- modal eliminar -->
