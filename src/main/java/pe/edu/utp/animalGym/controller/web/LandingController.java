@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LandingController {
-  @GetMapping("/")
+  @GetMapping("/landingPage")
   public String index(Model model) {
     model.addAttribute("content", "landing :: content");
     model.addAttribute("content", "landing :: modal");
