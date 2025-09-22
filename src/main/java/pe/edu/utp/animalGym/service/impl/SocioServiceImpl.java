@@ -5,27 +5,27 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pe.edu.utp.animalGym.model.Partner;
-import pe.edu.utp.animalGym.repository.PartnerRepository;
-import pe.edu.utp.animalGym.service.PartnerService;
+import pe.edu.utp.animalGym.model.Socio;
+import pe.edu.utp.animalGym.repository.SocioRepository;
+import pe.edu.utp.animalGym.service.SocioService;
 
-public class PartnerServiceImpl implements PartnerService {
+public class SocioServiceImpl implements SocioService {
 
     @Autowired
-    private PartnerRepository partnerRepository;
+    private SocioRepository partnerRepository;
 
     @Override
-    public List<Partner> findAll() {
+    public List<Socio> findAll() {
         return partnerRepository.findAll();
     }
 
     @Override
-    public Optional<Partner> findById(Integer id) {
+    public Optional<Socio> findById(Integer id) {
         return partnerRepository.findById(id);
     }
 
     @Override
-    public Partner save(Partner entity) {
+    public Socio save(Socio entity) {
         return partnerRepository.save(entity);
     }
 

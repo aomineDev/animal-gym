@@ -13,15 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 
 public class Reservar {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reservaId;
     private LocalDate fecha;
     private String estado;
-    //@ManyToOne
-    //@JoinColumn(name = "claseId", nullable = false)
+    // @ManyToOne
+    // @JoinColumn(name = "claseId", nullable = false)
     private Clase clase;
-    //@ManyToOne
-    //@JoinColumn(name = "personaId", nullable = false)
-    private Partner socio;
+    // @ManyToOne
+    // @JoinColumn(name = "personaId", nullable = false)
+    private Socio socio;
 }

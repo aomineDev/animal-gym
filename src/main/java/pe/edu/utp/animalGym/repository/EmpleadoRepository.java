@@ -7,40 +7,40 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import pe.edu.utp.animalGym.model.Employee;
+import pe.edu.utp.animalGym.model.Empleado;
 
 @Repository
-public class EmployeeRepository {
+public class EmpleadoRepository {
 
-    private List<Employee> employeeList = new ArrayList<>(
+    private List<Empleado> employeeList = new ArrayList<>(
 
-            List.of(new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+            List.of(new Empleado(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                     "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500, "Anual",
                     "xxx"),
-                    new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                    new Empleado(2, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                             "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
                             "Anual",
                             "xxx"),
-                    new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                    new Empleado(3, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                             "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
                             "Anual",
                             "xxx"),
-                    new Employee(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                    new Empleado(4, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                             "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
                             "Anual",
                             "xxx")));
 
     private Integer nextId = 1;
 
-    public List<Employee> findAll() {
+    public List<Empleado> findAll() {
         return employeeList;
     }
 
-    public Optional<Employee> findById(Integer id) {
+    public Optional<Empleado> findById(Integer id) {
         return employeeList.stream().filter(p -> p.getPersonaId() == id).findFirst();
     }
 
-    public Employee save(Employee employee) {
+    public Empleado save(Empleado employee) {
         if (employee.getPersonaId() == null) {
             employee.setPersonaId(nextId++);
         } else {

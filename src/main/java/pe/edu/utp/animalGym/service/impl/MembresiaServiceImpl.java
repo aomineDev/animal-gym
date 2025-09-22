@@ -6,28 +6,28 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.edu.utp.animalGym.model.Membership;
-import pe.edu.utp.animalGym.repository.MembershipRepository;
-import pe.edu.utp.animalGym.service.MembershipService;
+import pe.edu.utp.animalGym.model.Membresia;
+import pe.edu.utp.animalGym.repository.MembresiaRepository;
+import pe.edu.utp.animalGym.service.MembresiaService;
 
 @Service
-public class MembershipServiceImpl implements MembershipService {
+public class MembresiaServiceImpl implements MembresiaService {
     // tienes que traer la instancia
     @Autowired
-    private MembershipRepository membershipRepository;
+    private MembresiaRepository membershipRepository;
 
     @Override
-    public List<Membership> findAll() {
+    public List<Membresia> findAll() {
         return membershipRepository.findAll();
     }
 
     @Override
-    public Optional<Membership> findById(Integer id) {
+    public Optional<Membresia> findById(Integer id) {
         return membershipRepository.findById(id);
     }
 
     @Override
-    public Membership save(Membership entity) {
+    public Membresia save(Membresia entity) {
         return membershipRepository.save(entity);
     }
 

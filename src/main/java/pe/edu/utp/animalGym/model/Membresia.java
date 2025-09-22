@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Membership {
+public class Membresia {
     private Integer menbresiaId;
     private String nombre;
     private String descripcion;
@@ -21,4 +21,8 @@ public class Membership {
     private double precioOferta;
     private LocalDate inicioOferta;
     private LocalDate finOferta;
+    private String imagen;
+    private boolean estado;
+    private Integer limiteCupos;
+    
 }

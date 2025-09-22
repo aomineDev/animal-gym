@@ -5,12 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import pe.edu.utp.animalGym.service.impl.EmployeeServiceImpl;
+import pe.edu.utp.animalGym.service.impl.EmpleadoServiceImpl;
 
 @Controller
-public class EmployeeController {
+public class EmpleadoController {
     @Autowired
-    private EmployeeServiceImpl service;
+    private EmpleadoServiceImpl service;
 
     @GetMapping("/empleados")
 
