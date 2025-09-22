@@ -30,7 +30,7 @@ public class EmpleadoRepository {
                             "Anual",
                             "xxx")));
 
-    private Integer nextId = 1;
+    private Integer nextId = 5;
 
     public List<Empleado> findAll() {
         return employeeList;
