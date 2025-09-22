@@ -20,7 +20,9 @@ public class MembresiaController {
         model.addAttribute("modal", "membresias :: modal");
 
         model.addAttribute("activePage", "membresias");
+        
         model.addAttribute("detalleCardMenbresia", service.findAll());
+
         return "layout";
     }
 

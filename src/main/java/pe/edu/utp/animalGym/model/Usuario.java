@@ -18,7 +18,7 @@ public class Usuario {
     private String contrasena;
     //@ManyToOne
     //@JoinColumn(name = "rolId", nullable = false)
-    private Rol rol;
+    // private Rol rol;
     //@OneToOne
     //@JoinColumn(name = "personaId", nullable = false)
     private Person persona;

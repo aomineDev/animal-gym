@@ -21,4 +21,8 @@ public class Membresia {
     private double precioOferta;
     private LocalDate inicioOferta;
     private LocalDate finOferta;
+    private String imagen;
+    private boolean estado;
+    private Integer limiteCupos;
+    
 }
