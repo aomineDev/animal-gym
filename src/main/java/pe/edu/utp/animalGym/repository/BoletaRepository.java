@@ -24,6 +24,11 @@ public class BoletaRepository {
                     LocalTime.of(12, 1, 3),
                     12, 100011, 0, true, null,
                     new Empleado(1, "78945612", "Luis", "Fernandez", "987456123", "Masculino", null, null, null, 0,
+                            null, null)),
+            new Boleta(3, LocalDate.of(2025, 6, 18),
+                    LocalTime.of(12, 1, 3),
+                    12, 100011, 0, true, null,
+                    new Empleado(1, "78945612", "Juan", "x", "987456123", "Masculino", null, null, null, 0,
                             null, null))));
     private Integer nextId = 1;
 
