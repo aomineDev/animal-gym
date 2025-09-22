@@ -19,11 +19,11 @@ public class Rutina {
     private String objetivo;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private Employee empleado;
+    private Empleado empleado;
     private ArrayList<DetalleRutina> detalleRutinaList;
 
     public Rutina(String nombre, String descripcion, String objetivo, LocalDate fechaInicio, LocalDate fechaFin,
-            Employee empleado, ArrayList<DetalleRutina> detalleRutinaList) {
+            Empleado empleado, ArrayList<DetalleRutina> detalleRutinaList) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.objetivo = objetivo;

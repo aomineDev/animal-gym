@@ -6,23 +6,23 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import pe.edu.utp.animalGym.model.Partner;
+import pe.edu.utp.animalGym.model.Socio;
 
 @Repository
-public class PartnerRepository {
+public class SocioRepository {
 
-    private List<Partner> partnerList = new ArrayList<>();
+    private List<Socio> partnerList = new ArrayList<>();
     private Integer nextId = 1;
 
-    public List<Partner> findAll() {
+    public List<Socio> findAll() {
         return partnerList;
     }
 
-    public Optional<Partner> findById(Integer id) {
+    public Optional<Socio> findById(Integer id) {
         return partnerList.stream().filter(p -> p.getPersonaId() == id).findFirst();
     }
 
-    public Partner save(Partner partner) {
+    public Socio save(Socio partner) {
         if (partner.getPersonaId() == null) {
             partner.setPersonaId(nextId++);
         } else {

@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Membership {
+public class Membresia {
     private Integer menbresiaId;
     private String nombre;
     private String descripcion;

@@ -27,7 +27,7 @@ public class Clase {
     private String objetivo;
     private String intensidad;
     private String imagen;
-    //@ManyToOne
-    //@JoinColumn(name = "personaId", nullable = false)
-    private Employee empleado;
+    // @ManyToOne
+    // @JoinColumn(name = "personaId", nullable = false)
+    private Empleado empleado;
 }

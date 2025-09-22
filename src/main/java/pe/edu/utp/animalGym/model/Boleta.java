@@ -21,11 +21,11 @@ public class Boleta {
     private double precioTotal;
     private double igv;
     private boolean estado;
-    private Partner socio;
-    private Employee empleado;
+    private Socio socio;
+    private Empleado empleado;
 
     public Boleta(LocalDate fecha, LocalTime hora, double grabado, double precioTotal, double igv, boolean estado,
-            Partner socio, Employee empleado) {
+            Socio socio, Empleado empleado) {
         this.fecha = fecha;
         this.hora = hora;
         this.grabado = grabado;

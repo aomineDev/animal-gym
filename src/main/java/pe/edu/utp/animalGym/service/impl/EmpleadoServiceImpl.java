@@ -6,28 +6,28 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.edu.utp.animalGym.model.Employee;
-import pe.edu.utp.animalGym.repository.EmployeeRepository;
-import pe.edu.utp.animalGym.service.EmployeeService;
+import pe.edu.utp.animalGym.model.Empleado;
+import pe.edu.utp.animalGym.repository.EmpleadoRepository;
+import pe.edu.utp.animalGym.service.EmpleadoService;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmpleadoServiceImpl implements EmpleadoService {
     // traer la instancia
     @Autowired
-    private EmployeeRepository employee;
+    private EmpleadoRepository employee;
 
     @Override
-    public List<Employee> findAll() {
+    public List<Empleado> findAll() {
         return employee.findAll();
     }
 
     @Override
-    public Optional<Employee> findById(Integer id) {
+    public Optional<Empleado> findById(Integer id) {
         return employee.findById(id);
     }
 
     @Override
-    public Employee save(Employee entity) {
+    public Empleado save(Empleado entity) {
         return employee.save(entity);
     }
 

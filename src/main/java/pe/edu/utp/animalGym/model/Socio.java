@@ -12,18 +12,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Partner extends Person {
+public class Socio extends Person {
     private LocalDate fechaVencimineto;
     private boolean activo;
     private int puntos;
     private double peso;
     private double altura;
-    private Membership menbresia;
+    private Membresia menbresia;
 
     // private Rutina Rutina;
-    public Partner(Integer personaId, String dni, String nombre, String apellido, String telefono, String genero,
+    public Socio(Integer personaId, String dni, String nombre, String apellido, String telefono, String genero,
             String email, LocalDate fechaNacimiento, LocalDate fechaIngreso, LocalDate fechaVencimiento, boolean activo,
-            int puntos, double peso, double altura, Membership membership) {
+            int puntos, double peso, double altura, Membresia membership) {
         super(personaId, dni, nombre, apellido, telefono, genero, email, fechaNacimiento, fechaIngreso);
         this.fechaVencimineto = fechaVencimiento;
         this.activo = activo;

@@ -5,12 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import pe.edu.utp.animalGym.service.impl.MembershipServiceImpl;
+import pe.edu.utp.animalGym.service.impl.MembresiaServiceImpl;
 
 @Controller
-public class MembershipController {
+public class MembresiaController {
     @Autowired
-    private MembershipServiceImpl service;
+    private MembresiaServiceImpl service;
 
     @GetMapping("/membresias")
 

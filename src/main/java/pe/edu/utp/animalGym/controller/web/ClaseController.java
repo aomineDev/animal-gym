@@ -4,7 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.edu.utp.animalGym.model.Clase;
-import pe.edu.utp.animalGym.model.Employee;
+import pe.edu.utp.animalGym.model.Empleado;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,9 +24,9 @@ public class ClaseController {
 
     List<Clase> clases = new ArrayList<>();
 
-    Employee empleado1 = new Employee();
+    Empleado empleado1 = new Empleado();
     empleado1.setNombre("Juan Pérez");
-    Employee empleado2 = new Employee();
+    Empleado empleado2 = new Empleado();
     empleado2.setNombre("María Gómez");
 
     clases.add(new Clase(1, "Yoga Avanzado", "Clase de relajación y flexibilidad", 20,
