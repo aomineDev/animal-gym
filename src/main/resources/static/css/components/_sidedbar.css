@@ -111,8 +111,8 @@
 }
 
 .navbar-user-image {
-  width: 40px;
-  aspect-ratio: 1/1;
+width: 40px;
+aspect-ratio: 1/1;
 }
 
 @media (min-width: 1024px) {

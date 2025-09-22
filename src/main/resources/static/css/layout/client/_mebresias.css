@@ -1,0 +1,37 @@
+/*color de las cartas*/
+.custom-card {
+    background-color: #0A0A0A;
+    border: 1px solid #2c2c2c;
+    min-width: 280px;
+    /* Mantiene tamaño uniforme */
+    max-width: 400px;
+}
+
+/*color del boton*/
+.color-btn {
+    background-color: #444444;
+}
+
+
+.custom-card hr {
+    opacity: 0.5;
+}
+
+/* Scroll más elegante */
+.overflow-auto::-webkit-scrollbar {
+    height: 8px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+    background: var(--red);
+    border-radius: 10px;
+}
+
+.btn-mebresias {
+    transition: all 0.3s ease;
+
+}
+
+.btn-mebresias:hover {
+    background-color: var(--red) !important;
+}
