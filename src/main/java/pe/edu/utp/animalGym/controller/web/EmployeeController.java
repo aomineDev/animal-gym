@@ -17,13 +17,12 @@ public class EmployeeController {
     public String employee(Model model) {
         model.addAttribute("content", "empleados :: content");
 
-        // modal añadir empleado
-        // model.addAttribute("modal", "empleados :: modalAñadirEmpleado");
-
         // // // modal Actulizar empleado
-        model.addAttribute("modal", "empleados :: modalActualizarEmpleado");
+        model.addAttribute("modal1", "empleados :: modalActualizarEmpleado");
         // modal elimianr empleado
-        // model.addAttribute("modal", "empleados :: modalEliminarEmpleado");
+        model.addAttribute("modal2", "empleados :: modalEliminarEmpleado");
+        // modal añadir empleado
+        model.addAttribute("modal3", "empleados :: modalAñadirEmpleado");
 
         model.addAttribute("activePage", "empleados");
 
