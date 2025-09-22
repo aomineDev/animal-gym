@@ -5,225 +5,173 @@
 <body>
   <th:block th:fragment="content">
     <div class="container">
-      <div class="row">
-  
-        <!-- centro -->
-        <div class="col-12 mt-3 mx-3 h-0">
-          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearClase"><i class="bi bi-plus"
-              id="btnAbrirCrear"></i>Crear
-            clase</button>
-        </div>
-  
-        <!-- Iquierda Filtro -->
-        <div class="section__filter d-none d-lg-block col-lg-3">
-          <div class="w-90 mx-auto mt-4">
-            <div class="bg-white p-4 rounded-4 mt-3 shadow">
-              <form class="form__filter">
-                <h5 class="mb-3">Filtrar clases</h5>
-  
-                <div class="mb-3">
-                  <label class="form-label">Fecha</label>
-                  <input type="date" class="form-control">
-                </div>
-  
-                <div class="mb-3">
-                  <label class="form-label">Duración</label>
-                  <select class="form-select">
-                    <option>20m</option>
-                    <option>40m</option>
-                    <option>60m</option>
-                  </select>
-                </div>
-  
-                <div class="mb-3">
-                  <label class="form-label">Entrenador</label>
-                  <select class="form-select">
-                    <option>Entrenador 1</option>
-                    <option>Entrenador 2</option>
-                    <option>Entrenador 3</option>
-                  </select>
-                </div>
-  
-                <div class="mb-3">
-                  <label class="form-label">Estado</label>
-                  <select class="form-select">
-                    <option>Programado</option>
-                    <option>En curso</option>
-                    <option>Finalizado</option>
-                  </select>
-                </div>
-  
-                <button class="btn btn-primary w-100">Aplicar</button>
-              </form>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Drecha -->
-        <div class="col-12 col-lg-9">
-          <div class="row px-4" id="section__card">
-            <!-- Clases Card -->
-            <div class="col-12 col-md-6 col-xl-4" th:each="clase : ${clases}">
-              <div class="mt-4 border-0 card overflow-hidden rounded-4">
-                <div class="overflow-hidden">
-                  <img th:src="${clase.imagen}" class="card-img-top" th:alt="${clase.nombre}">
-                </div>
-                <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Clases</h2>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearClase"><i class="bi bi-plus"
+            id="btnAbrirCrear"></i>Crear
+          clase</button>
+      </div>
+
+      <!-- Drecha -->
+      <div class="col-12 col-lg-9">
+        <div class="row" id="section__card">
+          <!-- CARTA -->
+          <div class="col-12 col-md-6 col-xl-4" th:each="clase : ${clases}">
+            <div class="mt-4 border-0 card overflow-hidden rounded-4">
+              <div class="overflow-hidden">
+                <img th:src="${clase.imagen}" class="card-img-top" th:alt="${clase.nombre}">
+              </div>
+
+              <div class="row d-flex align-items-center card-body">
+
+                <div class="col-9">
                   <h5 class="card-title mb-1" th:text="${clase.nombre}"></h5>
                   <p class="text-muted mb-1" th:text="${clase.descripcion}"></p>
                   <span class="badge bg-outline-primary text-primary" th:text="${clase.estado}"></span>
-                  <!--
-                  <ul class="list-unstyled mt-2 small">
-                      <li><strong>Capacidad:</strong> <span th:text="${clase.capacidad}"></span></li>
-                      <li><strong>Fecha:</strong> <span th:text="${clase.fecha}"></span></li>
-                      <li><strong>Horario:</strong>
-                          <span th:text="${clase.horaInicio}"></span> - <span th:text="${clase.horaFin}"></span>
-                      </li>
-                      <li><strong>Duración:</strong> <span th:text="${clase.duracion}"></span> min</li>
-                      <li><strong>Objetivo:</strong> <span th:text="${clase.objetivo}"></span></li>
-                      <li><strong>Intensidad:</strong> <span th:text="${clase.intensidad}"></span></li>
-                      <li><strong>Instructor:</strong> <span th:text="${clase.empleado?.nombre}"></span></li>
-                  </ul> -->
-  
-                  <div class="dropdown text-end">
+                </div>
+
+                <div class="col-3 text-end">
+                  <div class="dropdown">
                     <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
                       <i class="bi bi-three-dots-vertical"></i>
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#" th:attr="data-id=${clase.claseId}">Ver detalles</a></li>
-                      <li><a class="dropdown-item" href="#" th:attr="data-id=${clase.claseId}">Editar</a></li>
-                      <li><a class="dropdown-item text-danger" href="#" th:attr="data-id=${clase.claseId}">Eliminar</a>
+                      <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verClase"
+                          th:attr="data-id=${clase.claseId}">
+                          Ver detalles
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editarClase"
+                          th:attr="data-id=${clase.claseId}">
+                          Editar
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                          data-bs-target="#eliminarClase" th:attr="data-id=${clase.claseId}">
+                          Eliminar
+                        </a>
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
-  
           </div>
         </div>
       </div>
     </div>
-    </div>
-    </div>
-  
-    <!-- Filtro flotante-->
-    <button class="btn__filter btn btn-primary rounded-circle position-fixed d-lg-none" data-bs-toggle="modal"
-      data-bs-target="#filtroModal">
-      <i class="bi bi-funnel-fill"></i>
-    </button>
+  </th:block>
+
+  <!-- Mis modales -->
+  <th:block th:fragment="modals">
+    <div th:replace="clase :: modalAdd"></div>
+    <div th:replace="clase :: modalEdit"></div>
+    <div th:replace="clase :: modalDelete"></div>
+    <div th:replace="clase :: modalDetails"></div>
+  </th:block>
+
+  <th:block th:fragment="modalAdd">
+    <!-- Modal Crear clase-->
+    <div class="modal fade" id="crearClase" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear Clase</h1> <button type="button"
+              class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="#" class="row needs-validation" novalidate>
+              <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la clase</label>
+                <input type="text" name="nombre" class="form-control" required>
+              </div>
+              <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
+                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
+                  placeholder="Escribe una breve descripción de la clase" required></textarea>
+              </div>
+              <div class="mb-3 col-md-6"> <label for="duracion" class="form-label">Duración (minutos)</label>
+                <input type="number" name="duracion" id="duracion" class="form-control" min="1" required>
+              </div>
+              <div class="mb-3 col-md-6"> <label for="fecha" class="form-label">Fecha</label> <input type="date"
+                  name="fecha" id="fecha" class="form-control" required> </div>
+              <div class="mb-3 col-md-6"> <label for="hora" class="form-label">Hora</label> <input type="time"
+                  name="hora" id="hora" class="form-control" required> </div>
+              <div class="mb-3 col-md-6"> <label for="capacidad" class="form-label">Capacidad</label> <input
+                  type="number" name="capacidad" id="capacidad" class="form-control" min="1" required>
+              </div>
+              <div class="mb-4"> <label for="entrenador" class="form-label">Entrenador</label> <select name="entrenador"
+                  class="form-select" id="select_crear" required>
+                  <option value="">Seleccione un entrenador</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary col-5 ms-3">Crear clase</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </th:block>
 
-  
-
-
-  <th:block th:fragment="modal">
-    <!-- Modal Crear clase-->
-    <div class="modal fade" id="crearClase" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content rounded-4">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear Clase</h1> <button type="button"
-                        class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="#" class="row needs-validation" novalidate>
-                        <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la clase</label>
-                            <input type="text" name="nombre" class="form-control" required>
-                        </div>
-                        <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
-                                placeholder="Escribe una breve descripción de la clase" required></textarea>
-                        </div>
-                        <div class="mb-3 col-md-6"> <label for="duracion" class="form-label">Duración (minutos)</label>
-                            <input type="number" name="duracion" id="duracion" class="form-control" min="1" required>
-                        </div>
-                        <div class="mb-3 col-md-6"> <label for="fecha" class="form-label">Fecha</label> <input
-                                type="date" name="fecha" id="fecha" class="form-control" required> </div>
-                        <div class="mb-3 col-md-6"> <label for="hora" class="form-label">Hora</label> <input type="time"
-                                name="hora" id="hora" class="form-control" required> </div>
-                        <div class="mb-3 col-md-6"> <label for="capacidad" class="form-label">Capacidad</label> <input
-                                type="number" name="capacidad" id="capacidad" class="form-control" min="1" required>
-                        </div>
-                        <div class="mb-4"> <label for="entrenador" class="form-label">Entrenador</label> <select
-                                name="entrenador" class="form-select" id="select_crear" required>
-                                <option value="">Seleccione un entrenador</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary col-5 ms-3">Crear clase</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Filtro -->
-    <div class="modal fade" id="filtroModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content rounded-4">
-                <div class="modal-header">
-                    <h5 class="modal-title">Filtrar Clases</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="form__filter"></form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Ver detalles -->
-    <div class="modal fade" id="verClase" tabindex="-1" aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header p-0 position-relative">
-                    <img class="img-fluid rounded-top" src="img/clase-1.jpg" alt="">
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalDetailClase"></div>
-
-            </div>
-        </div>
-    </div>
-
+  <th:block th:fragment="modalEdit">
     <!-- Modal Editar -->
     <div class="modal fade" id="editarClase" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content rounded-4">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Clase</h1> <button type="button"
-                        class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editarClaseForm" class="row needs-validation" novalidate></form>
-                </div>
-            </div>
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Clase</h1> <button type="button"
+              class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editarClaseForm" class="row needs-validation" novalidate></form>
+          </div>
         </div>
+      </div>
     </div>
+  </th:block>
+
+  <th:block th:fragment="modalDelete">
     <!-- Modal Eliminar -->
     <div class="modal fade" id="eliminarClase" tabindex="-1" aria-hidden="true">
 
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Eliminar</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Estas seguro que deseas eliminar?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="">Confirmar
-                        eliminacion</button>
-                </div>
-            </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Eliminar</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>¿Estas seguro que deseas eliminar?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="">Confirmar
+              eliminacion</button>
+          </div>
         </div>
+      </div>
     </div>
   </th:block>
+
+  <th:block th:fragment="modalDetails">
+    <!-- Modal Ver detalles -->
+    <div class="modal fade" id="verClase" tabindex="-1" aria-hidden="true">
+
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header p-0 position-relative">
+            <img class="img-fluid rounded-top" src="img/clase-1.jpg" alt="">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modalDetailClase"></div>
+
+        </div>
+      </div>
+    </div>
+  </th:block>
+
 </body>
 
 </html>
