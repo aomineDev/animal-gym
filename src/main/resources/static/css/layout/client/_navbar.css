@@ -1,5 +1,6 @@
 .body_client {
-    background-color: var(--dark-lighten);
+    background-color: var(--dark-lighten) !important;
+    min-height: 100vh;
 }
 
 .text-white {
