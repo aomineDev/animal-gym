@@ -42,6 +42,7 @@
                     <!-- cabezeras de la tabla -->
                     <thead class="table-light">
                         <tr class="text-center">
+                            <th>Foto</th>
                             <th>Dni</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
@@ -59,7 +60,8 @@
                     <!-- contenido de la tabla -->
                     <tbody id="tablaEmpleados" class="text-center">
                         <tr th:each="empleado: ${empleadoTabla}">
-                            <td th:text="${empleado.dni}"></td>
+                            <td><img th:src="@{${empleado.foto}}" class="profile-img" alt="Foto del empleado"></td>
+                            <td th:text="${empleado.personaId}"></td>
                             <td th:text="${empleado.nombre}"></td>
                             <td th:text="${empleado.apellido}"></td>
                             <td th:text="${empleado.telefono}"></td>
@@ -77,8 +79,9 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#modalActualizarEmpleado" data-id="${id}">
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-id="${id}"
+                                                th:attr="data-bs-target=|#editar__${empleado.personaId}|">
+
                                                 <i class="bi bi-pencil me-2"></i>Editar</a>
                                         </li>
                                         <li>
@@ -142,116 +145,181 @@
                 <div class="modal-content rounded-4">
                     <div class="modal-header">
                         <h5 class="modal-title text-center w-100">Agregar Empleado</h5>
-                        <!-- boton agregar empleado abrira el modal -->
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                             id="close"></button>
                     </div>
                     <div class="modal-body">
                         <!-- formulario del modal -->
-                        <form id="formEmpleado" class="row g-2 needs-validation" novalidate method="post">
-                            <!-- dni -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="dni" class="form-label">Dni</label>
-                                <input type="text" id="dni" class="form-control" name="dni" pattern="[0-9]{8}"
-                                    required />
-                            </div>
-                            <!-- file -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="file" class="form-label">Foto del empleado</label>
-                                <input type="file" id="file" class="form-control" name="file" required>
-                            </div>
-                            <!-- nombre -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" class="form-control" pattern="[a-z]+"
-                                    required />
-                            </div>
-                            <!-- apellido -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="apellido" class="form-label">Apellido</label>
+                        <form id="formEmpleado" class="needs-validation" novalidate method="post">
 
-                                <input type="text" id="apellido" name="apellido" class="form-control" pattern="[a-z]+"
-                                    required />
-                            </div>
-                            <!-- telefono -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="telefono" class="form-label"></label>
-                                <input type="tel" id="telefono" class="form-control" name="telefono" pattern="9[0-9]{8}"
-                                    required />
-                            </div>
-                            <!-- genero -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="genero" class="form-label">Genero</label>
+                            <!-- Sección Datos Personales -->
+                            <div class="form-section mb-4">
+                                <h6 class="section-title text-primary border-bottom pb-2 mb-3"> Datos Personales</h6>
+                                <div class="row g-3">
+                                    <!-- dni -->
+                                    <div class="col-md-6">
+                                        <label for="dni" class="form-label">DNI *</label>
+                                        <input type="text" id="dni" class="form-control" name="dni" pattern="[0-9]{8}"
+                                            maxlength="8" required />
 
-                                <input type="text" id="genero" class="form-control" name="genero" required />
-                            </div>
-                            <!-- email -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="correo" class="form-label">Correo electronico</label>
+                                    </div>
 
-                                <input type="email" id="email" class="form-control" name="correo"
-                                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
-                            </div>
-                            <!-- fecha de nacimiento -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="" class="form-label">Fecha de nacimiento</label>
-                                <input type="date" id="fechaNacimiento" class="form-control" name="fecha_nacimiento"
-                                    required />
-                            </div>
-                            <!-- Fecha de registro -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="" class="form-label">Fecha de registro</label>
-                                <input type="date" id="fechaRegistro" class="form-control" name="fecha_ingreso"
-                                    required />
-                            </div>
-                            <!-- Fecha de salario -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="salario" class="form-label">Salario</label>
-                                <input type="number" id="salario" class="form-control" name="salario" required />
-                            </div>
-                            <!--Tipo de contrato -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="" class="form-label">Tipo de contrato</label>
-                                <input type="text" id="tipoContrato" class="form-control" name="tipoContrato"
-                                    required />
-                            </div>
-                            <!-- especialiad -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="" class="form-label">Especialidad</label>
-                                <input type="text" id="especialidad" class="form-control" name="especialidad"
-                                    required />
+                                    <!-- file -->
+                                    <div class="col-md-6">
+                                        <label for="file" class="form-label">Foto del empleado</label>
+                                        <input type="file" id="file" class="form-control" name="file"
+                                            accept="image/jpeg,image/jpg,image/png" required>
+                                    </div>
+
+                                    <!-- nombre -->
+                                    <div class="col-md-6">
+                                        <label for="nombre" class="form-label">Nombre *</label>
+                                        <input type="text" id="nombre" name="nombre" class="form-control"
+                                            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+                                    </div>
+
+                                    <!-- apellido -->
+                                    <div class="col-md-6">
+                                        <label for="apellido" class="form-label">Apellido *</label>
+                                        <input type="text" id="apellido" name="apellido" class="form-control"
+                                            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+
+                                    </div>
+
+                                    <!-- telefono -->
+                                    <div class="col-md-4">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="tel" id="telefono" class="form-control" name="telefono"
+                                            pattern="9[0-9]{8}" placeholder="9XXXXXXXX" required />
+                                    </div>
+
+                                    <!-- genero -->
+                                    <div class="col-md-4">
+                                        <label for="genero" class="form-label">Género</label>
+                                        <select id="genero" class="form-select" name="genero" required>
+                                            <option value="">Seleccionar...</option>
+                                            <option value="M">Masculino</option>
+                                            <option value="F">Femenino</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- email -->
+                                    <div class="col-md-4">
+                                        <label for="email" class="form-label">Correo electrónico *</label>
+                                        <input type="email" id="email" class="form-control" name="email"
+                                            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
+                                    </div>
+
+                                    <!-- fecha de nacimiento -->
+                                    <div class="col-md-6">
+                                        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                                        <input type="date" id="fechaNacimiento" class="form-control"
+                                            name="fechaNacimiento" / required>
+                                    </div>
+
+                                    <!-- Fecha de ingreso -->
+                                    <div class="col-md-6">
+                                        <label for="fechaIngreso" class="form-label">Fecha de ingreso</label>
+                                        <input type="date" id="fechaIngreso" class="form-control" name="fechaIngreso"
+                                            required />
+                                    </div>
+                                </div>
                             </div>
 
+                            <!-- Sección Datos Laborales -->
+                            <div class="form-section mb-4">
+                                <h6 class="section-title text-primary border-bottom pb-2 mb-3">Datos Laborales</h6>
+                                <div class="row g-3">
+                                    <!-- salario -->
+                                    <div class="col-md-4">
+                                        <label for="salario" class="form-label">Salario *</label>
+                                        <input type="number" id="salario" class="form-control" name="salario"
+                                            step="0.01" min="0" required />
+                                    </div>
 
+                                    <!-- Tipo de contrato -->
+                                    <div class="col-md-4">
+                                        <label for="tipoContrato" class="form-label">Tipo de contrato</label>
+                                        <select id="tipoContrato" class="form-select" name="tipoContrato" required>
+                                            <option value="">Seleccionar...</option>
+                                            <option value="INDEFINIDO">Indefinido</option>
+                                            <option value="TEMPORAL">Temporal</option>
+                                            <option value="PRACTICAS">Prácticas</option>
+                                            <option value="FREELANCE">Freelance</option>
+                                        </select>
+                                    </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="rol_id" class="form-label">Rol</label>
-                                <select name="rol_id" class="form-select crearRol" required>
-                                    <option value="">Seleccione un rol...</option>
-                                    <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
-                                        th:text="${rol.nombre}">
-                                    </option>
-                                </select>
+                                    <!-- especialidad -->
+                                    <div class="col-md-4">
+                                        <label for="especialidad" class="form-label">Especialidad</label>
+                                        <input type="text" id="especialidad" class="form-control" name="especialidad"
+                                            required />
+                                    </div>
+                                </div>
                             </div>
-                            <!-- usuario -->
-                            <!-- <div class="col-md-6 mb-3 mb-3">
-                                <label for="" class="form-label">Usuario</label>
-                                <input type="text" id="especialidad" class="form-control" name="especialidad"
-                                    required />
-                            </div> -->
-                            <!-- contraseña -->
-                            <div class="col-md-6 mb-3 mb-3">
-                                <label for="" class="form-label">Ingrese su contraseña</label>
-                                <input type="password" id="contraseña" class="form-control" name="contraseña"
-                                    required />
+
+                            <!-- Sección Datos de Usuario -->
+                            <div class="form-section mb-4">
+                                <h6 class="section-title text-primary border-bottom pb-2 mb-3">Datos de Usuario</h6>
+
+                                <!-- Nota informativa -->
+                                <div class="alert alert-info py-2 mb-3">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Nota:</strong> El nombre de usuario será automáticamente el DNI ingresado.
+                                </div>
+
+                                <div class="row g-3">
+                                    <!-- Usuario display -->
+                                    <div class="col-md-6">
+                                        <label for="usernameDisplay" class="form-label">Nombre de Usuario</label>
+                                        <input type="text" class="form-control" id="usernameDisplay" readonly
+                                            placeholder="Se generará con el DNI" style="background-color: #f8f9fa;">
+                                        <div class="form-text">Este será el nombre para iniciar sesión (basado en el
+                                            DNI)</div>
+                                    </div>
+
+                                    <!-- Rol -->
+                                    <div class="col-md-6">
+                                        <label for="rol_id" class="form-label">Rol *</label>
+                                        <select name="rol_id" id="rol_id" class="form-select crearRol" required>
+                                            <option value="">Seleccione un rol...</option>
+                                            <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
+                                                th:text="${rol.nombre}">
+                                            </option>
+                                        </select>
+
+                                    </div>
+
+                                    <!-- contraseña -->
+                                    <div class="col-md-6">
+                                        <label for="contraseña" class="form-label">Contraseña *</label>
+                                        <input type="password" id="contraseña" class="form-control" name="contraseña"
+                                            minlength="6" required />
+                                        <div class="form-text">Mínimo 6 caracteres</div>
+
+                                    </div>
+
+                                    <!-- confirmar contraseña -->
+                                    <div class="col-md-6">
+                                        <label for="confirmarContraseña" class="form-label">Confirmar Contraseña
+                                            *</label>
+                                        <input type="password" id="confirmarContraseña" class="form-control"
+                                            name="confirmarContraseña" minlength="6" required />
+                                        <div id="passwordMessage" class="form-text"></div>
+                                        <div class="invalid-feedback">
+                                            Las contraseñas no coinciden
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="modal-footer">
-                                <!-- boton cerrar modal + boton guardar empleado  -->
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                     Cerrar
                                 </button>
+                                </button>
                                 <button type="submit" class="btn btn-primary" id="guardarEmpleado">
-                                    Guardar
+                                    Guardar Empleado
                                 </button>
                             </div>
                         </form>
@@ -260,6 +328,7 @@
             </div>
         </div>
     </th:block>
+
     <!-- modal eliminar -->
     <th:block th:fragment="modalEliminarEmpleado">
         <div class="modal fade" id="modalEliminarEmpleado" tabindex="-1" aria-hidden="true">
@@ -300,67 +369,198 @@
     </th:block>
     <!-- modal actualizar empleado -->
     <th:block th:fragment="modalActualizarEmpleado">
-        <div class="modal fade" id="modalActualizarEmpleado" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-center w-100" id="staticBackdropLabel">Editar Empleado</h5> <button
-                            type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="editarEmpleadoForm" class="row g-2 needs-validation" novalidate>
-                            <div class="col-12 mb-3">
-                                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre"
-                                    pattern="[A-Za-z]+" title="Solo letras minusculas" required value="${nombre}" />
-                            </div>
-                            <div class="col-12 mb-3">
-                                <input type="text" id="apellido" name="apellido" class="form-control"
-                                    placeholder="Apellido" pattern="[A-Za-z]+" required value="${apellido}" />
-                            </div>
-                            <div class="col-12 mb-3">
-                                <input type="text" id="dni" class="form-control" name="dni" placeholder="Dni"
-                                    pattern="[0-9]{8}" required value="${dni}" />
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="">Fecha de registro</label>
-                                <input type="date" id="fechaRegistro" class="form-control" name="fecha_ingreso"
-                                    placeholder="Fecha de registro" required value="${fecha_ingreso}" />
-                            </div>
-                            <div class="col-12 mb-3">
-                                <input type="tel" id="telefono" class="form-control" name="telefono"
-                                    placeholder="Numero de telefono" pattern="9[0-9]{8}" required value="${telefono}" />
-                            </div>
-                            <div class="col-12 mb-3">
-                                <input type="email" id="correo" class="form-control" name="correo" placeholder="Correo"
-                                    required value="${correo}" />
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="">Fecha de nacimiento</label>
-                                <input type="date" id="fechaNacimiento" class="form-control" name="fecha_nacimiento"
-                                    placeholder="Fecha de nacimiento" required value="${fecha_nacimiento}" />
-                            </div>
-                            <div class="col-12 mb-3">
-                                <select name="rol_id" class="form-select crearRol" required>
-                                    <option value="">Seleccion un rol..</option>
-                                    <option value="${rolNombre}" selected>${rolNombre}</option>
+        <div th:each="empleado: ${empleadoTabla}">
+            <div class="modal fade" th:id="|editar__${empleado.personaId}|" tabindex="-1" aria-hidden="true">
 
-                                </select>
-                            </div>
+                <div class="modal-dialog modal-dialog-centered modal-lg" id="modal-hijo">
+                    <div class="modal-content rounded-4">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center w-100">Agregar Empleado</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                id="close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- formulario del modal -->
+                            <form id="formEmpleado" class="needs-validation" novalidate method="post">
 
-                            <div class="modal-footer">
-                                <!-- boton cerrar modal + boton guardar empleado  -->
-                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    Cerrar
-                                </button>
-                                <button type="submit" class="btn btn-primary" data-id=${id}>
-                                    Actualizar empleado
-                                </button>
-                            </div>
-                        </form>
+                                <!-- Sección Datos Personales -->
+                                <div class="form-section mb-4">
+                                    <h6 class="section-title text-primary border-bottom pb-2 mb-3"> Datos Personales
+                                    </h6>
+                                    <div class="row g-3">
+                                        <!-- dni -->
+                                        <div class="col-md-6">
+                                            <label for="dni" class="form-label">DNI *</label>
+                                            <input type="text" id="dni" class="form-control" name="dni"
+                                                pattern="[0-9]{8}" maxlength="8" th:value="${empleado.dni}" required />
+
+                                        </div>
+
+                                        <!-- file -->
+                                        <div class="col-md-6">
+                                            <label for="file" class="form-label">Foto del empleado</label>
+                                            <input type="file" id="file" class="form-control" name="file"
+                                                accept="image/jpeg,image/jpg,image/png" required>
+                                        </div>
+
+                                        <!-- nombre -->
+                                        <div class="col-md-6">
+                                            <label for="nombre" class="form-label">Nombre *</label>
+                                            <input type="text" id="nombre" name="nombre" class="form-control"
+                                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+                                        </div>
+
+                                        <!-- apellido -->
+                                        <div class="col-md-6">
+                                            <label for="apellido" class="form-label">Apellido *</label>
+                                            <input type="text" id="apellido" name="apellido" class="form-control"
+                                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+
+                                        </div>
+
+                                        <!-- telefono -->
+                                        <div class="col-md-4">
+                                            <label for="telefono" class="form-label">Teléfono</label>
+                                            <input type="tel" id="telefono" class="form-control" name="telefono"
+                                                pattern="9[0-9]{8}" placeholder="9XXXXXXXX" required />
+                                        </div>
+
+                                        <!-- genero -->
+                                        <div class="col-md-4">
+                                            <label for="genero" class="form-label">Género</label>
+                                            <select id="genero" class="form-select" name="genero" required>
+                                                <option value="">Seleccionar...</option>
+                                                <option value="M">Masculino</option>
+                                                <option value="F">Femenino</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- email -->
+                                        <div class="col-md-4">
+                                            <label for="email" class="form-label">Correo electrónico *</label>
+                                            <input type="email" id="email" class="form-control" name="email"
+                                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
+                                        </div>
+
+                                        <!-- fecha de nacimiento -->
+                                        <div class="col-md-6">
+                                            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                                            <input type="date" id="fechaNacimiento" class="form-control"
+                                                name="fechaNacimiento" / required>
+                                        </div>
+
+                                        <!-- Fecha de ingreso -->
+                                        <div class="col-md-6">
+                                            <label for="fechaIngreso" class="form-label">Fecha de ingreso</label>
+                                            <input type="date" id="fechaIngreso" class="form-control"
+                                                name="fechaIngreso" required />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sección Datos Laborales -->
+                                <div class="form-section mb-4">
+                                    <h6 class="section-title text-primary border-bottom pb-2 mb-3">Datos Laborales</h6>
+                                    <div class="row g-3">
+                                        <!-- salario -->
+                                        <div class="col-md-4">
+                                            <label for="salario" class="form-label">Salario *</label>
+                                            <input type="number" id="salario" class="form-control" name="salario"
+                                                step="0.01" min="0" required />
+                                        </div>
+
+                                        <!-- Tipo de contrato -->
+                                        <div class="col-md-4">
+                                            <label for="tipoContrato" class="form-label">Tipo de contrato</label>
+                                            <select id="tipoContrato" class="form-select" name="tipoContrato" required>
+                                                <option value="">Seleccionar...</option>
+                                                <option value="INDEFINIDO">Indefinido</option>
+                                                <option value="TEMPORAL">Temporal</option>
+                                                <option value="PRACTICAS">Prácticas</option>
+                                                <option value="FREELANCE">Freelance</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- especialidad -->
+                                        <div class="col-md-4">
+                                            <label for="especialidad" class="form-label">Especialidad</label>
+                                            <input type="text" id="especialidad" class="form-control"
+                                                name="especialidad" required />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sección Datos de Usuario -->
+                                <div class="form-section mb-4">
+                                    <h6 class="section-title text-primary border-bottom pb-2 mb-3">Datos de Usuario</h6>
+
+                                    <!-- Nota informativa -->
+                                    <div class="alert alert-info py-2 mb-3">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        <strong>Nota:</strong> El nombre de usuario será automáticamente el DNI
+                                        ingresado.
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <!-- Usuario display -->
+                                        <div class="col-md-6">
+                                            <label for="usernameDisplay" class="form-label">Nombre de Usuario</label>
+                                            <input type="text" class="form-control" id="usernameDisplay" readonly
+                                                placeholder="Se generará con el DNI" style="background-color: #f8f9fa;">
+                                            <div class="form-text">Este será el nombre para iniciar sesión (basado en el
+                                                DNI)</div>
+                                        </div>
+
+                                        <!-- Rol -->
+                                        <div class="col-md-6">
+                                            <label for="rol_id" class="form-label">Rol *</label>
+                                            <select name="rol_id" id="rol_id" class="form-select crearRol" required>
+                                                <option value="">Seleccione un rol...</option>
+                                                <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
+                                                    th:text="${rol.nombre}">
+                                                </option>
+                                            </select>
+
+                                        </div>
+
+                                        <!-- contraseña -->
+                                        <div class="col-md-6">
+                                            <label for="contraseña" class="form-label">Contraseña *</label>
+                                            <input type="password" id="contraseña" class="form-control"
+                                                name="contraseña" minlength="6" required />
+                                            <div class="form-text">Mínimo 6 caracteres</div>
+
+                                        </div>
+
+                                        <!-- confirmar contraseña -->
+                                        <div class="col-md-6">
+                                            <label for="confirmarContraseña" class="form-label">Confirmar Contraseña
+                                                *</label>
+                                            <input type="password" id="confirmarContraseña" class="form-control"
+                                                name="confirmarContraseña" minlength="6" required />
+                                            <div id="passwordMessage" class="form-text"></div>
+                                            <div class="invalid-feedback">
+                                                Las contraseñas no coinciden
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Cerrar
+                                    </button>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary" id="guardarEmpleado">
+                                        Guardar Empleado
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
     </th:block>
 
 

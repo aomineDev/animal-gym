@@ -16,4 +16,10 @@ public class Usuario {
     private String contraseña;
     private Rol rol;
     private Person persona;
+
+    public Usuario(String contraseña, Rol rol, Person persona) {
+        this.contraseña = contraseña;
+        this.rol = rol;
+        this.persona = persona;
+    }
 }

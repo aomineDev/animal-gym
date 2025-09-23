@@ -19,15 +19,19 @@ public class EmpleadoRepository {
     public EmpleadoRepository() {
         save(new Empleado(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
                 1500, "Anual", "xxx"));
-        save(new Empleado(2, "76454651", "Sebastian", "Murillo", "913582873", "Masculino",
+        save(new Empleado(2, "77454651", "Sebastian", "Murillo", "913582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
                 1500, "Anual", "xxx"));
         save(new Empleado(3, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
                 1500, "Anual", "xxx"));
         save(new Empleado(4, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
                 1500, "Anual", "xxx"));
     }
 

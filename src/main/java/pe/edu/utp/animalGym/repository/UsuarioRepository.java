@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import pe.edu.utp.animalGym.model.Empleado;
+import pe.edu.utp.animalGym.model.Rol;
 import pe.edu.utp.animalGym.model.Usuario;
 
 @Repository
@@ -18,10 +20,19 @@ public class UsuarioRepository {
         return usuarios;
     }
 
+    public UsuarioRepository(RolRepository rolRepository, EmpleadoRepository empleadoRepository) {
+
+        Rol rol1 = rolRepository.findById(1).orElse(null);
+        Empleado emp1 = empleadoRepository.findById(1).orElse(null);
+
+        save(new Usuario("Contraseña", rol1, emp1));
+
+    }
+
     public Optional<Usuario> findById(Integer id) {
         return usuarios.stream()
-                       .filter(u -> u.getUsuarioId().equals(id))
-                       .findFirst();
+                .filter(u -> u.getUsuarioId().equals(id))
+                .findFirst();
     }
 
     public Usuario save(Usuario usuario) {
