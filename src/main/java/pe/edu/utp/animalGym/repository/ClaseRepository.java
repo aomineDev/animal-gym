@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import pe.edu.utp.animalGym.model.Clase;
@@ -18,7 +17,6 @@ public class ClaseRepository {
     private final List<Clase> claseList = new ArrayList<>();
     private Integer nextId = 1;
 
-    @Autowired
     public ClaseRepository(EmpleadoRepository empleadoRepository) {
 
         Empleado empleado1 = empleadoRepository.findById(1).orElseThrow();
