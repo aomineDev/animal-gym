@@ -10,27 +10,21 @@ import org.springframework.stereotype.Repository;
 
 import pe.edu.utp.animalGym.model.Boleta;
 import pe.edu.utp.animalGym.model.Empleado;
+import pe.edu.utp.animalGym.model.Socio;
 
 @Repository
 public class BoletaRepository {
 
-    private List<Boleta> boletaList = new ArrayList<>(List.of(
-            new Boleta(1, LocalDate.of(2025, 6, 18),
-                    LocalTime.of(12, 1, 3),
-                    12, 1000, 0, true, null,
-                    new Empleado(1, "78945612", "Leonardo", "Murillo", "987456123", "Masculino", null, null, null, 0,
-                            null, null)),
-            new Boleta(2, LocalDate.of(2025, 6, 18),
-                    LocalTime.of(12, 1, 3),
-                    12, 100011, 0, true, null,
-                    new Empleado(1, "78945612", "Luis", "Fernandez", "987456123", "Masculino", null, null, null, 0,
-                            null, null)),
-            new Boleta(3, LocalDate.of(2025, 6, 18),
-                    LocalTime.of(12, 1, 3),
-                    12, 100011, 0, true, null,
-                    new Empleado(1, "78945612", "Juan", "x", "987456123", "Masculino", null, null, null, 0,
-                            null, null))));
+    private List<Boleta> boletaList = new ArrayList<>();
     private Integer nextId = 1;
+
+    public BoletaRepository(EmpleadoRepository empleadoRepository, SocioRepository socioRepository) {
+        Empleado empleado1 = empleadoRepository.findById(1).orElseThrow();
+        Empleado empleado2 = empleadoRepository.findById(2).orElseThrow();
+        // Socio socio1 = socioRepository.findById(1).orElseThrow();
+        save(new Boleta(LocalDate.of(2024, 1, 12), LocalTime.of(12, 12, 12), 189, 1506, 19, false, null, empleado1));
+        save(new Boleta(LocalDate.of(2024, 1, 12), LocalTime.of(12, 12, 12), 180, 100, 15, false, null, empleado2));
+    }
 
     public List<Boleta> findAll() {
         return boletaList;

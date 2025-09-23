@@ -6,20 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 //@Entity
-@Getter 
+@Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class Usuario {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer usuarioId;
-    private String contrasena;
-    //@ManyToOne
-    //@JoinColumn(name = "rolId", nullable = false)
-    // private Rol rol;
-    //@OneToOne
-    //@JoinColumn(name = "personaId", nullable = false)
+    private String contraseña;
+    private Rol rol;
     private Person persona;
+
+    public Usuario(String contraseña, Rol rol, Person persona) {
+        this.contraseña = contraseña;
+        this.rol = rol;
+        this.persona = persona;
+    }
 }

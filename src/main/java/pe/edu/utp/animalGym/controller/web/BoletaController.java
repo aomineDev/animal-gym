@@ -18,7 +18,7 @@ public class BoletaController {
     public String Socio(Model model) {
         model.addAttribute("content", "boletas :: content");
 
-        model.addAttribute("modal", "boletas :: boletaModal");
+        model.addAttribute("modal", "boletas :: modals");
 
         model.addAttribute("activePage", "boletas");
         model.addAttribute("tablaBoleta", servicio.findAll());

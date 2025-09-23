@@ -12,25 +12,28 @@ import pe.edu.utp.animalGym.model.Empleado;
 @Repository
 public class EmpleadoRepository {
 
-    private List<Empleado> employeeList = new ArrayList<>(
+    private List<Empleado> employeeList = new ArrayList<>();
 
-            List.of(new Empleado(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
-                    "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500, "Anual",
-                    "xxx"),
-                    new Empleado(2, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
-                            "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
-                            "Anual",
-                            "xxx"),
-                    new Empleado(3, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
-                            "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
-                            "Anual",
-                            "xxx"),
-                    new Empleado(4, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
-                            "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19), 1500,
-                            "Anual",
-                            "xxx")));
+    private Integer nextId = 1;
 
-    private Integer nextId = 5;
+    public EmpleadoRepository() {
+        save(new Empleado(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
+                1500, "Anual", "xxx"));
+        save(new Empleado(2, "77454651", "Sebastian", "Murillo", "913582873", "Masculino",
+                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
+                1500, "Anual", "xxx"));
+        save(new Empleado(3, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
+                1500, "Anual", "xxx"));
+        save(new Empleado(4, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
+                1500, "Anual", "xxx"));
+    }
 
     public List<Empleado> findAll() {
         return employeeList;
