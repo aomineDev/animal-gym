@@ -23,9 +23,14 @@ public class UsuarioRepository {
     public UsuarioRepository(RolRepository rolRepository, EmpleadoRepository empleadoRepository) {
 
         Rol rol1 = rolRepository.findById(1).orElse(null);
+        Rol rol2 = rolRepository.findById(2).orElse(null);
         Empleado emp1 = empleadoRepository.findById(1).orElse(null);
+        Empleado emp2 = empleadoRepository.findById(2).orElse(null);
+        Empleado emp3 = empleadoRepository.findById(3).orElse(null);
 
-        save(new Usuario("Contraseña", rol1, emp1));
+        save(new Usuario("Contraseña", rol2, emp1));
+        save(new Usuario("Contraseña", rol2, emp2));
+        save(new Usuario("Contraseña", rol1, emp3));
 
     }
 

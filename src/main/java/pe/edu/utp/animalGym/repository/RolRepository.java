@@ -10,9 +10,13 @@ import pe.edu.utp.animalGym.model.Rol;
 
 @Repository
 public class RolRepository {
-    private List<Rol> roles = new ArrayList<>(List.of(
-            new Rol(1, "Mesero"), new Rol(2, "Cocinero")));
+    private List<Rol> roles = new ArrayList<>();
     private Integer nextId = 1;
+
+    public RolRepository() {
+        save(new Rol("Administrador"));
+        save(new Rol("Entrenador"));
+    }
 
     public List<Rol> findAll() {
         return roles;

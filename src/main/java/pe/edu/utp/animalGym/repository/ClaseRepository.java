@@ -21,7 +21,6 @@ public class ClaseRepository {
 
         Empleado empleado1 = empleadoRepository.findById(1).orElseThrow();
         Empleado empleado2 = empleadoRepository.findById(2).orElseThrow();
-        Empleado empleado3 = empleadoRepository.findById(3).orElseThrow();
 
         save(new Clase("Yoga Avanzado", "Clase de relajación y flexibilidad", 20,
                 LocalDate.now().plusDays(1), LocalTime.of(9, 0), LocalTime.of(10, 0), 60,
@@ -36,7 +35,7 @@ public class ClaseRepository {
         save(new Clase("Zumba Energética", "Baile y cardio divertido", 25,
                 LocalDate.now().plusDays(3), LocalTime.of(10, 0), LocalTime.of(11, 0), 60,
                 "Finalizado", "Mejorar coordinación y cardio", "Media",
-                "https://picsum.photos/400/250?random=3", empleado3));
+                "https://picsum.photos/400/250?random=3", empleado2));
     }
 
     public List<Clase> findAll() {
