@@ -2,6 +2,8 @@ package pe.edu.utp.animalGym.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +22,7 @@ public class Rutina {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private Empleado empleado;
-    private ArrayList<DetalleRutina> detalleRutinaList;
+    private List<DetalleRutina> detalleRutinaList;
 
     public Rutina(String nombre, String descripcion, String objetivo, LocalDate fechaInicio, LocalDate fechaFin,
             Empleado empleado, ArrayList<DetalleRutina> detalleRutinaList) {

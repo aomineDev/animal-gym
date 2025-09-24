@@ -11,11 +11,39 @@ import pe.edu.utp.animalGym.model.Ejercicio;
 @Repository
 public class EjercicioRepository {
 
-    private List<Ejercicio> ejercicioList = new ArrayList<>(List.of(
-            new Ejercicio("Sentadilla",
-                    "Ejercicio de piernas",
-                    "Cuádriceps",
-                    "Barra")));
+    private List<Ejercicio> ejercicioList = new ArrayList<>();
+
+    public EjercicioRepository() {
+        save(new Ejercicio("Sentadilla",
+                "Ejercicio de piernas",
+                "Cuádriceps",
+                "Barra"));
+
+        save(new Ejercicio("Prensa de piernas",
+                "Ejercicio en máquina para tren inferior",
+                "Cuádriceps y glúteos",
+                "Máquina de prensa"));
+
+        save(new Ejercicio("Curl de bíceps",
+                "Ejercicio de aislamiento para brazos",
+                "Bíceps",
+                "Mancuernas o barra"));
+
+        save(new Ejercicio("Tríceps en polea",
+                "Ejercicio de extensión de codo en polea",
+                "Tríceps",
+                "Polea"));
+
+        save(new Ejercicio("Press de banca",
+                "Ejercicio para desarrollar el pecho",
+                "Pectorales",
+                "Barra"));
+
+        save(new Ejercicio("Dominadas",
+                "Ejercicio de tracción vertical",
+                "Dorsales y bíceps",
+                "Peso corporal"));
+    }
 
     private Integer nextId = 1;
 
