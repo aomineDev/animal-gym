@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import pe.edu.utp.animalGym.model.Boleta;
 import pe.edu.utp.animalGym.model.Empleado;
-import pe.edu.utp.animalGym.model.Socio;
 
 @Repository
 public class BoletaRepository {
