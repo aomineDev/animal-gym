@@ -4,6 +4,18 @@
 <body>
   <th:block th:fragment="content">
     <h2 class="mt-4">Reporte</h2>
+    <ul id="pruebaList">
+      <h3>Prueba</h3>
+      <form id="pruebaForm">
+        <input type="text" id="name" name="name" placeholder="Nombre de la prueba" class="" required>
+        <button type="submit" class="btn btn-primary btn-sm">Agregar</button>
+      </form>
+      <li th:each="prueba: ${pruebas}" th:data-id="${prueba.id}"><span class="prueba-nombre"
+          th:text="${prueba.name}"></span>
+        <button class="pruebaUpdateBtn" th:data-id="${prueba.id}">✏️</button> <button class="pruebaDeleteBtn"
+          th:data-id="${prueba.id}">🗑️</button>
+      </li>
+    </ul>
     <div class="row mt-3">
       <div class="col-md">
         <div class="card card-flat">
@@ -54,6 +66,97 @@
         </div>
       </div>
     </div>
+    <script>
+      //componentes 
+      function listItem({ name }) {
+        return `<li>${name}</li>`
+      }
+      document.getElementById('pruebaForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const nameInput = event.target.name;
+        const name = nameInput.value.trim()
+        const service = new Service('pruebas')
+        const prueba = {
+          name
+        }
+
+        try {
+          // const response = await fetch('/api/pruebas', {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json'
+          //   },
+          //   body: JSON.stringify(prueba)
+          // })
+          // const data = await response.json();  
+          const data = await service.save(prueba)
+
+          console.log(data)
+          console.log(document.getElementById('pruebaList'))
+          document.getElementById('pruebaList').insertAdjacentHTML('beforeend', listItem(data));
+          nameInput.value = '';
+
+        } catch (error) {
+
+          console.error('Error:', error)
+        }
+
+
+
+      });
+      document.querySelectorAll('.pruebaDeleteBtn').forEach(btn => {
+        btn.addEventListener('click', async function (event) {
+          const id = this.dataset.id;
+          const li = document.querySelector(`#pruebaList li[data-id='${id}']`);
+
+          console.log(li)
+          try {
+            const response = await fetch(`/api/pruebas/${id}`, {
+              method: 'DELETE'
+            });
+            if (response.ok) {
+              li.remove();
+            } else {
+              console.error('Error al eliminar la prueba');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        });
+      })
+
+      document.querySelectorAll('.pruebaUpdateBtn').forEach(btn => {
+        btn.addEventListener('click', async function (event) {
+          const id = this.dataset.id;
+          const li = document.querySelector(`#pruebaList li[data-id='${id}']`);
+
+          const newName = prompt('Ingrese el nuevo nombre:');
+
+          const prueba = {
+            id,
+            name: newName
+          }
+
+          try {
+            const response = await fetch(`/api/pruebas/${id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(prueba)
+            });
+            if (response.ok) {
+              const updatedPrueba = await response.json();
+              li.querySelector('.prueba-nombre').innerText = updatedPrueba.name;
+            } else {
+              console.error('Error al actualizar la prueba');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        });
+      })
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>

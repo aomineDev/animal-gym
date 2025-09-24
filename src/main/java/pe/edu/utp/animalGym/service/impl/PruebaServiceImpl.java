@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.animalGym.model.Prueba;
 import pe.edu.utp.animalGym.repository.PruebaRepository;
 import pe.edu.utp.animalGym.service.PruebaService;
 
+@Service
 public class PruebaServiceImpl implements PruebaService {
   @Autowired
   private PruebaRepository repository;
