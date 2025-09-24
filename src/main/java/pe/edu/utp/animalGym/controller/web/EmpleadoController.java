@@ -30,7 +30,7 @@ public class EmpleadoController {
         model.addAttribute("activePage", "empleados");
 
         // pintar empleados en la tabla
-        model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
+        // model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
         // pintar el rol
         model.addAttribute("contenedorRol", serviceRol.findAll());
         model.addAttribute("contenedorUser", serviceUsuario.findAll());
