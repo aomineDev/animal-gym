@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import pe.edu.utp.animalGym.service.impl.MembresiaServiceImpl;
 
 @Controller
-public class MembresiaController {
+public class MembresiasController {
     @Autowired
     private MembresiaServiceImpl service;
 
@@ -20,7 +20,7 @@ public class MembresiaController {
         model.addAttribute("modal", "membresias :: modal");
 
         model.addAttribute("activePage", "membresias");
-        
+
         model.addAttribute("detalleCardMenbresia", service.findAll());
 
         return "layout";

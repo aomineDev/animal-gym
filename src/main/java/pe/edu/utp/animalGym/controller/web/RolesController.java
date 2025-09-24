@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class RolController {
+public class RolesController {
   @GetMapping("/rol")
   public String rol(Model model) {
     model.addAttribute("title", "Animal GYM | Rol");

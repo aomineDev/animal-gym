@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class SocioController {
+public class SociosController {
     @GetMapping("/socios")
 
     public String Socio(Model model) {

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+
+<body>
+  <th:block th:fragment="content">
+    <div class="container">
+      <!-- Principal -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-people me-2"></i>Gestión de Rutinas</h2>
+      </div>
+
+      <!-- Filtros -->
+      <div class="row g-2 mb-3">
+        <div class="col-md-4">
+          <input type="text" class="form-control" placeholder="Buscar rutina..." />
+        </div>
+        <div class="col-md-4 col-6">
+          <select class="form-select">
+            <option selected>Todos los estados</option>
+            <option>Activo</option>
+            <option>Inactivo</option>
+          </select>
+        </div>
+        <div class="col-md-4 col-12">
+          <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#agregarRutinaModal">
+            <i class="bi bi-person-plus me-2"></i>Nueva Rutina
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabla de Rutinas -->
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Nombre</th>
+              <th>Duración</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="rutinaTable"></tbody>
+        </table>
+      </div>
+
+      <!-- Paginación -->
+      <nav aria-label="Paginación de socios">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Anterior</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <span class="page-link">...</span>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">8</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </th:block>
+
+  <th:block th:fragment="modal">
+  </th:block>
+</body>
+
+</html>

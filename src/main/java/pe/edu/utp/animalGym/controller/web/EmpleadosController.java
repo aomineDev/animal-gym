@@ -10,7 +10,7 @@ import pe.edu.utp.animalGym.service.impl.RolServiceImpl;
 import pe.edu.utp.animalGym.service.impl.UsuarioServiceImpl;
 
 @Controller
-public class EmpleadoController {
+public class EmpleadosController {
     @Autowired
     private EmpleadoServiceImpl serviceEmpleado;
 
