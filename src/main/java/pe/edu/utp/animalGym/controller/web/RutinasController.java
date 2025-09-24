@@ -10,7 +10,7 @@ public class RutinasController {
   public String rutinas(Model model) {
     model.addAttribute("title", "Animal GYM | Rutinas");
     model.addAttribute("content", "rutinas :: content");
-    model.addAttribute("modal", "rutinas :: modal");
+    model.addAttribute("modal", "rutinas :: modals");
     model.addAttribute("activePage", "rutinas");
 
     return "layout";
