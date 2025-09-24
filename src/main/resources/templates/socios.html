@@ -53,44 +53,70 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="socioItem">
-
-                    <tr>
-                        <td><img src="${foto_perfil}" class="profile-img"></td>
-                        <td>${nombre.split(" ")[0]} ${apellido.split(" ")[0]}</td>
-                        <td>${correo}</td>
-                        <td>+51 ${telefono}</td>
-                        <td><span class="badge ${StateClass}">${InnerText}</span></td>
-                        <td>${plan}</td>
-                        <td>${fecha_ingreso}</td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                                    <i class="bi bi-three-dots-vertical"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#perfilSocioModal" data-id="${id}">
-                                            <i class="bi bi-eye me-2"></i>Ver perfil
-                                        </a></li>
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#socioModal" data-id="${id}">
-                                            <i class="bi bi-pencil me-2"></i>Editar
-                                        </a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#confirmDeleteModal" data-id="${id}">
-                                            <i class="bi bi-trash me-2"></i>Eliminar
-                                        </a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody>
+            <tr th:each="socio : ${socios}">
+                <td>
+                    <img th:src="${socio.imagen}" class="profile-img" alt="foto">
+                </td>
+                <td th:text="${socio.nombre} + ' ' + ${socio.apellido}"></td>
+                <td th:text="${socio.email}"></td>
+                <td th:text="|+51 ${socio.telefono}|"></td>
+                <td>
+                    <span th:classappend="${socio.activo} ? 'badge bg-success' : 'badge bg-danger'"
+                          th:text="${socio.activo} ? 'Activo' : 'Inactivo'"></span>
+                </td>
+                <!-- <td></td> -->
+                <td th:text="${socio.menbresia != null ? socio.menbresia.nombre : 'Sin membresía'}"></td>
+                <td th:text="${socio.fechaIngreso}"></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item"
+                                   href="#"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#perfilSocioModal"
+                                   th:attr="data-id=${socio.personaId},
+                                            data-nombre=${socio.nombre},
+                                            data-apellido=${socio.apellido},
+                                            data-dni=${socio.dni},
+                                            data-puntos=${socio.puntos},
+                                            data-peso=${socio.peso},
+                                            data-altura=${socio.altura},
+                                            data-fecha-vencimiento=${socio.fechaVencimineto}">
+                                    <i class="bi bi-eye me-2"></i>Ver perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                   href="#"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#socioModal"
+                                   th:attr="data-id=${socio.personaId}">
+                                    <i class="bi bi-pencil me-2"></i>Editar
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger"
+                                   href="#"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#confirmDeleteModal"
+                                   th:attr="data-id=${socio.personaId}">
+                                    <i class="bi bi-trash me-2"></i>Eliminar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
             </table>
         </div>
+        <!-- Fin tabla Socios -->
 
         <!-- Paginación -->
         <nav aria-label="Paginación de socios">
@@ -120,7 +146,331 @@
         </nav>
     </th:block>
 
+    
     <th:block th:fragment="modal">
+        <!-- Modal Confirmación Eliminar -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmar Eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+                            <h6 class="mt-3">¿Está seguro de que desea eliminar este socio?</h6>
+                            <p class="text-muted">Esta acción no se puede deshacer.</p>
+                            <div class="alert alert-danger">
+                                <i class="bi bi-person-x me-2"></i>
+                                Se eliminará toda la información del socio: <strong>Juan Pérez</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger">
+                            <i class="bi bi-trash me-2"></i>Eliminar Definitivamente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Modal Perfil Socio  FALTA AGREGAR A LA RAMA SPRING*-->
+        <div class="modal fade" id="perfilSocioModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Perfil del Socio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="socioContentVerPerfil">
+                        <div class="row g-4">
+                            <!-- Información Personal -->
+                            <div class="col-12 col-lg-4">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body text-center">
+                                        <img src="./${foto_perfil}" class="profile-img-large mb-3">
+                                        <h5 class="card-title mb-0">${nombre} ${apellido}</h5>
+                                        <p class="text-muted">Membresía Activa</p>
+        
+                                        <!--<div class="d-grid gap-2 mb-3">
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-arrow-repeat me-1"></i>Renovar Membresía
+                    </button>
+                  </div>-->
+        
+                                        <div class="d-flex justify-content-around mb-3">
+                                            <div>
+                                                <small class="text-muted">Peso</small>
+                                                <div class="fw-bold">${peso} kg</div>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted">Altura</small>
+                                                <div class="fw-bold">${altura} m</div>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted">Edad</small>
+                                                <div class="fw-bold">${new Date().getFullYear() - new
+                                                    Date(fecha_nacimiento).getFullYear()} años</div>
+                                            </div>
+                                        </div>
+        
+                                        <hr>
+                                        <ul class="list-group text-start small">
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span><i class="bi bi-calendar3 me-2"></i>Fecha de inscripción:</span>
+                                                <span class="fw-bold">${fecha_ingreso}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span><i class="bi bi-card-checklist me-2"></i>Plan actual:</span>
+                                                <span class="fw-bold">Plan Básico Mensual</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span><i class="bi bi-person-badge me-2"></i>DNI:</span>
+                                                <span class="fw-bold">${dni}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span><i class="bi bi-telephone me-2"></i>Teléfono:</span>
+                                                <span class="fw-bold">+51 ${telefono}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <span><i class="bi bi-envelope me-2"></i>Correo:</span>
+                                                <span class="fw-bold">${correo}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <!-- Historial de Clases -->
+                            <div class="col-12 col-lg-8">
+                                <div class="card h-100 shadow-sm">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title mb-0">
+                                                <i class="bi bi-clock-history me-2"></i>Historial de Clases
+                                            </h5>
+                                            <span class="badge bg-primary">Clases inscritas</span>
+                                        </div>
+        
+                                        <div class="table-responsive">
+                                            <table class="table table-sm table-hover">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>Clase</th>
+                                                        <th>Instructor</th>
+                                                        <th>Fecha Inicio</th>
+                                                        <th>Fecha Final</th>
+                                                        <th>Horario</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div>
+                                                                <strong>Yoga Matutino</strong>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div>
+                                                                <strong>María García</strong>
+                                                            </div>
+                                                        </td>
+                                                        <td>15/08/2025</td>
+                                                        <td>30/09/2025</td>
+                                                        <td>
+                                                            <span class="badge bg-info">07:00 - 08:00</span>
+                                                        </td>
+                                                        <td><span class="badge bg-secondary">Finalizado</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+        
+                                        <!--<div class="mt-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <button class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-plus-circle me-1"></i>Inscribir a nueva clase
+                      </button>
+                    </div>
+                  </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary">
+                                  <i class="bi bi-pencil me-2"></i>Editar Información
+                                </button>
+                                <button type="button" class="btn btn-outline-success">
+                                  <i class="bi bi-file-earmark-text me-2"></i>Generar Reporte
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                              </div> -->
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- Modal Nuevo/Editar Socio -->
+        <div class="modal fade" id="socioModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Nuevo Socio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="socioForm" class="row g-3 needs-validation" novalidate>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">Nombre</label>
+                                <div class="input-group">
+                                    <input type="text" id="nombre" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
+                                        required>
+                                    <span class="input-group-text">
+                                        <i class="bi bi-person"></i>
+                                    </span>
+                                </div>
+                                <div class="valid-feedback">Nombre válido</div>
+                                <div class="invalid-feedback">Ingrese un nombre válido</div>
+                            </div>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">Apellido</label>
+                                <div class="input-group">
+                                    <input type="text" id="apellido" class="form-control" required>
+                                    <span class="input-group-text">
+                                        <i class="bi bi-person"></i>
+                                    </span>
+                                </div>
+                                <div class="valid-feedback">Apellido válido</div>
+                                <div class="invalid-feedback">Ingrese un apellido válido</div>
+                            </div>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">DNI</label>
+                                <div class="input-group">
+                                    <input type="text" id="dni" class="form-control" pattern="^\d{8}$" maxlength="8" required>
+                                    <span class="input-group-text">
+                                        <i class="bi bi-card-text"></i>
+                                    </span>
+                                </div>
+                                <div class="valid-feedback">DNI válido</div>
+                                <div class="invalid-feedback">Ingrese un DNI válido (8 dígitos)</div>
+                            </div>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">Teléfono</label>
+                                <div class="input-group">
+                                    <input type="tel" id="telefono" class="form-control" pattern="^[9]\d{8}$" maxlength="9"
+                                        required>
+                                    <span class="input-group-text">
+                                        <i class="bi bi-telephone"></i>
+                                    </span>
+                                </div>
+                                <div class="valid-feedback">Teléfono válido</div>
+                                <div class="invalid-feedback">Ingrese un número válido (9 dígitos)</div>
+                            </div>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">Correo</label>
+                                <div class="input-group">
+                                    <input type="email" id="correo" class="form-control" required>
+                                    <span class="input-group-text">
+                                        <i class="bi bi-envelope"></i>
+                                    </span>
+                                </div>
+                                <div class="valid-feedback">Correo válido</div>
+                                <div class="invalid-feedback">Ingrese un correo válido</div>
+                            </div>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">Fecha de Nacimiento</label>
+                                <div class="input-group">
+                                    <input type="date" id="fechaNacimiento" class="form-control" required>
+                                    <!-- <span class="input-group-text">
+                                  <i class="bi bi-calendar3"></i>
+                                </span> -->
+                                </div>
+                                <div class="valid-feedback">Fecha válida</div>
+                                <div class="invalid-feedback">Seleccione una fecha válida</div>
+                            </div>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">Membresía</label>
+                                <select id="membresia" class="form-select" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="1">Plan Básico Mensual</option>
+                                    <option value="2">Plan Premium Anual</option>
+                                    <option value="3">Plan Estudiante</option>
+                                </select>
+                                <div class="valid-feedback">Membresía válida</div>
+                                <div class="invalid-feedback">Seleccione una membresía</div>
+                            </div>
+        
+                            <div class="col-md-6">
+                                <label class="form-label">Fecha de Ingreso</label>
+                                <div class="input-group">
+                                    <input type="date" id="fechaIngreso" class="form-control" required>
+                                    <!-- <span class="input-group-text">
+                                    <i class="bi bi-calendar-plus"></i>
+                                  </span> -->
+                                </div>
+                                <div class="valid-feedback">Fecha válida</div>
+                                <div class="invalid-feedback">Seleccione una fecha válida</div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label class="form-label">Peso (kg) <small class="text-muted">(opcional)</small></label>
+                                <div class="input-group">
+                                    <input type="number" id="peso" class="form-control" min="30" max="200" step="0.1">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-speedometer"></i>
+                                    </span>
+                                </div>
+                                <div class="valid-feedback">Peso válido</div>
+                                <div class="invalid-feedback">Ingrese un peso válido (30-200 kg)</div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label class="form-label">Altura (cm) <small class="text-muted">(opcional)</small></label>
+                                <div class="input-group">
+                                    <input type="number" id="altura" class="form-control" min="120" max="220">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-arrows-vertical"></i>
+                                    </span>
+                                </div>
+                                <div class="valid-feedback">Altura válida</div>
+                                <div class="invalid-feedback">Ingrese una altura válida (120-220 cm)</div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label class="form-label">Estado</label>
+                                <select id="estado" class="form-select" required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                    <option value="vencido">Vencido</option>
+                                </select>
+                                <div class="valid-feedback">Estado válido</div>
+                                <div class="invalid-feedback">Seleccione un estado</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" onclick="">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
     </th:block>
 </body>
 
