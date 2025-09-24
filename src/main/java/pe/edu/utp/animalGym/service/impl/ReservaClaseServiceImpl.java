@@ -6,27 +6,27 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.edu.utp.animalGym.model.Reservar;
-import pe.edu.utp.animalGym.repository.ReservarRepository;
-import pe.edu.utp.animalGym.service.ReservarService;
+import pe.edu.utp.animalGym.model.ReservaClase;
+import pe.edu.utp.animalGym.repository.ReservaClaseRepository;
+import pe.edu.utp.animalGym.service.ReservaClaseService;
 
 @Service
-public class ReservarServiceImpl implements ReservarService {
+public class ReservaClaseServiceImpl implements ReservaClaseService {
   @Autowired
-  private ReservarRepository repository;
+  private ReservaClaseRepository repository;
 
   @Override
-  public List<Reservar> findAll() {
+  public List<ReservaClase> findAll() {
     return repository.findAll();
   }
 
   @Override
-  public Optional<Reservar> findById(Integer id) {
+  public Optional<ReservaClase> findById(Integer id) {
     return repository.findById(id);
   }
 
   @Override
-  public Reservar save(Reservar entity) {
+  public ReservaClase save(ReservaClase entity) {
     return repository.save(entity);
   }
 

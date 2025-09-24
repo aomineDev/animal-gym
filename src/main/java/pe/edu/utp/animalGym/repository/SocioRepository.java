@@ -1,5 +1,6 @@
 package pe.edu.utp.animalGym.repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,29 +12,43 @@ import pe.edu.utp.animalGym.model.Socio;
 @Repository
 public class SocioRepository {
 
-    private List<Socio> partnerList = new ArrayList<>();
-    private Integer nextId = 1;
+    private List<Socio> socioList = new ArrayList<>();
+    private Integer nextId = 2;
+
+    public SocioRepository() {
+        save(new Socio(
+                1,
+                "12345678", "Juan", "Perez", "987654321", "M", "juan.perez@email.com",
+                LocalDate.of(1990, 5, 15), LocalDate.of(2023, 1, 1),
+                LocalDate.of(2024, 1, 1),
+                true,
+                100,
+                70.5,
+                1.75,
+                null));
+
+    }
 
     public List<Socio> findAll() {
-        return partnerList;
+        return socioList;
     }
 
     public Optional<Socio> findById(Integer id) {
-        return partnerList.stream().filter(p -> p.getPersonaId() == id).findFirst();
+        return socioList.stream().filter(p -> p.getPersonaId() == id).findFirst();
     }
 
-    public Socio save(Socio partner) {
-        if (partner.getPersonaId() == null) {
-            partner.setPersonaId(nextId++);
+    public Socio save(Socio socio) {
+        if (socio.getPersonaId() == null) {
+            socio.setPersonaId(nextId++);
         } else {
-            deleteById(partner.getPersonaId());
+            deleteById(socio.getPersonaId());
         }
-        partnerList.add(partner);
-        return partner;
+        socioList.add(socio);
+        return socio;
     }
 
     public void deleteById(Integer id) {
-        partnerList.removeIf(p -> p.getPersonaId() == id);
+        socioList.removeIf(p -> p.getPersonaId() == id);
     }
 
 }

@@ -2,6 +2,7 @@ package pe.edu.utp.animalGym.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,11 +27,12 @@ public class Clase {
     private String intensidad;
     private String imagen;
     private Empleado empleado;
+    private List<ReservaClase> reservas;
 
     public Clase(String nombre, String descripcion, Integer capacidad, LocalDate fecha,
             LocalTime horaInicio, LocalTime horaFin, Integer duracion,
             String estado, String objetivo, String intensidad, String imagen,
-            Empleado empleado) {
+            Empleado empleado, List<ReservaClase> reservas) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.capacidad = capacidad;
@@ -43,5 +45,6 @@ public class Clase {
         this.intensidad = intensidad;
         this.imagen = imagen;
         this.empleado = empleado;
+        this.reservas = reservas;
     }
 }

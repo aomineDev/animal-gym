@@ -20,7 +20,6 @@ public class Socio extends Person {
     private double altura;
     private Membresia menbresia;
 
-    // private Rutina Rutina;
     public Socio(Integer personaId, String dni, String nombre, String apellido, String telefono, String genero,
             String email, LocalDate fechaNacimiento, LocalDate fechaIngreso, LocalDate fechaVencimiento, boolean activo,
             int puntos, double peso, double altura, Membresia membership) {
