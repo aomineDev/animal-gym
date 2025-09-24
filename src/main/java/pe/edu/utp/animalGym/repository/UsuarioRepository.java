@@ -32,16 +32,16 @@ public class UsuarioRepository {
         Empleado emp4 = empleadoRepository.findById(4).orElse(null);
         // usuario1
         save(new Usuario(
-                "123456", rol1, emp1));
+                "123456", rol2, emp1));
         // usuario2
         save(new Usuario(
-                "123456", rol1, emp2));
+                "123456", rol2, emp2));
         // usuario3
         save(new Usuario(
                 "123456", rol1, emp3));
         // usuario4
         save(new Usuario(
-                "123456", rol2, emp4));
+                "123456", rol1, emp4));
 
     }
 
