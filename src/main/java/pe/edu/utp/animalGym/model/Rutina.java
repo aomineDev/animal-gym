@@ -21,10 +21,12 @@ public class Rutina {
     private String objetivo;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+    private boolean estado;
     private Empleado empleado;
     private List<DetalleRutina> detalleRutinaList;
 
     public Rutina(String nombre, String descripcion, String objetivo, LocalDate fechaInicio, LocalDate fechaFin,
+            boolean estado,
             Empleado empleado, ArrayList<DetalleRutina> detalleRutinaList) {
         this.nombre = nombre;
         this.descripcion = descripcion;
