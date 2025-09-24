@@ -15,7 +15,7 @@ import pe.edu.utp.animalGym.model.Socio;
 public class SocioRepository {
 
     private List<Socio> socioList = new ArrayList<>();
-    private Integer nextId = 2;
+    private Integer nextId = 3;
 
     public SocioRepository(MembresiaRepository membresiaRepository,
             RutinaRepository rutinaRepository) {
@@ -38,6 +38,19 @@ public class SocioRepository {
                 1.75,
                 men1,
                 rutinas));
+
+        save(new Socio(
+                2,
+                "71597595", "Jhordan", "Calixto", "987654321", "M", "calixto@email.com",
+                LocalDate.of(1990, 5, 15),
+                LocalDate.of(2023, 1, 1),
+                LocalDate.of(2024, 1, 1),
+                true,
+                100,
+                70.5,
+                1.75,
+                men1,
+                null));
     }
 
     public List<Socio> findAll() {

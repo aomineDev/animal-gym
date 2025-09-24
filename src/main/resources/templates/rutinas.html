@@ -10,24 +10,45 @@
         <h2><i class="bi bi-people me-2"></i>Gestión de Rutinas</h2>
       </div>
 
-      <!-- Filtros -->
-      <div class="row g-2 mb-3">
-        <h3 class="text-center">Socios con rutinas activas</h1>
-          <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Buscar rutina..." />
-          </div>
-          <div class="col-md-6 col-6">
-            <select class="form-select">
-              <option selected>Todos los estados</option>
-              <option>Activo</option>
-              <option>Inactivo</option>
-            </select>
-          </div>
+      <!-- Tabla de sociso sin rutina Rutinas -->
+      <div class="table-responsive mt-4">
+        <h3 class="text-center">Socios sin rutina</h3>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Nombre</th>
+              <th>DNI</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="socio : ${socios}" th:if="${socio.rutinas == null or socio.rutinas.isEmpty()}">
+              <td th:text="${socio.nombre}"></td>
+              <td th:text="${socio.dni}"></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-three-dots-vertical"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#asignarRutinaModal"
+                        th:attr="data-id=${socio.personaId}">
+                        <i class="bi bi-plus-circle me-2"></i>Asignar rutina
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- Tabla de Rutinas -->
+      <!-- Tabla con rutinas activas -->
       <div class="table-responsive">
-        <table class="table table-hover align-middle" th:each="socio : ${socios}">
+        <h3 class="text-center mt-5">Socios con rutinas</h3>
+        <table class="table table-hover align-middle">
           <thead class="table-light">
             <tr>
               <th>Nombre</th>
@@ -39,31 +60,27 @@
             </tr>
           </thead>
           <tbody id="rutinaTable">
-            <tr>
+            <tr th:each="socio : ${socios}" th:if="${socio.rutinas != null and !socio.rutinas.isEmpty()}">
               <td th:text="${socio.nombre}"></td>
               <td th:text="${socio.dni}"></td>
               <td>
                 <div class="d-flex flex-column">
                   <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.nombre}"
-                    class="badge bg-primary mb-1 align-self-start">
-                  </span>
+                    class="badge bg-primary mb-1 align-self-start"></span>
                 </div>
               </td>
               <td>
                 <div class="d-flex flex-column">
                   <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.fechaInicio}"
-                    class="badge bg-success mb-1 align-self-start">
-                  </span>
+                    class="badge bg-success mb-1 align-self-start"></span>
                 </div>
               </td>
               <td>
                 <div class="d-flex flex-column">
                   <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.fechaFin}"
-                    class="badge bg-warning mb-1 align-self-start">
-                  </span>
+                    class="badge bg-warning mb-1 align-self-start"></span>
                 </div>
               </td>
-
               <td>
                 <div class="dropdown">
                   <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
@@ -76,21 +93,6 @@
                         <i class="bi bi-eye me-2"></i>Ver detalle
                       </a>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editarRutinaModal"
-                        data-id="${id}">
-                        <i class="bi bi-pencil me-2"></i>Editar
-                      </a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                      <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                        data-bs-target="#confirmDeleteModal" data-id="${id}">
-                        <i class="bi bi-trash me-2"></i>Eliminar
-                      </a>
-                    </li>
                   </ul>
                 </div>
               </td>
@@ -98,34 +100,6 @@
           </tbody>
         </table>
       </div>
-
-      <!-- Paginación -->
-      <nav aria-label="Paginación de socios">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Anterior</a>
-          </li>
-          <li class="page-item active">
-            <a class="page-link" href="#">1</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">2</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">3</a>
-          </li>
-          <li class="page-item">
-            <span class="page-link">...</span>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">8</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
   </th:block>
 
   <th:block th:fragment="modals">
