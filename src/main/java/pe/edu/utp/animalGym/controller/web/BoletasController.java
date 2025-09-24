@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 
 @Controller
 
-public class BoletaController {
+public class BoletasController {
     @Autowired
     private BoletaServiceImpl servicio;
 
