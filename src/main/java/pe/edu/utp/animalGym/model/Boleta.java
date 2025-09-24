@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Boleta {
 
     private Integer boletaId;
-    private LocalDate fecha;
+    private LocalDate fechaEmision;
     private LocalTime hora;
     private double grabado;
     private double precioTotal;
@@ -24,9 +24,10 @@ public class Boleta {
     private Socio socio;
     private Empleado empleado;
 
-    public Boleta(LocalDate fecha, LocalTime hora, double grabado, double precioTotal, double igv, boolean estado,
+    public Boleta(LocalDate fechaEmision, LocalTime hora, double grabado, double precioTotal, double igv,
+            boolean estado,
             Socio socio, Empleado empleado) {
-        this.fecha = fecha;
+        this.fechaEmision = fechaEmision;
         this.hora = hora;
         this.grabado = grabado;
         this.precioTotal = precioTotal;
