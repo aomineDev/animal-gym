@@ -38,7 +38,7 @@ public class RutinaRepository {
                 "Rutina enfocada en fuerza de tren inferior",
                 "Mejorar fuerza y volumen de piernas",
                 LocalDate.now(),
-                LocalDate.now().plusMonths(1),
+                LocalDate.now().plusMonths(2),
                 entrenador1,
                 detallesPierna);
         save(rutinaPierna);

@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import pe.edu.utp.animalGym.model.Membresia;
+import pe.edu.utp.animalGym.model.Rutina;
 import pe.edu.utp.animalGym.model.Socio;
 
 @Repository
@@ -16,21 +17,27 @@ public class SocioRepository {
     private List<Socio> socioList = new ArrayList<>();
     private Integer nextId = 2;
 
-    public SocioRepository(MembresiaRepository membresiaRepository) {
+    public SocioRepository(MembresiaRepository membresiaRepository,
+            RutinaRepository rutinaRepository) {
+
         Membresia men1 = membresiaRepository.findById(1).orElse(null);
+
+        List<Rutina> rutinas = new ArrayList<>();
+        rutinas.add(rutinaRepository.findById(1).orElse(null));
+        rutinas.add(rutinaRepository.findById(2).orElse(null));
 
         save(new Socio(
                 1,
                 "12345678", "Juan", "Perez", "987654321", "M", "juan.perez@email.com",
-                LocalDate.of(1990, 5, 15), LocalDate.of(2023, 1, 1),
+                LocalDate.of(1990, 5, 15),
+                LocalDate.of(2023, 1, 1),
                 LocalDate.of(2024, 1, 1),
                 true,
                 100,
                 70.5,
                 1.75,
                 men1,
-                null));
-
+                rutinas));
     }
 
     public List<Socio> findAll() {
