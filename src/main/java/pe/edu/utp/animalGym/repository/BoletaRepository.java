@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import pe.edu.utp.animalGym.model.Boleta;
 import pe.edu.utp.animalGym.model.Empleado;
+import pe.edu.utp.animalGym.model.Socio;
 
 @Repository
 public class BoletaRepository {
@@ -18,11 +19,12 @@ public class BoletaRepository {
     private Integer nextId = 1;
 
     public BoletaRepository(EmpleadoRepository empleadoRepository, SocioRepository socioRepository) {
-        Empleado empleado1 = empleadoRepository.findById(1).orElseThrow();
-        Empleado empleado2 = empleadoRepository.findById(2).orElseThrow();
+        Empleado empleado1 = empleadoRepository.findById(1).orElse(null);
+        Empleado empleado2 = empleadoRepository.findById(2).orElse(null);
+        Socio so = socioRepository.findById(1).orElse(null);
         // Socio socio1 = socioRepository.findById(1).orElseThrow();
-        save(new Boleta(LocalDate.of(2024, 1, 12), LocalTime.of(12, 12, 12), 189, 1506, 19, false, null, empleado1));
-        save(new Boleta(LocalDate.of(2024, 1, 12), LocalTime.of(12, 12, 12), 180, 100, 15, false, null, empleado2));
+        save(new Boleta(LocalDate.of(2024, 1, 12), LocalTime.of(12, 12, 12), 189, 1506, 19, false, so, empleado1));
+        save(new Boleta(LocalDate.of(2024, 1, 12), LocalTime.of(12, 12, 12), 180, 100, 15, false, so, empleado2));
     }
 
     public List<Boleta> findAll() {

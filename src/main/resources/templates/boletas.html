@@ -17,20 +17,24 @@
                     <tr class="text-center">
                         <th>Boleta N°</th>
                         <th>Fecha de emisióm</th>
+                        <th>Hora</th>
                         <th>Empleado</th>
                         <th>Socio</th>
-
+                        <th>Membresía</th>
                         <th>Importe total</th>
                     </tr>
                 </thead>
                 <tbody id="tablaBoleta" class="text-center">
                     <tr th:each="boleta: ${tablaBoleta}">
                         <td th:text="${boleta.boletaId}"></td>
-                        <td th:text="${boleta.fecha}"></td>
+                        <td th:text="${boleta.fechaEmision}"></td>
                         <td th:text="${boleta.hora}"></td>
                         <td th:text="${boleta.empleado.nombre}"></td>
-                        <!-- <td th:text="${boleta.socio.nombre}"></td> -->
+                        <td th:text="${boleta.socio.nombre}"></td>
+                        <td th:text="${boleta.socio.menbresia.nombre}"></td>
+
                         <td th:text="${boleta.precioTotal}"></td>
+
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
@@ -57,74 +61,123 @@
     </th:block>
     <!-- ver detalles -->
     <th:block th:fragment="boletaModal">
-        <div th:each="boleta: ${tablaBoleta}">
-            <div class="modal fade" id="boletaModal" th:id="|verBoleta__${boleta.boletaId}|" tabindex="-1"
+        <div th:each="boleta : ${tablaBoleta}">
+            <div class="modal fade" th:id="|verBoleta__${boleta.boletaId}|" tabindex="-1"
                 aria-labelledby="boletaModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content shadow">
-                        <div class="modal-header">
-                            <h5 class="modal-title fw-bold" id="boletaModalLabel">Boleta de Venta</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content shadow-lg">
+                        <!-- Header -->
+                        <div class="modal-header bg-black text-white py-3 px-4">
+                            <h5 class="modal-title fw-bold d-flex align-items-center" id="boletaModalLabel">
+                                <i class="bi bi-receipt me-2"></i>Boleta de Venta
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Cerrar"></button>
                         </div>
 
-                        <div class="modal-body p-5" id="modalBodyBoleta">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="caja-titulo">
-                                        <h4 class="fw-bold">Gimnasio Animal Gym</h4>
+                        <!-- Body -->
+                        <div class="modal-body p-4 bg-light">
+                            <!-- Gimnasio & Logo -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h4 class="fw-bold text-dark mb-1">
+                                        <i class="bi bi-dumbbell me-2"></i>Gimnasio Animal Gym
+                                    </h4>
+                                    <small class="text-muted">Tu gimnasio de confianza</small>
+                                </div>
+                                <img src="img/logo.jpg" alt="Logo Animal Gym" class="gym-logo logos">
+                            </div>
+
+                            <hr class="mb-4">
+
+                            <!-- Información de la boleta -->
+                            <div class="row mb-4">
+                                <div class="col-md-6 mb-3">
+                                    <p class="mb-1"><strong>Boleta N°:</strong> <span
+                                            th:text="${boleta.boletaId}"></span></p>
+                                    <p class="mb-1"><strong>Fecha de emisión:</strong>
+                                        <span th:text="${#temporals.format(boleta.fechaEmision,'dd/MM/yyyy')}"></span>
+                                    </p>
+                                    <p class="mb-1"><strong>Hora:</strong> <span
+                                            th:text="${#temporals.format(boleta.hora,'HH:mm:ss')}"></span></p>
+                                </div>
+                                <div class="col-md-6 text-md-end">
+                                    <p class="mb-1"><strong>Empleado:</strong> <span
+                                            th:text="${boleta.empleado.nombre}"></span></p>
+                                    <p class="mb-1"><strong>Estado:</strong>
+                                        <span class="badge"
+                                            th:classappend="${boleta.estado} ? ' bg-success' : ' bg-secondary'"
+                                            th:text="${boleta.estado} ? 'Activa' : 'Inactiva'"></span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+
+                            <!-- Información del socio -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold text-danger mb-3"><i class="bi bi-person-heart me-2"></i>Socio</h6>
+                                <div class="row">
+                                    <div class="col-md-4 mb-2">
+                                        <small class="text-muted">Nombre:</small>
+                                        <div class="fw-semibold" th:text="${boleta.socio.nombre}"></div>
                                     </div>
-                                    <div>
-                                        <img src="img/logo.jpg" alt="logo" class="logos">
+                                    <div class="col-md-4 mb-2">
+                                        <small class="text-muted">Apellido:</small>
+                                        <div class="fw-semibold" th:text="${boleta.socio.apellido}"></div>
+                                    </div>
+                                    <div class="col-md-4 mb-2">
+                                        <small class="text-muted">Membresía:</small>
+                                        <div class="badge bg-light text-dark px-3 py-2 fs-6"
+                                            th:text="${boleta.socio.menbresia.nombre}"></div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <hr />
+                            <hr class="mb-4">
 
-                                <div class="mb-3">
-                                    <p><strong>Boleta N°: </strong><span th:text="${boleta.boletaId}"></span></p>
-                                    <p><strong>Fecha de emisión:</strong><span th:text="${boleta.fecha}"></span></p>
-                                    <p><strong>Hora: </strong><span th:text="${boleta.hora}"></span></p>
-                                    <p><strong>Empleado: </strong><span th:text="${boleta.empleado.nombre}"></span></p>
-                                    <!-- <p><strong>Socio: </strong> <span id="modalSocio"></span></p> -->
-                                    <p><strong>Estado: </strong><span th:text="${boleta.estado}"></span></p>
+                            <!-- Totales -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold text-danger mb-3"><i class="bi bi-calculator me-2"></i>Resumen de
+                                    Pago</h6>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Operaciones Grabadas:</span>
+                                    <span>S/ <span
+                                            th:text="${#numbers.formatDecimal(boleta.grabado, 1, 2)}"></span></span>
                                 </div>
-
-                                <div class="row justify-content-end">
-                                    <div class="col-12 col-sm-6 totales caja-importe">
-                                        <table class="table table-borderless text-center text-sm-end">
-                                            <tr>
-                                                <th>Op. Grabadas:</th>
-                                                <td th:text="${boleta.grabado}"></td>
-                                            </tr>
-                                            <tr>
-                                                <th>IGV (18%):</th>
-                                                <td th:text="${boleta.igv}"></td>
-                                            </tr>
-                                            <tr class="table-active">
-                                                <th>Importe Total:</th>
-                                                <td class="fw-bold" th:text="${boleta.precioTotal}"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>IGV (18%):</span>
+                                    <span>S/ <span th:text="${#numbers.formatDecimal(boleta.igv, 1, 2)}"></span></span>
                                 </div>
-
-                                <div class="text-center mt-3">
-                                    <p class="mb-0">¡Gracias por confiar en nosotros!</p>
-                                    <small>Este documento no tiene validez tributaria</small>
+                                <div class="d-flex justify-content-between fw-bold fs-5 border-top pt-2">
+                                    <span>Total:</span>
+                                    <span>S/ <span
+                                            th:text="${#numbers.formatDecimal(boleta.precioTotal, 1, 2)}"></span></span>
                                 </div>
+                            </div>
+
+                            <!-- Agradecimiento -->
+                            <div class="text-center">
+                                <i class="bi bi-heart-fill text-danger fs-3 mb-2"></i>
+                                <h5 class="fw-bold text-black
+                                 mb-1">¡Gracias por confiar en nosotros!</h5>
+                                <small class="text-muted">Tu salud y bienestar son nuestra prioridad</small><br>
+                                <small class="text-muted"><i class="bi bi-info-circle me-1"></i> Documento sin validez
+                                    tributaria</small>
                             </div>
                         </div>
 
+                        <!-- Footer -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                <i class="bi bi-x-lg me-2"></i>Cerrar
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </th:block>
-
 
 </body>
 

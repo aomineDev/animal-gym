@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import pe.edu.utp.animalGym.model.Socio;
 import pe.edu.utp.animalGym.repository.SocioRepository;
 import pe.edu.utp.animalGym.service.SocioService;
 
+@Service
 public class SocioServiceImpl implements SocioService {
 
     @Autowired
