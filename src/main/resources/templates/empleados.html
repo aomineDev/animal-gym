@@ -54,24 +54,27 @@
                             <th>Salario</th>
                             <th>Tipo contrato</th>
                             <th>Especialidad</th>
-                            <th>Rol</th>
+                            <th>Rol del usuario</th>
                         </tr>
                     </thead>
                     <!-- contenido de la tabla -->
+                    <!-- th:each="empleado: ${empleadoTabla}" -->
                     <tbody id="tablaEmpleados" class="text-center">
-                        <tr th:each="empleado: ${empleadoTabla}">
-                            <td><img th:src="@{${empleado.foto}}" class="profile-img" alt="Foto del empleado"></td>
-                            <td th:text="${empleado.personaId}"></td>
-                            <td th:text="${empleado.nombre}"></td>
-                            <td th:text="${empleado.apellido}"></td>
-                            <td th:text="${empleado.telefono}"></td>
-                            <td th:text="${empleado.genero}"></td>
-                            <td th:text="${empleado.email}"></td>
-                            <td th:text="${empleado.fechaNacimiento}"></td>
-                            <td th:text="${empleado.fechaIngreso}"></td>
-                            <td th:text="${empleado.salario}"></td>
-                            <td th:text="${empleado.tipoContrato}"></td>
-                            <td th:text="${empleado.especialidad}"></td>
+                        <tr th:each="usuario : ${contenedorUser}">
+                            <td><img th:src="@{${usuario.persona.foto}}" class="profile-img" alt="Foto del empleado">
+                            </td>
+                            <td th:text="${usuario.persona.dni}"></td>
+                            <td th:text="${usuario.persona.nombre}"></td>
+                            <td th:text="${usuario.persona.apellido}"></td>
+                            <td th:text="${usuario.persona.telefono}"></td>
+                            <td th:text="${usuario.persona.genero}"></td>
+                            <td th:text="${usuario.persona.email}"></td>
+                            <td th:text="${usuario.persona.fechaNacimiento}"></td>
+                            <td th:text="${usuario.persona.fechaIngreso}"></td>
+                            <td th:text="${usuario.persona.salario}"></td>
+                            <td th:text="${usuario.persona.tipoContrato}"></td>
+                            <td th:text="${usuario.persona.especialidad}"></td>
+                            <td th:text="${usuario.rol.nombre}"></td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
@@ -80,7 +83,7 @@
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-id="${id}"
-                                                th:attr="data-bs-target=|#editar__${empleado.personaId}|">
+                                                th:attr="data-bs-target=|#editar__${usuario.persona.personaId}|">
 
                                                 <i class="bi bi-pencil me-2"></i>Editar</a>
                                         </li>
@@ -88,8 +91,10 @@
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li>
+                                            <!-- //añadir id para eliminar -->
                                             <a class="dropdown-item text-danger" data-bs-toggle="modal"
-                                                data-bs-target="#modalEliminarEmpleado" href="#" data-id="${id}">
+                                                th:attr="data-bs-target=|#eliminar__${usuario.persona.personaId}|"
+                                                href="#" data-id="${id}">
                                                 <i class="bi bi-trash me-2"></i>Eliminar</a>
                                         </li>
                                     </ul>
@@ -198,8 +203,8 @@
                                         <label for="genero" class="form-label">Género</label>
                                         <select id="genero" class="form-select" name="genero" required>
                                             <option value="">Seleccionar...</option>
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
                                         </select>
                                     </div>
 
@@ -242,10 +247,8 @@
                                         <label for="tipoContrato" class="form-label">Tipo de contrato</label>
                                         <select id="tipoContrato" class="form-select" name="tipoContrato" required>
                                             <option value="">Seleccionar...</option>
-                                            <option value="INDEFINIDO">Indefinido</option>
-                                            <option value="TEMPORAL">Temporal</option>
-                                            <option value="PRACTICAS">Prácticas</option>
-                                            <option value="FREELANCE">Freelance</option>
+                                            <option value="Anual">Indefinido</option>
+                                            <option value="Temporal">Temporal</option>
                                         </select>
                                     </div>
 
@@ -331,51 +334,55 @@
 
     <!-- modal eliminar -->
     <th:block th:fragment="modalEliminarEmpleado">
-        <div class="modal fade" id="modalEliminarEmpleado" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <!-- Header -->
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirmar Eliminación</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- Body -->
-                    <div class="modal-body">
-                        <div class="text-center">
-                            <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem"></i>
-                            <h6 class="mt-3">
-                                ¿Está seguro de que desea eliminar este empleado?
-                            </h6>
-                            <p class="text-muted">
-                                Esta acción no se puede deshacer.
-                            </p>
+        <div th:each="usuario: ${contenedorUser}">
+            <div class="modal fade" th:id="|eliminar__${usuario.persona.personaId}|" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <!-- Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmar Eliminación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
-                    </div>
 
-                    <!-- Footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Cancelar
-                        </button>
-                        <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="">
-                            <i class="bi bi-trash me-2"></i>Eliminar
-                        </button>
+                        <!-- Body -->
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem"></i>
+                                <h6 class="mt-3">
+                                    ¿Está seguro de que desea eliminar empleado <p th:text="${usuario.persona.nombre}">
+                                    </p>
+                                </h6>
+                                <p class="text-muted">
+                                    Esta acción no se puede deshacer.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Cancelar
+                            </button>
+                            <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="">
+                                <i class="bi bi-trash me-2"></i>Eliminar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </th:block>
     <!-- modal actualizar empleado -->
     <th:block th:fragment="modalActualizarEmpleado">
-        <div th:each="empleado: ${empleadoTabla}">
-            <div class="modal fade" th:id="|editar__${empleado.personaId}|" tabindex="-1" aria-hidden="true">
+        <div th:each="usuario: ${contenedorUser}">
+            <div class="modal fade" th:id="|editar__${usuario.persona.personaId}|" tabindex="-1" aria-hidden="true">
 
                 <div class="modal-dialog modal-dialog-centered modal-lg" id="modal-hijo">
                     <div class="modal-content rounded-4">
                         <div class="modal-header">
-                            <h5 class="modal-title text-center w-100">Agregar Empleado</h5>
+                            <h5 class="modal-title text-center w-100">Actualizar Empleado</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                 id="close"></button>
                         </div>
@@ -392,11 +399,10 @@
                                         <div class="col-md-6">
                                             <label for="dni" class="form-label">DNI *</label>
                                             <input type="text" id="dni" class="form-control" name="dni"
-                                                pattern="[0-9]{8}" maxlength="8" th:value="${empleado.dni}" required />
+                                                pattern="[0-9]{8}" maxlength="8" th:value="${usuario.persona.dni}"
+                                                required />
 
                                         </div>
-
-                                        <!-- file -->
                                         <div class="col-md-6">
                                             <label for="file" class="form-label">Foto del empleado</label>
                                             <input type="file" id="file" class="form-control" name="file"
@@ -407,14 +413,16 @@
                                         <div class="col-md-6">
                                             <label for="nombre" class="form-label">Nombre *</label>
                                             <input type="text" id="nombre" name="nombre" class="form-control"
-                                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+                                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" th:value="${usuario.persona.nombre}"
+                                                required />
                                         </div>
 
                                         <!-- apellido -->
                                         <div class="col-md-6">
                                             <label for="apellido" class="form-label">Apellido *</label>
                                             <input type="text" id="apellido" name="apellido" class="form-control"
-                                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+                                                pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" th:value="${usuario.persona.apellido}"
+                                                required />
 
                                         </div>
 
@@ -422,7 +430,8 @@
                                         <div class="col-md-4">
                                             <label for="telefono" class="form-label">Teléfono</label>
                                             <input type="tel" id="telefono" class="form-control" name="telefono"
-                                                pattern="9[0-9]{8}" placeholder="9XXXXXXXX" required />
+                                                pattern="9[0-9]{8}" placeholder="9XXXXXXXX"
+                                                th:value="${usuario.persona.telefono}" required />
                                         </div>
 
                                         <!-- genero -->
@@ -430,8 +439,12 @@
                                             <label for="genero" class="form-label">Género</label>
                                             <select id="genero" class="form-select" name="genero" required>
                                                 <option value="">Seleccionar...</option>
-                                                <option value="M">Masculino</option>
-                                                <option value="F">Femenino</option>
+                                                <option value="Masculino"
+                                                    th:selected="${usuario.persona.genero == 'Masculino'}">
+                                                    Masculino</option>
+                                                <option value="Indefinido"
+                                                    th:selected="${usuario.persona.genero == 'Femenino'}">
+                                                    Femenino</option>
                                             </select>
                                         </div>
 
@@ -439,21 +452,24 @@
                                         <div class="col-md-4">
                                             <label for="email" class="form-label">Correo electrónico *</label>
                                             <input type="email" id="email" class="form-control" name="email"
-                                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
+                                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                                                th:value="${usuario.persona.email}" required />
                                         </div>
 
                                         <!-- fecha de nacimiento -->
                                         <div class="col-md-6">
                                             <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
                                             <input type="date" id="fechaNacimiento" class="form-control"
-                                                name="fechaNacimiento" / required>
+                                                name="fechaNacimiento" th:value="${usuario.persona.fechaNacimiento}"
+                                                required />
                                         </div>
 
                                         <!-- Fecha de ingreso -->
                                         <div class="col-md-6">
                                             <label for="fechaIngreso" class="form-label">Fecha de ingreso</label>
                                             <input type="date" id="fechaIngreso" class="form-control"
-                                                name="fechaIngreso" required />
+                                                name="fechaIngreso" th:value="${usuario.persona.fechaIngreso}"
+                                                required />
                                         </div>
                                     </div>
                                 </div>
@@ -466,18 +482,21 @@
                                         <div class="col-md-4">
                                             <label for="salario" class="form-label">Salario *</label>
                                             <input type="number" id="salario" class="form-control" name="salario"
-                                                step="0.01" min="0" required />
+                                                step="1" min="0" th:value="${usuario.persona.salario}" required />
                                         </div>
 
                                         <!-- Tipo de contrato -->
                                         <div class="col-md-4">
                                             <label for="tipoContrato" class="form-label">Tipo de contrato</label>
                                             <select id="tipoContrato" class="form-select" name="tipoContrato" required>
-                                                <option value="">Seleccionar...</option>
-                                                <option value="INDEFINIDO">Indefinido</option>
-                                                <option value="TEMPORAL">Temporal</option>
-                                                <option value="PRACTICAS">Prácticas</option>
-                                                <option value="FREELANCE">Freelance</option>
+                                                <option value="">Seleccione...</option>
+                                                <option value="Anual"
+                                                    th:selected="${usuario.persona.tipoContrato == 'Anual'}">
+                                                    Anual</option>
+
+                                                <option value="Indefinido"
+                                                    th:selected="${usuario.persona.tipoContrato == 'Indefinido'}">
+                                                    Indefinido</option>
                                             </select>
                                         </div>
 
@@ -485,7 +504,8 @@
                                         <div class="col-md-4">
                                             <label for="especialidad" class="form-label">Especialidad</label>
                                             <input type="text" id="especialidad" class="form-control"
-                                                name="especialidad" required />
+                                                name="especialidad" th:value="${usuario.persona.especialidad}"
+                                                required />
                                         </div>
                                     </div>
                                 </div>
@@ -506,7 +526,8 @@
                                         <div class="col-md-6">
                                             <label for="usernameDisplay" class="form-label">Nombre de Usuario</label>
                                             <input type="text" class="form-control" id="usernameDisplay" readonly
-                                                placeholder="Se generará con el DNI" style="background-color: #f8f9fa;">
+                                                placeholder="Se generará con el DNI" style="background-color: #f8f9fa;"
+                                                th:value="${usuario.persona.dni}">
                                             <div class="form-text">Este será el nombre para iniciar sesión (basado en el
                                                 DNI)</div>
                                         </div>
@@ -516,9 +537,12 @@
                                             <label for="rol_id" class="form-label">Rol *</label>
                                             <select name="rol_id" id="rol_id" class="form-select crearRol" required>
                                                 <option value="">Seleccione un rol...</option>
-                                                <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
-                                                    th:text="${rol.nombre}">
-                                                </option>
+                                                <option value="Indefinido"
+                                                    th:selected="${usuario.rol.nombre == 'Cajero'}">
+                                                    Cajero</option>
+                                                <option value="Indefinido"
+                                                    th:selected="${usuario.rol.nombre == 'Mesero'}">
+                                                    Mesero</option>
                                             </select>
 
                                         </div>
@@ -527,7 +551,8 @@
                                         <div class="col-md-6">
                                             <label for="contraseña" class="form-label">Contraseña *</label>
                                             <input type="password" id="contraseña" class="form-control"
-                                                name="contraseña" minlength="6" required />
+                                                name="contraseña" minlength="6" th:value="${usuario.contraseña}"
+                                                required />
                                             <div class="form-text">Mínimo 6 caracteres</div>
 
                                         </div>
@@ -537,11 +562,10 @@
                                             <label for="confirmarContraseña" class="form-label">Confirmar Contraseña
                                                 *</label>
                                             <input type="password" id="confirmarContraseña" class="form-control"
-                                                name="confirmarContraseña" minlength="6" required />
+                                                name="confirmarContraseña" minlength="6"
+                                                th:value="${usuario.contraseña}" required />
                                             <div id="passwordMessage" class="form-text"></div>
-                                            <div class="invalid-feedback">
-                                                Las contraseñas no coinciden
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

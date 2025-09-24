@@ -11,6 +11,7 @@ import pe.edu.utp.animalGym.model.Rol;
 import pe.edu.utp.animalGym.model.Usuario;
 
 @Repository
+
 public class UsuarioRepository {
 
     private List<Usuario> usuarios = new ArrayList<>();
@@ -20,12 +21,27 @@ public class UsuarioRepository {
         return usuarios;
     }
 
-    public UsuarioRepository(RolRepository rolRepository, EmpleadoRepository empleadoRepository) {
+    public UsuarioRepository(EmpleadoRepository empleadoRepository, RolRepository rolRepository) {
 
         Rol rol1 = rolRepository.findById(1).orElse(null);
-        Empleado emp1 = empleadoRepository.findById(1).orElse(null);
+        Rol rol2 = rolRepository.findById(2).orElse(null);
 
-        save(new Usuario("Contraseña", rol1, emp1));
+        Empleado emp1 = empleadoRepository.findById(1).orElse(null);
+        Empleado emp2 = empleadoRepository.findById(2).orElse(null);
+        Empleado emp3 = empleadoRepository.findById(3).orElse(null);
+        Empleado emp4 = empleadoRepository.findById(4).orElse(null);
+        // usuario1
+        save(new Usuario(
+                "123456", rol1, emp1));
+        // usuario2
+        save(new Usuario(
+                "123456", rol1, emp2));
+        // usuario3
+        save(new Usuario(
+                "123456", rol1, emp3));
+        // usuario4
+        save(new Usuario(
+                "123456", rol2, emp4));
 
     }
 

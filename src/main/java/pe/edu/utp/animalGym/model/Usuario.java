@@ -13,11 +13,13 @@ import lombok.Setter;
 
 public class Usuario {
     private Integer usuarioId;
+    // private String nombreUsuario;
     private String contraseña;
     private Rol rol;
     private Person persona;
 
     public Usuario(String contraseña, Rol rol, Person persona) {
+        // this.nombreUsuario = nombreUsuario;
         this.contraseña = contraseña;
         this.rol = rol;
         this.persona = persona;

@@ -21,18 +21,19 @@ public class EmpleadoRepository {
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "https://randomuser.me/api/portraits/men/1.jpg",
                 1500, "Anual", "xxx"));
-        save(new Empleado(2, "77454651", "Sebastian", "Murillo", "913582873", "Masculino",
+        save(new Empleado(2, "77454651", "Sebastian", "Pereze", "955582873", "Masculino",
+                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "https://randomuser.me/api/portraits/men/1.jpg",
+                1500, "Indefinido", "xxx"));
+        save(new Empleado(3, "76454651", "Juan", "Carlos", "920582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "https://randomuser.me/api/portraits/men/1.jpg",
                 1500, "Anual", "xxx"));
-        save(new Empleado(3, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
+        save(new Empleado(4, "76454651", "Tomas", "Torres", "915582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "https://randomuser.me/api/portraits/men/1.jpg",
                 1500, "Anual", "xxx"));
-        save(new Empleado(4, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
-                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
-                "https://randomuser.me/api/portraits/men/1.jpg",
-                1500, "Anual", "xxx"));
+
     }
 
     public List<Empleado> findAll() {
@@ -43,15 +44,15 @@ public class EmpleadoRepository {
         return employeeList.stream().filter(p -> p.getPersonaId() == id).findFirst();
     }
 
-    public Empleado save(Empleado employee) {
-        if (employee.getPersonaId() == null) {
-            employee.setPersonaId(nextId++);
+    public Empleado save(Empleado empleado) {
+        if (empleado.getPersonaId() == null) {
+            empleado.setPersonaId(nextId++);
         } else {
-            deleteById(employee.getPersonaId());
+            deleteById(empleado.getPersonaId());
         }
 
-        employeeList.add(employee);
-        return employee;
+        employeeList.add(empleado);
+        return empleado;
     }
 
     public void deleteById(Integer id) {

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.edu.utp.animalGym.service.impl.EmpleadoServiceImpl;
 import pe.edu.utp.animalGym.service.impl.RolServiceImpl;
+import pe.edu.utp.animalGym.service.impl.UsuarioServiceImpl;
 
 @Controller
 public class EmpleadoController {
@@ -15,6 +16,9 @@ public class EmpleadoController {
 
     @Autowired
     private RolServiceImpl serviceRol;
+
+    @Autowired
+    private UsuarioServiceImpl serviceUsuario;
 
     @GetMapping("/empleados")
 
@@ -29,14 +33,9 @@ public class EmpleadoController {
         model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
         // pintar el rol
         model.addAttribute("contenedorRol", serviceRol.findAll());
+        model.addAttribute("contenedorUser", serviceUsuario.findAll());
         // guardarDatos
         return "layout";
     }
-
-    // @PostMapping("/guardar")
-    // public String guardarEmpleado(@ModelAttribute Employee empleado) {
-    // service.save(empleado);
-    // return "redirect:/empleados";
-    //
 
 }
