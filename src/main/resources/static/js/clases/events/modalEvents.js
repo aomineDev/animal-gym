@@ -1,6 +1,19 @@
-import { formCrearClase, sectionCards } from "../dom.js";
+import { formCrearClase, formsEditarClase } from "../dom.js";
 import Service from "../../service/index.js";
 import { renderClaseCard } from "../render.js";
+
+// let usuarios = [];
+
+// async function fetchUsuarios() {
+//   try {
+//     const response = await fetch("/api/usuarios");
+//     if (!response.ok) throw new Error("Error al obtener usuarios");
+//     usuarios = await response.json();
+//     console.log("Usuarios cargados:", usuarios);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 export const crearClaseEvents = () => {
   formCrearClase.addEventListener("submit", async function (event) {
@@ -15,45 +28,12 @@ export const crearClaseEvents = () => {
 
     //Subir archivo primero
     const file = form.file.files[0];
-    let imageUrl = null;
+    let imageUrl = await uploadFile(file);
 
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
+    console.log(imageUrl);
 
-      const uploadResponse = await fetch("/api/clases/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!uploadResponse.ok) {
-        alert("Error al subir imagen");
-        return;
-      }
-      imageUrl = await uploadResponse.text();
-    }
-
-    const clase = {
-      nombre: form.nombre.value.trim(),
-      descripcion: form.descripcion.value.trim(),
-      capacidad: parseInt(form.capacidad.value),
-      fecha: form.fecha.value,
-      horaInicio: form.horaInicio.value,
-      horaFin: form.horaFin.value,
-      duracion: calcularDuracion(form.horaInicio.value, form.horaFin.value),
-      estado: calcularEstado(
-        form.fecha.value,
-        form.horaInicio.value,
-        form.horaFin.value
-      ),
-      objetivo: form.objetivo.value.trim(),
-      intensidad: form.intensidad.value,
-      imagen: imageUrl,
-      empleado: {
-        personaId: parseInt(form.entrenador.value),
-      },
-      reservas: null,
-    };
+    //Reconstruimos el objeto
+    const clase = objetoConstruido(form, imageUrl);
 
     //Se llama la clase del service
     const service = new Service("clases");
@@ -63,6 +43,7 @@ export const crearClaseEvents = () => {
 
       console.log(data);
 
+      //Para renderizar dinamicamente
       renderClaseCard(data);
 
       //Para cerrar el modal
@@ -76,6 +57,64 @@ export const crearClaseEvents = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+  });
+};
+
+export const editarClaseEvents = () => {
+  formsEditarClase.forEach((formEditarClase) => {
+    formEditarClase.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      console.log("ss");
+
+      if (!formEditarClase.checkValidity()) {
+        formEditarClase.classList.add("was-validated");
+        return;
+      }
+
+      //Recuperamos el Claseid del modal
+      const idClase = formEditarClase.getAttribute("data-id");
+      console.log("el id es: ", idClase);
+
+      const form = event.target;
+
+      //Subir archivo primero
+      const file = form.file.files[0];
+      let imageUrl = await uploadFile(file);
+
+      //Reconstruimos el objeto
+      const clase = objetoConstruido(form, imageUrl);
+      clase.claseId = idClase;
+
+      //Se llama la clase del service
+      const service = new Service("clases");
+
+      try {
+        const data = await service.update(clase, idClase);
+
+        console.log(data);
+
+        let card = document.querySelector(`#clase-card-${idClase}`);
+
+        //para cerrar modal
+        const modalElement = document.getElementById(`editarClase__${idClase}`);
+        if (modalElement) {
+          const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
+          if (bootstrapModal) {
+            bootstrapModal.hide(); // cierra modal y backdrop
+          }
+        }
+
+        if (card) {
+          card = renderClaseCard(data);
+        }
+
+        formEditarClase.reset();
+        formEditarClase.classList.remove("was-validated");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
   });
 };
 
@@ -113,6 +152,55 @@ export const eliminarClaseEvents = () => {
       }
     }
   });
+};
+
+const uploadFile = async (file) => {
+  if (!file) return null;
+
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/api/clases/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al subir la imagen");
+    }
+
+    return await response.text();
+  } catch (error) {
+    console.error("Error en uploadFile:", error);
+    return null;
+  }
+};
+
+const objetoConstruido = (form, imageUrl) => {
+  const clase = {
+    claseId: null,
+    nombre: form.nombre.value.trim(),
+    descripcion: form.descripcion.value.trim(),
+    capacidad: parseInt(form.capacidad.value),
+    fecha: form.fecha.value,
+    horaInicio: form.horaInicio.value,
+    horaFin: form.horaFin.value,
+    duracion: calcularDuracion(form.horaInicio.value, form.horaFin.value),
+    estado: calcularEstado(
+      form.fecha.value,
+      form.horaInicio.value,
+      form.horaFin.value
+    ),
+    objetivo: form.objetivo.value.trim(),
+    intensidad: form.intensidad.value,
+    imagen: imageUrl,
+    empleado: {
+      personaId: parseInt(form.entrenador.value),
+    },
+  };
+
+  return clase;
 };
 
 function calcularDuracion(horaInicio, horaFin) {

@@ -31,6 +31,13 @@ export function renderClaseCard(clase) {
                   </a>
                 </li>
                 <li>
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editarClase__${
+                    clase.claseId
+                  }">
+                    Editar
+                  </a>
+                      </li>
+                <li>
                   <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
                      data-bs-target="#eliminarClase__${clase.claseId}">
                     Eliminar
@@ -146,6 +153,121 @@ export function renderClaseCard(clase) {
       </div>
     `;
 
+  // --- Modal Editar ---
+  const modalEditarHtml = /*html*/ `
+    <div class="modal fade" id="editarClase__${
+      clase.claseId
+    }" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Editar Clase</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editarClaseForm__${clase.claseId}" data-id="${
+    clase.claseId
+  }" class="row needs-validation" novalidate>
+              
+              <!-- Nombre -->
+              <div class="mb-3 col-md-6">
+                <label for="nombre" class="form-label">Nombre de la clase</label>
+                <input type="text" name="nombre" class="form-control" value="${
+                  clase.nombre
+                }" required>
+              </div>
+
+              <!-- Imagen -->
+              <div class="col-md-6">
+                <label for="file" class="form-label">Foto de la clase</label>
+                <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png">
+              </div>
+
+              <!-- Descripción -->
+              <div class="mb-3 col-md-6">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea name="descripcion" id="descripcion" class="form-control" rows="3" placeholder="Escribe una breve descripción de la clase">${
+                  clase.descripcion
+                }</textarea>
+              </div>
+
+              <!-- Objetivo -->
+              <div class="mb-3 col-md-6">
+                <label for="objetivo" class="form-label">Objetivo</label>
+                <textarea name="objetivo" id="objetivo" class="form-control" rows="3" placeholder="Escribe el objetivo de la clase">${
+                  clase.objetivo
+                }</textarea>
+              </div>
+
+              <!-- Capacidad -->
+              <div class="mb-3 col-md-6">
+                <label for="capacidad" class="form-label">Capacidad</label>
+                <input type="number" name="capacidad" id="capacidad" class="form-control" min="1" value="${
+                  clase.capacidad
+                }" required>
+              </div>
+
+              <!-- Fecha -->
+              <div class="mb-3 col-md-6">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" name="fecha" id="fecha" class="form-control" value="${
+                  clase.fecha
+                }" required>
+              </div>
+
+              <!-- Hora Inicio -->
+              <div class="mb-3 col-md-6">
+                <label for="horaInicio" class="form-label">Hora Inicio</label>
+                <input type="time" name="horaInicio" id="horaInicio" class="form-control" value="${
+                  clase.horaInicio
+                }" required>
+              </div>
+
+              <!-- Hora Fin -->
+              <div class="mb-3 col-md-6">
+                <label for="horaFin" class="form-label">Hora Fin</label>
+                <input type="time" name="horaFin" id="horaFin" class="form-control" value="${
+                  clase.horaFin
+                }" required>
+              </div>
+
+              <!-- Intensidad -->
+              <div class="mb-3 col-md-6">
+                <label for="intensidad" class="form-label">Intensidad</label>
+                <select name="intensidad" class="form-select" required>
+                  <option value="" ${
+                    clase.intensidad === "" ? "selected" : ""
+                  }>Seleccione la intensidad</option>
+                  <option value="Baja" ${
+                    clase.intensidad === "Baja" ? "selected" : ""
+                  }>Baja</option>
+                  <option value="Media" ${
+                    clase.intensidad === "Media" ? "selected" : ""
+                  }>Media</option>
+                  <option value="Alta" ${
+                    clase.intensidad === "Alta" ? "selected" : ""
+                  }>Alta</option>
+                </select>
+              </div>
+
+              <!-- Entrenador -->
+              <div class="mb-3 col-md-6">
+                <label for="entrenador" class="form-label">Entrenador</label>
+                <select name="entrenador" class="form-select" required>
+                  <option value="${clase.empleado.personaId}" selected>
+                    ${clase.empleado.nombre} ${clase.empleado.apellido}
+                  </option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary col-5 ms-3">Actualizar clase</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
   // --- Modal Eliminar ---
   const modalEliminarHtml = /*html*/ `
     <div class="modal fade" id="eliminarClase__${clase.claseId}" tabindex="-1" aria-hidden="true">
@@ -170,10 +292,40 @@ export function renderClaseCard(clase) {
     </div>
   `;
 
-  // --- Inyectar ---
-  sectionCards.insertAdjacentHTML("beforeend", cardHtml);
-  document.body.insertAdjacentHTML("beforeend", modalDetallesHtml);
-  document.body.insertAdjacentHTML("beforeend", modalEliminarHtml);
+  // --- Inyectar o reemplazar ---
+  const cardExistente = document.querySelector(`#clase-card-${clase.claseId}`);
+  if (cardExistente) {
+    cardExistente.outerHTML = cardHtml;
+  } else {
+    sectionCards.insertAdjacentHTML("beforeend", cardHtml);
+  }
+
+  const modalDetallesExistente = document.querySelector(
+    `#verClase__${clase.claseId}`
+  );
+  if (modalDetallesExistente) {
+    modalDetallesExistente.outerHTML = modalDetallesHtml;
+  } else {
+    document.body.insertAdjacentHTML("beforeend", modalDetallesHtml);
+  }
+
+  const modalExistente = document.querySelector(
+    `#editarClase__${clase.claseId}`
+  );
+  if (modalExistente) {
+    modalExistente.outerHTML = modalEditarHtml;
+  } else {
+    document.body.insertAdjacentHTML("beforeend", modalEditarHtml);
+  }
+
+  const modalEliminarExistente = document.querySelector(
+    `#eliminarClase__${clase.claseId}`
+  );
+  if (modalEliminarExistente) {
+    modalEliminarExistente.outerHTML = modalEliminarHtml;
+  } else {
+    document.body.insertAdjacentHTML("beforeend", modalEliminarHtml);
+  }
 }
 
 function estadoClase(estado) {
