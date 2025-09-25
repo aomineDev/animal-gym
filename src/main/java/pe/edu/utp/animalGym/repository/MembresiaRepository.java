@@ -11,38 +11,76 @@ import pe.edu.utp.animalGym.model.Membresia;
 @Repository
 public class MembresiaRepository {
 
-    private List<Membresia> membershipList = new ArrayList<>(
-            List.of(new Membresia(1, "Basico", "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
-                    28, 299, 200, LocalDate.of(2022, 12, 12),
-                    LocalDate.of(2000, 12, 9), "https://picsum.photos/400/250?random=3", true, 140),
-                    new Membresia(1, "Premium",
+    private List<Membresia> membershipList = new ArrayList<>();
+    private Integer nextId = 1;
+
+    public MembresiaRepository(){
+
+        save(new Membresia(1, "Basico", "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
+                     28, 299, 200, LocalDate.of(2022, 12, 12),
+                  LocalDate.of(2000, 12, 9), "https://picsum.photos/400/250?random=3", true, 140));
+        save(new Membresia(2, "Premium",
                             "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
                             30, 300, 150, LocalDate.of(2025, 4, 12),
-                            LocalDate.of(2025, 12, 19), "https://picsum.photos/400/250?random=2", false, 100),
-                    new Membresia(3, "Familiar",
+                            LocalDate.of(2025, 12, 19), "https://picsum.photos/400/250?random=2", false, 100));
+        save(new Membresia(3, "Familiar",
                             "Acceso para 3 miembros de la familia, incluye máquinas, clases grupales y descuentos en nutrición.",
-                            90, 750, 600,
+                            90, 750,600,
                             LocalDate.of(2025, 1, 10),
                             LocalDate.of(2025, 2, 10),
                             "https://picsum.photos/400/250?random=4",
-                            true, 200),
+                            true, 200));
 
-                    new Membresia(4, "Estudiantil",
+        save(new Membresia(4, "Estudiantil",
                             "Acceso completo con descuento exclusivo para estudiantes universitarios, incluye clases grupales.",
                             60, 400, 300,
                             LocalDate.of(2025, 3, 1),
                             LocalDate.of(2025, 5, 1),
                             "https://picsum.photos/400/250?random=5",
-                            true, 120),
+                            true, 120));
 
-                    new Membresia(5, "Corporativa",
+        save(new Membresia(5, "Corporativa",
                             "Plan especial para empresas: acceso para grupos, incluye clases, área de coworking fitness y descuentos.",
                             180, 1200, 950,
                             LocalDate.of(2025, 6, 15),
                             LocalDate.of(2025, 7, 15),
                             "https://picsum.photos/400/250?random=6",
-                            false, 300)));
-    private Integer nextId = 1;
+                            false, 300));
+    }
+
+
+    // private List<Membresia> membershipList = new ArrayList<>(
+    //         List.of(new Membresia(1, "Basico", "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
+    //                 28, 299, 200, LocalDate.of(2022, 12, 12),
+    //                 LocalDate.of(2000, 12, 9), "https://picsum.photos/400/250?random=3", true, 140),
+    //                 new Membresia(1, "Premium",
+    //                         "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
+    //                         30, 300, 150, LocalDate.of(2025, 4, 12),
+    //                         LocalDate.of(2025, 12, 19), "https://picsum.photos/400/250?random=2", false, 100),
+    //                 new Membresia(3, "Familiar",
+    //                         "Acceso para 3 miembros de la familia, incluye máquinas, clases grupales y descuentos en nutrición.",
+    //                         90, 750, 600,
+    //                         LocalDate.of(2025, 1, 10),
+    //                         LocalDate.of(2025, 2, 10),
+    //                         "https://picsum.photos/400/250?random=4",
+    //                         true, 200),
+
+    //                 new Membresia(4, "Estudiantil",
+    //                         "Acceso completo con descuento exclusivo para estudiantes universitarios, incluye clases grupales.",
+    //                         60, 400, 300,
+    //                         LocalDate.of(2025, 3, 1),
+    //                         LocalDate.of(2025, 5, 1),
+    //                         "https://picsum.photos/400/250?random=5",
+    //                         true, 120),
+
+    //                 new Membresia(5, "Corporativa",
+    //                         "Plan especial para empresas: acceso para grupos, incluye clases, área de coworking fitness y descuentos.",
+    //                         180, 1200, 950,
+    //                         LocalDate.of(2025, 6, 15),
+    //                         LocalDate.of(2025, 7, 15),
+    //                         "https://picsum.photos/400/250?random=6",
+    //                         false, 300)));
+    // private Integer nextId = 1;
 
     public List<Membresia> findAll() {
         return membershipList;
