@@ -1,3 +1,4 @@
-import { crearClaseEvents } from "./events/modalEvents.js";
+import { crearClaseEvents, eliminarClaseEvents } from "./events/modalEvents.js";
 
-crearClaseEvents()
+crearClaseEvents();
+eliminarClaseEvents();

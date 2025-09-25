@@ -16,7 +16,7 @@
       <div class="col-12">
         <div class="row" id="section__card">
           <!-- CARTA -->
-          <div class="col-12 col-md-6 col-xl-3" th:each="clase : ${clases}">
+          <div class="col-12 col-md-6 col-xl-3" th:each="clase : ${clases}" th:attr="id=|clase-card-${clase.claseId}|">
             <div class="mt-4 border-0 card overflow-hidden rounded-4">
               <div class="overflow-hidden">
                 <img th:src="@{${clase.imagen}}" class="card-img-top w-100" th:alt="${clase.nombre}"
@@ -129,7 +129,7 @@
 
               <!-- Intensidad -->
               <div class="mb-3 col-md-6"> <label for="intensidad" class="form-label">Intensidad</label> <select
-                  name="intensidad" class="form-select" id="select_crear" required>
+                  name="intensidad" class="form-select" id="select_intensidad" required>
                   <option value="">Seleccione la intensidad</option>
                   <option value="Baja">Baja</option>
                   <option value="Media">Media</option>
@@ -139,8 +139,8 @@
 
               <!-- Entrenador -->
               <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label> <select
-                  name="entrenador" class="form-select" id="select_crear" required>
-                  <option value="0">Seleccione un entrenador</option>
+                  name="entrenador" class="form-select" id="select_entrenador" required>
+                  <option value="">Seleccione un entrenador</option>
                   <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
                     th:value="${usuario.persona.personaId}"
                     th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}">
@@ -413,7 +413,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="">Confirmar
+              <button type="button" class="btn btn-danger btnConfirmarEliminar"
+                th:attr="data-id=${clase.claseId}">Confirmar
                 eliminacion</button>
             </div>
           </div>

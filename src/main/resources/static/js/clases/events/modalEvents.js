@@ -6,6 +6,11 @@ export const crearClaseEvents = () => {
   formCrearClase.addEventListener("submit", async function (event) {
     event.preventDefault();
 
+    if (!formCrearClase.checkValidity()) {
+      formCrearClase.classList.add("was-validated");
+      return;
+    }
+
     const form = event.target;
 
     //Subir archivo primero
@@ -59,18 +64,54 @@ export const crearClaseEvents = () => {
       console.log(data);
 
       renderClaseCard(sectionCards, data);
+
+      //Para cerrar el modal
+      const modal = bootstrap.Modal.getInstance(
+        document.getElementById("crearClase")
+      );
+      modal.hide();
+
+      formCrearClase.reset();
+      formCrearClase.classList.remove("was-validated");
     } catch (error) {
       console.error("Error:", error);
     }
+  });
+};
 
-    //Para cerrar el modal
-    const modal = bootstrap.Modal.getInstance(
-      document.getElementById("crearClase")
-    );
-    modal.hide();
+export const eliminarClaseEvents = () => {
+  document.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("btnConfirmarEliminar")) {
+      const id = event.target.getAttribute("data-id");
 
-    formCrearClase.reset();
-    formCrearClase.classList.remove("was-validated");
+      console.log("carta", id);
+
+      //Se llama la clase del service
+      const service = new Service("clases");
+
+      try {
+        const response = await service.delete(id);
+
+        if (response.ok) {
+          console.log("eliminado bien");
+
+          const card = document.querySelector(`#clase-card-${id}`);
+
+          if (card) {
+            card.remove();
+          }
+
+          // cerrar el modal
+          const modal = event.target.closest(".modal");
+          const bootstrapModal = bootstrap.Modal.getInstance(modal);
+          bootstrapModal.hide();
+        } else {
+          console.error("Error al eliminar la clase", response);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   });
 };
 
