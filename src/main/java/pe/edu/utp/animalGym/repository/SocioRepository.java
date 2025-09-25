@@ -94,6 +94,7 @@ public class SocioRepository {
                 100,
                 70.5,
                 1.75,
+                "https://picsum.photos/50/50?random=4",
                 men1,
                 null));
     }
