@@ -1,6 +1,6 @@
 import { sectionCards } from "./dom.js";
 
-export function renderClaseCard(clase) {
+export function renderClaseCard(clase, usuarios) {
   const cardHtml = /*html*/ `
     <div class="col-12 col-md-6 col-xl-3" id="clase-card-${clase.claseId}">
       <div class="mt-4 border-0 card overflow-hidden rounded-4">
@@ -254,9 +254,19 @@ export function renderClaseCard(clase) {
               <div class="mb-3 col-md-6">
                 <label for="entrenador" class="form-label">Entrenador</label>
                 <select name="entrenador" class="form-select" required>
-                  <option value="${clase.empleado.personaId}" selected>
-                    ${clase.empleado.nombre} ${clase.empleado.apellido}
-                  </option>
+                  <option value="">Seleccione un entrenador</option>
+                  ${usuarios
+                    .filter((u) => u.rol.rolId === 2)
+                    .map(
+                      (u) => `<option value="${u.persona.personaId}" ${
+                        u.persona.personaId === clase.empleado.personaId
+                          ? "selected"
+                          : ""
+                      }>
+                              ${u.persona.nombre} ${u.persona.apellido}
+                             </option>`
+                    )
+                    .join("")}
                 </select>
               </div>
 

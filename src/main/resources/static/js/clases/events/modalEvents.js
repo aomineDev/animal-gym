@@ -2,20 +2,21 @@ import { formCrearClase } from "../dom.js";
 import Service from "../../service/index.js";
 import { renderClaseCard } from "../render.js";
 
-// let usuarios = [];
+let usuarios = [];
 
-// async function fetchUsuarios() {
-//   try {
-//     const response = await fetch("/api/usuarios");
-//     if (!response.ok) throw new Error("Error al obtener usuarios");
-//     usuarios = await response.json();
-//     console.log("Usuarios cargados:", usuarios);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+async function fetchUsuarios() {
+  try {
+    const response = await fetch("/api/usuarios");
+    if (!response.ok) throw new Error("Error al obtener usuarios");
+    usuarios = await response.json();
+    console.log("Usuarios cargados:", usuarios);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const crearClaseEvents = () => {
+  fetchUsuarios();
   formCrearClase.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -44,7 +45,7 @@ export const crearClaseEvents = () => {
       console.log(data);
 
       //Para renderizar dinamicamente
-      renderClaseCard(data);
+      renderClaseCard(data, usuarios);
 
       //Para cerrar el modal
       const modal = bootstrap.Modal.getInstance(
@@ -61,6 +62,7 @@ export const crearClaseEvents = () => {
 };
 
 export const editarClaseEvents = () => {
+  fetchUsuarios();
   document.body.addEventListener("click", async (event) => {
     if (!event.target.classList.contains("btnActualizarClase")) return;
 
@@ -106,7 +108,7 @@ export const editarClaseEvents = () => {
       }
 
       if (card) {
-        renderClaseCard(data);
+        renderClaseCard(data, usuarios);
       }
 
       form.reset();
