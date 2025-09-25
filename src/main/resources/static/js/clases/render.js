@@ -165,9 +165,9 @@ export function renderClaseCard(clase) {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="editarClaseForm__${clase.claseId}" data-id="${
-    clase.claseId
-  }" class="row needs-validation" novalidate>
+            <form data-id="${
+              clase.claseId
+            }" class="editarClaseForm row needs-validation" novalidate>
               
               <!-- Nombre -->
               <div class="mb-3 col-md-6">
@@ -180,13 +180,13 @@ export function renderClaseCard(clase) {
               <!-- Imagen -->
               <div class="col-md-6">
                 <label for="file" class="form-label">Foto de la clase</label>
-                <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png">
+                <input type="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png">
               </div>
 
               <!-- Descripción -->
               <div class="mb-3 col-md-6">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <textarea name="descripcion" id="descripcion" class="form-control" rows="3" placeholder="Escribe una breve descripción de la clase">${
+                <textarea name="descripcion" class="form-control" rows="3" placeholder="Escribe una breve descripción de la clase">${
                   clase.descripcion
                 }</textarea>
               </div>
@@ -194,7 +194,7 @@ export function renderClaseCard(clase) {
               <!-- Objetivo -->
               <div class="mb-3 col-md-6">
                 <label for="objetivo" class="form-label">Objetivo</label>
-                <textarea name="objetivo" id="objetivo" class="form-control" rows="3" placeholder="Escribe el objetivo de la clase">${
+                <textarea name="objetivo" class="form-control" rows="3" placeholder="Escribe el objetivo de la clase">${
                   clase.objetivo
                 }</textarea>
               </div>
@@ -202,7 +202,7 @@ export function renderClaseCard(clase) {
               <!-- Capacidad -->
               <div class="mb-3 col-md-6">
                 <label for="capacidad" class="form-label">Capacidad</label>
-                <input type="number" name="capacidad" id="capacidad" class="form-control" min="1" value="${
+                <input type="number" name="capacidad" class="form-control" min="1" value="${
                   clase.capacidad
                 }" required>
               </div>
@@ -218,7 +218,7 @@ export function renderClaseCard(clase) {
               <!-- Hora Inicio -->
               <div class="mb-3 col-md-6">
                 <label for="horaInicio" class="form-label">Hora Inicio</label>
-                <input type="time" name="horaInicio" id="horaInicio" class="form-control" value="${
+                <input type="time" name="horaInicio" class="form-control" value="${
                   clase.horaInicio
                 }" required>
               </div>
@@ -226,7 +226,7 @@ export function renderClaseCard(clase) {
               <!-- Hora Fin -->
               <div class="mb-3 col-md-6">
                 <label for="horaFin" class="form-label">Hora Fin</label>
-                <input type="time" name="horaFin" id="horaFin" class="form-control" value="${
+                <input type="time" name="horaFin" class="form-control" value="${
                   clase.horaFin
                 }" required>
               </div>
@@ -260,7 +260,7 @@ export function renderClaseCard(clase) {
                 </select>
               </div>
 
-              <button type="submit" class="btn btn-primary col-5 ms-3">Actualizar clase</button>
+              <button type="submit" class="btn btn-primary col-5 ms-3 btnActualizarClase">Actualizar clase</button>
             </form>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { formCrearClase, formsEditarClase } from "../dom.js";
+import { formCrearClase } from "../dom.js";
 import Service from "../../service/index.js";
 import { renderClaseCard } from "../render.js";
 
@@ -61,60 +61,59 @@ export const crearClaseEvents = () => {
 };
 
 export const editarClaseEvents = () => {
-  formsEditarClase.forEach((formEditarClase) => {
-    formEditarClase.addEventListener("submit", async function (event) {
-      event.preventDefault();
+  document.body.addEventListener("click", async (event) => {
+    if (!event.target.classList.contains("btnActualizarClase")) return;
 
-      console.log("ss");
+    const modal = event.target.closest(".modal");
+    const form = modal.querySelector(".editarClaseForm");
+    if (!form) return;
 
-      if (!formEditarClase.checkValidity()) {
-        formEditarClase.classList.add("was-validated");
-        return;
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+
+    console.log("bien");
+
+    //Recuperamos el Claseid del modal
+    const idClase = form.getAttribute("data-id");
+    console.log("el id es: ", idClase);
+
+    //Subir archivo primero
+    const file = form.file.files[0];
+    let imageUrl = await uploadFile(file);
+
+    //Reconstruimos el objeto
+    const clase = objetoConstruido(form, imageUrl);
+    clase.claseId = idClase;
+
+    //Se llama la clase del service
+    const service = new Service("clases");
+
+    try {
+      const data = await service.update(clase, idClase);
+
+      console.log(data);
+
+      let card = document.querySelector(`#clase-card-${idClase}`);
+
+      //para cerrar modal
+      const bootstrapModal = bootstrap.Modal.getInstance(modal);
+      if (bootstrapModal) {
+        bootstrapModal.hide();
       }
 
-      //Recuperamos el Claseid del modal
-      const idClase = formEditarClase.getAttribute("data-id");
-      console.log("el id es: ", idClase);
-
-      const form = event.target;
-
-      //Subir archivo primero
-      const file = form.file.files[0];
-      let imageUrl = await uploadFile(file);
-
-      //Reconstruimos el objeto
-      const clase = objetoConstruido(form, imageUrl);
-      clase.claseId = idClase;
-
-      //Se llama la clase del service
-      const service = new Service("clases");
-
-      try {
-        const data = await service.update(clase, idClase);
-
-        console.log(data);
-
-        let card = document.querySelector(`#clase-card-${idClase}`);
-
-        //para cerrar modal
-        const modalElement = document.getElementById(`editarClase__${idClase}`);
-        if (modalElement) {
-          const bootstrapModal = bootstrap.Modal.getInstance(modalElement);
-          if (bootstrapModal) {
-            bootstrapModal.hide(); // cierra modal y backdrop
-          }
-        }
-
-        if (card) {
-          card = renderClaseCard(data);
-        }
-
-        formEditarClase.reset();
-        formEditarClase.classList.remove("was-validated");
-      } catch (error) {
-        console.error("Error:", error);
+      if (card) {
+        renderClaseCard(data);
       }
-    });
+
+      form.reset();
+      form.classList.remove("was-validated");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   });
 };
 
