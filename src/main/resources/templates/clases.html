@@ -13,13 +13,14 @@
       </div>
 
       <!-- Drecha -->
-      <div class="col-12 col-lg-9">
+      <div class="col-12">
         <div class="row" id="section__card">
           <!-- CARTA -->
-          <div class="col-12 col-md-6 col-xl-4" th:each="clase : ${clases}">
+          <div class="col-12 col-md-6 col-xl-3" th:each="clase : ${clases}">
             <div class="mt-4 border-0 card overflow-hidden rounded-4">
               <div class="overflow-hidden">
-                <img th:src="${clase.imagen}" class="card-img-top" th:alt="${clase.nombre}">
+                <img th:src="@{${clase.imagen}}" class="card-img-top w-100" th:alt="${clase.nombre}"
+                  style="height:200px; object-fit:cover;">
               </div>
 
               <div class="row d-flex align-items-center card-body">

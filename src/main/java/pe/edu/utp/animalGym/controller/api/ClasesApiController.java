@@ -62,13 +62,13 @@ public class ClasesApiController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            String carpetaUploads = "src/main/resources/static/uploads/";
+            String carpetaUploads = "uploads/clases/";
             String nombreArchivo = System.currentTimeMillis() + "_" + file.getOriginalFilename();
             Path ruta = Paths.get(carpetaUploads + nombreArchivo);
 
             Files.write(ruta, file.getBytes());
 
-            return ResponseEntity.ok("/uploads/" + nombreArchivo);
+            return ResponseEntity.ok("/uploads/clases/" + nombreArchivo);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al subir la imagen");

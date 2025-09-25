@@ -1,5 +1,6 @@
-import { formCrearClase } from "../dom.js";
+import { formCrearClase, sectionCards } from "../dom.js";
 import Service from "../../service/index.js";
+import { renderClaseCard } from "../render.js";
 
 export const crearClaseEvents = () => {
   formCrearClase.addEventListener("submit", async function (event) {
@@ -27,9 +28,6 @@ export const crearClaseEvents = () => {
       imageUrl = await uploadResponse.text();
     }
 
-    console.log(imageUrl);
-
-    //2
     const clase = {
       nombre: form.nombre.value.trim(),
       descripcion: form.descripcion.value.trim(),
@@ -46,7 +44,7 @@ export const crearClaseEvents = () => {
       objetivo: form.objetivo.value.trim(),
       intensidad: form.intensidad.value,
       imagen: imageUrl,
-      entrenador: {
+      empleado: {
         personaId: parseInt(form.entrenador.value),
       },
       reservas: null,
@@ -59,14 +57,20 @@ export const crearClaseEvents = () => {
       const data = await service.save(clase);
 
       console.log(data);
-      //   console.log(document.getElementById("pruebaList"));
-      //   document
-      //     .getElementById("pruebaList")
-      //     .insertAdjacentHTML("beforeend", listItem(data));
-      //   nameInput.value = "";
+
+      renderClaseCard(sectionCards, data);
     } catch (error) {
       console.error("Error:", error);
     }
+
+    //Para cerrar el modal
+    const modal = bootstrap.Modal.getInstance(
+      document.getElementById("crearClase")
+    );
+    modal.hide();
+
+    formCrearClase.reset();
+    formCrearClase.classList.remove("was-validated");
   });
 };
 

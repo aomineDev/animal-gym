@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.edu.utp.animalGym.model.Clase;
+import pe.edu.utp.animalGym.model.Empleado;
 import pe.edu.utp.animalGym.repository.ClaseRepository;
+import pe.edu.utp.animalGym.repository.EmpleadoRepository;
 import pe.edu.utp.animalGym.service.ClaseService;
 
 @Service
 public class ClaseServiceImpl implements ClaseService {
   @Autowired
   private ClaseRepository repository;
+
+  @Autowired
+  private EmpleadoRepository empleadoRepository;
 
   @Override
   public List<Clase> findAll() {
@@ -27,6 +32,12 @@ public class ClaseServiceImpl implements ClaseService {
 
   @Override
   public Clase save(Clase entity) {
+    if (entity.getEmpleado() != null && entity.getEmpleado().getPersonaId() != null) {
+      Empleado empleado = empleadoRepository.findById(entity.getEmpleado().getPersonaId())
+          .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+      entity.setEmpleado(empleado);
+    }
+
     return repository.save(entity);
   }
 
