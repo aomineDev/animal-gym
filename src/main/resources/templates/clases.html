@@ -83,7 +83,7 @@
               class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="#" class="row needs-validation" novalidate>
+            <form id="formCrearClase" class="row needs-validation" novalidate>
 
               <!-- nombre-->
               <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la clase</label>
@@ -143,7 +143,7 @@
                   <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
                     th:value="${usuario.persona.personaId}"
                     th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}">
-                  </option>></option>
+                  </option>
                 </select>
               </div>
               <button type="submit" class="btn btn-primary col-5 ms-3">Crear clase</button>
@@ -420,6 +420,7 @@
       </div>
     </div>
 
+    <script type="module" th:src="@{/js/clases/main.js}"></script>
 
   </th:block>
 
