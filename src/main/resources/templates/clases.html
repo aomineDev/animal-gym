@@ -162,7 +162,7 @@
 
             <div class="modal-header p-0 position-relative">
               <img class="img-fluid w-100 rounded-top" style="max-height: 300px; object-fit: cover;"
-                th:src="${clase.imagen}" alt="Imagen clase">
+                th:src="${clase.imagen}" th:alt="${clase.nombre}">
               <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
                 aria-label="Close"></button>
             </div>
@@ -207,7 +207,7 @@
                 <div class="col-12 col-md-4">
                   <div class="border border-2 rounded-3 p-3 h-100">
                     <h6 class="mb-2"><i class="bi bi-clock-fill me-1"></i> Duración</h6>
-                    <h5 th:text="${clase.capacidad} + ' minutos'"></h5>
+                    <h5 th:text="${clase.duracion} + ' minutos'"></h5>
                   </div>
                 </div>
 

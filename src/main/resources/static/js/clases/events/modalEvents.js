@@ -63,7 +63,7 @@ export const crearClaseEvents = () => {
 
       console.log(data);
 
-      renderClaseCard(sectionCards, data);
+      renderClaseCard(data);
 
       //Para cerrar el modal
       const modal = bootstrap.Modal.getInstance(
