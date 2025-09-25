@@ -10,11 +10,14 @@ import pe.edu.utp.animalGym.model.Prueba;
 
 @Repository
 public class PruebaRepository {
-  private List<Prueba> pruebaList = new ArrayList<>(List.of(
-      new Prueba("Prueba 1"),
-      new Prueba("Prueba 2"),
-      new Prueba("Prueba 3")));
+  private List<Prueba> pruebaList = new ArrayList<>();
   private Integer nextId = 1;
+
+  public PruebaRepository() {
+    save(new Prueba("Prueba 1"));
+    save(new Prueba("Prueba 2"));
+    save(new Prueba("Prueba 3"));
+  }
 
   public List<Prueba> findAll() {
     return pruebaList;
