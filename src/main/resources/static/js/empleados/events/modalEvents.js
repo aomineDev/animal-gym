@@ -1,6 +1,7 @@
 import { formulario } from "../dom.js";
 import Service from "../../service/index.js"
 import { renderClaseCard } from "../render.js";
+//guardarEMpleado
 export const crearEmpleado = () => {
     formulario.addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -26,7 +27,7 @@ export const crearEmpleado = () => {
         const rolSelect = document.getElementById('rol_id');
         //servicios
         const servicioEmpleado = new Service("empleados");
-        const servicioUsuario = new Service("usuario");
+        const servicioUsuario = new Service("usuarios");
         //enviar datos al backemd
         //objetos
         try {
@@ -77,6 +78,7 @@ export const crearEmpleado = () => {
 
     })
 }
+//eliminarEmpleado en proceso ;v
 export const elminarEmpleado = () => {
 
 }
