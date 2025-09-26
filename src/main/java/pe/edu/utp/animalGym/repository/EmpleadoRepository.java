@@ -14,7 +14,7 @@ public class EmpleadoRepository {
 
     private List<Empleado> employeeList = new ArrayList<>();
 
-    private Integer nextId = 1;
+    private Integer nextId = 5;
 
     public EmpleadoRepository() {
         save(new Empleado(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
