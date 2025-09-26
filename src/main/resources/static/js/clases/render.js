@@ -422,6 +422,35 @@ export function renderClaseCard(clase, usuarios) {
   }
 }
 
+export function renderTablaInscritos(clase) {
+  const tbody = document.querySelector(
+    `#tablaSociosInscritos__${clase.claseId}`
+  );
+  if (!tbody) return;
+
+  // Renderizar las filas
+  tbody.innerHTML = clase.reservas
+    .map(
+      (reserva) => `
+        <tr>
+          <td>${reserva.socio.nombre}</td>
+          <td>${reserva.socio.apellido}</td>
+          <td>${reserva.socio.dni}</td>
+          <td>${reserva.fecha}</td>
+          <td>
+            <button 
+              class="btn btn-sm btn-danger btnEliminarReserva" 
+              data-reserva-id="${reserva.id}" 
+              data-clase-id="${clase.claseId}">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      `
+    )
+    .join("");
+}
+
 function estadoClase(estado) {
   switch (estado) {
     case "Programado":

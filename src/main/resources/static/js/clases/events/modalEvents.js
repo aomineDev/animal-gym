@@ -1,6 +1,6 @@
 import { formCrearClase } from "../dom.js";
 import Service from "../../service/index.js";
-import { renderClaseCard } from "../render.js";
+import { renderClaseCard, renderTablaInscritos } from "../render.js";
 import { showToast } from "../../toast.js";
 
 let usuarios = [];
@@ -221,7 +221,11 @@ export const agregarSocioClase = () => {
       clase.reservas.push(nuevoReservaClase);
       let nuevaClase = await serviceClase.update(clase, idClase);
       console.log("el objeto guardado fue ", nuevaClase);
+
       showToast("Socio inscrito correctamente", 1);
+      form.reset();
+      form.classList.remove("was-validated");
+      renderTablaInscritos(nuevaClase);
     } catch (error) {
       showToast("Error al inscribir socio", 2);
       console.error("Error:", error);

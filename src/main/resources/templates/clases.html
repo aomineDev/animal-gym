@@ -375,7 +375,7 @@
                   </tr>
                 </thead>
                 <!-- contenido de la tabla -->
-                <tbody id="tablaSociosInscritos" class="text-center">
+                <tbody th:id="|tablaSociosInscritos__${clase.claseId}|" class="text-center">
                   <tr th:each="reserva : ${clase.reservas}">
                     <td th:text="${reserva.socio.nombre}"></td>
                     <td th:text="${reserva.socio.apellido}"></td>
