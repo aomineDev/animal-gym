@@ -3,6 +3,14 @@ export default class Service {
     this.service = service;
   }
 
+  async findById(id) {
+    const response = await fetch(`/api/${this.service}/${id}`);
+
+    const data = await response.json();
+
+    return data;
+  }
+
   async findAll() {
     const response = await fetch(`/api/${this.service}`);
 

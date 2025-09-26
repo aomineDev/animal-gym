@@ -377,7 +377,8 @@
               </table>
 
               <!-- Formulario de búsqueda y agregar socio -->
-              <form class="row g-2 align-items-center mt-4 needs-validation agregarSocioForm" novalidate>
+              <form th:attr="data-id=${clase.claseId}"
+                class="row g-2 align-items-center mt-4 needs-validation agregarSocioForm" novalidate>
                 <!-- Campo DNI -->
                 <div class="col-md-8">
                   <input type="text" class="form-control" placeholder="Ingrese DNI del socio" pattern="[0-8]{8}"
