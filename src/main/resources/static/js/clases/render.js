@@ -36,7 +36,13 @@ export function renderClaseCard(clase, usuarios) {
                   }">
                     Editar
                   </a>
-                      </li>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                    data-bs-target="#gestionarInscritos__${clase.claseId}">
+                      Gestionar Inscritos
+                  </a>
+                </li>
                 <li>
                   <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
                      data-bs-target="#eliminarClase__${clase.claseId}">
@@ -302,6 +308,75 @@ export function renderClaseCard(clase, usuarios) {
     </div>
   `;
 
+  // --- Modal Gestionar Inscritos ---
+  const modalGestionarInscritosHtml = /*html*/ `
+  <div class="modal fade" id="gestionarInscritos__${
+    clase.claseId
+  }" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content rounded-4 p-3">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">${clase.nombre}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Título -->
+          <div class="mb-4 text-center">
+            <h3 class="h5">Tabla de socios inscritos</h3>
+          </div>
+
+          <!-- Tabla de socios -->
+          <table class="table table-hover align-middle">
+            <thead class="table-light text-center">
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Fecha inscripción</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tablaSociosInscritos__${
+              clase.claseId
+            }" class="text-center">
+              ${clase.reservas
+                .map(
+                  (reserva) => `
+                    <tr>
+                      <td>${reserva.socio.nombre}</td>
+                      <td>${reserva.socio.apellido}</td>
+                      <td>${reserva.socio.dni}</td>
+                      <td>${reserva.fecha}</td>
+                      <td>
+                        <button class="btn btn-sm btn-danger btnEliminarReserva" data-reserva-id="${reserva.id}">
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  `
+                )
+                .join("")}
+            </tbody>
+          </table>
+
+          <!-- Formulario de búsqueda y agregar socio -->
+          <form data-id="${
+            clase.claseId
+          }" class="row g-2 align-items-center mt-4 needs-validation agregarSocioForm" novalidate>
+            <div class="col-md-8">
+              <input type="text" class="form-control" placeholder="Ingrese DNI del socio" pattern="[0-9]{8}" name="dni" required>
+              <input type="hidden" name="claseId" value="${clase.claseId}">
+            </div>
+            <div class="col-md-4 text-start">
+              <button type="submit" class="btn btn-primary w-100 btnAgregarSocio">Agregar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
   // --- Inyectar o reemplazar ---
   const cardExistente = document.querySelector(`#clase-card-${clase.claseId}`);
   if (cardExistente) {
@@ -326,6 +401,15 @@ export function renderClaseCard(clase, usuarios) {
     modalExistente.outerHTML = modalEditarHtml;
   } else {
     document.body.insertAdjacentHTML("beforeend", modalEditarHtml);
+  }
+
+  const modalGestionarInscritosExistente = document.querySelector(
+    `#gestionarInscritos__${clase.claseId}`
+  );
+  if (modalGestionarInscritosExistente) {
+    modalGestionarInscritosExistente.outerHTML = modalGestionarInscritosHtml;
+  } else {
+    document.body.insertAdjacentHTML("beforeend", modalGestionarInscritosHtml);
   }
 
   const modalEliminarExistente = document.querySelector(

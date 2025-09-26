@@ -27,7 +27,7 @@ public class ClaseRepository {
                 .filter(r -> r.getSocio().getPersonaId() == 1)
                 .toList();
 
-        save(new Clase("Yoga Avanzado", "Clase de relajación y flexibilidad", 20,
+        save(new Clase("Yoga Avanzado", "Clase de relajación y flexibilidad", 1,
                 LocalDate.now().plusDays(1), LocalTime.of(9, 0), LocalTime.of(10, 0), 60,
                 "Programado", "Mejorar elasticidad", "Baja",
                 "/uploads/clases/yoga.png", empleado1, reservasParaYoga));

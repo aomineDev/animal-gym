@@ -179,45 +179,52 @@ export const agregarSocioClase = () => {
     const serviceSocios = new Service("socios");
     socios = await serviceSocios.findAll();
 
-    //Validamos su existencia en BD
+    //Validamos su existencia en BD ** PRIMERA VALIDACION
     let socioEncontrado = socios.find((socio) => socio.dni === dniBuscado);
-
     if (!socioEncontrado) {
       showToast("No existe el socio solicitado", 3);
-    } else {
-      //validar que no exista en la tabla ** SEGUNDA VALIDACION
-      //servicio Clases para traer toda la clase a rellenar
-      const serviceClase = new Service("clases");
-      let clase = await serviceClase.findById(idClase);
+      return;
+    }
 
-      let socioYaInscrito = clase.reservas.some(
-        (reserva) => reserva.socio.dni === socioEncontrado.dni
-      );
+    //servicio Clases para traer toda la clase a rellenar
+    const serviceClase = new Service("clases");
 
-      if (socioYaInscrito) {
-        showToast("Socio ya esta inscrito", 3);
-      } else {
-        //construyo el objeto
-        const reservaClase = {
-          fecha: new Date().toISOString().split("T")[0],
-          estado: true,
-          socio: socioEncontrado,
-        };
+    //Validamos que no este en la tabla ** SEGUNDA VALIDACION
+    let clase = await serviceClase.findById(idClase);
+    let socioYaInscrito = clase.reservas.some(
+      (reserva) => reserva.socio.dni === socioEncontrado.dni
+    );
 
-        //servicios del ClaseReserva para guardar el objeto y traerlo con id
-        const serviceReserva = new Service("reservaClase");
-        let nuevoReservaClase = await serviceReserva.save(reservaClase);
+    if (socioYaInscrito) {
+      showToast("Socio ya esta inscrito", 3);
+      return;
+    }
 
-        try {
-          clase.reservas.push(nuevoReservaClase);
-          let nuevaClase = await serviceClase.update(clase, idClase);
-          console.log("el objeto guardado fue ", nuevaClase);
-          showToast("Socio inscrito correctamente", 1);
-        } catch (error) {
-          showToast("Error al inscribir socio", 2);
-          console.error("Error:", error);
-        }
-      }
+    //Validamos el aforo de la clase ** TERCERA VALIDACION
+    if (clase.capacidad === clase.reservas.length) {
+      showToast("Se llego al limite de capacidad de la clase", 3);
+      return;
+    }
+
+    //construyo el objeto
+    const reservaClase = {
+      fecha: new Date().toISOString().split("T")[0],
+      estado: true,
+      socio: socioEncontrado,
+    };
+
+    //servicios del ClaseReserva para guardar el objeto y traerlo con id
+    const serviceReserva = new Service("reservaClase");
+    let nuevoReservaClase = await serviceReserva.save(reservaClase);
+
+    try {
+      clase.reservas.push(nuevoReservaClase);
+      let nuevaClase = await serviceClase.update(clase, idClase);
+      console.log("el objeto guardado fue ", nuevaClase);
+      showToast("Socio inscrito correctamente", 1);
+    } catch (error) {
+      showToast("Error al inscribir socio", 2);
+      console.error("Error:", error);
     }
   });
 };

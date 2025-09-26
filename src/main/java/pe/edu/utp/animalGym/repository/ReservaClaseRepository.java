@@ -24,7 +24,7 @@ public class ReservaClaseRepository {
 
         Socio socio1 = socioRepository.findById(1).orElseThrow();
 
-        save(new ReservaClase(LocalDate.now(), true, socio1));
+        save(new ReservaClase(LocalDate.now(), socio1));
 
     }
 

@@ -369,8 +369,8 @@
                   <tr class="text-center">
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>DNI</th>
                     <th>Fecha inscripción</th>
-                    <th>Estado</th>
                     <th>Acción</th>
                   </tr>
                 </thead>
@@ -379,8 +379,8 @@
                   <tr th:each="reserva : ${clase.reservas}">
                     <td th:text="${reserva.socio.nombre}"></td>
                     <td th:text="${reserva.socio.apellido}"></td>
+                    <td th:text="${reserva.socio.dni}"></td>
                     <td th:text="${reserva.fecha}"></td>
-                    <td th:text="${reserva.estado} ? 'Activo' : 'Cancelado'"></td>
                     <td>
                       <button class="btn btn-sm btn-danger">Eliminar</button>
                     </td>
