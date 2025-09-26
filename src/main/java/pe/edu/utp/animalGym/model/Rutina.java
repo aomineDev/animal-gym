@@ -23,7 +23,7 @@ public class Rutina {
     private LocalDate fechaFin;
     private boolean estado;
     private Empleado empleado;
-    private List<DetalleRutina> detalleRutinaList;
+    private List<DetalleRutina> detalleRutinaList = new ArrayList<>();
 
     public Rutina(String nombre, String descripcion, String objetivo, LocalDate fechaInicio, LocalDate fechaFin,
             boolean estado,
