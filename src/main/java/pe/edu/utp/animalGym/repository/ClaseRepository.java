@@ -35,12 +35,12 @@ public class ClaseRepository {
         save(new Clase("Crossfit Intenso", "Entrenamiento de alta intensidad", 15,
                 LocalDate.now().plusDays(2), LocalTime.of(18, 0), LocalTime.of(19, 30), 90,
                 "En curso", "Mejorar fuerza y resistencia", "Alta",
-                "/uploads/clases/crossfit.jpg", empleado2, null));
+                "/uploads/clases/crossfit.jpg", empleado2, new ArrayList<>()));
 
         save(new Clase("Zumba Energética", "Baile y cardio divertido", 25,
                 LocalDate.now().plusDays(3), LocalTime.of(10, 0), LocalTime.of(11, 0), 60,
                 "Finalizado", "Mejorar coordinación y cardio", "Media",
-                "/uploads/clases/zumba.png", empleado2, null));
+                "/uploads/clases/zumba.png", empleado2, new ArrayList<>()));
     }
 
     public List<Clase> findAll() {

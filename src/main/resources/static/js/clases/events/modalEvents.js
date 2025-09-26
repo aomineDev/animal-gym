@@ -1,6 +1,7 @@
 import { formCrearClase } from "../dom.js";
 import Service from "../../service/index.js";
 import { renderClaseCard } from "../render.js";
+import { showToast } from "../../toast.js";
 
 let usuarios = [];
 
@@ -169,66 +170,54 @@ export const agregarSocioClase = () => {
       return;
     }
 
-    //Recuperamos el Claseid del modal
+    //Recuperamos el Claseid del modal y el dni del input
     const idClase = form.getAttribute("data-id");
-
-    // Recuperamos el dni ingresado
     let dniBuscado = form.dni.value.trim();
 
-    //traigo la lista de socios de bd
+    //traigo la lista de socios de bd ** PRIMERA VALIDACION
     let socios = [];
     const serviceSocios = new Service("socios");
     socios = await serviceSocios.findAll();
 
-    //Validamos su existencia
+    //Validamos su existencia en BD
     let socioEncontrado = socios.find((socio) => socio.dni === dniBuscado);
 
     if (!socioEncontrado) {
-      alert("No se encontró el socio");
+      showToast("No existe el socio solicitado", 3);
     } else {
-      //construyo el objeto
-      const reservaClase = {
-        fecha: new Date().toISOString().split("T")[0],
-        estado: true,
-        socio: socioEncontrado,
-      };
-
-      //servicios del ClaseReserva para guardar el objeto y traerlo con id
-      const serviceReserva = new Service("reservaClase");
-      let nuevoReserClase = await serviceReserva.save(reservaClase);
-      console.log("ya tiene id, ", nuevoReserClase);
-
+      //validar que no exista en la tabla ** SEGUNDA VALIDACION
       //servicio Clases para traer toda la clase a rellenar
       const serviceClase = new Service("clases");
       let clase = await serviceClase.findById(idClase);
 
-      try {
-        clase.reservas.push(nuevoReserClase);
-        let nuevaClase = await serviceClase.update(clase, idClase);
-        console.log("el objeto guardado fue ", nuevaClase);
-      } catch (error) {
-        console.error("Error:", error);
+      let socioYaInscrito = clase.reservas.some(
+        (reserva) => reserva.socio.dni === socioEncontrado.dni
+      );
+
+      if (socioYaInscrito) {
+        showToast("Socio ya esta inscrito", 3);
+      } else {
+        //construyo el objeto
+        const reservaClase = {
+          fecha: new Date().toISOString().split("T")[0],
+          estado: true,
+          socio: socioEncontrado,
+        };
+
+        //servicios del ClaseReserva para guardar el objeto y traerlo con id
+        const serviceReserva = new Service("reservaClase");
+        let nuevoReservaClase = await serviceReserva.save(reservaClase);
+
+        try {
+          clase.reservas.push(nuevoReservaClase);
+          let nuevaClase = await serviceClase.update(clase, idClase);
+          console.log("el objeto guardado fue ", nuevaClase);
+          showToast("Socio inscrito correctamente", 1);
+        } catch (error) {
+          showToast("Error al inscribir socio", 2);
+          console.error("Error:", error);
+        }
       }
-
-      // try {
-      //   const data = await serviceReserva.save(reservaClase);
-
-      //   console.log(data);
-
-      //   //Para renderizar dinamicamente
-      //   renderClaseCard(data, usuarios);
-
-      //   //Para cerrar el modal
-      //   const modal = bootstrap.Modal.getInstance(
-      //     document.getElementById("crearClase")
-      //   );
-      //   modal.hide();
-
-      //   formCrearClase.reset();
-      //   formCrearClase.classList.remove("was-validated");
-      // } catch (error) {
-      //   console.error("Error:", error);
-      // }
     }
   });
 };

@@ -32,23 +32,22 @@ public class ClaseServiceImpl implements ClaseService {
 
   @Override
   public Clase save(Clase entity) {
-    // Si la entidad ya existe, recuperamos lo que está en BD
+    // Si es update
     if (entity.getClaseId() != null) {
       Clase existente = repository.findById(entity.getClaseId())
           .orElseThrow(() -> new RuntimeException("Clase no encontrada"));
 
-      // Si reservas vino null, preservamos lo anterior
+      // Si reservas vino null, preservar lo existente
       if (entity.getReservas() == null) {
         entity.setReservas(existente.getReservas());
       }
 
-      // Igual para empleado si quieres mantenerlo
       if (entity.getEmpleado() == null) {
         entity.setEmpleado(existente.getEmpleado());
       }
     }
 
-    // Pero si vino empleado con id, cargarlo de BD
+    // Si trae empleado con id, buscarlo en repo
     if (entity.getEmpleado() != null && entity.getEmpleado().getPersonaId() != null) {
       Empleado empleado = empleadoRepository.findById(entity.getEmpleado().getPersonaId())
           .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
