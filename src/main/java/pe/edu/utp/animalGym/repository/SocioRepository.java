@@ -85,7 +85,7 @@ public class SocioRepository {
                 rutinas));
 
         save(new Socio(
-                2,
+                5,
                 "71597595", "Jhordan", "Calixto", "987654321", "M", "calixto@email.com",
                 LocalDate.of(1990, 5, 15),
                 LocalDate.of(2023, 1, 1),
