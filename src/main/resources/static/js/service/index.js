@@ -3,6 +3,14 @@ export default class Service {
     this.service = service;
   }
 
+  async findAll() {
+    const response = await fetch(`/api/${this.service}`);
+
+    const data = await response.json();
+
+    return data;
+  }
+
   async save(entity) {
     const response = await fetch(`/api/${this.service}`, {
       method: "POST",

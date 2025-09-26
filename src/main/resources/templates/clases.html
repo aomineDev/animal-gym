@@ -377,18 +377,18 @@
               </table>
 
               <!-- Formulario de búsqueda y agregar socio -->
-              <form id="agregarSocio" class="row g-2 align-items-center mt-4">
+              <form class="row g-2 align-items-center mt-4 needs-validation agregarSocioForm" novalidate>
                 <!-- Campo DNI -->
                 <div class="col-md-8">
-                  <input type="text" class="form-control" placeholder="Ingrese DNI del socio" name="dni" required>
+                  <input type="text" class="form-control" placeholder="Ingrese DNI del socio" pattern="[0-8]{8}"
+                    name="dni" required>
                   <input type="hidden" th:name="claseId" th:value="${clase.claseId}">
                 </div>
                 <!-- Botón agregar -->
                 <div class="col-md-4 text-start">
-                  <button type="submit" class="btn btn-primary w-100">Agregar</button>
+                  <button type="submit" class="btn btn-primary w-100 btnAgregarSocio">Agregar</button>
                 </div>
               </form>
-
             </div>
           </div>
         </div>

@@ -155,6 +155,49 @@ export const eliminarClaseEvents = () => {
   });
 };
 
+export const agregarSocioClase = () => {
+  document.body.addEventListener("click", async (event) => {
+    if (!event.target.classList.contains("btnAgregarSocio")) return;
+
+    const modal = event.target.closest(".modal");
+    const form = modal.querySelector(".agregarSocioForm");
+    if (!form) return;
+
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+
+    // Recuperamos el dni ingresado
+    let dniBuscado = form.dni.value.trim();
+
+    //almaceno la lista de socios de bd
+    let socios = [];
+    const serviceSocios = new Service("socios");
+    socios = await serviceSocios.findAll();
+    console.log(socios);
+
+    //Validamos su existencia
+    let socioEncontrado = socios.find((socio) => socio.dni === dniBuscado);
+
+    if (!socioEncontrado) {
+      alert("No se encontró el socio");
+    } else {
+      console.log("Socio encontrado:", socioEncontrado);
+
+      const reservaClase = {
+        fecha: new Date().toISOString().split("T")[0],
+        estado: true,
+        socio: socioEncontrado,
+      };
+
+      console.log(reservaClase);
+    }
+  });
+};
+
 const uploadFile = async (file) => {
   if (!file) return null;
 
