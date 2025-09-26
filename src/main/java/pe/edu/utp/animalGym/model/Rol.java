@@ -12,10 +12,10 @@ import lombok.Setter;
 public class Rol {
 
     private Integer rolId;
-    private String nombre;
+    private String nombreRol;
 
-    public Rol(String nombre) {
-        this.nombre = nombre;
+    public Rol(String nombreRol) {
+        this.nombreRol = nombreRol;
     }
 
 }
