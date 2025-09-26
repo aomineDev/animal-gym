@@ -29,8 +29,8 @@ public class RutinaRepository {
 
         // --------- Rutina de Piernas ----------
         ArrayList<DetalleRutina> detallesPierna = new ArrayList<>();
-        detallesPierna.add(new DetalleRutina("Lunes", 4, 12, 40, 200, 90, sentadilla));
-        detallesPierna.add(new DetalleRutina("Miércoles", 4, 10, 80, 250, 120, prensa));
+        detallesPierna.add(new DetalleRutina(1, "Lunes", 4, 12, 40, 200, 90, sentadilla));
+        detallesPierna.add(new DetalleRutina(2, "Miércoles", 4, 10, 80, 250, 120, prensa));
 
         Rutina rutinaPierna = new Rutina(
                 1,
@@ -46,8 +46,8 @@ public class RutinaRepository {
 
         // --------- Rutina de Brazos ----------
         ArrayList<DetalleRutina> detallesBrazo = new ArrayList<>();
-        detallesBrazo.add(new DetalleRutina("Martes", 4, 12, 15, 100, 60, curlBiceps));
-        detallesBrazo.add(new DetalleRutina("Jueves", 4, 12, 20, 120, 60, tricepsPolea));
+        detallesBrazo.add(new DetalleRutina(3, "Martes", 4, 12, 15, 100, 60, curlBiceps));
+        detallesBrazo.add(new DetalleRutina(4, "Jueves", 4, 12, 20, 120, 60, tricepsPolea));
 
         Rutina rutinaBrazo = new Rutina(
                 2,

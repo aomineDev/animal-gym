@@ -15,7 +15,7 @@ import pe.edu.utp.animalGym.model.Socio;
 public class SocioRepository {
 
     private List<Socio> socioList = new ArrayList<>();
-    private Integer nextId = 3;
+    private Integer nextId = 6;
 
     public SocioRepository(MembresiaRepository membresiaRepository,
             RutinaRepository rutinaRepository) {

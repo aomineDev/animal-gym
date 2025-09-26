@@ -16,12 +16,10 @@ public class ReservaClase {
 
     private Integer reservaClaseId;
     private LocalDate fecha;
-    private boolean estado;
     private Socio socio;
 
-    public ReservaClase(LocalDate fecha, boolean estado, Socio socio) {
+    public ReservaClase(LocalDate fecha, Socio socio) {
         this.fecha = fecha;
-        this.estado = estado;
         this.socio = socio;
     }
 }

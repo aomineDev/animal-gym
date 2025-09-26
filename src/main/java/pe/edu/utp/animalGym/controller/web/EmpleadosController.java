@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import pe.edu.utp.animalGym.model.Usuario;
+import pe.edu.utp.animalGym.service.impl.EmpleadoServiceImpl;
 import pe.edu.utp.animalGym.service.impl.RolServiceImpl;
 import pe.edu.utp.animalGym.service.impl.UsuarioServiceImpl;
 
@@ -16,6 +19,9 @@ public class EmpleadosController {
     @Autowired
     private UsuarioServiceImpl serviceUsuario;
 
+    @Autowired
+    private EmpleadoServiceImpl serviceEmpleado;
+
     @GetMapping("/empleados")
 
     public String employee(Model model) {
@@ -26,11 +32,11 @@ public class EmpleadosController {
         model.addAttribute("activePage", "empleados");
 
         // pintar empleados en la tabla
-        // model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
+        model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
         // pintar el rol
         model.addAttribute("contenedorRol", serviceRol.findAll());
         model.addAttribute("contenedorUser", serviceUsuario.findAll());
-        // guardarDatos
+
         return "layout";
     }
 

@@ -14,24 +14,24 @@ public class EmpleadoRepository {
 
     private List<Empleado> employeeList = new ArrayList<>();
 
-    private Integer nextId = 1;
+    private Integer nextId = 5;
 
     public EmpleadoRepository() {
         save(new Empleado(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
-                "https://randomuser.me/api/portraits/men/1.jpg",
+                "uploads/empleados/emp1.JPG",
                 1500, "Anual", "xxx"));
         save(new Empleado(2, "77454651", "Sebastian", "Pereze", "955582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
-                "https://randomuser.me/api/portraits/men/1.jpg",
+                "uploads/empleados/emp1.JPG",
                 1500, "Indefinido", "xxx"));
         save(new Empleado(3, "76454651", "Juan", "Carlos", "920582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
-                "https://randomuser.me/api/portraits/men/1.jpg",
+                "uploads/empleados/emp1.JPG",
                 1500, "Anual", "xxx"));
         save(new Empleado(4, "76454651", "Tomas", "Torres", "915582873", "Masculino",
                 "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
-                "https://randomuser.me/api/portraits/men/1.jpg",
+                "uploads/empleados/emp1.JPG",
                 1500, "Anual", "xxx"));
 
     }

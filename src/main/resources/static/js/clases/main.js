@@ -1,4 +1,13 @@
-import { crearClaseEvents, eliminarClaseEvents } from "./events/modalEvents.js";
+import {
+  crearClaseEvents,
+  eliminarClaseEvents,
+  editarClaseEvents,
+  agregarSocioClase,
+} from "./events/modalEvents.js";
 
-crearClaseEvents();
-eliminarClaseEvents();
+document.addEventListener("DOMContentLoaded", () => {
+  crearClaseEvents();
+  editarClaseEvents();
+  eliminarClaseEvents();
+  agregarSocioClase();
+});

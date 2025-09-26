@@ -2,6 +2,7 @@ package pe.edu.utp.animalGym.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class Clase {
     private String intensidad;
     private String imagen;
     private Empleado empleado;
-    private List<ReservaClase> reservas;
+    private List<ReservaClase> reservas = new ArrayList<>();
 
     public Clase(String nombre, String descripcion, Integer capacidad, LocalDate fecha,
             LocalTime horaInicio, LocalTime horaFin, Integer duracion,
