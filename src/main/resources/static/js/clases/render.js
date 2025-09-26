@@ -348,7 +348,7 @@ export function renderClaseCard(clase, usuarios) {
                       <td>${reserva.socio.dni}</td>
                       <td>${reserva.fecha}</td>
                       <td>
-                        <button class="btn btn-sm btn-danger btnEliminarReserva" data-reserva-id="${reserva.id}">
+                        <button class="btn btn-sm btn-danger btnEliminarReserva" data-clase-id="${clase.claseId}" data-reserva-id="${reserva.reservaClaseId}">
                           Eliminar
                         </button>
                       </td>
@@ -440,7 +440,7 @@ export function renderTablaInscritos(clase) {
           <td>
             <button 
               class="btn btn-sm btn-danger btnEliminarReserva" 
-              data-reserva-id="${reserva.id}" 
+              data-reserva-id="${reserva.reservaClaseId}" 
               data-clase-id="${clase.claseId}">
               Eliminar
             </button>

@@ -382,7 +382,9 @@
                     <td th:text="${reserva.socio.dni}"></td>
                     <td th:text="${reserva.fecha}"></td>
                     <td>
-                      <button class="btn btn-sm btn-danger">Eliminar</button>
+                      <button class="btn btn-sm btn-danger btnEliminarReserva"
+                        th:data-reserva-id="${reserva.reservaClaseId}"
+                        th:data-clase-id="${clase.claseId}">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
