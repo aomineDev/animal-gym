@@ -13,13 +13,14 @@
       </div>
 
       <!-- Drecha -->
-      <div class="col-12 col-lg-9">
+      <div class="col-12">
         <div class="row" id="section__card">
           <!-- CARTA -->
-          <div class="col-12 col-md-6 col-xl-4" th:each="clase : ${clases}">
+          <div class="col-12 col-md-6 col-xl-3" th:each="clase : ${clases}" th:attr="id=|clase-card-${clase.claseId}|">
             <div class="mt-4 border-0 card overflow-hidden rounded-4">
               <div class="overflow-hidden">
-                <img th:src="${clase.imagen}" class="card-img-top" th:alt="${clase.nombre}">
+                <img th:src="@{${clase.imagen}}" class="card-img-top w-100" th:alt="${clase.nombre}"
+                  style="height:200px; object-fit:cover;">
               </div>
 
               <div class="row d-flex align-items-center card-body">
@@ -83,7 +84,7 @@
               class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="#" class="row needs-validation" novalidate>
+            <form id="formCrearClase" class="row needs-validation" novalidate>
 
               <!-- nombre-->
               <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la clase</label>
@@ -128,7 +129,7 @@
 
               <!-- Intensidad -->
               <div class="mb-3 col-md-6"> <label for="intensidad" class="form-label">Intensidad</label> <select
-                  name="intensidad" class="form-select" id="select_crear" required>
+                  name="intensidad" class="form-select" id="select_intensidad" required>
                   <option value="">Seleccione la intensidad</option>
                   <option value="Baja">Baja</option>
                   <option value="Media">Media</option>
@@ -138,12 +139,12 @@
 
               <!-- Entrenador -->
               <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label> <select
-                  name="entrenador" class="form-select" id="select_crear" required>
-                  <option value="0">Seleccione un entrenador</option>
+                  name="entrenador" class="form-select" id="select_entrenador" required>
+                  <option value="">Seleccione un entrenador</option>
                   <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
                     th:value="${usuario.persona.personaId}"
                     th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}">
-                  </option>></option>
+                  </option>
                 </select>
               </div>
               <button type="submit" class="btn btn-primary col-5 ms-3">Crear clase</button>
@@ -161,7 +162,7 @@
 
             <div class="modal-header p-0 position-relative">
               <img class="img-fluid w-100 rounded-top" style="max-height: 300px; object-fit: cover;"
-                th:src="${clase.imagen}" alt="Imagen clase">
+                th:src="${clase.imagen}" th:alt="${clase.nombre}">
               <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
                 aria-label="Close"></button>
             </div>
@@ -206,7 +207,7 @@
                 <div class="col-12 col-md-4">
                   <div class="border border-2 rounded-3 p-3 h-100">
                     <h6 class="mb-2"><i class="bi bi-clock-fill me-1"></i> Duración</h6>
-                    <h5 th:text="${clase.capacidad} + ' minutos'"></h5>
+                    <h5 th:text="${clase.duracion} + ' minutos'"></h5>
                   </div>
                 </div>
 
@@ -263,7 +264,7 @@
                 class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form id="editarClaseForm" class="row needs-validation" novalidate>
+              <form th:attr="data-id=${clase.claseId}" class="editarClaseForm row needs-validation" novalidate>
                 <!-- nombre-->
                 <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la clase</label>
                   <input type="text" name="nombre" class="form-control" th:value="${clase.nombre}" required>
@@ -272,27 +273,26 @@
                 <!-- imagen -->
                 <div class="col-md-6">
                   <label for="file" class="form-label">Foto de la clase</label>
-                  <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png"
-                    required>
+                  <input type="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png" required>
                 </div>
 
                 <!-- descripcion -->
                 <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
-                  <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
+                  <textarea name="descripcion" class="form-control" rows="3"
                     placeholder="Escribe una breve descripción de la clase" th:text="${clase.descripcion}"
                     required></textarea>
                 </div>
 
                 <!-- objetivo -->
                 <div class="mb-3 col-md-6"> <label for="objetivo" class="form-label">Objetivo</label>
-                  <textarea name="objetivo" id="objetivo" class="form-control" rows="3"
-                    placeholder="Escribe el objetivo de la clase" th:text="${clase.objetivo}" required></textarea>
+                  <textarea name="objetivo" class="form-control" rows="3" placeholder="Escribe el objetivo de la clase"
+                    th:text="${clase.objetivo}" required></textarea>
                 </div>
 
                 <!-- capacidad -->
                 <div class="mb-3 col-md-6"> <label for="capacidad" class="form-label">Capacidad</label>
-                  <input type="number" name="capacidad" id="capacidad" class="form-control" min="1"
-                    th:value="${clase.capacidad}" required>
+                  <input type="number" name="capacidad" class="form-control" min="1" th:value="${clase.capacidad}"
+                    required>
                 </div>
 
                 <!-- fecha -->
@@ -301,35 +301,33 @@
 
                 <!-- horaInicio -->
                 <div class="mb-3 col-md-6"> <label for="horaInicio" class="form-label">Hora Inicio</label> <input
-                    type="time" name="horaInicio" id="horaInicio" class="form-control" th:value="${clase.horaInicio}"
-                    required> </div>
+                    type="time" name="horaInicio" class="form-control" th:value="${clase.horaInicio}" required> </div>
 
                 <!-- horaInicio -->
                 <div class="mb-3 col-md-6"> <label for="horaFin" class="form-label">Hora Fin</label> <input type="time"
-                    name="horaFin" id="horaFin" class="form-control" th:value="${clase.horaFin}" required> </div>
+                    name="horaFin" class="form-control" th:value="${clase.horaFin}" required> </div>
 
                 <!-- Intensidad -->
                 <div class="mb-3 col-md-6"> <label for="intensidad" class="form-label">Intensidad</label> <select
                     name="intensidad" class="form-select" id="select_crear" required>
                     <option value="" th:selected="${clase.intensidad == ''}">Seleccione la intensidad</option>
-                    <option value="1" th:selected="${clase.intensidad == 'Baja'}">Baja</option>
-                    <option value="2" th:selected="${clase.intensidad == 'Media'}">Media</option>
-                    <option value="3" th:selected="${clase.intensidad == 'Alta'}">Alta</option>
+                    <option value="Baja" th:selected="${clase.intensidad == 'Baja'}">Baja</option>
+                    <option value="Media" th:selected="${clase.intensidad == 'Media'}">Media</option>
+                    <option value="Alta" th:selected="${clase.intensidad == 'Alta'}">Alta</option>
                   </select>
                 </div>
 
                 <!-- Entrenador -->
                 <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label> <select
                     name="entrenador" class="form-select" id="select_crear" required>
-                    <option value="0">Seleccione un entrenador</option>
+                    <option value="">Seleccione un entrenador</option>
                     <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
                       th:value="${usuario.persona.personaId}"
                       th:text="${usuario.persona.nombre + ' ' + usuario.persona.apellido}"
                       th:selected="${usuario.persona.personaId == clase.empleado.personaId}">
-                    </option>></option>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary col-5 ms-3">Crear clase</button>
+                <button type="submit" class="btn btn-primary col-5 ms-3 btnActualizarClase">Actualizar clase</button>
               </form>
             </div>
           </div>
@@ -412,7 +410,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="">Confirmar
+              <button type="button" class="btn btn-danger btnConfirmarEliminar"
+                th:attr="data-id=${clase.claseId}">Confirmar
                 eliminacion</button>
             </div>
           </div>
@@ -420,6 +419,7 @@
       </div>
     </div>
 
+    <script type="module" th:src="@{/js/clases/main.js}"></script>
 
   </th:block>
 
