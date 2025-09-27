@@ -1,7 +1,7 @@
-import { formCrearClase } from "../dom.js";
+import { formCrearClase, modalCrearClase } from "../dom.js";
 import Service from "../../service/index.js";
-import { renderClaseCard } from "../render.js";
-import { showToast } from "../../toast.js";
+import { renderClaseCard, renderTablaInscritos } from "../render.js";
+import { showToast, resetFormModalClose } from "../../utils.js";
 
 let usuarios = [];
 
@@ -17,6 +17,9 @@ async function fetchUsuarios() {
 
 export const crearClaseEvents = () => {
   fetchUsuarios();
+
+  resetFormModalClose(modalCrearClase, formCrearClase);
+
   formCrearClase.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -46,6 +49,7 @@ export const crearClaseEvents = () => {
 
       //Para renderizar dinamicamente
       renderClaseCard(data, usuarios);
+      showToast("Clase creada correctamente", 1);
 
       //Para cerrar el modal
       const modal = bootstrap.Modal.getInstance(
@@ -57,6 +61,7 @@ export const crearClaseEvents = () => {
       formCrearClase.classList.remove("was-validated");
     } catch (error) {
       console.error("Error:", error);
+      showToast("Error al crear clase", 2);
     }
   });
 };
@@ -111,10 +116,13 @@ export const editarClaseEvents = () => {
         renderClaseCard(data, usuarios);
       }
 
+      showToast("Clase modificada correctamente", 1);
+
       form.reset();
       form.classList.remove("was-validated");
     } catch (error) {
       console.error("Error:", error);
+      showToast("Error al modificar clase", 2);
     }
   });
 };
@@ -141,12 +149,15 @@ export const eliminarClaseEvents = () => {
             card.remove();
           }
 
+          showToast("Clase eliminada correctamente", 1);
+
           // cerrar el modal
           const modal = event.target.closest(".modal");
           const bootstrapModal = bootstrap.Modal.getInstance(modal);
           bootstrapModal.hide();
         } else {
           console.error("Error al eliminar la clase", response);
+          showToast("Error al eliminar clase", 2);
         }
       } catch (error) {
         console.error("Error:", error);
@@ -179,45 +190,94 @@ export const agregarSocioClase = () => {
     const serviceSocios = new Service("socios");
     socios = await serviceSocios.findAll();
 
-    //Validamos su existencia en BD
+    //Validamos su existencia en BD ** PRIMERA VALIDACION
     let socioEncontrado = socios.find((socio) => socio.dni === dniBuscado);
-
     if (!socioEncontrado) {
       showToast("No existe el socio solicitado", 3);
-    } else {
-      //validar que no exista en la tabla ** SEGUNDA VALIDACION
-      //servicio Clases para traer toda la clase a rellenar
-      const serviceClase = new Service("clases");
-      let clase = await serviceClase.findById(idClase);
+      return;
+    }
 
-      let socioYaInscrito = clase.reservas.some(
-        (reserva) => reserva.socio.dni === socioEncontrado.dni
-      );
+    //servicio Clases para traer toda la clase a rellenar
+    const serviceClase = new Service("clases");
 
-      if (socioYaInscrito) {
-        showToast("Socio ya esta inscrito", 3);
+    //Validamos que no este en la tabla ** SEGUNDA VALIDACION
+    let clase = await serviceClase.findById(idClase);
+    let socioYaInscrito = clase.reservas.some(
+      (reserva) => reserva.socio.dni === socioEncontrado.dni
+    );
+
+    if (socioYaInscrito) {
+      showToast("Socio ya esta inscrito", 3);
+      return;
+    }
+
+    //Validamos el aforo de la clase ** TERCERA VALIDACION
+    if (clase.capacidad === clase.reservas.length) {
+      showToast("Se llego al limite de capacidad de la clase", 3);
+      return;
+    }
+
+    //construyo el objeto
+    const reservaClase = {
+      fecha: new Date().toISOString().split("T")[0],
+      estado: true,
+      socio: socioEncontrado,
+    };
+
+    //servicios del ClaseReserva para guardar el objeto y traerlo con id
+    const serviceReserva = new Service("reservaClase");
+    let nuevoReservaClase = await serviceReserva.save(reservaClase);
+
+    try {
+      clase.reservas.push(nuevoReservaClase);
+      let nuevaClase = await serviceClase.update(clase, idClase);
+      console.log("el objeto guardado fue ", nuevaClase);
+      renderTablaInscritos(nuevaClase);
+
+      showToast("Socio inscrito correctamente", 1);
+      form.reset();
+      form.classList.remove("was-validated");
+    } catch (error) {
+      showToast("Error al inscribir socio", 2);
+      console.error("Error:", error);
+    }
+  });
+};
+
+export const eliminarSocioClase = () => {
+  document.body.addEventListener("click", async (e) => {
+    if (!e.target.classList.contains("btnEliminarReserva")) return;
+
+    const reservaId = e.target.getAttribute("data-reserva-id");
+    const claseId = e.target.getAttribute("data-clase-id");
+
+    console.log("Eliminar reserva:", reservaId, "de la clase:", claseId);
+
+    const serviceReserva = new Service("reservaClase");
+
+    try {
+      let response = await serviceReserva.delete(reservaId);
+      if (response.ok) {
+        // Actualizar en memoria
+        let clase = await new Service("clases").findById(claseId);
+
+        clase.reservas = clase.reservas.filter(
+          (r) => String(r.reservaClaseId) !== String(reservaId)
+        );
+
+        let nuevaClase = await new Service("clases").update(clase, claseId);
+
+        console.log("Clase actualizada en BD:", nuevaClase);
+
+        renderTablaInscritos(nuevaClase);
+        showToast("Socio eliminado correctamente de la clase", 1);
       } else {
-        //construyo el objeto
-        const reservaClase = {
-          fecha: new Date().toISOString().split("T")[0],
-          estado: true,
-          socio: socioEncontrado,
-        };
-
-        //servicios del ClaseReserva para guardar el objeto y traerlo con id
-        const serviceReserva = new Service("reservaClase");
-        let nuevoReservaClase = await serviceReserva.save(reservaClase);
-
-        try {
-          clase.reservas.push(nuevoReservaClase);
-          let nuevaClase = await serviceClase.update(clase, idClase);
-          console.log("el objeto guardado fue ", nuevaClase);
-          showToast("Socio inscrito correctamente", 1);
-        } catch (error) {
-          showToast("Error al inscribir socio", 2);
-          console.error("Error:", error);
-        }
+        console.error("Error al eliminar socio de la clase", response);
+        showToast("Error al eliminar socio de la clase", 2);
       }
+    } catch (error) {
+      console.error("Error:", error);
+      showToast("Error al eliminar socio de la clase", 2);
     }
   });
 };

@@ -3,6 +3,7 @@ import {
   eliminarClaseEvents,
   editarClaseEvents,
   agregarSocioClase,
+  eliminarSocioClase,
 } from "./events/modalEvents.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,4 +11,5 @@ document.addEventListener("DOMContentLoaded", () => {
   editarClaseEvents();
   eliminarClaseEvents();
   agregarSocioClase();
+  eliminarSocioClase();
 });

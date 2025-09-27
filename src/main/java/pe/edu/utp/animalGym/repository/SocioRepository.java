@@ -54,7 +54,7 @@ public class SocioRepository {
                 1.65,
                 "https://picsum.photos/50/50?random=2",
                 men2,
-                rutinas));
+                new ArrayList<>()));
 
         save(new Socio(
                 3,
@@ -68,7 +68,7 @@ public class SocioRepository {
                 1.80,
                 "https://picsum.photos/50/50?random=3",
                 men3,
-                rutinas));
+                new ArrayList<>()));
 
         save(new Socio(
                 4,
@@ -82,7 +82,7 @@ public class SocioRepository {
                 1.60,
                 "https://picsum.photos/50/50?random=4",
                 men1,
-                rutinas));
+                new ArrayList<>()));
 
         save(new Socio(
                 5,
@@ -96,7 +96,7 @@ public class SocioRepository {
                 1.75,
                 "https://picsum.photos/50/50?random=4",
                 men1,
-                null));
+                new ArrayList<>()));
     }
 
     public List<Socio> findAll() {
