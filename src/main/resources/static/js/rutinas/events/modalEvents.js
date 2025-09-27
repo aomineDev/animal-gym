@@ -1,5 +1,5 @@
 import Service from "../../service/index.js";
-import { renderTablaDetalle } from "../render.js";
+import { renderTablaDetalle, renderTablaRutinaModal } from "../render.js";
 import { formCrearRutina, crearRutinaModal } from "../dom.js";
 import { resetFormModalClose, showToast } from "../../utils.js";
 
@@ -81,6 +81,8 @@ export const crearRutinaEvents = () => {
       let socioCompleto = await socioService.update(socioIncompleto, socioId);
 
       console.log(socioCompleto);
+
+      renderTablaRutinaModal(socioCompleto);
 
       showToast("Rutina creado correctamente", 1);
 

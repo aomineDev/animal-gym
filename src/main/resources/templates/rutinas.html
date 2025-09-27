@@ -152,7 +152,7 @@
                           <th>Acciones</th>
                         </tr>
                       </thead>
-                      <tbody class="text-center">
+                      <tbody th:id="|tablaRutinasModal__${socio.personaId}|" class="text-center">
                         <tr th:each="rutina : ${socio.rutinas}" class="fila-rutina"
                           th:data-rutina-id="${rutina.rutinaId}" th:data-socio-id="${socio.personaId}">
                           <td th:text="${rutina.nombre}"></td>

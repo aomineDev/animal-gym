@@ -13,3 +13,46 @@ export function renderTablaDetalle(tablaEjercicios, detalleRutina) {
             </td>
         </tr>`;
 }
+
+export function renderTablaRutinaModal(socio) {
+  const tbody = document.querySelector(
+    `#tablaRutinasModal__${socio.personaId}`
+  );
+
+  if (!tbody) return;
+
+  // Renderizar las filas
+  tbody.innerHTML = socio.rutinas
+    .map(
+      (rutina) => `
+        <tr class="fila-rutina" data-rutina-id="${rutina.rutinaId}" data-socio-id="${socio.personaId}">
+          <td>${rutina.nombre}</td>
+          <td>${rutina.descripcion}</td>
+          <td>${rutina.objetivo}</td>
+          <td>${rutina.fechaInicio}</td>
+          <td>${rutina.fechaFin}</td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#socioModal">
+                    <i class="bi bi-pencil me-2"></i>Editar
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                    <i class="bi bi-trash me-2"></i>Eliminar
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+  `
+    )
+    .join("");
+}
