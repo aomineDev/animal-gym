@@ -4,6 +4,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import pe.edu.utp.animalGym.service.impl.SocioServiceImpl;
+import pe.edu.utp.animalGym.service.impl.UsuarioServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ public class RutinasController {
   @Autowired
   SocioServiceImpl socioServiceImpl;
 
+  @Autowired
+  private UsuarioServiceImpl usuarioServiceImpl;
+
   @GetMapping("/rutinas")
   public String rutinas(Model model) {
     model.addAttribute("title", "Animal GYM | Rutinas");
@@ -21,6 +25,7 @@ public class RutinasController {
     model.addAttribute("modal", "rutinas :: modals");
     model.addAttribute("activePage", "rutinas");
     model.addAttribute("socios", socioServiceImpl.findAll());
+    model.addAttribute("usuarios", usuarioServiceImpl.findAll());
 
     return "layout";
   }

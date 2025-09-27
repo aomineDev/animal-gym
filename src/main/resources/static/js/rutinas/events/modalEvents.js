@@ -1,4 +1,3 @@
-import { tablaEjercicios } from "../dom.js";
 import Service from "../../service/index.js";
 import { renderTablaDetalle } from "../render.js";
 
@@ -9,6 +8,11 @@ export const renderFilaEvents = () => {
 
     const rutinaId = fila.getAttribute("data-rutina-id");
     console.log("clickeaste fila ", rutinaId);
+
+    //en base al id del socio de esa fila recuperamos el cuerpo y pintamos en rutina
+    const socioId = fila.getAttribute("data-socio-id");
+    const modal = document.getElementById(`detalleSocioModal__${socioId}`);
+    const tablaEjercicios = modal.querySelector("#tablaEjercicios tbody");
 
     //recupero el objeto completo de rutina
     let rutinaService = new Service("rutinas");
