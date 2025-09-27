@@ -1,3 +1,10 @@
+export function renderFilaSocio(socio) {
+  const filaHtml = /*html*/ `
+  
+  
+  `;
+}
+
 export function renderTablaDetalle(tablaEjercicios, detalleRutina) {
   tablaEjercicios.innerHTML += `
         <tr>
@@ -38,14 +45,15 @@ export function renderTablaRutinaModal(socio) {
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#socioModal">
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#">
                     <i class="bi bi-pencil me-2"></i>Editar
                   </a>
                 </li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
-                  <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
-                    <i class="bi bi-trash me-2"></i>Eliminar
+                  <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                    data-bs-target=#eliminarRutina__${rutina.rutinaId} data-socio-id="${socio.personaId}"">
+                    Eliminar
                   </a>
                 </li>
               </ul>

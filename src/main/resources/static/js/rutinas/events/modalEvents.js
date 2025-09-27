@@ -102,6 +102,61 @@ export const crearRutinaEvents = () => {
   });
 };
 
+export const eliminarRutinaEvents = () => {
+  document.body.addEventListener("click", async (event) => {
+    if (!event.target.classList.contains("btnConfirmarEliminar")) return;
+
+    const rutinaId = event.target.getAttribute("data-id");
+    const socioId = event.target.getAttribute("data-socio-id");
+
+    console.log("socio", socioId);
+    console.log("rutina", rutinaId);
+
+    let rutinaService = new Service("rutinas");
+    let socioService = new Service("socios");
+
+    try {
+      let response = await rutinaService.delete(rutinaId);
+
+      if (response.ok) {
+        let socioDesactualizado = await socioService.findById(socioId);
+        console.log(socioDesactualizado);
+
+        socioDesactualizado.rutinas = socioDesactualizado.rutinas.filter(
+          (rutina) => String(rutina.rutinaId) !== String(rutinaId)
+        );
+
+        let socioActualizado = await socioService.update(
+          socioDesactualizado,
+          socioId
+        );
+
+        console.log(socioActualizado);
+        console.log("eliminado bien");
+        renderTablaRutinaModal(socioActualizado);
+
+        // Cerrar el modal de creación
+        const bootstrapModal = bootstrap.Modal.getInstance(
+          document.getElementById(`eliminarRutina__${rutinaId}`)
+        );
+        bootstrapModal.hide();
+
+        // Abrir el modal de detalle
+        const detalleModalId = `detalleSocioModal__${socioId}`;
+        const detalleModalEl = document.getElementById(detalleModalId);
+        const detalleModal = new bootstrap.Modal(detalleModalEl);
+        detalleModal.show();
+      } else {
+        console.error("Error al eliminar la rutina", response);
+        showToast("Error al eliminar rutina", 2);
+      }
+    } catch (err) {
+      console.error("Error al eliminar rutina", err);
+      showToast("Error al eliminar rutina", 2);
+    }
+  });
+};
+
 const objetoConstruido = (form) => {
   const rutina = {
     rutinaId: null,

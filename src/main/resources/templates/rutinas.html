@@ -167,7 +167,7 @@
                               </button>
                               <ul class="dropdown-menu">
                                 <li>
-                                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#socioModal">
+                                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#">
                                     <i class="bi bi-pencil me-2"></i>Editar
                                   </a>
                                 </li>
@@ -176,8 +176,8 @@
                                 </li>
                                 <li>
                                   <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                                    data-bs-target="#confirmDeleteModal">
-                                    <i class="bi bi-trash me-2"></i>Eliminar
+                                    th:attr="data-bs-target=|#eliminarRutina__${rutina.rutinaId}|">
+                                    Eliminar
                                   </a>
                                 </li>
                               </ul>
@@ -272,6 +272,31 @@
                   name="fechaFin" class="form-control" required> </div>
               <button type="submit" class="btn btn-primary col-5 ms-3 btnCrearRutina">Crear rutina</button>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Eliminar -->
+    <div th:each="socio: ${socios}">
+      <div th:each="rutina: ${socio.rutinas}">
+        <div class="modal fade" th:id="|eliminarRutina__${rutina.rutinaId}|" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Eliminar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>¿Estas seguro que deseas eliminar esta rutina?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger btnConfirmarEliminar" th:attr="data-id=${rutina.rutinaId}"
+                  th:data-socio-id="${socio.personaId}">Confirmar
+                  eliminacion</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
