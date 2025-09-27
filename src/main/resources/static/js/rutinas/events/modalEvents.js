@@ -1,5 +1,5 @@
 import Service from "../../service/index.js";
-import { renderTablaDetalle, renderTablaRutinaModal } from "../render.js";
+import { renderFilaSocio, renderTablaDetalle } from "../render.js";
 import { formCrearRutina, crearRutinaModal } from "../dom.js";
 import { resetFormModalClose, showToast } from "../../utils.js";
 
@@ -82,7 +82,8 @@ export const crearRutinaEvents = () => {
 
       console.log(socioCompleto);
 
-      renderTablaRutinaModal(socioCompleto);
+      renderFilaSocio(socioCompleto);
+      //renderTablaRutinaModal(socioCompleto);
 
       showToast("Rutina creado correctamente", 1);
 
@@ -133,7 +134,11 @@ export const eliminarRutinaEvents = () => {
 
         console.log(socioActualizado);
         console.log("eliminado bien");
-        renderTablaRutinaModal(socioActualizado);
+
+        //renderizo
+        renderFilaSocio(socioActualizado);
+        //renderTablaRutinaModal(socioActualizado);
+        showToast("Rutina eliminada correctamente", 1);
 
         // Cerrar el modal de creación
         const bootstrapModal = bootstrap.Modal.getInstance(

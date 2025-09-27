@@ -48,7 +48,7 @@
       <!-- Tabla con rutinas activas -->
       <div class="table-responsive">
         <h3 class="text-center mt-5">Socios con rutinas</h3>
-        <table class="table table-hover align-middle">
+        <table id="tablaPrincipal" class="table table-hover align-middle">
           <thead class="table-light">
             <tr>
               <th>Nombre</th>
@@ -60,7 +60,7 @@
             </tr>
           </thead>
           <tbody id="rutinaTable">
-            <tr th:each="socio : ${socios}" th:if="${socio.rutinas != null and !socio.rutinas.isEmpty()}">
+            <tr th:each="socio : ${socios}" th:id="|socio-fila-${socio.personaId}|">
               <td th:text="${socio.nombre}"></td>
               <td th:text="${socio.dni}"></td>
               <td>
