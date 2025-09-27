@@ -23,3 +23,12 @@ export function showToast(message, type = "info") {
   const toast = new bootstrap.Toast(toastEl, { delay: 7000 });
   toast.show();
 }
+
+export function resetFormModalClose(modal, form) {
+  if (!modal || !form) return;
+
+  modal.addEventListener("hidden.bs.modal", () => {
+    form.reset();
+    form.classList.remove("was-validated");
+  });
+}

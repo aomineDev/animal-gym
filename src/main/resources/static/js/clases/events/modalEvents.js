@@ -1,7 +1,7 @@
-import { formCrearClase } from "../dom.js";
+import { formCrearClase, modalCrearClase } from "../dom.js";
 import Service from "../../service/index.js";
 import { renderClaseCard, renderTablaInscritos } from "../render.js";
-import { showToast } from "../../toast.js";
+import { showToast, resetFormModalClose } from "../../utils.js";
 
 let usuarios = [];
 
@@ -17,6 +17,9 @@ async function fetchUsuarios() {
 
 export const crearClaseEvents = () => {
   fetchUsuarios();
+
+  resetFormModalClose(modalCrearClase, formCrearClase);
+
   formCrearClase.addEventListener("submit", async function (event) {
     event.preventDefault();
 

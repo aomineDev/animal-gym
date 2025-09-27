@@ -1,5 +1,6 @@
-import { renderFilaEvents } from "./events/modalEvents.js";
+import { renderFilaEvents, crearRutinaEvents } from "./events/modalEvents.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   renderFilaEvents();
+  crearRutinaEvents();
 });

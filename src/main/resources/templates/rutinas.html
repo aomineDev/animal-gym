@@ -100,6 +100,17 @@
           </tbody>
         </table>
       </div>
+
+      <!-- Toast -->
+      <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="toast" class="toast align-items-center border-0" role="alert">
+          <div class="d-flex">
+            <div class="toast-body">
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+          </div>
+        </div>
+      </div>
   </th:block>
 
   <th:block th:fragment="modals">
@@ -125,7 +136,8 @@
                 <div class="col-12 col-lg-6">
                   <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
                     <h6 class="mb-0">Rutinas</h6>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#crearRutina">+
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#crearRutina"
+                      th:data-socio-id="${socio.personaId}">+
                       Agregar rutina</button>
                   </div>
                   <div class="table-responsive">
@@ -221,7 +233,7 @@
               class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="formCrearRutina" class="row needs-validation" novalidate>
+            <form id="formCrearRutina" class="row needs-validation crearRutinaForm" novalidate>
 
               <!-- nombre-->
               <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la rutina</label>
@@ -258,7 +270,7 @@
               <!-- fechaFin -->
               <div class="mb-3 col-md-6"> <label for="fechaFin" class="form-label">Fecha Fin</label> <input type="date"
                   name="fechaFin" class="form-control" required> </div>
-              <button type="submit" class="btn btn-primary col-5 ms-3">Crear rutina</button>
+              <button type="submit" class="btn btn-primary col-5 ms-3 btnCrearRutina">Crear rutina</button>
             </form>
           </div>
         </div>
