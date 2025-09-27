@@ -1,7 +1,7 @@
 import { formulario } from "../dom.js";
 import Service from "../../service/index.js"
 import { renderEmpleadoCard } from "../render.js";
-import { showToast } from "../../toast.js"
+import { showToast } from "../../utils.js"
 // metodo para obtener todos los roles de mi backends importante ya que necesitamos mostrar los select con sus direntes opciones de rol
 let roles = [];
 async function fetchRoles() {
