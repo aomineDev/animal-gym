@@ -5,21 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.animalGym.model.Usuario;
 import pe.edu.utp.animalGym.service.UsuarioService;
+import pe.edu.utp.animalGym.service.impl.UsuarioServiceImpl;
 
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuariosApiController {
 
+    private final UsuarioServiceImpl usuarioServiceImpl;
+
     @Autowired
     UsuarioService usuarioService;
+
+    UsuariosApiController(UsuarioServiceImpl usuarioServiceImpl) {
+        this.usuarioServiceImpl = usuarioServiceImpl;
+    }
 
     @GetMapping
     public ResponseEntity<List<Usuario>> findAll() {
@@ -29,5 +39,16 @@ public class UsuariosApiController {
     @PostMapping
     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+        usuarioService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> update(@PathVariable Integer id, @RequestBody Usuario usuario) {
+        return ResponseEntity.ok(usuarioService.save(usuario));
     }
 }

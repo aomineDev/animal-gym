@@ -18,19 +18,19 @@ public class EmpleadoRepository {
 
     public EmpleadoRepository() {
         save(new Empleado(1, "76454651", "Leonardo", "Murillo", "913582873", "Masculino",
-                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "loelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp1.JPG",
                 1500, "Anual", "xxx"));
         save(new Empleado(2, "77454651", "Sebastian", "Pereze", "955582873", "Masculino",
-                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+                "lsonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp1.JPG",
                 1500, "Indefinido", "xxx"));
-        save(new Empleado(3, "76454651", "Juan", "Carlos", "920582873", "Masculino",
-                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+        save(new Empleado(3, "76464651", "Juan", "Carlos", "920582873", "Masculino",
+                "leasdonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp1.JPG",
                 1500, "Anual", "xxx"));
-        save(new Empleado(4, "76454651", "Tomas", "Torres", "915582873", "Masculino",
-                "leonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
+        save(new Empleado(4, "76484651", "Tomas", "Torres", "915562873", "Masculino",
+                "leona1211rdoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp1.JPG",
                 1500, "Anual", "xxx"));
 

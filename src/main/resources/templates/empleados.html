@@ -40,7 +40,7 @@
                 <div class="row" id="empleado_card">
                     <!-- CARTA -->
                     <div class="col-12 col-md-6 col-xl-3" th:each="empleado : ${empleadoTabla}"
-                        th:attr="id=|clase-card-${empleado.personaId}|">
+                        th:attr="id=|empleado-card-${empleado.personaId}|">
                         <div class="mt-4 border-0 card overflow-hidden rounded-4">
                             <div class="overflow-hidden">
                                 <img th:src="@{${empleado.foto}}" class="card-img-top w-100"
@@ -95,7 +95,17 @@
             <!-- Tabla de los empleados-->
 
         </div>
-
+        <!-- Toast -->
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="toast" class="toast align-items-center border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        </div>
     </th:block>
     <th:block th:fragment="modals">
         <!-- modal crear empleado -->
@@ -302,7 +312,8 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                 Cancelar
                             </button>
-                            <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="">
+                            <button type="button" class="btn btn-danger btnConfirmarEliminar"
+                                th:attr="data-id=${empleado.personaId}">
                                 <i class="bi bi-trash me-2"></i>Eliminar
                             </button>
                         </div>
@@ -324,7 +335,8 @@
                         </div>
                         <div class="modal-body">
                             <!-- formulario del modal -->
-                            <form id="formEmpleado" class="needs-validation" novalidate method="post">
+                            <form id="formEmpleadoActualizar" class="needs-validation forEmpleadoEditar" novalidate
+                                method="post">
 
                                 <!-- Sección Datos Personales -->
                                 <div class="form-section mb-4">
@@ -453,34 +465,22 @@
                                         <div class="form-text">Este será el nombre para iniciar sesión (basado en el
                                             DNI)</div>
                                     </div>
-                                    <!-- <div class="row g-3" th:each="usuario :$contenedorUser"> -->
-
-
-                                    <!-- contraseña -->
 
                                 </div>
                                 <div class="col-md-6">
                                     <label for="rol_id" class="form-label">Rol *</label>
-                                    <!-- <select name="rol_id" id="rol_id" class="form-select crearRol" required>
-                                        <option value="">Seleccione un rol...</option>
-                                        <option th:each="usuario : ${contenedorUser}"
-                                            th:if="${usuario.rol.rolId==1 || usuario.rol.rolId==2}"
-                                            th:value="${usuario.rol.rolId}" th:text="${usuario.rol.nombreRol}"
-                                            th:selected="${usuario.persona.personaId == empleado.personaId}"></option>
-                                        </option>
-                                    </select> -->
-                                    <select name="rol_id" id="rol_id" class="form-select crearRol" required>
-                                        <option value="">Seleccione un rol...</option>
-                                        <option th:each="usuario : ${contenedorUser}"
-                                            th:if="${usuario.persona.personaId==empleado.personaId}"
-                                            th:value="${usuario.rol.rolId}" th:text="${usuario.rol.nombreRol}"
-                                            th:selected="${usuario.persona.personaId == empleado.personaId}">
-                                        </option>
-                                    </select>
-                                    <!-- <label for="contraseña" class="form-label">Contraseña *</label>
-                                    <input type="password" id="contraseña" class="form-control" name="contraseña"
-                                        minlength="6" th:each="usuario :${contenedorUser}" th:value="" if required />
-                                    <div class="form-text">Mínimo 6 caracteres</div> -->
+
+                                    <div th:each="usuario : ${contenedorUser}">
+                                        <div th:if="${usuario.persona.personaId == empleado.personaId}">
+                                            <select name="rolId" class="form-select crearRol" required>
+                                                <option value="">Seleccione un rol...</option>
+                                                <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
+                                                    th:text="${rol.nombreRol}"
+                                                    th:selected="${rol.rolId == usuario.rol.rolId}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
                         </div>
@@ -489,8 +489,10 @@
                                 Cerrar
                             </button>
                             </button>
-                            <button type="submit" class="btn btn-primary" id="guardarEmpleado">
-                                Guardar Empleado
+                            <button type="submit" class="btn btn-primary btnActualizarEmpleado"
+                                th:attr="data-id=${empleado.personaId}">
+                                >
+                                Actualizar Empleado
                             </button>
                         </div>
                         </form>
