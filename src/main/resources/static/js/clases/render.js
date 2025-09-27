@@ -5,18 +5,16 @@ export function renderClaseCard(clase, usuarios) {
     <div class="col-12 col-md-6 col-xl-3" id="clase-card-${clase.claseId}">
       <div class="mt-4 border-0 card overflow-hidden rounded-4">
         <div class="overflow-hidden">
-          <img src="${clase.imagen}" class="card-img-top w-100" alt="${
-    clase.nombre
-  }"
+          <img src="${clase.imagen}" class="card-img-top w-100" alt="${clase.nombre
+    }"
             style="height:200px; object-fit:cover;">
         </div>
         <div class="row d-flex align-items-center card-body">
           <div class="col-9">
             <h5 class="card-title mb-1">${clase.nombre}</h5>
             <p class="text-muted mb-1">${clase.descripcion}</p>
-            <span class="badge ${estadoClase(clase.estado)}">${
-    clase.estado
-  }</span>
+            <span class="badge ${estadoClase(clase.estado)}">${clase.estado
+    }</span>
           </div>
           <div class="col-3 text-end">
             <div class="dropdown">
@@ -31,9 +29,8 @@ export function renderClaseCard(clase, usuarios) {
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editarClase__${
-                    clase.claseId
-                  }">
+                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editarClase__${clase.claseId
+    }">
                     Editar
                   </a>
                 </li>
@@ -59,9 +56,8 @@ export function renderClaseCard(clase, usuarios) {
 
   // --- Modal Ver Detalles ---
   const modalDetallesHtml = /*html*/ `
-      <div class="modal fade" id="verClase__${
-        clase.claseId
-      }" tabindex="-1" aria-hidden="true">
+      <div class="modal fade" id="verClase__${clase.claseId
+    }" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
 
@@ -91,9 +87,8 @@ export function renderClaseCard(clase, usuarios) {
                 <h5 class="mb-2"><i class="bi bi-person-badge me-2"></i> Entrenador</h5>
                 <div class="d-flex gap-2 border border-2 rounded-3 p-3 align-items-center">
                   <i class="bi bi-person-fill fs-4 text-primary"></i>
-                  <h5 class="mb-0">${
-                    clase.empleado.nombre + " " + clase.empleado.apellido
-                  }</h5>
+                  <h5 class="mb-0">${clase.empleado.nombre + " " + clase.empleado.apellido
+    }</h5>
                 </div>
               </div>
 
@@ -103,9 +98,8 @@ export function renderClaseCard(clase, usuarios) {
                 <div class="col-12 col-md-4">
                   <div class="border border-2 rounded-3 p-3 h-100">
                     <h6 class="mb-2"><i class="bi bi-lightning-charge-fill me-1"></i> Intensidad</h6>
-                    <h5 class="mb-0 ${estadoIntensidad(clase.intensidad)}">${
-    clase.intensidad
-  }</h5>
+                    <h5 class="mb-0 ${estadoIntensidad(clase.intensidad)}">${clase.intensidad
+    }</h5>
                   </div>
                 </div>
 
@@ -147,9 +141,8 @@ export function renderClaseCard(clase, usuarios) {
                 <div class="col-12 col-md-6">
                   <div class="border border-2 rounded-3 p-3 h-100">
                     <h6 class="mb-2"><i class="bi bi-check-circle-fill me-1"></i> Estado</h6>
-                    <h5 class="text-primary ${estadoClase(clase.estado)}">${
-    clase.estado
-  }</h5>
+                    <h5 class="text-primary ${estadoClase(clase.estado)}">${clase.estado
+    }</h5>
                   </div>
                 </div>
               </div>
@@ -161,8 +154,7 @@ export function renderClaseCard(clase, usuarios) {
 
   // --- Modal Editar ---
   const modalEditarHtml = /*html*/ `
-    <div class="modal fade" id="editarClase__${
-      clase.claseId
+    <div class="modal fade" id="editarClase__${clase.claseId
     }" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content rounded-4">
@@ -171,16 +163,14 @@ export function renderClaseCard(clase, usuarios) {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form data-id="${
-              clase.claseId
-            }" class="editarClaseForm row needs-validation" novalidate>
+            <form data-id="${clase.claseId
+    }" class="editarClaseForm row needs-validation" novalidate>
               
               <!-- Nombre -->
               <div class="mb-3 col-md-6">
                 <label for="nombre" class="form-label">Nombre de la clase</label>
-                <input type="text" name="nombre" class="form-control" value="${
-                  clase.nombre
-                }" required>
+                <input type="text" name="nombre" class="form-control" value="${clase.nombre
+    }" required>
               </div>
 
               <!-- Imagen -->
@@ -192,67 +182,57 @@ export function renderClaseCard(clase, usuarios) {
               <!-- Descripción -->
               <div class="mb-3 col-md-6">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <textarea name="descripcion" class="form-control" rows="3" placeholder="Escribe una breve descripción de la clase">${
-                  clase.descripcion
-                }</textarea>
+                <textarea name="descripcion" class="form-control" rows="3" placeholder="Escribe una breve descripción de la clase">${clase.descripcion
+    }</textarea>
               </div>
 
               <!-- Objetivo -->
               <div class="mb-3 col-md-6">
                 <label for="objetivo" class="form-label">Objetivo</label>
-                <textarea name="objetivo" class="form-control" rows="3" placeholder="Escribe el objetivo de la clase">${
-                  clase.objetivo
-                }</textarea>
+                <textarea name="objetivo" class="form-control" rows="3" placeholder="Escribe el objetivo de la clase">${clase.objetivo
+    }</textarea>
               </div>
 
               <!-- Capacidad -->
               <div class="mb-3 col-md-6">
                 <label for="capacidad" class="form-label">Capacidad</label>
-                <input type="number" name="capacidad" class="form-control" min="1" value="${
-                  clase.capacidad
-                }" required>
+                <input type="number" name="capacidad" class="form-control" min="1" value="${clase.capacidad
+    }" required>
               </div>
 
               <!-- Fecha -->
               <div class="mb-3 col-md-6">
                 <label for="fecha" class="form-label">Fecha</label>
-                <input type="date" name="fecha" id="fecha" class="form-control" value="${
-                  clase.fecha
-                }" required>
+                <input type="date" name="fecha" id="fecha" class="form-control" value="${clase.fecha
+    }" required>
               </div>
 
               <!-- Hora Inicio -->
               <div class="mb-3 col-md-6">
                 <label for="horaInicio" class="form-label">Hora Inicio</label>
-                <input type="time" name="horaInicio" class="form-control" value="${
-                  clase.horaInicio
-                }" required>
+                <input type="time" name="horaInicio" class="form-control" value="${clase.horaInicio
+    }" required>
               </div>
 
               <!-- Hora Fin -->
               <div class="mb-3 col-md-6">
                 <label for="horaFin" class="form-label">Hora Fin</label>
-                <input type="time" name="horaFin" class="form-control" value="${
-                  clase.horaFin
-                }" required>
+                <input type="time" name="horaFin" class="form-control" value="${clase.horaFin
+    }" required>
               </div>
 
               <!-- Intensidad -->
               <div class="mb-3 col-md-6">
                 <label for="intensidad" class="form-label">Intensidad</label>
                 <select name="intensidad" class="form-select" required>
-                  <option value="" ${
-                    clase.intensidad === "" ? "selected" : ""
-                  }>Seleccione la intensidad</option>
-                  <option value="Baja" ${
-                    clase.intensidad === "Baja" ? "selected" : ""
-                  }>Baja</option>
-                  <option value="Media" ${
-                    clase.intensidad === "Media" ? "selected" : ""
-                  }>Media</option>
-                  <option value="Alta" ${
-                    clase.intensidad === "Alta" ? "selected" : ""
-                  }>Alta</option>
+                  <option value="" ${clase.intensidad === "" ? "selected" : ""
+    }>Seleccione la intensidad</option>
+                  <option value="Baja" ${clase.intensidad === "Baja" ? "selected" : ""
+    }>Baja</option>
+                  <option value="Media" ${clase.intensidad === "Media" ? "selected" : ""
+    }>Media</option>
+                  <option value="Alta" ${clase.intensidad === "Alta" ? "selected" : ""
+    }>Alta</option>
                 </select>
               </div>
 
@@ -262,17 +242,16 @@ export function renderClaseCard(clase, usuarios) {
                 <select name="entrenador" class="form-select" required>
                   <option value="">Seleccione un entrenador</option>
                   ${usuarios
-                    .filter((u) => u.rol.rolId === 2)
-                    .map(
-                      (u) => `<option value="${u.persona.personaId}" ${
-                        u.persona.personaId === clase.empleado.personaId
-                          ? "selected"
-                          : ""
-                      }>
+      .filter((u) => u.rol.rolId === 2)
+      .map(
+        (u) => `<option value="${u.persona.personaId}" ${u.persona.personaId === clase.empleado.personaId
+            ? "selected"
+            : ""
+          }>
                               ${u.persona.nombre} ${u.persona.apellido}
                              </option>`
-                    )
-                    .join("")}
+      )
+      .join("")}
                 </select>
               </div>
 

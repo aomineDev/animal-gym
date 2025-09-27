@@ -1,7 +1,8 @@
 import { cajaDeCartas } from "./dom.js";
-export function renderClaseCard(empleado, usuario) {
-    const card =  /*html*/`
-    <div class="col-12 col-md-6 col-xl-3" id="clase-card-${empleado.personaId}">
+export function renderEmpleadoCard(empleado, usuario, roles) {
+  //renderizado de cartas
+  const card =  /*html*/`
+    <div class="col-12 col-md-6 col-xl-3" id="empleado-card-${empleado.personaId}">
         <div class="mt-4 border-0 card overflow-hidden rounded-4">
             <div class="overflow-hidden">
                 <img src="${empleado.foto}" class="card-img-top w-100"
@@ -49,7 +50,8 @@ export function renderClaseCard(empleado, usuario) {
         </div>
     </div>
     `;
-    const modalEliminar = /*html*/ `
+  //renderizados del modal eliminar
+  const modalEliminar = /*html*/ `
  <div class="modal fade" id="eliminar__${empleado.personaId}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -78,7 +80,7 @@ export function renderClaseCard(empleado, usuario) {
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                 Cancelar
                             </button>
-                            <button type="button" class="btn btn-danger" id="btnConfirmarEliminar" data-id="${empleado.personaId}">
+                            <button type="button" class="btn btn-danger btnConfirmarEliminar" data-id="${empleado.personaId}">
                                 <i class="bi bi-trash me-2"></i>Eliminar
                             </button>
                         </div>
@@ -87,7 +89,8 @@ export function renderClaseCard(empleado, usuario) {
 
         
   `
-    const verDetalle = /*html*/`
+  //renderizados de constante ver detalles 
+  const verDetalle = /*html*/`
   <div class="modal fade" id="verDetalle__${empleado.personaId}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -271,8 +274,8 @@ export function renderClaseCard(empleado, usuario) {
     </div>
   </div>
 `;
-
-    const editar = /*html*/ `
+  //renderizado de editar
+  const editar = /*html*/ `
 <div class="modal fade" id="editar__${empleado.personaId}" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" id="modal-hijo">
     <div class="modal-content rounded-4">
@@ -282,7 +285,7 @@ export function renderClaseCard(empleado, usuario) {
       </div>
       <div class="modal-body">
         <!-- formulario del modal -->
-        <form id="formEmpleado-${empleado.personaId}" class="needs-validation" novalidate method="post">
+        <form id="formEmpleado-${empleado.personaId}" class="needs-validation forEmpleadoEditar" novalidate method="post">
           
           <!-- Sección Datos Personales -->
           <div class="form-section mb-4">
@@ -399,18 +402,23 @@ export function renderClaseCard(empleado, usuario) {
               <div class="form-text">Este será el nombre para iniciar sesión (basado en el DNI)</div>
             </div>
 
-            <div class="col-md-6">
-              <label for="rol_id-${empleado.personaId}" class="form-label">Rol *</label>
-              <select name="rol_id" id="rol_id-${empleado.personaId}" class="form-select crearRol" required>
+            
+          </div>
+          <div class="col-md-6">
+                 <label for="rol_id-${empleado.personaId}" class="form-label">Rol *</label>
+              <select name="rolId" id="rol_id-${empleado.personaId}" class="form-select crearRol" required>
                 <option value="">Seleccione un rol...</option>
-                <option value="${usuario.rol.rolId}" selected>${usuario.rol.nombreRol}</option>
+                ${roles
+      .map(rol => `<option value="${rol.rolId}" ${rol.rolId === usuario.rol.rolId ? "selected" : ""}>
+                                ${rol.nombreRol}
+                               </option>`)
+      .join("")}
               </select>
             </div>
-          </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar Empleado</button>
+            <button type="submit" class="btn btn-primary btnActualizarEmpleado" data-id="${empleado.personaId}">Actualizar Empleado</button>
           </div>
         </form>
       </div>
@@ -418,10 +426,30 @@ export function renderClaseCard(empleado, usuario) {
   </div>
 </div>`;
 
-    ; cajaDeCartas.insertAdjacentHTML('beforeend', card)
-    document.body.insertAdjacentHTML('beforeend', modalEliminar);
-    document.body.insertAdjacentHTML('beforeend', verDetalle);
-    document.body.insertAdjacentHTML('beforeend', editar);
-
+  ;
+  //insertar las cartas
+  const cardExistente = document.querySelector(`#empleado-card-${empleado.personaId}`);
+  if (cardExistente) {
+    cardExistente.outerHTML = card;
+  } else {
+    cajaDeCartas.insertAdjacentHTML("beforeend", card);
+  }
+  if (!document.querySelector(`#editar__${empleado.personaId}`)) {
+    document.body.insertAdjacentHTML("beforeend", editar);
+  }
+  const detalleExistente = document.querySelector(`#verDetalle__${empleado.personaId}`);
+  if (detalleExistente) {
+    // Si ya existe el modal, lo reemplazamos
+    detalleExistente.outerHTML = verDetalle;
+  } else {
+    // Si no existe, lo agregamos al body
+    document.body.insertAdjacentHTML("beforeend", verDetalle);
+  }
+  if (!document.querySelector(`#eliminar__${empleado.personaId}`)) {
+    document.body.insertAdjacentHTML("beforeend", modalEliminar);
+  }
 
 }
+
+
+
