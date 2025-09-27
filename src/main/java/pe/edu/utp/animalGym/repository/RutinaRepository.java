@@ -39,7 +39,6 @@ public class RutinaRepository {
                 "Mejorar fuerza y volumen de piernas",
                 LocalDate.now(),
                 LocalDate.now().plusMonths(2),
-                true,
                 entrenador1,
                 detallesPierna);
         save(rutinaPierna);
@@ -56,13 +55,12 @@ public class RutinaRepository {
                 "Aumentar masa muscular en brazos",
                 LocalDate.now(),
                 LocalDate.now().plusMonths(1),
-                true,
                 entrenador2,
                 detallesBrazo);
         save(rutinaBrazo);
     }
 
-    private Integer nextId = 1;
+    private Integer nextId = 3;
 
     public List<Rutina> findAll() {
         return rutinaList;

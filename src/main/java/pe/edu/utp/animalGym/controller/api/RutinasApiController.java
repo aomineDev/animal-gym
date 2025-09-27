@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/rutinas")
-public class RutinaApiController {
+public class RutinasApiController {
     @Autowired
     RutinaService service;
 

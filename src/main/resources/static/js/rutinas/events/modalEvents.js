@@ -1,7 +1,7 @@
 import Service from "../../service/index.js";
 import { renderTablaDetalle } from "../render.js";
 import { formCrearRutina, crearRutinaModal } from "../dom.js";
-import { resetFormModalClose } from "../../utils.js";
+import { resetFormModalClose, showToast } from "../../utils.js";
 
 export const renderFilaEvents = () => {
   document.body.addEventListener("click", async (event) => {
@@ -65,20 +65,53 @@ export const crearRutinaEvents = () => {
     const modal = formCrearRutina.closest("#crearRutina");
     const socioId = modal.dataset.socioId;
 
-    console.log(modal, socioId);
+    let rutina = objetoConstruido(formCrearRutina);
 
-    // Obtener datos del formulario
-    // const formData = Object.fromEntries(new FormData(formCrearRutina));
+    let rutinaService = new Service("rutinas");
+    let socioService = new Service("socios");
 
-    // console.log("Creando rutina para socio:", socioId, formData);
+    try {
+      let rutinaCompleta = await rutinaService.save(rutina);
+      console.log(rutinaCompleta);
 
-    // Aquí llamas a tu Service para crear la rutina:
-    // await rutinaService.create({...formData, socioId});
+      //Ahora le mandamos esa rutina al arreglo de rutinas al socio
+      let socioIncompleto = await socioService.findById(socioId);
+      socioIncompleto.rutinas.push(rutinaCompleta);
 
-    // Resetea el formulario y cierra el modal
-    // formCrearRutina.reset();
-    // formCrearRutina.classList.remove("was-validated");
-    // const bootstrapModal = bootstrap.Modal.getInstance(modal);
-    // bootstrapModal.hide();
+      let socioCompleto = await socioService.update(socioIncompleto, socioId);
+
+      console.log(socioCompleto);
+
+      showToast("Rutina creado correctamente", 1);
+
+      // Cerrar el modal de creación
+      const bootstrapModal = bootstrap.Modal.getInstance(crearRutinaModal);
+      bootstrapModal.hide();
+
+      // Abrir el modal de detalle
+      const detalleModalId = `detalleSocioModal__${socioId}`;
+      const detalleModalEl = document.getElementById(detalleModalId);
+      const detalleModal = new bootstrap.Modal(detalleModalEl);
+      detalleModal.show();
+    } catch (err) {
+      console.error("Error al crear rutina", err);
+      showToast("Error al crear rutina", 2);
+    }
   });
+};
+
+const objetoConstruido = (form) => {
+  const rutina = {
+    rutinaId: null,
+    nombre: form.nombre.value.trim(),
+    descripcion: form.descripcion.value.trim(),
+    objetivo: form.objetivo.value.trim(),
+    fechaInicio: form.fechaInicio.value,
+    fechaFin: form.fechaFin.value,
+    empleado: {
+      personaId: parseInt(form.entrenador.value),
+    },
+  };
+
+  return rutina;
 };
