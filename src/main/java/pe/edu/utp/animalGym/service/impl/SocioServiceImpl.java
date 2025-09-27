@@ -28,6 +28,19 @@ public class SocioServiceImpl implements SocioService {
 
     @Override
     public Socio save(Socio entity) {
+
+        // Si es update
+        if (entity.getPersonaId() != null) {
+            Socio existente = partnerRepository.findById(entity.getPersonaId())
+                    .orElseThrow(() -> new RuntimeException("Socio no encontrado"));
+
+            // Si rutinas vino null, preservar lo existente
+            if (entity.getRutinas() == null) {
+                entity.setRutinas(existente.getRutinas());
+            }
+
+        }
+
         return partnerRepository.save(entity);
     }
 
