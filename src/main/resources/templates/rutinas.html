@@ -10,44 +10,9 @@
         <h2><i class="bi bi-people me-2"></i>Gestión de Rutinas</h2>
       </div>
 
-      <!-- Tabla de sociso sin rutina Rutinas -->
-      <div class="table-responsive mt-4">
-        <h3 class="text-center">Socios sin rutina</h3>
-        <table class="table table-hover align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>Nombre</th>
-              <th>DNI</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="socio : ${socios}" th:if="${socio.rutinas == null or socio.rutinas.isEmpty()}">
-              <td th:text="${socio.nombre}"></td>
-              <td th:text="${socio.dni}"></td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#asignarRutinaModal"
-                        th:attr="data-id=${socio.personaId}">
-                        <i class="bi bi-plus-circle me-2"></i>Asignar rutina
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
       <!-- Tabla con rutinas activas -->
       <div class="table-responsive">
-        <h3 class="text-center mt-5">Socios con rutinas</h3>
+        <h3 class="text-center mt-5">Tabla de socios</h3>
         <table id="tablaPrincipal" class="table table-hover align-middle">
           <thead class="table-light">
             <tr>
@@ -167,7 +132,8 @@
                               </button>
                               <ul class="dropdown-menu">
                                 <li>
-                                  <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#">
+                                  <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                    th:attr="data-bs-target=|#editarRutina__${rutina.rutinaId}|">
                                     <i class="bi bi-pencil me-2"></i>Editar
                                   </a>
                                 </li>
@@ -277,6 +243,66 @@
       </div>
     </div>
 
+    <!-- Modal Editar rutina-->
+    <div th:each="socio : ${socios}">
+      <div th:each="rutina : ${socio.rutinas}">
+        <div class="modal fade" th:id="|editarRutina__${rutina.rutinaId}|" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Rutina</h1> <button type="button"
+                  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="row needs-validation editarRutinaForm" novalidate>
+
+                  <!-- nombre-->
+                  <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la rutina</label>
+                    <input type="text" name="nombre" class="form-control" th:value="${rutina.nombre}" required>
+                  </div>
+
+                  <!-- Entrenador -->
+                  <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label> <select
+                      name="entrenador" class="form-select" id="select_entrenador" required>
+                      <option value="">Seleccione un entrenador</option>
+                      <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
+                        th:value="${usuario.persona.personaId}"
+                        th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}"
+                        th:selected="${usuario.persona.personaId == rutina.empleado.personaId}">
+                      </option>
+                    </select>
+                  </div>
+
+                  <!-- descripcion -->
+                  <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
+                      placeholder="Escribe una breve descripción de la rutina" th:text="${rutina.descripcion}"
+                      required></textarea>
+                  </div>
+
+                  <!-- objetivo -->
+                  <div class="mb-3 col-md-6"> <label for="objetivo" class="form-label">Objetivo</label>
+                    <textarea name="objetivo" id="objetivo" class="form-control" rows="3"
+                      placeholder="Escribe el objetivo de la rutina" th:text="${rutina.objetivo}" required></textarea>
+                  </div>
+
+                  <!-- fechaInicio -->
+                  <div class="mb-3 col-md-6"> <label for="fechaInicio" class="form-label">Fecha Inicio</label> <input
+                      type="date" name="fechaInicio" class="form-control" th:value="${rutina.fechaInicio}" required>
+                  </div>
+
+                  <!-- fechaFin -->
+                  <div class="mb-3 col-md-6"> <label for="fechaFin" class="form-label">Fecha Fin</label> <input
+                      type="date" name="fechaFin" class="form-control" th:value="${rutina.fechaFin}" required> </div>
+                  <button type="submit" class="btn btn-primary col-5 ms-3 btnEditarRutina"
+                    th:data-socio-id="${socio.personaId}" th:data-id="${rutina.rutinaId}">Editar rutina</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Modal Eliminar -->
     <div th:each="socio: ${socios}">
       <div th:each="rutina: ${socio.rutinas}">

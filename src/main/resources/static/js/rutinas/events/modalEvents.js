@@ -3,6 +3,18 @@ import { renderFilaSocio, renderTablaDetalle } from "../render.js";
 import { formCrearRutina, crearRutinaModal } from "../dom.js";
 import { resetFormModalClose, showToast } from "../../utils.js";
 
+let usuarios = [];
+
+async function fetchUsuarios() {
+  try {
+    const response = await fetch("/api/usuarios");
+    if (!response.ok) throw new Error("Error al obtener usuarios");
+    usuarios = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export const renderFilaEvents = () => {
   document.body.addEventListener("click", async (event) => {
     const fila = event.target.closest(".fila-rutina");
@@ -44,6 +56,8 @@ export const renderFilaEvents = () => {
 };
 
 export const crearRutinaEvents = () => {
+  fetchUsuarios();
+
   //reseteo del modal: Solo si cierra sin hacer cambios
   resetFormModalClose(crearRutinaModal, formCrearRutina);
 
@@ -82,7 +96,7 @@ export const crearRutinaEvents = () => {
 
       console.log(socioCompleto);
 
-      renderFilaSocio(socioCompleto);
+      renderFilaSocio(socioCompleto, usuarios);
       //renderTablaRutinaModal(socioCompleto);
 
       showToast("Rutina creado correctamente", 1);
@@ -103,7 +117,86 @@ export const crearRutinaEvents = () => {
   });
 };
 
+export const editarRutinaEvents = () => {
+  fetchUsuarios();
+  document.body.addEventListener("click", async (event) => {
+    if (!event.target.classList.contains("btnEditarRutina")) return;
+
+    const rutinaId = event.target.getAttribute("data-id");
+    const socioId = event.target.getAttribute("data-socio-id");
+
+    console.log("rutina ", rutinaId, " y socio ", socioId);
+
+    //Busca de abajo a arriba el modal
+    const modal = event.target.closest(".modal");
+    const form = modal.querySelector(".editarRutinaForm");
+
+    if (!form) return;
+
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+
+    let rutina = objetoConstruido(form);
+    rutina.rutinaId = rutinaId;
+
+    console.log("objeto incompleto ", rutina);
+
+    let rutinaService = new Service("rutinas");
+    let socioService = new Service("socios");
+
+    try {
+      //actualizo la rutina
+      let rutinaCompleta = await rutinaService.update(rutina, rutinaId);
+
+      //llamo al socio de esa rutina
+      let socioIncompleto = await socioService.findById(socioId);
+
+      //busco la rutina del socio incompleto para actulizar
+      let index = socioIncompleto.rutinas.findIndex(
+        (r) => r.rutinaId === Number(rutinaId)
+      );
+      console.log(index);
+
+      socioIncompleto.rutinas[index] = rutinaCompleta;
+
+      let socioActualizado = await socioService.update(
+        socioIncompleto,
+        socioId
+      );
+
+      renderFilaSocio(socioActualizado, usuarios);
+
+      showToast("Rutina actualizada correctamente", 1);
+
+      // Cerrar el modal de creación
+      const bootstrapModal = bootstrap.Modal.getInstance(
+        document.getElementById(`editarRutina__${rutinaId}`)
+      );
+      bootstrapModal.hide();
+
+      // Abrir el modal de detalle
+      const detalleModal = new bootstrap.Modal(
+        document.getElementById(`detalleSocioModal__${socioId}`)
+      );
+      detalleModal.show();
+
+      console.log(
+        "Socio actualizado con rutina reemplazada: ",
+        socioActualizado
+      );
+    } catch (err) {
+      console.error("Error al actualizar rutina", err);
+      showToast("Error al actualizar rutina", 2);
+    }
+  });
+};
+
 export const eliminarRutinaEvents = () => {
+  fetchUsuarios();
   document.body.addEventListener("click", async (event) => {
     if (!event.target.classList.contains("btnConfirmarEliminar")) return;
 
@@ -136,7 +229,7 @@ export const eliminarRutinaEvents = () => {
         console.log("eliminado bien");
 
         //renderizo
-        renderFilaSocio(socioActualizado);
+        renderFilaSocio(socioActualizado, usuarios);
         //renderTablaRutinaModal(socioActualizado);
         showToast("Rutina eliminada correctamente", 1);
 

@@ -40,7 +40,7 @@ public class RutinaServiceImpl implements RutinaService {
                     .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
 
             // Si detalleList vino null, preservar lo existente
-            if (entity.getDetalleRutinaList() == null) {
+            if (entity.getDetalleRutinaList().isEmpty()) {
                 entity.setDetalleRutinaList(existente.getDetalleRutinaList());
             }
 

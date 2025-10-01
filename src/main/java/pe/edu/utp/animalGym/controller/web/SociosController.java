@@ -12,9 +12,7 @@ import pe.edu.utp.animalGym.service.impl.SocioServiceImpl;
 
 @Controller
 public class SociosController {
-    
-    // @Autowired
-    // private SocioServiceImpl socio;
+
     @Autowired
     private SocioServiceImpl socioRepository;
      @Autowired

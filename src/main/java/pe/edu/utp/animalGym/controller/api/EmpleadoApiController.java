@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import pe.edu.utp.animalGym.model.Clase;
 import pe.edu.utp.animalGym.model.Empleado;
 import pe.edu.utp.animalGym.service.EmpleadoService;
 
