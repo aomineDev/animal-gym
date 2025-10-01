@@ -12,7 +12,7 @@ import pe.edu.utp.animalGym.model.Membresia;
 public class MembresiaRepository {
 
     private List<Membresia> membershipList = new ArrayList<>();
-    private Integer nextId = 1;
+    private Integer nextId = 3;
 
     public MembresiaRepository(){
 
@@ -23,7 +23,7 @@ public class MembresiaRepository {
                             "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
                             30, 300, 150, LocalDate.of(2025, 4, 12),
                             LocalDate.of(2025, 12, 19), "https://picsum.photos/400/250?random=2", false, 100));
-        save(new Membresia(3, "Familiar",
+        /*save(new Membresia(3, "Familiar",
                             "Acceso para 3 miembros de la familia, incluye máquinas, clases grupales y descuentos en nutrición.",
                             90, 750,600,
                             LocalDate.of(2025, 1, 10),
@@ -45,7 +45,7 @@ public class MembresiaRepository {
                             LocalDate.of(2025, 6, 15),
                             LocalDate.of(2025, 7, 15),
                             "https://picsum.photos/400/250?random=6",
-                            false, 300));
+                            false, 300))*/;
     }
 
     public List<Membresia> findAll() {
@@ -57,7 +57,7 @@ public class MembresiaRepository {
     }
 
     public Membresia save(Membresia membership) {
-        if (membership.getMenbresiaId() == null) {
+        if (membership.getMenbresiaId() == null || membership.getMenbresiaId() <= 0) {
             membership.setMenbresiaId(nextId++);
         } else {
             deleteById(membership.getMenbresiaId());

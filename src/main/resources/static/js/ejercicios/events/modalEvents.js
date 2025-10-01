@@ -5,6 +5,7 @@ import { showToast } from "../../toast.js";
 
 const servicioEjercicio = new Service("ejercicios");
 
+
 export const crearEjercicio = () => {
 
   formulario.addEventListener('submit', async function (e) {
@@ -75,6 +76,9 @@ export const eliminarEjercicio = () => {
           );
           if (modal) modal.hide();
 
+          document.querySelector("#editarEjercicio__"+id).remove();
+          document.querySelector("#eliminarEjercicio__"+id).remove();
+
           showToast(`Ejercicio ${id} eliminado`, 2);
 
         } else {
@@ -89,20 +93,20 @@ export const eliminarEjercicio = () => {
   });
 };
 
+
 export const actualizarEjercicio = () => {
  
   document.body.addEventListener("click", async function (e) {
     const btn = e.target.closest(".actualizarEjercicio");
-
+    // console.log(btn);
     if (btn) {
       e.preventDefault();
-      const id = btn.dataset.id;
-      // console.log("id", id);
+      const id = btn.dataset.id;//data-id
+      const formValid = document.querySelector('#editarEjercicio__'+id+" #socioForm")
 
-      const formData = new FormData(document.querySelector('#socioForm'))
+      const formData = new FormData(formValid)
 
-      const objActualizado = {
-        ejercicioId: id,
+      const obj = {
         nombre: formData.get("nombre"),
         descripcion: formData.get("descripcion"),
         grupoMuscular: formData.get("grupoMuscular"), 
@@ -110,13 +114,27 @@ export const actualizarEjercicio = () => {
       };
 
       try {
-        const response = await servicioEjercicio.update(objActualizado, id);
+        const ejercicioActualizado = await servicioEjercicio.update(obj, id);
 
-        if (response.ok) {
-          const nuevoHTML = renderActualizar(objActualizado);
-          document.getElementById(`elementEjercicio_${id}`).outerHTML = nuevoHTML;
-
+        const edit = document.getElementById("elementEjercicio_" + id);
+        if (edit) {
+          edit.remove();
         }
+
+        renderEjercicioCard(ejercicioActualizado);
+          
+        formValid.reset();
+        formValid.classList.remove("was-validated");
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("editarEjercicio__"+id)
+        );
+        if (modal) modal.hide();
+        
+        document.querySelector("#editarEjercicio__"+id).remove();
+        document.querySelector("#eliminarEjercicio__"+id).remove();
+
+        showToast(`Se ha editado el ejercicio "${obj.nombre}"`, 1);
+
       } catch (error) {
         console.error("Error al actualizar:", error);
       }

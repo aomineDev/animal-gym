@@ -56,7 +56,7 @@ export function renderEjercicioCard(ejercicio) {
                       <div class="col-md-6">
                           <label class="form-label">Nombre</label>
                           <div class="input-group">
-                              <input type="text" id="nombre" value="${ejercicio.nombre}" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
+                              <input type="text" id="nombre" name="nombre" value="${ejercicio.nombre}" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
                                   required>
                               <span class="input-group-text">
                                   <i class="bi bi-person"></i>
@@ -69,7 +69,7 @@ export function renderEjercicioCard(ejercicio) {
                       <div class="col-md-6">
                           <label class="form-label">Grupo Muscular</label>
                           <div class="input-group">
-                              <input type="text" id="grupoMuscular" value="${ejercicio.grupoMuscular}" class="form-control" required>
+                              <input type="text" id="grupoMuscular" name="grupoMuscular" value="${ejercicio.grupoMuscular}" class="form-control" required>
                               <span class="input-group-text">
                                   <i class="bi bi-person"></i>
                               </span>
@@ -81,7 +81,7 @@ export function renderEjercicioCard(ejercicio) {
                       <div class="col-md-6">
                           <label class="form-label">Equipo</label>
                           <div class="input-group">
-                              <input type="text" id="equipo" value="${ejercicio.equipo}" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
+                              <input type="text" id="equipo" name="equipo" value="${ejercicio.equipo}" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
                                   required>
                               <span class="input-group-text">
                                   <i class="bi bi-person"></i>
@@ -140,7 +140,7 @@ export function renderEjercicioCard(ejercicio) {
   `;
 
 
-  
+
 
   insertarDOM(listaEjercicio, itemEjercicio);
   insertarDOM(document.body, modalEditar);
