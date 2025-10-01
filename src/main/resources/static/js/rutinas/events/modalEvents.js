@@ -103,6 +103,47 @@ export const crearRutinaEvents = () => {
   });
 };
 
+export const editarRutinaEvents = () => {
+  document.body.addEventListener("click", async (event) => {
+    if (!event.target.classList.contains("btnEditarRutina")) return;
+
+    const rutinaId = event.target.getAttribute("data-id");
+    const socioId = event.target.getAttribute("data-socio-id");
+
+    console.log("rutina ", rutinaId, " y socio ", socioId);
+
+    //Busca de abajo a arriba el modal
+    const modal = event.target.closest(".modal");
+    const form = modal.querySelector(".editarRutinaForm");
+
+    if (!form) return;
+
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+
+    let rutina = objetoConstruido(form);
+    rutina.rutinaId = rutinaId;
+
+    console.log("objeto incompleto ", rutina);
+
+    let rutinaService = new Service("rutinas");
+    let socioService = new Service("socios");
+
+    try {
+      let rutinaCompleta = await rutinaService.update(rutina, rutinaId);
+      let socioIncompleto = await socioService.findById(socioId);
+      socioIncompleto.console.log("objeto en bd ", rutinaCompleta);
+    } catch (err) {
+      console.error("Error al actualizar rutina", err);
+      showToast("Error al actualizar rutina", 2);
+    }
+  });
+};
+
 export const eliminarRutinaEvents = () => {
   document.body.addEventListener("click", async (event) => {
     if (!event.target.classList.contains("btnConfirmarEliminar")) return;

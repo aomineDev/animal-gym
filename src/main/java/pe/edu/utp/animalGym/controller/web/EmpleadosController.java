@@ -5,22 +5,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import pe.edu.utp.animalGym.model.Usuario;
-import pe.edu.utp.animalGym.service.impl.EmpleadoServiceImpl;
-import pe.edu.utp.animalGym.service.impl.RolServiceImpl;
-import pe.edu.utp.animalGym.service.impl.UsuarioServiceImpl;
+import pe.edu.utp.animalGym.service.EmpleadoService;
+import pe.edu.utp.animalGym.service.RolService;
+import pe.edu.utp.animalGym.service.UsuarioService;
 
 @Controller
 public class EmpleadosController {
 
     @Autowired
-    private RolServiceImpl serviceRol;
+    private RolService serviceRol;
 
     @Autowired
-    private UsuarioServiceImpl serviceUsuario;
+    private UsuarioService serviceUsuario;
 
     @Autowired
-    private EmpleadoServiceImpl serviceEmpleado;
+    private EmpleadoService serviceEmpleado;
 
     @GetMapping("/empleados")
 

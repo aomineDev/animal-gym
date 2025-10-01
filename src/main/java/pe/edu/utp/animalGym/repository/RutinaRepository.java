@@ -87,17 +87,4 @@ public class RutinaRepository {
         rutinaList.removeIf(r -> r.getRutinaId() == id);
     }
 
-    // ---- Para los detalles ----
-    public void addDetalleToRutina(Integer rutinaId, DetalleRutina detalle) {
-        findById(rutinaId).ifPresent(rutina -> rutina.getDetalleRutinaList().add(detalle));
-    }
-
-    public void removeDetalleFromRutina(Integer rutinaId, Integer detalleId) {
-        findById(rutinaId).ifPresent(rutina -> rutina.getDetalleRutinaList()
-                .removeIf(detalle -> detalle.getDetalleRutinaId().equals(detalleId)));
-    }
-
-    public void updateDetallesRutina(Integer rutinaId, List<DetalleRutina> nuevosDetalles) {
-        findById(rutinaId).ifPresent(rutina -> rutina.setDetalleRutinaList(new ArrayList<>(nuevosDetalles)));
-    }
 }
