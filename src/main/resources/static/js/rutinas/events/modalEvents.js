@@ -4,12 +4,23 @@ import { formCrearRutina, crearRutinaModal } from "../dom.js";
 import { resetFormModalClose, showToast } from "../../utils.js";
 
 let usuarios = [];
+let ejercicioss = [];
 
 async function fetchUsuarios() {
   try {
     const response = await fetch("/api/usuarios");
     if (!response.ok) throw new Error("Error al obtener usuarios");
     usuarios = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function fetchEjercicios() {
+  let ejercicioService = new Service("ejercicios");
+
+  try {
+    ejercicioss = await ejercicioService.findAll();
   } catch (error) {
     console.error(error);
   }
@@ -57,6 +68,7 @@ export const renderFilaEvents = () => {
 
 export const crearRutinaEvents = () => {
   fetchUsuarios();
+  fetchEjercicios();
 
   //reseteo del modal: Solo si cierra sin hacer cambios
   resetFormModalClose(crearRutinaModal, formCrearRutina);
@@ -81,20 +93,17 @@ export const crearRutinaEvents = () => {
 
     let rutina = objetoConstruido(formCrearRutina);
 
-    let rutinaService = new Service("rutinas");
-    let socioService = new Service("socios");
-
     try {
-      let rutinaCompleta = await rutinaService.save(rutina);
-      console.log(rutinaCompleta);
+      const response = await fetch(`/api/socios/${socioId}/rutinas`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(rutina),
+      });
 
-      //Ahora le mandamos esa rutina al arreglo de rutinas al socio
-      let socioIncompleto = await socioService.findById(socioId);
-      socioIncompleto.rutinas.push(rutinaCompleta);
-
-      let socioCompleto = await socioService.update(socioIncompleto, socioId);
-
-      console.log(socioCompleto);
+      const socioReconstruido = await response.json();
+      console.log("socio reconstruido ", socioReconstruido);
 
       showToast("Rutina creado correctamente", 1);
 
@@ -102,7 +111,7 @@ export const crearRutinaEvents = () => {
       const bootstrapModal = bootstrap.Modal.getInstance(crearRutinaModal);
       bootstrapModal.hide();
 
-      renderFilaSocio(socioCompleto, usuarios);
+      renderFilaSocio(socioReconstruido, usuarios, ejercicioss);
       //renderTablaRutinaModal(socioCompleto);
 
       // Abrir el modal de detalle
@@ -176,7 +185,7 @@ export const editarRutinaEvents = () => {
       );
       bootstrapModal.hide();
 
-      renderFilaSocio(socioActualizado, usuarios);
+      renderFilaSocio(socioActualizado, usuarios, ejercicioss);
 
       // Abrir el modal de detalle
       const detalleModal = new bootstrap.Modal(
@@ -235,7 +244,7 @@ export const eliminarRutinaEvents = () => {
         bootstrapModal.hide();
 
         //renderizo
-        renderFilaSocio(socioActualizado, usuarios);
+        renderFilaSocio(socioActualizado, usuarios, ejercicioss);
         //renderTablaRutinaModal(socioActualizado);
         showToast("Rutina eliminada correctamente", 1);
 
@@ -281,6 +290,8 @@ export const agregarEjercicioEvents = () => {
 
     console.log(detalleRutina);
 
+    let socioServices = new Service("socios");
+
     try {
       //agregamos ejercicio a la rutina
       const response = await fetch(`/api/rutinas/${rutinaId}/detalles`, {
@@ -295,11 +306,16 @@ export const agregarEjercicioEvents = () => {
 
       console.log("rutina reconstruida ", data);
 
+      let socioCompleto = await socioServices.findById(socioId);
+
       // Cerrar el modal de creación
       const bootstrapModal = bootstrap.Modal.getInstance(
         document.getElementById(`agregarEjercicio__${rutinaId}`)
       );
       bootstrapModal.hide();
+
+      //renderizo
+      // renderFilaSocio(socioCompleto, usuarios, ejercicioss);
 
       // Abrir el modal de detalle
       const detalleModalId = `detalleSocioModal__${socioId}`;

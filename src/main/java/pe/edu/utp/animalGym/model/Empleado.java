@@ -18,8 +18,9 @@ public class Empleado extends Person {
     private String tipoContrato;
     private String especialidad;
 
-    // constructor con la herencia de persona para poder hacer los objetos
-    public Empleado(Integer personaId, String dni, String nombre, String apellido, String telefono,
+    public Empleado(Integer personaId,
+            String dni, String nombre,
+            String apellido, String telefono,
             String genero, String email, LocalDate fechaNacimiento, LocalDate fechaIngreso, String foto,
             double salario, String tipoContrato, String especialidad) {
         super(personaId, dni, nombre, apellido, telefono, genero, email, fechaNacimiento, fechaIngreso);
@@ -28,5 +29,4 @@ public class Empleado extends Person {
         this.tipoContrato = tipoContrato;
         this.especialidad = especialidad;
     }
-
 }

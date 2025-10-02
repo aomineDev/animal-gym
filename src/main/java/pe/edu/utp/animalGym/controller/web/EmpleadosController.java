@@ -25,17 +25,11 @@ public class EmpleadosController {
 
     public String employee(Model model) {
         model.addAttribute("content", "empleados :: content");
-
-        // Modales
         model.addAttribute("modal", "empleados :: modals");
         model.addAttribute("activePage", "empleados");
-
-        // pintar empleados en la tabla
         model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
-        // pintar el rol
         model.addAttribute("contenedorRol", serviceRol.findAll());
         model.addAttribute("contenedorUser", serviceUsuario.findAll());
-
         return "layout";
     }
 

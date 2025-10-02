@@ -1,7 +1,7 @@
 import { formulario } from "../dom.js";
 import Service from "../../service/index.js"
 import { renderEjercicioCard } from "../render.js";
-import { showToast } from "../../toast.js";
+import { showToast } from "../../utils.js";
 
 const servicioEjercicio = new Service("ejercicios");
 
@@ -13,7 +13,7 @@ export const crearEjercicio = () => {
     e.preventDefault();
     e.stopPropagation();
     // console.log(this)
-      // validacion de Bootstrap
+    // validacion de Bootstrap
     if (!this.checkValidity()) {
       this.classList.add("was-validated");
       return;
@@ -24,7 +24,7 @@ export const crearEjercicio = () => {
     const objEjercicioData = {
       nombre: formData.get("nombre"),//name del input
       descripcion: formData.get("descripcion"),
-      grupoMuscular: formData.get("grupoMuscular"), 
+      grupoMuscular: formData.get("grupoMuscular"),
       equipo: formData.get("equipo"),
     };
 
@@ -76,8 +76,8 @@ export const eliminarEjercicio = () => {
           );
           if (modal) modal.hide();
 
-          document.querySelector("#editarEjercicio__"+id).remove();
-          document.querySelector("#eliminarEjercicio__"+id).remove();
+          document.querySelector("#editarEjercicio__" + id).remove();
+          document.querySelector("#eliminarEjercicio__" + id).remove();
 
           showToast(`Ejercicio ${id} eliminado`, 2);
 
@@ -95,21 +95,21 @@ export const eliminarEjercicio = () => {
 
 
 export const actualizarEjercicio = () => {
- 
+
   document.body.addEventListener("click", async function (e) {
     const btn = e.target.closest(".actualizarEjercicio");
     // console.log(btn);
     if (btn) {
       e.preventDefault();
       const id = btn.dataset.id;//data-id
-      const formValid = document.querySelector('#editarEjercicio__'+id+" #socioForm")
+      const formValid = document.querySelector('#editarEjercicio__' + id + " #socioForm")
 
       const formData = new FormData(formValid)
 
       const obj = {
         nombre: formData.get("nombre"),
         descripcion: formData.get("descripcion"),
-        grupoMuscular: formData.get("grupoMuscular"), 
+        grupoMuscular: formData.get("grupoMuscular"),
         equipo: formData.get("equipo")
       };
 
@@ -122,16 +122,16 @@ export const actualizarEjercicio = () => {
         }
 
         renderEjercicioCard(ejercicioActualizado);
-          
+
         formValid.reset();
         formValid.classList.remove("was-validated");
         const modal = bootstrap.Modal.getInstance(
-          document.getElementById("editarEjercicio__"+id)
+          document.getElementById("editarEjercicio__" + id)
         );
         if (modal) modal.hide();
-        
-        document.querySelector("#editarEjercicio__"+id).remove();
-        document.querySelector("#eliminarEjercicio__"+id).remove();
+
+        document.querySelector("#editarEjercicio__" + id).remove();
+        document.querySelector("#eliminarEjercicio__" + id).remove();
 
         showToast(`Se ha editado el ejercicio "${obj.nombre}"`, 1);
 
@@ -139,6 +139,6 @@ export const actualizarEjercicio = () => {
         console.error("Error al actualizar:", error);
       }
     }
-});
+  });
 
 }
