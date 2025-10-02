@@ -30,6 +30,13 @@ public class UsuarioRepository {
         Empleado emp2 = empleadoRepository.findById(2).orElse(null);
         Empleado emp3 = empleadoRepository.findById(3).orElse(null);
         Empleado emp4 = empleadoRepository.findById(4).orElse(null);
+        Empleado emp5 = empleadoRepository.findById(5).orElse(null);
+
+        Empleado emp6 = empleadoRepository.findById(6).orElse(null);
+        Empleado emp7 = empleadoRepository.findById(7).orElse(null);
+        Empleado emp8 = empleadoRepository.findById(8).orElse(null);
+        Empleado emp9 = empleadoRepository.findById(9).orElse(null);
+        Empleado emp10 = empleadoRepository.findById(10).orElse(null);
         // usuario1
         save(new Usuario(
                 "123456", rol2, emp1));
@@ -38,10 +45,22 @@ public class UsuarioRepository {
                 "123456", rol2, emp2));
         // usuario3
         save(new Usuario(
-                "123456", rol1, emp3));
+                "123456", rol2, emp3));
         // usuario4
         save(new Usuario(
-                "123456", rol1, emp4));
+                "123456", rol2, emp4));
+        save(new Usuario(
+                "123456", rol2, emp5));
+        save(new Usuario(
+                "123456", rol2, emp6));
+        save(new Usuario(
+                "123456", rol2, emp7));
+        save(new Usuario(
+                "123456", rol1, emp8));
+        save(new Usuario(
+                "123456", rol1, emp9));
+        save(new Usuario(
+                "123456", rol2, emp10));
 
     }
 
