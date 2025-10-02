@@ -16,6 +16,7 @@
     min-height: 150px;
     display: flex;
     align-items: center;
+    border-color: rgb(39, 39, 39);
 }
 
 .plan-card.active {
@@ -25,4 +26,26 @@
 
 .plan-card:hover {
     border-color: var(--red);
+}
+
+.detalle-compra-card {
+    background: var(--dark-lighten);
+    color: #f1f1f1;
+    border: 2px solid transparent;
+    border-radius: 10px;
+}
+
+.detalle-compra-card h5,
+.detalle-compra-card h6 {
+    color: #ffffff;
+}
+
+.detalle-compra-card .text-danger {
+    color: var(--red) !important;
+}
+
+.detalle-compra-card .list-group-item {
+    background: transparent;
+    color: #ddd;
+    border-color: rgba(255, 255, 255, 0.1);
 }

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+
+<body>
+    <th:block th:fragment="content">
+
+        <body>
+            <th:block th:fragment="content">
+
+                <div class="body_client">
+                    <!-- HEADER -->
+                    <header>
+                        <div class="header__menu">
+                            <nav class="navbar navbar-expand-lg bg-black d-flex fixed-top">
+                                <div class="container">
+                                    <a class="navbar-brand text-white" th:href="@{/landing}">
+                                        <img src="img/logo.png" alt="Logo" class="img-fluid"
+                                            style="max-height: 50px; width: auto;">
+                                    </a>
+                                </div>
+                            </nav>
+                        </div>
+                    </header>
+
+                    <!-- Contenedor principal -->
+                    <div class="container mt-5 pt-5">
+
+                        <!-- 🔴 Pasos de progreso -->
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="step text-center mx-3">
+                                <div class="circle bg-red-gym text-white mx-auto">1</div>
+                                <small class="d-block mt-2">Información</small>
+                            </div>
+                            <div class="line my-auto"></div>
+                            <div class="step text-center mx-3">
+                                <div class="circle bg-dark text-white mx-auto">2</div>
+                                <small class="d-block mt-2">Pago</small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Columna izquierda: pasos -->
+                            <div class="col-lg-7">
+                                <!-- Paso 1: Información -->
+                                <div id="step-info">
+                                    <div class="card detalle-compra-card">
+                                        <div class="card-body">
+                                            <h5 class="title-3 mb-3">Información Personal</h5>
+                                            <form id="formInfo">
+                                                <div class="row">
+                                                    <!-- DNI -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>DNI</label>
+                                                        <input type="text" class="form-control" name="dni" required
+                                                            pattern="\d{8}" maxlength="8" minlength="8"
+                                                            title="El DNI debe tener 8 dígitos" placeholder="8 dígitos">
+                                                    </div>
+
+                                                    <!-- Género -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Género</label>
+                                                        <select class="form-control" name="genero" required>
+                                                            <option value="">Seleccione</option>
+                                                            <option>Masculino</option>
+                                                            <option>Femenino</option>
+                                                            <option>Otro</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <!-- Nombre -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Nombres</label>
+                                                        <input type="text" class="form-control" name="nombre" required
+                                                            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}"
+                                                            title="El nombre solo debe contener letras y espacios (mínimo 2 caracteres)">
+                                                    </div>
+
+                                                    <!-- Apellido -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Apellidos</label>
+                                                        <input type="text" class="form-control" name="apellido" required
+                                                            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}"
+                                                            title="El apellido solo debe contener letras y espacios (mínimo 2 caracteres)">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <!-- Teléfono -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Teléfono</label>
+                                                        <input type="tel" class="form-control" name="telefono" required
+                                                            pattern="\d{9}" maxlength="9" minlength="9"
+                                                            title="El teléfono debe tener exactamente 9 dígitos">
+                                                    </div>
+
+                                                    <!-- Email -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control" name="email" required
+                                                            placeholder="ejemplo@correo.com">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <!-- Fecha de nacimiento -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Fecha de Nacimiento</label>
+                                                        <input type="date" class="form-control" name="fechaNacimiento"
+                                                            required max="2007-12-31"
+                                                            title="Debes ser mayor de 18 años">
+                                                    </div>
+
+                                                    <!-- Clave -->
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Clave</label>
+                                                        <input type="password" class="form-control" name="clave"
+                                                            required minlength="6" maxlength="20"
+                                                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$"
+                                                            title="La clave debe tener entre 6 y 20 caracteres, con al menos una letra y un número">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Botón -->
+                                                <button type="button" class="btn bg-red-gym text-white w-100"
+                                                    id="btnContinuar">
+                                                    Continuar
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Paso 2: Pasarela de pago -->
+                                <div id="step-pago" class="d-none">
+                                    <div class="card detalle-compra-card mt-4" id="pasarelaPago">
+                                        <div class="card-body">
+                                            <h5 class="title-3 mb-3">Pago con tarjeta</h5>
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label>Número de tarjeta</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="XXXX XXXX XXXX XXXX" required pattern="\d{16}">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Fecha de expiración</label>
+                                                        <input type="text" class="form-control" placeholder="MM/AA"
+                                                            required pattern="\d{2}/\d{2}">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>CVV</label>
+                                                        <input type="text" class="form-control" placeholder="123"
+                                                            required pattern="\d{3}">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Nombre en la tarjeta</label>
+                                                    <input type="text" class="form-control" required>
+                                                </div>
+                                                <button type="submit" class="btn bg-red-gym text-white w-100">
+                                                    Pagar ahora
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Columna derecha: Resumen -->
+                            <div class="col-lg-5">
+                                <div class="card detalle-compra-card">
+                                    <div class="card-body">
+                                        <h5 class="title-3">Resumen del pedido</h5>
+                                        <p class="mb-1">Gimnasio: <span class="text-danger">Gym Santa Rosa</span></p>
+                                        <p class="mb-1">Plan: <strong id="detallePlan">PLAN FULL</strong></p>
+                                        <p class="mb-1">Total:
+                                            <strong class="text-danger">S/
+                                                <span id="detallePrecio">99.90</span>
+                                            </strong>
+                                        </p>
+                                        <h6 class="title-3">Desglose</h6>
+                                        <ul class="list-group" id="desglosePagos">
+                                            <li class="list-group-item">Inscripción: Gratis</li>
+                                            <li class="list-group-item">Mantenimiento: Gratis</li>
+                                            <li class="list-group-item">Fidelidad: 12 meses</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Script para manejar pasos -->
+                <script>
+                    document.getElementById("btnContinuar").addEventListener("click", () => {
+                        // Ocultar paso 1 y mostrar paso 2
+                        document.getElementById("step-info").classList.add("d-none");
+                        document.getElementById("step-pago").classList.remove("d-none");
+
+                        // Cambiar colores en los pasos
+                        document.querySelectorAll(".circle")[0].classList.remove("bg-red-gym");
+                        document.querySelectorAll(".circle")[0].classList.add("bg-dark");
+                        document.querySelectorAll(".circle")[1].classList.remove("bg-dark");
+                        document.querySelectorAll(".circle")[1].classList.add("bg-red-gym");
+                    });
+                </script>
+
+                <!-- Estilos extra -->
+                <style>
+                    .circle {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: bold;
+                    }
+
+                    .line {
+                        width: 60px;
+                        height: 3px;
+                        background: #ccc;
+                    }
+
+                    .detalle-compra-card {
+                        background-color: var(--dark-lighten);
+                        color: white;
+                        border: none;
+                    }
+
+                    .list-group-item {
+                        background-color: transparent;
+                        border: none;
+                        color: white;
+                        padding: 0.5rem 0;
+                    }
+                </style>
+            </th:block>
+        </body>
+
+
+    </th:block>
+
+    <th:block th:fragment="modal">
+    </th:block>
+</body>
+
+</html>
