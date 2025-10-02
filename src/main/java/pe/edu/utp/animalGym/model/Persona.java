@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Person {
+public class Persona {
     private Integer personaId;
     private String dni;
     private String nombre;

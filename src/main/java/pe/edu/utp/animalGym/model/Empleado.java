@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Empleado extends Person {
+public class Empleado extends Persona {
     private String foto;
     private double salario;
     private String tipoContrato;
