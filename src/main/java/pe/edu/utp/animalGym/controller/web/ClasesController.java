@@ -2,18 +2,19 @@ package pe.edu.utp.animalGym.controller.web;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import pe.edu.utp.animalGym.service.impl.ClaseServiceImpl;
-import pe.edu.utp.animalGym.service.impl.UsuarioServiceImpl;
+
+import pe.edu.utp.animalGym.service.ClaseService;
+import pe.edu.utp.animalGym.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class ClasesController {
   @Autowired
-  private ClaseServiceImpl service;
+  private ClaseService service;
 
   @Autowired
-  private UsuarioServiceImpl usuarioServiceImpl;
+  private UsuarioService usuarioService;
 
   @GetMapping("/clases")
   public String clase(Model model) {
@@ -22,7 +23,7 @@ public class ClasesController {
     model.addAttribute("modal", "clases :: modals");
     model.addAttribute("activePage", "clases");
     model.addAttribute("clases", service.findAll());
-    model.addAttribute("usuarios", usuarioServiceImpl.findAll());
+    model.addAttribute("usuarios", usuarioService.findAll());
 
     return "layout";
   }
