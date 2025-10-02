@@ -96,14 +96,14 @@ export const crearRutinaEvents = () => {
 
       console.log(socioCompleto);
 
-      renderFilaSocio(socioCompleto, usuarios);
-      //renderTablaRutinaModal(socioCompleto);
-
       showToast("Rutina creado correctamente", 1);
 
       // Cerrar el modal de creación
       const bootstrapModal = bootstrap.Modal.getInstance(crearRutinaModal);
       bootstrapModal.hide();
+
+      renderFilaSocio(socioCompleto, usuarios);
+      //renderTablaRutinaModal(socioCompleto);
 
       // Abrir el modal de detalle
       const detalleModalId = `detalleSocioModal__${socioId}`;
@@ -122,8 +122,8 @@ export const editarRutinaEvents = () => {
   document.body.addEventListener("click", async (event) => {
     if (!event.target.classList.contains("btnEditarRutina")) return;
 
-    const rutinaId = event.target.getAttribute("data-id");
-    const socioId = event.target.getAttribute("data-socio-id");
+    const rutinaId = Number(event.target.getAttribute("data-id"));
+    const socioId = Number(event.target.getAttribute("data-socio-id"));
 
     console.log("rutina ", rutinaId, " y socio ", socioId);
 
@@ -157,7 +157,7 @@ export const editarRutinaEvents = () => {
 
       //busco la rutina del socio incompleto para actulizar
       let index = socioIncompleto.rutinas.findIndex(
-        (r) => r.rutinaId === Number(rutinaId)
+        (r) => r.rutinaId === rutinaId
       );
       console.log(index);
 
@@ -168,8 +168,6 @@ export const editarRutinaEvents = () => {
         socioId
       );
 
-      renderFilaSocio(socioActualizado, usuarios);
-
       showToast("Rutina actualizada correctamente", 1);
 
       // Cerrar el modal de creación
@@ -177,6 +175,8 @@ export const editarRutinaEvents = () => {
         document.getElementById(`editarRutina__${rutinaId}`)
       );
       bootstrapModal.hide();
+
+      renderFilaSocio(socioActualizado, usuarios);
 
       // Abrir el modal de detalle
       const detalleModal = new bootstrap.Modal(
@@ -228,16 +228,16 @@ export const eliminarRutinaEvents = () => {
         console.log(socioActualizado);
         console.log("eliminado bien");
 
-        //renderizo
-        renderFilaSocio(socioActualizado, usuarios);
-        //renderTablaRutinaModal(socioActualizado);
-        showToast("Rutina eliminada correctamente", 1);
-
         // Cerrar el modal de creación
         const bootstrapModal = bootstrap.Modal.getInstance(
           document.getElementById(`eliminarRutina__${rutinaId}`)
         );
         bootstrapModal.hide();
+
+        //renderizo
+        renderFilaSocio(socioActualizado, usuarios);
+        //renderTablaRutinaModal(socioActualizado);
+        showToast("Rutina eliminada correctamente", 1);
 
         // Abrir el modal de detalle
         const detalleModalId = `detalleSocioModal__${socioId}`;
@@ -253,6 +253,81 @@ export const eliminarRutinaEvents = () => {
       showToast("Error al eliminar rutina", 2);
     }
   });
+};
+
+export const agregarEjercicioEvents = () => {
+  document.body.addEventListener("click", async (event) => {
+    if (!event.target.classList.contains("btnAgregarEjercicio")) return;
+
+    const rutinaId = event.target.getAttribute("data-id");
+    const socioId = event.target.getAttribute("data-socio-id");
+
+    console.log("rutina ", rutinaId, " y socio ", socioId);
+
+    //Busca de abajo a arriba el modal
+    const modal = event.target.closest(".modal");
+    const form = modal.querySelector(".agregarEjercicioForm");
+
+    if (!form) return;
+
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.classList.add("was-validated");
+      return;
+    }
+
+    let detalleRutina = detalleRutinaConstruido(form);
+
+    console.log(detalleRutina);
+
+    try {
+      //agregamos ejercicio a la rutina
+      const response = await fetch(`/api/rutinas/${rutinaId}/detalles`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(detalleRutina),
+      });
+
+      const data = await response.json();
+
+      console.log("rutina reconstruida ", data);
+
+      // Cerrar el modal de creación
+      const bootstrapModal = bootstrap.Modal.getInstance(
+        document.getElementById(`agregarEjercicio__${rutinaId}`)
+      );
+      bootstrapModal.hide();
+
+      // Abrir el modal de detalle
+      const detalleModalId = `detalleSocioModal__${socioId}`;
+      const detalleModalEl = document.getElementById(detalleModalId);
+      const detalleModal = new bootstrap.Modal(detalleModalEl);
+      detalleModal.show();
+    } catch (err) {
+      console.error("Error al agregar detalle", err);
+      showToast("Error al agregar detalle", 2);
+    }
+  });
+};
+
+const detalleRutinaConstruido = (form) => {
+  const detalle = {
+    detalleRutinaId: null,
+    diaSemana: form.diaSemana.value.trim(),
+    serie: form.serie.value.trim(),
+    repeticiones: form.repeticiones.value.trim(),
+    peso: form.peso.value,
+    calorias: form.calorias.value,
+    tiempoDescanso: form.tiempoDescanso.value,
+    ejercicio: {
+      ejercicioId: parseInt(form.ejercicio.value),
+    },
+  };
+
+  return detalle;
 };
 
 const objetoConstruido = (form) => {

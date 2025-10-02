@@ -15,7 +15,7 @@ public class DetalleRutina {
     private String diaSemana;
     private int serie;
     private int repeticiones;
-    private int peso;
+    private double peso;
     private int calorias;
     private int tiempoDescanso;
     private Ejercicio ejercicio;

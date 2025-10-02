@@ -3,6 +3,7 @@ import {
   crearRutinaEvents,
   eliminarRutinaEvents,
   editarRutinaEvents,
+  agregarEjercicioEvents,
 } from "./events/modalEvents.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,4 +11,5 @@ document.addEventListener("DOMContentLoaded", () => {
   crearRutinaEvents();
   eliminarRutinaEvents();
   editarRutinaEvents();
+  agregarEjercicioEvents();
 });
