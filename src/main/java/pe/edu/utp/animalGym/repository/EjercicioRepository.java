@@ -14,32 +14,32 @@ public class EjercicioRepository {
     private List<Ejercicio> ejercicioList = new ArrayList<>();
 
     public EjercicioRepository() {
-        save(new Ejercicio("Sentadilla",
+        save(new Ejercicio(1,"Sentadilla",
                 "Ejercicio de piernas",
                 "Cuádriceps",
                 "Barra"));
 
-        save(new Ejercicio("Prensa de piernas",
+        save(new Ejercicio(2,"Prensa de piernas",
                 "Ejercicio en máquina para tren inferior",
                 "Cuádriceps y glúteos",
                 "Máquina de prensa"));
 
-        save(new Ejercicio("Curl de bíceps",
+        save(new Ejercicio(3,"Curl de bíceps",
                 "Ejercicio de aislamiento para brazos",
                 "Bíceps",
                 "Mancuernas o barra"));
 
-        save(new Ejercicio("Tríceps en polea",
+        save(new Ejercicio(4,"Tríceps en polea",
                 "Ejercicio de extensión de codo en polea",
                 "Tríceps",
                 "Polea"));
 
-        save(new Ejercicio("Press de banca",
+        save(new Ejercicio(5,"Press de banca",
                 "Ejercicio para desarrollar el pecho",
                 "Pectorales",
                 "Barra"));
 
-        save(new Ejercicio("Dominadas",
+        save(new Ejercicio(6,"Dominadas",
                 "Ejercicio de tracción vertical",
                 "Dorsales y bíceps",
                 "Peso corporal"));

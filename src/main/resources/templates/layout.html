@@ -63,6 +63,11 @@
               <span class="sidebar-link-icon"><i class="bi bi-receipt"></i></span>Boletas
             </a>
           </li>
+          <li class="sidebar-item" th:classappend="${activePage == 'ejercicios'} ? ' active'">
+            <a th:href="@{/ejercicio}" class="sidebar-link">
+              <span class="sidebar-link-icon"><i class="bi bi-receipt"></i></span>Ejercicios
+            </a>
+          </li>
         </ul>
       </nav>
     </div>

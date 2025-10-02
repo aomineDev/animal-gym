@@ -2,7 +2,6 @@ import { toastBody, toastEl } from "./dom.js";
 
 export function showToast(message, type = "info") {
   toastEl.className = "toast align-items-center border-0";
-
   // aplicar color según tipo
   switch (type) {
     case 1:
