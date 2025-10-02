@@ -1,0 +1,26 @@
+.bg-red-gym {
+    background-color: var(--red) !important;
+}
+
+.text-red-gym {
+    color: var(--red);
+}
+
+.plan-card {
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: var(--dark-lighten);
+    border-color: rgb(39, 39, 39);
+}
+
+.plan-card.active {
+    border-color: var(--dark-lighten);
+    background: var(--red);
+}
+
+.plan-card:hover {
+    border-color: var(--red);
+}

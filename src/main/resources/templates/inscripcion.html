@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <th:block th:fragment="content">
+
+        <div class="body_client">
+            <!-- HEADER -->
+            <header>
+                <div class="header__menu">
+                    <nav class="navbar navbar-expand-lg bg-black d-flex fixed-top">
+                        <div class="container">
+
+                            <a class="navbar-brand text-white" href="#">
+                                <img src="img/logo.png" alt="Logo" class="img-fluid"
+                                    style="max-height: 50px; width: auto;">
+                            </a>
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"
+                                    style="filter: invert(29%) sepia(95%) saturate(7496%) hue-rotate(357deg) brightness(96%) contrast(109%);"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                                <div class="text-center">
+                                    <a href="#" class="btn bg-red-gym fw-bold text-white rounded-0 px-4 py-2">INSCRÍBETE
+                                        YA!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- CONTENIDO -->
+            <div class="container py-5 mt-5">
+                <div class="row">
+                    <!-- Selección de Planes -->
+                    <div class="col-lg-7">
+                        <h4 class="mb-4 title-2 text-white">Elige tu plan</h4>
+                        <div class="d-flex flex-column gap-3">
+
+                            <div class="plan-card" data-plan="PLAN MEGA" data-precio="89.9"
+                                data-detalle="Inscripción: Gratis, Mantenimiento: Gratis, Fidelidad: 12 meses">
+                                <div class="d-flex justify-content-between text-white">
+                                    <div>
+                                        <h5 class="mb-1">PLAN MEGA</h5>
+                                        <small>Inscripción: S/ 0 | Mantenimiento: Gratis | Fidelidad: 12 meses</small>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-red-gym">S/ 89.9</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="plan-card" data-plan="PLAN FULL" data-precio="99.9"
+                                data-detalle="Inscripción: Gratis, Mantenimiento: Gratis, Fidelidad: 12 meses">
+                                <div class="d-flex justify-content-between text-white">
+                                    <div>
+                                        <h5 class="mb-1">PLAN FULL</h5>
+                                        <small>Inscripción: S/ 0 | Mantenimiento: Gratis | Fidelidad: 12 meses</small>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-red-gym">S/ 99.9</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="plan-card" data-plan="PLAN PREMIUM" data-precio="109.9"
+                                data-detalle="Inscripción: Gratis, Mantenimiento: Gratis, Acceso a todas las sedes">
+                                <div class="d-flex justify-content-between text-white">
+                                    <div>
+                                        <h5 class="mb-1">PLAN PREMIUM</h5>
+                                        <small>Inscripción: S/ 0 | Mantenimiento: Gratis | Acceso a todas las
+                                            sedes</small>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-red-gym">S/ 109.9</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Detalle de Compra -->
+                    <div class="col-lg-5 mt-4 mt-lg-0">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title title-3">Detalles de la compra</h5>
+                                <p class="mb-1">Gimnasio elegido: <span class="text-danger">Gym Santa Rosa</span></p>
+                                <p class="mb-1">Plan elegido: <strong id="detallePlan">Ninguno</strong></p>
+                                <p class="mb-3">Total a pagar: <strong class="text-danger">S/ <span
+                                            id="detallePrecio">0.00</span></strong></p>
+
+                                <h6 class="title-3">Desglose detallado</h6>
+                                <ul class="list-group" id="desglosePagos"></ul>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <button class="btn bg-red-gym text-white">Continuar registro</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            const planCards = document.querySelectorAll('.plan-card');
+            const detallePlan = document.getElementById('detallePlan');
+            const detallePrecio = document.getElementById('detallePrecio');
+            const desglosePagos = document.getElementById('desglosePagos');
+
+            planCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Quitar selección previa
+                    planCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+
+                    // Obtener datos del plan
+                    const plan = card.dataset.plan;
+                    const precio = parseFloat(card.dataset.precio);
+
+                    // Actualizar detalle
+                    detallePlan.textContent = plan;
+                    detallePrecio.textContent = precio.toFixed(2);
+
+                    // Generar desglose de 3 meses
+                    desglosePagos.innerHTML = '';
+                    for (let i = 1; i <= 3; i++) {
+                        const li = document.createElement('li');
+                        li.className = "list-group-item d-flex justify-content-between";
+                        li.innerHTML = `<span>${i}° Pago</span> <span>S/ ${precio.toFixed(2)}</span>`;
+                        desglosePagos.appendChild(li);
+                    }
+                });
+            });
+        </script>
+
+    </th:block>
+
+</body>
+
+</html>
