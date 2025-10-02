@@ -9,11 +9,13 @@
 .plan-card {
     border: 2px solid transparent;
     border-radius: 10px;
-    padding: 15px;
+    padding: 20px;
     cursor: pointer;
     transition: 0.3s;
     background: var(--dark-lighten);
-    border-color: rgb(39, 39, 39);
+    min-height: 150px;
+    display: flex;
+    align-items: center;
 }
 
 .plan-card.active {

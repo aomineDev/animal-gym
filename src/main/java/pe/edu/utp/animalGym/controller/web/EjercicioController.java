@@ -20,7 +20,7 @@ public class EjercicioController {
     model.addAttribute("title", "Animal GYM | Ejercicio");
     model.addAttribute("content", "ejercicio :: content");
     model.addAttribute("modal", "ejercicio :: modal");
-    model.addAttribute("activePage", "ejercicio");
+    model.addAttribute("activePage", "ejercicios");
 
     model.addAttribute("ejercicios", ejercicioRepository.findAll());
 
