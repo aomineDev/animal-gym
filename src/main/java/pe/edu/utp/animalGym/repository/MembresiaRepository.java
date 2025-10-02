@@ -15,14 +15,14 @@ public class MembresiaRepository {
 
     public MembresiaRepository(){
 
-        save(new Membresia(1, "Basico", "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
+        save(new Membresia( "Basico", "Acceso libre a máquinas de cardio y pesas. No incluye clases grupales.",
                      28, 299, 200, LocalDate.of(2022, 12, 12),
                   LocalDate.of(2000, 12, 9), "/uploads/Membresias/1759392706679_a6.png", true, 140));
-        save(new Membresia(2, "Premium",
+        save(new Membresia( "Premium",
                             "Acceso completo a todo el gimnasio, incluye clases grupales, sauna y asesoría personalizada.",
                             30, 300, 150, LocalDate.of(2025, 4, 12),
                             LocalDate.of(2025, 12, 19), "/uploads/Membresias/1759392500047_a7.png", false, 100));
-        save(new Membresia(3, "Familiar",
+        save(new Membresia( "Familiar",
                             "Acceso para 3 miembros de la familia, incluye máquinas, clases grupales y descuentos en nutrición.",
                             90, 750,600,
                             LocalDate.of(2025, 1, 10),
@@ -30,7 +30,7 @@ public class MembresiaRepository {
                             "/uploads/Membresias/1759392766407_a5.png",
                             true, 200));
 
-        save(new Membresia(4, "Estudiantil",
+        save(new Membresia( "Estudiantil",
                             "Acceso completo con descuento exclusivo para estudiantes universitarios, incluye clases grupales.",
                             60, 400, 300,
                             LocalDate.of(2025, 3, 1),
@@ -38,7 +38,7 @@ public class MembresiaRepository {
                             "/uploads/Membresias/1759392532151_a4.png",
                             true, 120));
 
-        save(new Membresia(5, "Corporativa",
+        save(new Membresia( "Corporativa",
                             "Plan especial para empresas: acceso para grupos, incluye clases, área de coworking fitness y descuentos.",
                             180, 1200, 950,
                             LocalDate.of(2025, 6, 15),
