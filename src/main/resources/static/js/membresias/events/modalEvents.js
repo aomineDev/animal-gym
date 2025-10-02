@@ -1,7 +1,7 @@
 import { formulario, fileInput, vistaImg } from "../dom.js";
 import Service from "../../service/index.js"
 import { renderMembresiaCard } from "../render.js";
-import { showToast } from "../../toast.js";
+//import { showToast } from "../../toast.js";
 
 const servicioMembresia = new Service("membresias");
 
@@ -9,7 +9,7 @@ const servicioMembresia = new Service("membresias");
 export const crearMembresia = () => {
 
   formulario.addEventListener('submit', async function (e) {
-
+  
     e.preventDefault();
     e.stopPropagation();
 
@@ -96,7 +96,7 @@ export const crearMembresia = () => {
       );
       if (modal) modal.hide();
 
-      showToast(`Se ha creado la membresia "${objMembresiaData.nombre}"`, 1);
+      //showToast(`Se ha creado la membresia "${objMembresiaData.nombre}"`, 1);
 
     } catch (error) {
       console.error("Error al crear la membresia", error);
@@ -134,7 +134,7 @@ export const eliminarMembresia = () => {
           document.querySelector("#editarMembresia__"+id).remove();
           document.querySelector("#eliminarMembresia__"+id).remove();
 
-          showToast(`Membresia ${id} eliminado`, 2);
+          //showToast(`Membresia ${id} eliminado`, 2);
 
         } else {
           console.error("Error al eliminar la membresia.", response);
@@ -142,7 +142,7 @@ export const eliminarMembresia = () => {
 
       } catch (error) {
         console.error("Error al eliminar membresia >> render:", error);
-        showToast("No se pudo eliminar el membressia", 0);
+        //showToast("No se pudo eliminar el membressia", 0);
       }
     }
   });
@@ -239,7 +239,7 @@ export const actualizarMembresia = () => {
           document.querySelector("#editarMembresia__"+id).remove();
           document.querySelector("#eliminarMembresia__"+id).remove();
   
-          showToast(`Se ha editado la membresia "${objMembresiaData.nombre}"`, 1);
+          // showToast(`Se ha editado la membresia "${objMembresiaData.nombre}"`, 1);
   
         } catch (error) {
           console.error("Error al actualizar:", error);
@@ -272,17 +272,18 @@ const uploadFile = async (file) => {
 
 
 export const cargarImagen = () => {
-  document.querySelectorAll(".file-input").forEach(input => {
-  input.addEventListener("change", function () {
-    const file = this.files[0];
-    const previewId = this.dataset.preview;
+  document.body.addEventListener("change", (e) => {
+  if (e.target.matches('input[type="file"][data-preview]')) {
+    const file = e.target.files[0];
+    const previewId = e.target.dataset.preview;
     const previewImg = document.getElementById(previewId);
 
     if (file && previewImg) {
       const objectUrl = URL.createObjectURL(file);
-      vistaImg.src = objectUrl;
+      previewImg.src = objectUrl;
       previewImg.onload = () => URL.revokeObjectURL(objectUrl);
     }
-  });
+  }
 });
-}
+
+};

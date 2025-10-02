@@ -1,4 +1,4 @@
-import { actualizarEjercicio } from "../ejercicios/events/modalEvents.js";
+// import { actualizarEjercicio } from "../ejercicios/events/modalEvents.js";
 import { crearMembresia, eliminarMembresia, actualizarMembresia,  cargarImagen} from "./events/modalEvents.js";
 // import {paginacion} from "./events/pagination.js";
 

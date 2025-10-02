@@ -17,10 +17,13 @@ public class ClasesController {
 
   @GetMapping("/clases")
   public String clase(Model model) {
+    
     model.addAttribute("title", "Animal GYM | Clase");
+
     model.addAttribute("content", "clases :: content");
     model.addAttribute("modal", "clases :: modals");
     model.addAttribute("activePage", "clases");
+
     model.addAttribute("clases", service.findAll());
     model.addAttribute("usuarios", usuarioServiceImpl.findAll());
 

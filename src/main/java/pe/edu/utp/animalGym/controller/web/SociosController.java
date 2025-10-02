@@ -1,6 +1,6 @@
 package pe.edu.utp.animalGym.controller.web;
 
-import java.util.List;
+// import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,18 +16,18 @@ public class SociosController {
     @Autowired
     private SocioServiceImpl socioRepository;
      @Autowired
-    private MembresiaServiceImpl membresiaRepository;
+    private MembresiaServiceImpl memRepository;
     
-    @GetMapping("/socios")
-    public String Socio(Model model) {
+@GetMapping("/socios")
+public String Socio(Model model) {
+    model.addAttribute("title", "Animal GYM | Socios");
 
-        model.addAttribute("content", "socios :: content");
+    model.addAttribute("content", "socios :: content");
+    model.addAttribute("modal", "socios :: modal");
+    model.addAttribute("activePage", "socios");
 
-        model.addAttribute("modal", "socios :: modal");
-
-        model.addAttribute("activePage", "socios");
-        model.addAttribute("socios", socioRepository.findAll());
-        model.addAttribute("membresias", membresiaRepository.findAll());
-        return "layout";
-    }
+    model.addAttribute("socios", socioRepository.findAll());
+    model.addAttribute("membresias", memRepository.findAll());
+    return "layout";
+}
 }

@@ -30,7 +30,7 @@ public class SocioRepository {
 
         save(new Socio(
                 1,
-                "12345678", "Juan", "Perez", "987654321", "M", "juan.perez@email.com",
+                "12345678", "Mikaela", "Perez", "987654321", "F", "mikaela.perez@email.com",
                 LocalDate.of(1990, 5, 15),
                 LocalDate.of(2023, 1, 1),
                 LocalDate.of(2024, 1, 1),
@@ -38,7 +38,7 @@ public class SocioRepository {
                 100,
                 70.5,
                 1.75,
-                "https://picsum.photos/50/50?random=1",
+                "/uploads/socios/cliente1.jpg",
                 men1,
                 rutinas));
 
@@ -52,7 +52,7 @@ public class SocioRepository {
                 200,
                 60.0,
                 1.65,
-                "https://picsum.photos/50/50?random=2",
+                "/uploads/socios/cliente2.jpg",
                 men2,
                 new ArrayList<>()));
 
@@ -66,7 +66,7 @@ public class SocioRepository {
                 150,
                 80.0,
                 1.80,
-                "https://picsum.photos/50/50?random=3",
+                "/uploads/socios/cliente3.jpg",
                 men3,
                 new ArrayList<>()));
 
@@ -80,7 +80,7 @@ public class SocioRepository {
                 120,
                 55.0,
                 1.60,
-                "https://picsum.photos/50/50?random=4",
+                "/uploads/socios/cliente4.jpg",
                 men1,
                 new ArrayList<>()));
 
@@ -94,7 +94,7 @@ public class SocioRepository {
                 100,
                 70.5,
                 1.75,
-                "https://picsum.photos/50/50?random=4",
+                "/uploads/socios/cliente7.jpg",
                 men1,
                 new ArrayList<>()));
     }

@@ -214,8 +214,18 @@
 
                             <div class="col-md-12">
                                 <label for="file" class="form-label">Foto de la membresia</label>
-                                <input type="file" id="file" class="form-control" name="file"
+
+                                <!-- data-preview="vistaPrevia" -->
+                                <input type="file" id="file"  class="form-control" name="file"
                                     accept="image/jpeg,image/jpg,image/png" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 d-flex align-items-center justify-content-center">
+                                    <div class="w-100 text-center">
+                                    
+                                    <!-- <img src="" id="vistaPrevia" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;"> -->
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-12">
@@ -376,7 +386,7 @@
   <div class="col-md-6 d-flex align-items-center justify-content-center">
     <div class="w-100 text-center">
       <label for="file" class="form-label">Foto de la membresía</label>
-      <img th:src="@{${membresia.imagen}}" id="vistaPrevia" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;">
+      <img th:src="@{${membresia.imagen}}" th:id="|vistaPrevia${membresia.menbresiaId}|" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;">
     </div>
   </div>
 
@@ -391,7 +401,7 @@
                                 
                             <div class="col-md-12">
                                 <label for="file" class="form-label">Reemplazar foto de la membresia</label>
-                                <input type="file" id="file" class="form-control" width="100%" name="file" accept="image/jpeg,image/jpg,image/png"
+                                <input type="file" th:attr="data-preview=|vistaPrevia${membresia.menbresiaId}|" id="file" class="form-control" width="100%" name="file" accept="image/jpeg,image/jpg,image/png"
                                 >
                                 <input type="hidden" name="imagenActual" th:value="${membresia.imagen}" />
                                 <!-- <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png"

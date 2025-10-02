@@ -15,6 +15,7 @@ public class MembresiasController {
     @GetMapping("/membresias")
 
     public String Membership(Model model) {
+        model.addAttribute("title", "Animal GYM | Membresias");
         model.addAttribute("content", "membresias :: content");
 
         model.addAttribute("modal", "membresias :: modal");
