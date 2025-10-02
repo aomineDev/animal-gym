@@ -33,7 +33,6 @@ public class EmpleadoRepository {
                 "leona1211rdoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp1.JPG",
                 1500, "Anual", "xxx"));
-
     }
 
     public List<Empleado> findAll() {
