@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
   @GetMapping("/login")
   public String login(Model model) {
+    model.addAttribute("title", "Animal GYM | Login");
     model.addAttribute("content", "login :: content");
-    model.addAttribute("modal", "login :: modal");
 
     return "index";
   }

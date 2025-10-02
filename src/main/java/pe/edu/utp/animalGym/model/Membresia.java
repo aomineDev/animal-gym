@@ -24,5 +24,18 @@ public class Membresia {
     private String imagen;
     private boolean estado;
     private Integer limiteCupos;
-    
+
+    public Membresia(String nombre, String descripcion, int duracion, double precio, double precioOferta,
+            LocalDate inicioOferta, LocalDate finOferta, String imagen, boolean estado, Integer limiteCupos) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.precio = precio;
+        this.precioOferta = precioOferta;
+        this.inicioOferta = inicioOferta;
+        this.finOferta = finOferta;
+        this.imagen = imagen;
+        this.estado = estado;
+        this.limiteCupos = limiteCupos;
+    }
 }

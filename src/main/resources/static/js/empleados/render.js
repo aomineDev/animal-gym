@@ -303,9 +303,7 @@ export function renderEmpleadoCard(empleado, usuario, roles) {
               <div class="col-md-6">
                 <label for="file-${empleado.personaId}" class="form-label">Foto del empleado</label>
                 <input type="file" id="file-${empleado.personaId}" class="form-control" name="file"
-                       accept="image/jpeg,image/jpg,image/png" required>
-              </div>
-
+                       accept="image/jpeg,image/jpg,image/png" value="${empleado.foto}" required>
               <!-- nombre -->
               <div class="col-md-6">
                 <label for="nombre-${empleado.personaId}" class="form-label">Nombre *</label>

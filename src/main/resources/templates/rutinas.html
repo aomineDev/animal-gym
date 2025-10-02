@@ -212,8 +212,8 @@
               </div>
 
               <!-- Entrenador -->
-              <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label> <select
-                  name="entrenador" class="form-select" id="select_entrenador" required>
+              <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label>
+                <select name="entrenador" class="form-select" id="select_entrenador" required>
                   <option value="">Seleccione un entrenador</option>
                   <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
                     th:value="${usuario.persona.personaId}"
