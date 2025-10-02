@@ -2,8 +2,8 @@ import { listaEjercicio } from "./dom.js";
 
 export function renderEjercicioCard(ejercicio) {
 
-  // Items ejercicio insertar
-  const itemEjercicio = /*html*/`
+    // Items ejercicio insertar
+    const itemEjercicio = /*html*/`
     <tr id="elementEjercicio_${ejercicio.ejercicioId}">
       <td>${ejercicio.ejercicioId}</td>
       <td>${ejercicio.nombre}</td>
@@ -41,8 +41,8 @@ export function renderEjercicioCard(ejercicio) {
     </tr>
   `;
 
-  //Modal editar
-  const modalEditar = /*html*/`
+    //Modal editar
+    const modalEditar = /*html*/`
     <div class="modal fade"  id="editarEjercicio__${ejercicio.ejercicioId}" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
@@ -108,8 +108,8 @@ export function renderEjercicioCard(ejercicio) {
   </div>
   `;
 
-  //Modal eliminar
-  const modalEliminar = /*html*/`
+    //Modal eliminar
+    const modalEliminar = /*html*/`
     <div class="modal fade" id="eliminarEjercicio__${ejercicio.ejercicioId}" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -142,11 +142,11 @@ export function renderEjercicioCard(ejercicio) {
 
 
 
-  insertarDOM(listaEjercicio, itemEjercicio);
-  insertarDOM(document.body, modalEditar);
-  insertarDOM(document.body, modalEliminar);
+    insertarDOM(listaEjercicio, itemEjercicio);
+    insertarDOM(document.body, modalEditar);
+    insertarDOM(document.body, modalEliminar);
 }
 
-function insertarDOM(before, after){
-  return before.insertAdjacentHTML('beforeend', after);
+function insertarDOM(before, after) {
+    return before.insertAdjacentHTML('beforeend', after);
 }
