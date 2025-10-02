@@ -9,7 +9,7 @@ const servicioMembresia = new Service("membresias");
 export const crearMembresia = () => {
 
   formulario.addEventListener('submit', async function (e) {
-
+  
     e.preventDefault();
     e.stopPropagation();
 
@@ -96,7 +96,7 @@ export const crearMembresia = () => {
       );
       if (modal) modal.hide();
 
-      showToast(`Se ha creado la membresia "${objMembresiaData.nombre}"`, 1);
+      //showToast(`Se ha creado la membresia "${objMembresiaData.nombre}"`, 1);
 
     } catch (error) {
       console.error("Error al crear la membresia", error);
@@ -134,7 +134,7 @@ export const eliminarMembresia = () => {
           document.querySelector("#editarMembresia__" + id).remove();
           document.querySelector("#eliminarMembresia__" + id).remove();
 
-          showToast(`Membresia ${id} eliminado`, 2);
+          //showToast(`Membresia ${id} eliminado`, 2);
 
         } else {
           console.error("Error al eliminar la membresia.", response);
@@ -142,7 +142,7 @@ export const eliminarMembresia = () => {
 
       } catch (error) {
         console.error("Error al eliminar membresia >> render:", error);
-        showToast("No se pudo eliminar el membressia", 0);
+        //showToast("No se pudo eliminar el membressia", 0);
       }
     }
   });

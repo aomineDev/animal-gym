@@ -165,16 +165,16 @@ export function renderMembresiaCard(membresia){
                       </div>
                       
                      <div class="row">
-  <!-- Imagen a la izquierda -->
+
   <div class="col-md-6 d-flex align-items-center justify-content-center">
     <div class="w-100 text-center">
       <label for="file" class="form-label">Foto de la membresía</label>
-      <img src="${membresia.imagen}" id="vistaPrevia" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;">
+      <img src="${membresia.imagen}" id="vistaPrevia${membresia.menbresiaId}" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;">
         
       </div>
   </div>
 
-  <!-- Textarea a la derecha -->
+
   <div class="col-md-6">
     <label for="descripcion" class="form-label">Descripción</label>
     <textarea id="descripcion" class="form-control" rows="8" name="descripcion" required>${membresia.descripcion}</textarea>
@@ -185,7 +185,7 @@ export function renderMembresiaCard(membresia){
 
                     <div class="col-md-12">
                         <label for="file" class="form-label">Actualizar foto de la membresia</label>
-                        <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png">
+                        <input type="file" data-preview="vistaPrevia${membresia.menbresiaId}" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png">
                         <input type="hidden" name="imagenActual" value="${membresia.imagen}" />
                     </div>
                       <!-- <div class="col-12">
