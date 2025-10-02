@@ -21,15 +21,15 @@ public class EmpleadoRepository {
                 "loelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp11.JPG",
                 1500, "Anual", "Abdominales"));
-        save(new Empleado(2, "77454651", "Sebastian", "Pereze", "955582873", "Masculino",
+        save(new Empleado(2, "77454651", "Jhordan", "Calixto", "955582873", "Masculino",
                 "lsonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp5.JPG",
                 1500, "Indefinido", "Brazos"));
-        save(new Empleado(3, "76464651", "Juan", "Carlos", "920582873", "Masculino",
+        save(new Empleado(3, "76464651", "Ariel", "Omar", "920582873", "Masculino",
                 "leasdonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
-                "uploads/empleados/emp6.JPG",
+                "uploads/empleados/emp4.JPG",
                 1500, "Anual", "Piernas"));
-        save(new Empleado(4, "76484651", "Tomas", "Torres", "915562873", "Masculino",
+        save(new Empleado(4, "76484651", "Clever", "David", "915562873", "Masculino",
                 "leona1211rdoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
                 "uploads/empleados/emp7.JPG",
                 1500, "Anual", "Cabezasos"));
@@ -56,7 +56,7 @@ public class EmpleadoRepository {
 
         save(new Empleado(10, "70123498", "Jorge", "Martínez", "976543210", "Masculino",
                 "jorge.martinez@example.com", LocalDate.of(1985, 7, 5), LocalDate.of(2018, 11, 14),
-                "uploads/empleados/emp4.JPG", 3000, "Anual", "Piernas"));
+                "uploads/empleados/emp6.JPG", 3000, "Anual", "Piernas"));
     }
 
     public List<Empleado> findAll() {
