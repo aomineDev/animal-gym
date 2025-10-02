@@ -1,4 +1,4 @@
-export function renderFilaSocio(socio, usuarios) {
+export function renderFilaSocio(socio, usuarios, ejercicios) {
   const filaHtml = /*html*/ `
     <tr id="socio-fila-${socio.personaId}">
       <td>${socio.nombre}</td>
@@ -113,6 +113,12 @@ export function renderFilaSocio(socio, usuarios) {
                                           <i class="bi bi-pencil me-2"></i>Editar
                                         </a>
                                       </li>
+                                      <li>
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                          data-bs-target=#agregarEjercicio__${rutina.rutinaId} data-socio-id="${socio.personaId}">
+                                          + Agrega ejercicio
+                                        </a>
+                                      </li>
                                       <li><hr class="dropdown-divider"></li>
                                       <li>
                                         <a class="dropdown-item text-danger" href="#"
@@ -139,7 +145,6 @@ export function renderFilaSocio(socio, usuarios) {
               <div class="col-12 col-lg-6">
                 <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
                   <h6 class="mb-0">Ejercicios</h6>
-                  <button class="btn btn-sm btn-success">+ Agregar ejercicio</button>
                 </div>
                 <div class="table-responsive">
                   <table id="tablaEjercicios" class="table table-hover table-bordered align-middle">
@@ -283,6 +288,97 @@ export function renderFilaSocio(socio, usuarios) {
     )
     .join("");
 
+  // --- Modal agregar Ejercicio ---
+  const modalAgregarEjercicioHtml = socio.rutinas
+    .map(
+      (rutina) => /*html*/ `
+
+        <div class="modal fade" id="agregarEjercicio__${
+          rutina.rutinaId
+        }" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content rounded-4">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar ejercicio</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="row needs-validation agregarEjercicioForm" novalidate>
+
+                  <!-- Dia de semana -->
+                  <div class="mb-3 col-md-6"> <label for="diaSemana" class="form-label">Dia de entreno</label> <select
+                      name="diaSemana" class="form-select" required>
+                      <option value="">Seleccione un dia</option>
+                      <option value="Lunes">Lunes</option>
+                      <option value="Martes">Martes</option>
+                      <option value="Miercoles">Miercoles</option>
+                      <option value="Jueves">Jueves</option>
+                      <option value="Viernes">Viernes</option>
+                      <option value="Sabado">Sabado</option>
+                    </select>
+                  </div>
+
+                  <!-- series -->
+                  <div class="mb-3 col-md-6">
+                    <label for="serie" class="form-label">Serie</label>
+                    <input type="number" name="serie" class="form-control" min="1" required>
+                  </div>
+
+                  <!-- repeticiones -->
+                  <div class="mb-3 col-md-6">
+                    <label for="repeticiones" class="form-label">Repeticiones</label>
+                    <input type="number" name="repeticiones" class="form-control" min="1" required>
+                  </div>
+
+                  <!-- peso -->
+                  <div class="mb-3 col-md-6">
+                    <label for="peso" class="form-label">Peso (kg)</label>
+                    <input type="number" step="any" name="peso" class="form-control" min="1" required>
+                  </div>
+
+                  <!-- calorias -->
+                  <div class="mb-3 col-md-6">
+                    <label for="calorias" class="form-label">Calorias que se estima quemar (kcal)</label>
+                    <input type="number" step="any" name="calorias" class="form-control" min="1" required>
+                  </div>
+
+                  <!-- tiempoDescanso -->
+                  <div class="mb-3 col-md-6">
+                    <label for="tiempoDescanso" class="form-label">Tiempo de descanso (seg.)</label>
+                    <input type="number" step="any" name="tiempoDescanso" class="form-control" min="1" required>
+                  </div>
+
+                  <!-- Ejercicio -->
+                  <div class="mb-3"> <label for="ejercicio" class="form-label">Ejercicio</label>
+
+                  <select name="ejercicio" class="form-select" required>
+                    <option value="">Seleccione un ejercicio</option>
+                    ${ejercicios
+                      .map(
+                        (e) => `
+                          <option value="${e.ejercicioId}">
+                            ${e.nombre}
+                          </option>`
+                      )
+                      .join("")}
+                  </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary col-5 ms-3 btnAgregarEjercicio"
+                    data-id=${rutina.rutinaId} data-socio-id=${
+        socio.personaId
+      }>Agregar
+                    ejercicio</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  `
+    )
+    .join("");
+
   // Inyectar o reemplazar la fila en la tabla principal
   const filaExistente = document.querySelector(
     `#socio-fila-${socio.personaId}`
@@ -320,6 +416,15 @@ export function renderFilaSocio(socio, usuarios) {
     modalEliminarExistente.outerHTML = modalEliminarHtml;
   } else {
     document.body.insertAdjacentHTML("beforeend", modalEliminarHtml);
+  }
+
+  const modalAgregarEjercicioExistente = document.querySelector(
+    `#agregarEjercicio__${socio.personaId}`
+  );
+  if (modalAgregarEjercicioExistente) {
+    modalAgregarEjercicioExistente.outerHTML = modalAgregarEjercicioHtml;
+  } else {
+    document.body.insertAdjacentHTML("beforeend", modalAgregarEjercicioHtml);
   }
 }
 

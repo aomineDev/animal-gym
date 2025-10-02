@@ -71,6 +71,7 @@ public class RutinaServiceImpl implements RutinaService {
     }
 
     /* PARA EL DETALLE */
+    @Override
     public Rutina addDetalle(Integer rutinaId, DetalleRutina nuevoDetalle) {
         Rutina rutina = repository.findById(rutinaId)
                 .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
