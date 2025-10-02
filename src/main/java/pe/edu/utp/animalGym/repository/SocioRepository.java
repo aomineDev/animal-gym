@@ -24,10 +24,13 @@ public class SocioRepository {
         Membresia men2 = membresiaRepository.findById(2).orElse(null);
         Membresia men3 = membresiaRepository.findById(2).orElse(null);
 
-        List<Rutina> rutinas = new ArrayList<>();
-        rutinas.add(rutinaRepository.findById(1).orElse(null));
-        rutinas.add(rutinaRepository.findById(2).orElse(null));
+        Rutina rutinaPierna = rutinaRepository.findById(1).orElse(null);
+        Rutina rutinaBrazo = rutinaRepository.findById(2).orElse(null);
+        Rutina rutinaPecho = rutinaRepository.findById(3).orElse(null);
+        Rutina rutinaCore = rutinaRepository.findById(4).orElse(null);
+        Rutina rutinaFull = rutinaRepository.findById(5).orElse(null);
 
+        // Socios con rutinas únicas
         save(new Socio(
                 1,
                 "12345678", "Juan", "Perez", "987654321", "M", "juan.perez@email.com",
@@ -40,7 +43,7 @@ public class SocioRepository {
                 1.75,
                 "https://picsum.photos/50/50?random=1",
                 men1,
-                rutinas));
+                new ArrayList<>(List.of(rutinaPierna))));
 
         save(new Socio(
                 2,
@@ -54,7 +57,7 @@ public class SocioRepository {
                 1.65,
                 "https://picsum.photos/50/50?random=2",
                 men2,
-                new ArrayList<>()));
+                new ArrayList<>(List.of(rutinaBrazo))));
 
         save(new Socio(
                 3,
@@ -68,7 +71,7 @@ public class SocioRepository {
                 1.80,
                 "https://picsum.photos/50/50?random=3",
                 men3,
-                new ArrayList<>()));
+                new ArrayList<>(List.of(rutinaPecho))));
 
         save(new Socio(
                 4,
@@ -82,7 +85,7 @@ public class SocioRepository {
                 1.60,
                 "https://picsum.photos/50/50?random=4",
                 men1,
-                new ArrayList<>()));
+                new ArrayList<>(List.of(rutinaCore))));
 
         save(new Socio(
                 5,
@@ -94,9 +97,9 @@ public class SocioRepository {
                 100,
                 70.5,
                 1.75,
-                "https://picsum.photos/50/50?random=4",
+                "https://picsum.photos/50/50?random=5",
                 men1,
-                new ArrayList<>()));
+                new ArrayList<>(List.of(rutinaFull))));
     }
 
     public List<Socio> findAll() {

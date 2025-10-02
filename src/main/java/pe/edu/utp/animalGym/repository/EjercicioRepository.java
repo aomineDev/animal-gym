@@ -14,35 +14,84 @@ public class EjercicioRepository {
     private List<Ejercicio> ejercicioList = new ArrayList<>();
 
     public EjercicioRepository() {
-        save(new Ejercicio(1,"Sentadilla",
+        save(new Ejercicio("Sentadilla",
                 "Ejercicio de piernas",
                 "Cuádriceps",
                 "Barra"));
 
-        save(new Ejercicio(2,"Prensa de piernas",
+        save(new Ejercicio("Prensa de piernas",
                 "Ejercicio en máquina para tren inferior",
                 "Cuádriceps y glúteos",
                 "Máquina de prensa"));
 
-        save(new Ejercicio(3,"Curl de bíceps",
+        save(new Ejercicio("Curl de bíceps",
                 "Ejercicio de aislamiento para brazos",
                 "Bíceps",
                 "Mancuernas o barra"));
 
-        save(new Ejercicio(4,"Tríceps en polea",
+        save(new Ejercicio("Tríceps en polea",
                 "Ejercicio de extensión de codo en polea",
                 "Tríceps",
                 "Polea"));
 
-        save(new Ejercicio(5,"Press de banca",
+        save(new Ejercicio("Press de banca",
                 "Ejercicio para desarrollar el pecho",
                 "Pectorales",
                 "Barra"));
 
-        save(new Ejercicio(6,"Dominadas",
+        save(new Ejercicio("Dominadas",
                 "Ejercicio de tracción vertical",
                 "Dorsales y bíceps",
                 "Peso corporal"));
+        save(new Ejercicio(7, "Remo con barra",
+                "Ejercicio de tracción para espalda",
+                "Dorsales y trapecios",
+                "Barra"));
+
+        save(new Ejercicio("Elevaciones laterales",
+                "Aislamiento de hombros",
+                "Deltoides",
+                "Mancuernas"));
+
+        save(new Ejercicio("Peso muerto",
+                "Ejercicio compuesto para espalda y piernas",
+                "Dorsales, glúteos, isquiotibiales",
+                "Barra"));
+
+        save(new Ejercicio("Plancha",
+                "Ejercicio isométrico para core",
+                "Abdominales y core",
+                "Peso corporal"));
+
+        save(new Ejercicio("Fondos en paralelas",
+                "Ejercicio para tríceps y pecho",
+                "Tríceps y pectorales",
+                "Barras paralelas"));
+
+        save(new Ejercicio("Zancadas con mancuernas",
+                "Ejercicio para piernas y glúteos",
+                "Cuádriceps y glúteos",
+                "Mancuernas"));
+
+        save(new Ejercicio("Crunch abdominal",
+                "Ejercicio para fortalecer abdominales",
+                "Abdominales",
+                "Peso corporal"));
+
+        save(new Ejercicio("Press militar",
+                "Ejercicio para hombros y trapecios",
+                "Deltoides y trapecios",
+                "Barra o mancuernas"));
+
+        save(new Ejercicio("Remo en polea baja",
+                "Ejercicio de tracción horizontal",
+                "Dorsales y bíceps",
+                "Polea"));
+
+        save(new Ejercicio("Elevación de talones",
+                "Ejercicio para gemelos",
+                "Gemelos",
+                "Peso corporal o máquina"));
     }
 
     private Integer nextId = 1;
