@@ -14,7 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rutina {
-
     private Integer rutinaId;
     private String nombre;
     private String descripcion;
