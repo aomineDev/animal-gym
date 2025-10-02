@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Socio extends Person {
+public class Socio extends Persona {
     private LocalDate fechaVencimineto;
     private boolean activo;
     private int puntos;
@@ -22,7 +22,7 @@ public class Socio extends Person {
     private double altura;
     private String imagen;
     private Membresia menbresia;
-    private List<Rutina> rutinas = new ArrayList<>();;
+    private List<Rutina> rutinas = new ArrayList<>();
 
     public Socio(Integer personaId, String dni, String nombre, String apellido, String telefono, String genero,
             String email, LocalDate fechaNacimiento, LocalDate fechaIngreso, LocalDate fechaVencimiento, boolean activo,

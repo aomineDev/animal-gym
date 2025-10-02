@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/api/empleados")
 public class EmpleadoApiController {
+
     @Autowired
     private EmpleadoService service;
 
-    // metodo que tira todo un json del array de empleados
     @GetMapping
     public ResponseEntity<List<Empleado>> findAll() {
 
@@ -38,9 +38,8 @@ public class EmpleadoApiController {
 
     }
 
-    // metodo que devulve und id
     @GetMapping("/{id}")
-    public ResponseEntity<Empleado> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<Empleado> findById(@PathVariable Integer id) {
         return service.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 

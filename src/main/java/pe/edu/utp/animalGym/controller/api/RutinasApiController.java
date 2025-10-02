@@ -3,6 +3,7 @@ package pe.edu.utp.animalGym.controller.api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.utp.animalGym.model.DetalleRutina;
 import pe.edu.utp.animalGym.model.Rutina;
 import pe.edu.utp.animalGym.service.RutinaService;
 
@@ -50,6 +51,14 @@ public class RutinasApiController {
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{rutinaId}/detalles")
+    public ResponseEntity<Rutina> addDetalle(
+            @PathVariable Integer rutinaId,
+            @RequestBody DetalleRutina detalle) {
+        Rutina rutina = service.addDetalle(rutinaId, detalle);
+        return ResponseEntity.ok(rutina);
     }
 
 }

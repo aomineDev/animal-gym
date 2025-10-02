@@ -17,7 +17,7 @@ public class Ejercicio {
     private String grupoMuscular;
     private String equipo;
 
-    public Ejercicio(int ejercicioId, String nombre, String descripcion, String grupoMuscular, String equipo) {
+    public Ejercicio(String nombre, String descripcion, String grupoMuscular, String equipo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.grupoMuscular = grupoMuscular;

@@ -10,9 +10,8 @@ import pe.edu.utp.animalGym.model.Membresia;
 
 @Repository
 public class MembresiaRepository {
-
     private List<Membresia> membershipList = new ArrayList<>();
-    private Integer nextId = 3;
+    private Integer nextId = 1;
 
     public MembresiaRepository(){
 
@@ -69,5 +68,4 @@ public class MembresiaRepository {
     public void deleteById(Integer id) {
         membershipList.removeIf(m -> m.getMenbresiaId() == id);
     }
-
 }

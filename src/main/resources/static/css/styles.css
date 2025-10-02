@@ -4,6 +4,10 @@
 /* Componentes */
 @import './components/_sidedbar.css';
 
+/* Base */
+@import './base/_base.css';
+@import './base/_typography.css';
+
 /* Utilities */
 @import './utilities/variables.css';
 
