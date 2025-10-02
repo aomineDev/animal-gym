@@ -23,7 +23,7 @@ public class EmpleadoRepository {
                 1500, "Anual", "Abdominales"));
         save(new Empleado(2, "77454651", "Jhordan", "Calixto", "955582873", "Masculino",
                 "lsonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
-                "uploads/empleados/emp5.JPG",
+                "uploads/empleados/emp44.JPG",
                 1500, "Indefinido", "Brazos"));
         save(new Empleado(3, "76464651", "Ariel", "Omar", "920582873", "Masculino",
                 "leasdonardoelbaneado@gmail.com", LocalDate.of(2022, 3, 19), LocalDate.of(2022, 3, 19),
