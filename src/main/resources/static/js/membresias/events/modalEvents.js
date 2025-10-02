@@ -272,17 +272,17 @@ const uploadFile = async (file) => {
 
 
 export const cargarImagen = () => {
-  document.querySelectorAll(".file-input").forEach(input => {
-    input.addEventListener("change", function () {
-      const file = this.files[0];
-      const previewId = this.dataset.preview;
-      const previewImg = document.getElementById(previewId);
+  document.body.addEventListener("change", (e) => {
+  if (e.target.matches('input[type="file"][data-preview]')) {
+    const file = e.target.files[0];
+    const previewId = e.target.dataset.preview;
+    const previewImg = document.getElementById(previewId);
 
-      if (file && previewImg) {
-        const objectUrl = URL.createObjectURL(file);
-        vistaImg.src = objectUrl;
-        previewImg.onload = () => URL.revokeObjectURL(objectUrl);
-      }
-    });
-  });
+    if (file && previewImg) {
+      const objectUrl = URL.createObjectURL(file);
+      previewImg.src = objectUrl;
+      previewImg.onload = () => URL.revokeObjectURL(objectUrl);
+    }
+  }
+});
 }
