@@ -5,6 +5,19 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,38 +27,56 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Entity
+@Table(name = "clases")
 public class Clase {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "clase_id")
     private Integer claseId;
+
+    @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
+
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
+
+    @Column(name = "capacidad", nullable = false)
     private Integer capacidad;
+
+    @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
+
+    @Column(name = "hora_inicio", nullable = false)
     private LocalTime horaInicio;
+
+    @Column(name = "hora_fin", nullable = false)
     private LocalTime horaFin;
+
+    @Column(name = "duracion", nullable = false)
     private Integer duracion;
+
+    @Column(name = "estado", nullable = false, length = 20)
     private String estado;
+
+    @Column(name = "objetivo", nullable = false)
     private String objetivo;
+
+    @Column(name = "intensidad", nullable = false, length = 20)
     private String intensidad;
+
+    @Column(name = "imagen", nullable = false)
     private String imagen;
+
+    @ManyToOne
+    @JoinColumn(name = "empleado_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Empleado empleado;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "clase_id")
     private List<ReservaClase> reservas = new ArrayList<>();
 
-    public Clase(String nombre, String descripcion, Integer capacidad, LocalDate fecha,
-            LocalTime horaInicio, LocalTime horaFin, Integer duracion,
-            String estado, String objetivo, String intensidad, String imagen,
-            Empleado empleado, List<ReservaClase> reservas) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.capacidad = capacidad;
-        this.fecha = fecha;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.duracion = duracion;
-        this.estado = estado;
-        this.objetivo = objetivo;
-        this.intensidad = intensidad;
-        this.imagen = imagen;
-        this.empleado = empleado;
-        this.reservas = reservas;
-    }
 }
