@@ -11,17 +11,16 @@ import org.springframework.ui.Model;
 @Controller
 
 public class BoletasController {
-    @Autowired
-    private BoletaServiceImpl servicio;
+	@Autowired
+	private BoletaServiceImpl servicio;
 
-    @GetMapping("/boletas")
-    public String Socio(Model model) {
-        model.addAttribute("content", "boletas :: content");
+	@GetMapping("/boletas")
+	public String Socio(Model model) {
+		model.addAttribute("content", "boletas :: content");
 
-        model.addAttribute("modal", "boletas :: modals");
-
-        model.addAttribute("activePage", "boletas");
-        model.addAttribute("tablaBoleta", servicio.findAll());
-        return "layout";
-    }
+		model.addAttribute("modal", "boletas :: modals");
+		model.addAttribute("activePage", "boletas");
+		model.addAttribute("tablaBoleta", servicio.findAll());
+		return "layout";
+	}
 }
