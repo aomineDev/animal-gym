@@ -35,4 +35,10 @@ public class EjercicioServiceImpl implements EjercicioService {
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<Ejercicio> buscarPorNombre(String nombre) {
+        return repository.buscarPorNombre(nombre);
+    }
+
 }

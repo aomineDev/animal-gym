@@ -4,6 +4,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,27 +24,34 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Entity
+@Table(name = "socios")
 public class Socio extends Persona {
-    private LocalDate fechaVencimineto;
-    private boolean activo;
-    private int puntos;
-    private double peso;
-    private double altura;
-    private String imagen;
-    private Membresia menbresia;
-    private List<Rutina> rutinas = new ArrayList<>();
 
-    public Socio(Integer personaId, String dni, String nombre, String apellido, String telefono, String genero,
-            String email, LocalDate fechaNacimiento, LocalDate fechaIngreso, LocalDate fechaVencimiento, boolean activo,
-            int puntos, double peso, double altura, String imagen, Membresia membership, List<Rutina> rutinas) {
-        super(personaId, dni, nombre, apellido, telefono, genero, email, fechaNacimiento, fechaIngreso);
-        this.fechaVencimineto = fechaVencimiento;
-        this.activo = activo;
-        this.puntos = puntos;
-        this.peso = peso;
-        this.altura = altura;
-        this.imagen = imagen;
-        this.menbresia = membership;
-        this.rutinas = rutinas;
-    }
+    @Column(name = "fecha_vencimiento", nullable = false)
+    private LocalDate fechaVencimiento;
+
+    @Column(name = "estado", nullable = false)
+    private boolean estado;
+
+    @Column(name = "puntos", nullable = false)
+    private int puntos;
+
+    @Column(name = "peso")
+    private double peso;
+
+    @Column(name = "altura")
+    private double altura;
+
+    @Column(name = "imagen")
+    private String imagen;
+
+    @ManyToOne
+    @JoinColumn(name = "membresia_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    private Membresia menbresia;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "socio_id")
+    private List<Rutina> rutinas = new ArrayList<>();
 }
