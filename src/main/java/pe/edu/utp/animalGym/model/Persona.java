@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,35 +21,35 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "persona")
-public class Persona {
-
+@Table(name = "personas")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "persona_id")
-    private Integer personaId;
+    protected Integer personaId;
 
     @Column(name = "dni", unique = true, nullable = false, length = 8)
-    private String dni;
+    protected String dni;
 
     @Column(name = "nombre", nullable = false, length = 20)
-    private String nombre;
+    protected String nombre;
 
     @Column(name = "apellido", nullable = false, length = 30)
-    private String apellido;
+    protected String apellido;
 
     @Column(name = "telefono", unique = true, nullable = false, length = 9)
-    private String telefono;
+    protected String telefono;
 
-    @Column(name = "genero", nullable = false)
-    private String genero;
+    @Column(name = "genero", nullable = false, length = 20)
+    protected String genero;
 
-    @Column(name = "email", unique = true, nullable = false, length = 50)
-    private String email;
+    @Column(name = "email", unique = true, nullable = false, length = 100)
+    protected String email;
 
     @Column(name = "fecha_nacimiento", nullable = false)
-    private LocalDate fechaNacimiento;
+    protected LocalDate fechaNacimiento;
 
     @Column(name = "fecha_ingreso", nullable = false)
-    private LocalDate fechaIngreso;
+    protected LocalDate fechaIngreso;
 }
