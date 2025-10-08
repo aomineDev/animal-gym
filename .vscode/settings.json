@@ -2,6 +2,8 @@
   "java.compile.nullAnalysis.mode": "automatic",
   "java.configuration.updateBuildConfiguration": "interactive",
   "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "files.autoSave": "onFocusChange",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
