@@ -61,4 +61,10 @@ public class ClaseServiceImpl implements ClaseService {
   public void deleteById(Integer id) {
     repository.deleteById(id);
   }
+
+  @Override
+  public List<Clase> filtrar(String nombre, String estado, String intensidad) {
+    return repository.filtrar(nombre, estado, intensidad);
+  }
+
 }

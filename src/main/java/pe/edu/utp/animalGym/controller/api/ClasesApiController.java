@@ -75,4 +75,12 @@ public class ClasesApiController {
         }
     }
 
+    /* Filtros */
+    @GetMapping("/filtrar")
+    public ResponseEntity<List<Clase>> filtrar(@RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String estado,
+            @RequestParam(required = false) String intensidad) {
+        return ResponseEntity.ok(claseService.filtrar(nombre, estado, intensidad));
+    }
+
 }
