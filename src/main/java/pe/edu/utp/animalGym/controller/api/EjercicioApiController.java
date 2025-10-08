@@ -38,7 +38,9 @@ public class EjercicioApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Ejercicio> findById(@PathVariable Integer id) {
-        return service.findById(id).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return service.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -46,10 +48,6 @@ public class EjercicioApiController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(Ejercicio));
     }
 
-    //   @PutMapping("/{id}")
-    // public ResponseEntity<Ejercicio> update(@PathVariable Integer id, @RequestBody Ejercicio ejercicio) {
-    //     return ResponseEntity.ok(service.save(ejercicio));
-    // }
     @PutMapping("/{id}")
     public ResponseEntity<Ejercicio> update(@PathVariable Integer id, @RequestBody Ejercicio ejercicio) {
         // Aseguramos que el id del path sea el usado
@@ -57,10 +55,10 @@ public class EjercicioApiController {
         return ResponseEntity.ok(service.save(ejercicio));
     }
 
-      @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
-      service.deleteById(id);
-      return ResponseEntity.noContent().build();
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/upload")
@@ -77,6 +75,13 @@ public class EjercicioApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al subir la imagen");
         }
+    }
+
+    /* --- Filtros --- */
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Ejercicio>> buscarPorNombre(@RequestParam String nombre) {
+        List<Ejercicio> resultados = service.buscarPorNombre(nombre);
+        return ResponseEntity.ok(resultados);
     }
 
 }
