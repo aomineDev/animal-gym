@@ -36,4 +36,9 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         employee.deleteById(id);
     }
 
+    @Override
+    public List<Empleado> buscarPorNombre(String nombre) {
+        return employee.buscarPorNombre(nombre);
+    }
+
 }

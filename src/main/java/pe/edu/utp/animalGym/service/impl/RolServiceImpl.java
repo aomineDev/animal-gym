@@ -36,4 +36,9 @@ public class RolServiceImpl implements RolService {
         repository.deleteById(id);
     }
 
+    @Override
+    public List<Rol> buscarPorNombre(String nombre) {
+        return repository.buscarPorNombre(nombre);
+    }
+
 }
