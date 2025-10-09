@@ -1,7 +1,13 @@
-import { toastBody, toastEl } from '../dom.js'
-import { TOAST_TYPES } from '../constants/ToastTypes.js'
+import { toastBody, toastEl } from './dom.js'
 
 const bsToast = bootstrap.Toast.getOrCreateInstance(toastEl)
+
+export const TOAST_TYPES = Object.freeze({
+	SUCCESS: 1,
+	ERROR: 2,
+	WARNING: 3,
+	INFO: 4,
+})
 
 export function showToast(message, type = TOAST_TYPES.INFO) {
 	toastEl.className = 'toast align-items-center border-0'
