@@ -79,7 +79,7 @@ public class EjercicioApiController {
 
     /* --- Filtros --- */
     @GetMapping("/buscar")
-    public ResponseEntity<List<Ejercicio>> buscarPorNombre(@RequestParam String nombre) {
+    public ResponseEntity<List<Ejercicio>> buscarPorNombre(@RequestParam(required = false) String nombre) {
         List<Ejercicio> resultados = service.buscarPorNombre(nombre);
         return ResponseEntity.ok(resultados);
     }
