@@ -11,8 +11,10 @@ public class TemplateController {
     model.addAttribute("title", "Animal GYM | Template");
     model.addAttribute("content", "template :: content");
     model.addAttribute("modal", "template :: modal");
+    model.addAttribute("script", "");
+
     model.addAttribute("activePage", "template");
 
-    return "layout";
+    return "dashboard";
   }
 }

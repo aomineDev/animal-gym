@@ -18,10 +18,12 @@ public class MembresiasController {
         model.addAttribute("title", "Animal GYM | Membresias");
         model.addAttribute("content", "membresias :: content");
         model.addAttribute("modal", "membresias :: modal");
+        model.addAttribute("script", "");
+
         model.addAttribute("activePage", "membresias");
         model.addAttribute("detalleCardMenbresia", service.findAll());
 
-        return "layout";
+        return "dashboard";
     }
 
 }

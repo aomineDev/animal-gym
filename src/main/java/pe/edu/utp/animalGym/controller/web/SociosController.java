@@ -13,19 +13,21 @@ public class SociosController {
 
     @Autowired
     private SocioServiceImpl socioRepository;
-     @Autowired
+    @Autowired
     private MembresiaServiceImpl memRepository;
-    
-@GetMapping("/socios")
-public String Socio(Model model) {
-    model.addAttribute("title", "Animal GYM | Socios");
 
-    model.addAttribute("content", "socios :: content");
-    model.addAttribute("modal", "socios :: modal");
-    model.addAttribute("activePage", "socios");
+    @GetMapping("/socios")
+    public String Socio(Model model) {
+        model.addAttribute("title", "Animal GYM | Socios");
 
-    model.addAttribute("socios", socioRepository.findAll());
-    model.addAttribute("membresias", memRepository.findAll());
-    return "layout";
-}
+        model.addAttribute("content", "socios :: content");
+        model.addAttribute("modal", "socios :: modal");
+        model.addAttribute("script", "");
+
+        model.addAttribute("activePage", "socios");
+
+        model.addAttribute("socios", socioRepository.findAll());
+        model.addAttribute("membresias", memRepository.findAll());
+        return "dashboard";
+    }
 }
