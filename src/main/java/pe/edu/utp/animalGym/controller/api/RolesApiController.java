@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.animalGym.model.Rol;
 import pe.edu.utp.animalGym.service.impl.RolServiceImpl;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/roles")
@@ -25,4 +26,11 @@ public class RolesApiController {
     public ResponseEntity<List<Rol>> findAll() {
         return ResponseEntity.ok(serviceRol.findAll());
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Rol>> buscarPorNombre(@RequestParam String nombre) {
+        List<Rol> resultados = serviceRol.buscarPorNombre(nombre);
+        return ResponseEntity.ok(resultados);
+    }
+
 }

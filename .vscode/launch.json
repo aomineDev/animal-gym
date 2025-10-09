@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-AnimalGymApplication<animalGym>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "pe.edu.utp.animalGym.AnimalGymApplication",
+      "projectName": "animalGym",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

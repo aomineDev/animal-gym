@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import pe.edu.utp.animalGym.model.Ejercicio;
 import pe.edu.utp.animalGym.model.Empleado;
 import pe.edu.utp.animalGym.service.EmpleadoService;
 
@@ -74,4 +75,11 @@ public class EmpleadoApiController {
     public ResponseEntity<Empleado> update(@PathVariable Integer id, @RequestBody Empleado empleado) {
         return ResponseEntity.ok(service.save(empleado));
     }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Empleado>> buscarPorNombre(@RequestParam String nombre) {
+        List<Empleado> resultados = service.buscarPorNombre(nombre);
+        return ResponseEntity.ok(resultados);
+    }
+
 }

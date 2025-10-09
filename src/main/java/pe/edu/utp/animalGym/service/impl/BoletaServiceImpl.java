@@ -1,5 +1,6 @@
 package pe.edu.utp.animalGym.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,5 +35,10 @@ public class BoletaServiceImpl implements BoletaService {
     @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Boleta> buscarPorFechaEmision(LocalDate fecha) {
+        return repository.buscarPorFechaEmision(fecha);
     }
 }
