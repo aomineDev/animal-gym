@@ -1,9 +1,12 @@
 package pe.edu.utp.animalGym.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import pe.edu.utp.animalGym.model.Empleado;
@@ -77,6 +80,26 @@ public class SocioServiceImpl implements SocioService {
         }
 
         return partnerRepository.save(socio);
+    }
+
+    @Override
+    public List<Socio> buscarPorEstado(Boolean estado) {
+        return partnerRepository.buscarPorEstado(estado);
+    }
+
+    @Override
+    public List<Socio> buscarPorRangoVencimiento(LocalDate inicio, LocalDate fin) {
+        return partnerRepository.buscarPorRangoVencimiento(inicio, fin);
+    }
+
+    @Override
+    public List<Socio> buscarPorMembresia(Integer membresiaId) {
+        return partnerRepository.buscarPorMembresia(membresiaId);
+    }
+
+    @Override
+    public List<Socio> buscarPorNombre(String nombre) {
+        return partnerRepository.buscarPorNombre(nombre);
     }
 
 }

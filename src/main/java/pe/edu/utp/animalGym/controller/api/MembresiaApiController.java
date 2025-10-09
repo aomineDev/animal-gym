@@ -1,6 +1,5 @@
 package pe.edu.utp.animalGym.controller.api;
 
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -47,10 +46,10 @@ public class MembresiaApiController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(Membresia));
     }
 
-
-    //   @PutMapping("/{id}")
-    // public ResponseEntity<Membresia> update(@PathVariable Integer id, @RequestBody Membresia Membresia) {
-    //     return ResponseEntity.ok(service.save(Membresia));
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Membresia> update(@PathVariable Integer id,
+    // @RequestBody Membresia Membresia) {
+    // return ResponseEntity.ok(service.save(Membresia));
     // }
     @PutMapping("/{id}")
     public ResponseEntity<Membresia> update(@PathVariable Integer id, @RequestBody Membresia Membresia) {
@@ -59,17 +58,18 @@ public class MembresiaApiController {
         return ResponseEntity.ok(service.save(Membresia));
     }
     // @PutMapping("/{id}")
-    // public ResponseEntity<Membresia> update(@PathVariable Integer id, @RequestBody Membresia membresia) {
-    //     return service.findById(id).map(existing -> {
-    //         membresia.setMenbresiaId(id);
-    //         return ResponseEntity.ok(service.save(membresia));
-    //     }).orElseGet(() -> ResponseEntity.notFound().build());
+    // public ResponseEntity<Membresia> update(@PathVariable Integer id,
+    // @RequestBody Membresia membresia) {
+    // return service.findById(id).map(existing -> {
+    // membresia.setMenbresiaId(id);
+    // return ResponseEntity.ok(service.save(membresia));
+    // }).orElseGet(() -> ResponseEntity.notFound().build());
     // }
 
-      @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
-      service.deleteById(id);
-      return ResponseEntity.noContent().build();
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/upload")
@@ -86,6 +86,20 @@ public class MembresiaApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al subir la imagen");
         }
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<List<Membresia>> buscarPorEstado(@RequestParam Boolean estado) {
+        List<Membresia> resultados = service.buscarPorEstado(estado);
+        return ResponseEntity.ok(resultados);
+    }
+
+    @GetMapping("/buscar/precio")
+    public ResponseEntity<List<Membresia>> buscarPorPrecio(
+            @RequestParam Double min,
+            @RequestParam Double max) {
+        List<Membresia> resultados = service.buscarPorPrecio(min, max);
+        return ResponseEntity.ok(resultados);
     }
 
 }

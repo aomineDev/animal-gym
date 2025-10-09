@@ -36,4 +36,14 @@ public class MembresiaServiceImpl implements MembresiaService {
         membershipRepository.deleteById(id);
     }
 
+    @Override
+    public List<Membresia> buscarPorEstado(Boolean estado) {
+        return membershipRepository.buscarPorEstado(estado);
+    }
+
+    @Override
+    public List<Membresia> buscarPorPrecio(Double precioMin, Double precioMax) {
+        return membershipRepository.buscarPorPrecio(precioMin, precioMax);
+    }
+
 }
