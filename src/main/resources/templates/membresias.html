@@ -74,13 +74,14 @@
 
         <!-- Toast -->
         <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="toast" class="toast align-items-center border-0" role="alert">
-            <div class="d-flex">
-            <div class="toast-body">
+            <div id="toast" class="toast align-items-center border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
+                </div>
             </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-            </div>
-        </div>
         </div>
         <!-- <script th:inline="javascript">
             function formatDate(date) {
@@ -216,14 +217,14 @@
                                 <label for="file" class="form-label">Foto de la membresia</label>
 
                                 <!-- data-preview="vistaPrevia" -->
-                                <input type="file" id="file"  class="form-control" name="file"
+                                <input type="file" id="file" class="form-control" name="file"
                                     accept="image/jpeg,image/jpg,image/png" required>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 d-flex align-items-center justify-content-center">
                                     <div class="w-100 text-center">
-                                    
-                                    <!-- <img src="" id="vistaPrevia" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;"> -->
+
+                                        <!-- <img src="" id="vistaPrevia" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;"> -->
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +269,7 @@
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="button" class="btn btn-secondary w-25 m-1"
                                     data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary w-25 m-1" >Crear</button>
+                                <button type="submit" class="btn btn-primary w-25 m-1">Crear</button>
                             </div>
                         </form>
                     </div>
@@ -359,10 +360,11 @@
                                     <!-- <small class="text-muted">Calculada automáticamente</small> -->
 
                                 </div>
-                                 <div class="col-md-6">
+                                <div class="col-md-6">
                                     <label class="form-label">Estado</label>
                                     <select class="form-select" name="estado" required>
-                                        <option value="" th:selected="${membresia.estado == null}">Seleccione...</option>
+                                        <option value="" th:selected="${membresia.estado == null}">Seleccione...
+                                        </option>
                                         <option value="activo" th:selected="${membresia.estado}">Activo</option>
                                         <option value="inactivo" th:selected="${!membresia.estado}">Inactivo</option>
                                     </select>
@@ -383,30 +385,36 @@
                                     <div class="invalid-feedback">Ingrese una capacidad válida</div>
                                 </div>
                                 <div class="row">
-  <div class="col-md-6 d-flex align-items-center justify-content-center">
-    <div class="w-100 text-center">
-      <label for="file" class="form-label">Foto de la membresía</label>
-      <img th:src="@{${membresia.imagen}}" th:id="|vistaPrevia${membresia.menbresiaId}|" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;">
-    </div>
-  </div>
+                                    <div class="col-md-6 d-flex align-items-center justify-content-center">
+                                        <div class="w-100 text-center">
+                                            <label for="file" class="form-label">Foto de la membresía</label>
+                                            <img th:src="@{${membresia.imagen}}"
+                                                th:id="|vistaPrevia${membresia.menbresiaId}|" alt="Foto de la membresía"
+                                                class="img-fluid rounded"
+                                                style="max-height: 100%; object-fit: contain;">
+                                        </div>
+                                    </div>
 
-  <div class="col-md-6">
-    <label for="descripcion" class="form-label">Descripción</label>
-    <textarea id="descripcion" class="form-control" rows="8" th:text="${membresia.descripcion}" name="descripcion" required></textarea>
-    <div class="valid-feedback">Descripción válida</div>
-    <div class="invalid-feedback">Ingrese una descripción (mínimo 10 caracteres)</div>
-  </div>
-</div>
+                                    <div class="col-md-6">
+                                        <label for="descripcion" class="form-label">Descripción</label>
+                                        <textarea id="descripcion" class="form-control" rows="8"
+                                            th:text="${membresia.descripcion}" name="descripcion" required></textarea>
+                                        <div class="valid-feedback">Descripción válida</div>
+                                        <div class="invalid-feedback">Ingrese una descripción (mínimo 10 caracteres)
+                                        </div>
+                                    </div>
+                                </div>
 
-                                
-                            <div class="col-md-12">
-                                <label for="file" class="form-label">Reemplazar foto de la membresia</label>
-                                <input type="file" th:attr="data-preview=|vistaPrevia${membresia.menbresiaId}|" id="file" class="form-control" width="100%" name="file" accept="image/jpeg,image/jpg,image/png"
-                                >
-                                <input type="hidden" name="imagenActual" th:value="${membresia.imagen}" />
-                                <!-- <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png"
+
+                                <div class="col-md-12">
+                                    <label for="file" class="form-label">Reemplazar foto de la membresia</label>
+                                    <input type="file" th:attr="data-preview=|vistaPrevia${membresia.menbresiaId}|"
+                                        id="file" class="form-control" width="100%" name="file"
+                                        accept="image/jpeg,image/jpg,image/png">
+                                    <input type="hidden" name="imagenActual" th:value="${membresia.imagen}" />
+                                    <!-- <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png"
                                 required> -->
-                            </div>
+                                </div>
 
                                 <!-- <div class="col-12">
                                 <div class="alert alert-info">
@@ -417,7 +425,8 @@
                                 <div class="col-12 d-flex justify-content-end">
                                     <button type="button" class="btn btn-secondary w-25 m-1"
                                         data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary w-25 m-1 actualizarMembresia" th:attr="data-id=${membresia.menbresiaId}">Actualizar</button>
+                                    <button type="submit" class="btn btn-primary w-25 m-1 actualizarMembresia"
+                                        th:attr="data-id=${membresia.menbresiaId}">Actualizar</button>
                                 </div>
                             </form>
                         </div>
@@ -455,7 +464,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger eliminarMembresia" th:attr="data-id=${membresia.menbresiaId}">
+                            <button type="button" class="btn btn-danger eliminarMembresia"
+                                th:attr="data-id=${membresia.menbresiaId}">
                                 <i class="bi bi-trash me-2"></i>Eliminar
                             </button>
                         </div>
@@ -465,7 +475,7 @@
         </div>
 
         <script type="module" th:src="@{/js/membresias/main.js}"></script>
-        
+
     </th:block>
 </body>
 
