@@ -19,7 +19,7 @@ public interface SocioRepository extends JpaRepository<Socio, Integer> {
   @Query("SELECT s FROM Socio s WHERE s.fechaVencimiento BETWEEN :inicio AND :fin")
   List<Socio> buscarPorRangoVencimiento(@Param("inicio") LocalDate inicio, @Param("fin") LocalDate fin);
 
-  @Query("SELECT s FROM Socio s WHERE s.menbresia.menbresiaId = :membresiaId")
+  @Query("SELECT s FROM Socio s WHERE s.membresia.membresiaId = :membresiaId")
   List<Socio> buscarPorMembresia(@Param("membresiaId") Integer membresiaId);
 
   @Query("SELECT s FROM Socio s WHERE LOWER(s.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))")

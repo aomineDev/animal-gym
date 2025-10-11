@@ -1,57 +1,65 @@
 export default class Service {
-	constructor(service) {
-		this.service = service
-	}
+  constructor(service) {
+    this.service = service
+  }
 
-	async findById(id) {
-		const response = await fetch(`/api/${this.service}/${id}`)
+  async findById(id) {
+    const response = await fetch(`/api/${this.service}/${id}`)
 
-		const data = await response.json()
+    if (!response.ok) throw new Error('Error al obtener la entidad')
 
-		return data
-	}
+    const data = await response.json()
 
-	async findAll() {
-		const response = await fetch(`/api/${this.service}`)
+    return data
+  }
 
-		const data = await response.json()
+  async findAll() {
+    const response = await fetch(`/api/${this.service}`)
 
-		return data
-	}
+    if (!response.ok) throw new Error('Error al obtener la entidad')
 
-	async save(entity) {
-		const response = await fetch(`/api/${this.service}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(entity),
-		})
+    const data = await response.json()
 
-		const data = await response.json()
+    return data
+  }
 
-		return data
-	}
+  async save(entity) {
+    const response = await fetch(`/api/${this.service}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(entity),
+    })
 
-	async update(entity, id) {
-		const response = await fetch(`/api/${this.service}/${id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(entity),
-		})
+    if (!response.ok) throw new Error('Error al guardar la entidad')
 
-		const data = await response.json()
+    const data = await response.json()
 
-		return data
-	}
+    return data
+  }
 
-	async delete(id) {
-		const response = await fetch(`/api/${this.service}/${id}`, {
-			method: 'DELETE',
-		})
+  async update(entity, id) {
+    const response = await fetch(`/api/${this.service}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(entity),
+    })
 
-		return response
-	}
+    if (!response.ok) throw new Error('Error al actualizar la entidad')
+
+    const data = await response.json()
+
+    return data
+  }
+
+  async delete(id) {
+    const response = await fetch(`/api/${this.service}/${id}`, {
+      method: 'DELETE',
+    })
+
+    if (!response.ok) throw new Error('Error al eliminar la entidad')
+  }
 }

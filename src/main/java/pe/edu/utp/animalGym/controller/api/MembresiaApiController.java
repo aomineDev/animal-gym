@@ -54,7 +54,7 @@ public class MembresiaApiController {
     @PutMapping("/{id}")
     public ResponseEntity<Membresia> update(@PathVariable Integer id, @RequestBody Membresia Membresia) {
         // Aseguramos que el id del path sea el usado
-        Membresia.setMenbresiaId(id);
+        Membresia.setMembresiaId(id);
         return ResponseEntity.ok(service.save(Membresia));
     }
     // @PutMapping("/{id}")

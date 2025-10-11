@@ -1,12 +1,7 @@
-// import { actualizarEjercicio } from "../ejercicios/events/modalEvents.js";
-import { crearMembresia, eliminarMembresia, actualizarMembresia,  cargarImagen} from "./events/modalEvents.js";
-// import {paginacion} from "./events/pagination.js";
+import registerMembershipFormModalEvents from './events/formModal.js'
+import registerMembershipDeleteModalEvents from './events/deleteModal.js'
 
-document.addEventListener("DOMContentLoaded", () => {
-    crearMembresia();
-    cargarImagen();
-    actualizarMembresia();
-
-    eliminarMembresia();
-    
-});
+document.addEventListener('DOMContentLoaded', () => {
+  registerMembershipFormModalEvents()
+  registerMembershipDeleteModalEvents()
+})
