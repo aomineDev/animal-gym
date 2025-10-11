@@ -62,9 +62,9 @@ export default function (membership) {
 						<h5 class="fw-semibold mb-2">${nombre}</h5>
 					</a>
 					<h6 class="fw-semibold text-secondary">
-						S/ <span>${precioOferta}</span>
+						S/ <span>${precioOferta.toFixed(2)}</span>
 						<small class="text-decoration-line-through text-muted ms-1"
-							>S/ <span>${precio}</span></small
+							>S/ <span>${precio.toFixed(2)}</span></small
 						>
 						<span class="ms-2 small text-muted">
 							<i class="bi bi-clock"></i> <span>${duracion}</span> dias
