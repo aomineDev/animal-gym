@@ -11,8 +11,10 @@ public class RolesController {
     model.addAttribute("title", "Animal GYM | Rol");
     model.addAttribute("content", "rol :: content");
     model.addAttribute("modal", "rol :: modal");
+    model.addAttribute("script", "");
+
     model.addAttribute("activePage", "rol");
 
-    return "layout";
+    return "dashboard";
   }
 }

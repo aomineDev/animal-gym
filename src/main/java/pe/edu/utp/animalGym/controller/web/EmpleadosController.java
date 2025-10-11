@@ -26,11 +26,13 @@ public class EmpleadosController {
     public String employee(Model model) {
         model.addAttribute("content", "empleados :: content");
         model.addAttribute("modal", "empleados :: modals");
+        model.addAttribute("script", "");
+
         model.addAttribute("activePage", "empleados");
         model.addAttribute("empleadoTabla", serviceEmpleado.findAll());
         model.addAttribute("contenedorRol", serviceRol.findAll());
         model.addAttribute("contenedorUser", serviceUsuario.findAll());
-        return "layout";
+        return "dashboard";
     }
 
 }

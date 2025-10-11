@@ -17,10 +17,11 @@ public class BoletasController {
 	@GetMapping("/boletas")
 	public String Socio(Model model) {
 		model.addAttribute("content", "boletas :: content");
-
 		model.addAttribute("modal", "boletas :: modals");
 		model.addAttribute("activePage", "boletas");
+		model.addAttribute("script", "");
+
 		model.addAttribute("tablaBoleta", servicio.findAll());
-		return "layout";
+		return "dashboard";
 	}
 }

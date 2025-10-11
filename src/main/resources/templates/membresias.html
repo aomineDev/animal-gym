@@ -1,481 +1,236 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-</head>
 
 <body>
     <th:block th:fragment="content">
-
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Membresías</h2>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearMembresia">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membershipFormModal">
                 <i class="bi bi-plus-circle me-2"></i>Nueva Membresía
             </button>
         </div>
 
-
-        <div class="row g-4" id="content-membresias">
-            <div class="col-12 col-md-6 col-lg-4 col-xxl-3 ${estados.card}"
-                th:each="membresia : ${detalleCardMenbresia}" th:id="|membresiaCard__${membresia.menbresiaId}|">
+        <div class="row g-4" id="membership-container">
+            <div class="col-12 col-md-6 col-lg-4 col-xxl-3" th:each="membresia : ${membershipList}"
+                th:data-id="${membresia.membresiaId}">
                 <div class="workout-grid shadow-sm">
                     <div class="img-wrap position-relative">
-                        <!-- <a href="#" class="btn-wishlist position-absolute top-0 start-0 m-2 z-3">
-                      <i class="bi bi-heart-fill text-white fs-5"></i>
-                    </a> -->
                         <div class="dropdown position-absolute top-0 end-0 m-2 z-3">
-                            <a href="#" class="btn-wishlist text-white" data-bs-toggle="dropdown">
+                            <a href="#" class="text-white" data-bs-toggle="dropdown">
                                 <i class="bi bi-three-dots-vertical fs-5"></i>
                             </a>
                             <ul class="dropdown-menu">
-                                <!--<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verMembresiaModal" id="membresia-detalle" data-id="${id}">
-                                                      <i class="bi bi-eye me-2"></i>Ver detalles
-                                                    </a></li>-->
                                 <li>
-                                    <!-- data-bs-target="editarMembresia" -->
                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                        th:attr="data-bs-target=|#editarMembresia__${membresia.menbresiaId}|">
+                                        data-bs-target="#membershipFormModal" th:data-id="${membresia.membresiaId}">
                                         <i class="bi bi-pencil me-2"></i> Editar
                                     </a>
                                 </li>
                                 <li>
-                                    <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider" />
                                 </li>
-                                <li><a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                                        th:attr="data-bs-target=|#eliminarMembresia__${membresia.menbresiaId}|">
+                                <li>
+                                    <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#membershipDeleteModal" th:data-id="${membresia.membresiaId}">
                                         <i class="bi bi-trash me-2"></i>Eliminar
-                                    </a></li>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                        <a href="#">
-                            <img th:src="${membresia.imagen}" alt="" class="w-100 rounded-3">
-                        </a>
+                        <img th:src="${membresia.imagen}" alt="membership Image" class="w-100 rounded-3" />
                     </div>
                     <div class="workout-detail p-3">
                         <a href="#" class="text-decoration-none">
                             <h5 class="fw-semibold mb-2" th:text="${membresia.nombre}"></h5>
                         </a>
                         <h6 class="fw-semibold text-secondary">
-                            S/ <span th:text="${membresia.precio*0.50}"></span>
+                            S/ <span th:text="${membresia.precioOferta}"></span>
                             <small class="text-decoration-line-through text-muted ms-1">S/ <span
                                     th:text="${membresia.precio}"></span></small>
                             <span class="ms-2 small text-muted">
-                                <i class="bi bi-clock"></i> <span th:text="${membresia.duracion}"></span> dias
+                                <i class="bi bi-clock"></i>
+                                <span th:text="${membresia.duracion}"></span> dias
                             </span>
                         </h6>
                         <p class="small text-muted mb-2" th:text="${membresia.descripcion}"></p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <span th:text="${membresia.estado ? 'Activo' : 'Inactivo'}"
-                                th:classappend="${membresia.estado} ? ' badge bg-success' : ' badge bg-secondary'"></span>
-                            <small class="text-muted">35/<span th:text="${membresia.limiteCupos}"></span> socios</small>
+                            <span class="badge" th:classappend="${membresia.estado ? ' bg-success' : ' bg-secondary'}"
+                                th:text="${membresia.estado ? 'Activo' : 'Inactivo'}">
+                            </span>
+                            <small class="text-muted">
+                                limite:
+                                <span th:text="${membresia.limiteCupos}"></span> socios
+                            </small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Toast -->
-        <div class="toast-container position-fixed top-0 end-0 p-3">
-            <div id="toast" class="toast align-items-center border-0" role="alert">
-                <div class="d-flex">
-                    <div class="toast-body">
-                    </div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
-                        data-bs-dismiss="toast"></button>
-                </div>
-            </div>
-        </div>
-        <!-- <script th:inline="javascript">
-            function formatDate(date) {
-                const d = new Date(date);
-                let month = '' + (d.getMonth() + 1);
-                let day = '' + d.getDate();
-                const year = d.getFullYear();
-
-                if (month.length < 2) month = '0' + month;
-                if (day.length < 2) day = '0' + day;
-
-                return [year, month, day].join('-');
-            }
-            document.addEventListener('DOMContentLoaded', function () {
-                var membresiaModal = document.getElementById('membresiaEditarModal');
-                console.log('dfafsd')
-                membresiaModal.addEventListener('show.bs.modal', function (event) {
-                    var button = event.relatedTarget;
-                    console.log('hola')
-                    var id = button.getAttribute('data-id');
-                    var nombre = button.getAttribute('data-nombre');
-                    var precio = button.getAttribute('data-precio');
-                    var precioOferta = button.getAttribute('data-preciooferta');
-                    var duracion = button.getAttribute('data-duracion');
-                    var fechaInicio = button.getAttribute('data-fechainicio');
-                    var fechaFin = button.getAttribute('data-fechafin');
-                    var descripcion = button.getAttribute('data-descripcion');
-                    var estado = button.getAttribute('data-estado');
-                    var limite = button.getAttribute('data-limite');
-
-                    membresiaModal.querySelector('input[name="nombre"]').value = nombre;
-                    membresiaModal.querySelector('input[name="precio"]').value = precio;
-                    // membresiaModal.querySelector('input[name="precioOferta"]').value = precioOferta;
-                    // membresiaModal.querySelector('input[name="duracion"]').value = duracion;
-                    membresiaModal.querySelector('input[name="fecha_inicio"]').value = formatDate(fechaInicio);
-                    membresiaModal.querySelector('input[name="fecha_final"]').value = formatDate(fechaFin);
-                    membresiaModal.querySelector('textarea[name="descripcion"]').innerHTML = descripcion;
-                    membresiaModal.querySelector('input[name="limite"]').value = limite;
-
-                    console.log(nombre, precio, precioOferta, duracion, fechaInicio, fechaFin, descripcion, estado, limite)
-
-                    var estadoSelect = membresiaModal.querySelector('select[name="estado"]');
-                    if (estadoSelect) {
-                        estadoSelect.value = (estado === 'true' || estado === true) ? 'activo' : 'inactivo';
-                    }
-
-                    membresiaModal.querySelector('button[type="submit"]').setAttribute('data-id', id);
-                });
-
-
-            });
-
-        </script> -->
-
     </th:block>
 
     <th:block th:fragment="modal">
-
-        <!-- Modal Crear Membresia -->
-        <div class="modal fade" id="modalCrearMembresia" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
+        <!-- Modal de membresia -->
+        <div class="modal fade" id="membershipFormModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Nueva Membresía</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3 needs-validation" id="formCrearMembresia" novalidate>
+                        <form class="row g-3 needs-validation membership-form" id="membershipForm" novalidate
+                            data-type="create">
                             <div class="col-md-6">
                                 <label class="form-label">Nombre del Plan</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="nombre" required>
-                                </div>
+                                <input type="text" class="form-control" name="nombre" pattern="[\w\s]{3,}" required />
                                 <div class="valid-feedback">Nombre válido</div>
-                                <div class="invalid-feedback">Ingrese un nombre válido (mínimo 3 caracteres)</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un nombre válido (mínimo 3 caracteres)
+                                </div>
                             </div>
 
                             <div class="col-md-3">
-                                <label class="form-label">Precio Regular (S/)</label>
+                                <label class="form-label">Precio Regular</label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" name="precio" value="${precio}" min="1"
-                                        step="0.01" required>
-
+                                    <span class="input-group-text">S/</span>
+                                    <input type="number" class="form-control" name="precio" min="1" step="0.01"
+                                        required />
+                                    <div class="valid-feedback">Precio válido</div>
+                                    <div class="invalid-feedback">Ingrese un precio válido</div>
                                 </div>
-                                <div class="valid-feedback">Precio válido</div>
-                                <div class="invalid-feedback">Ingrese un precio válido</div>
                             </div>
-
 
                             <div class="col-md-3">
-                                <label class="form-label">Precio Promocional (S/)</label>
+                                <label class="form-label">Precio Promocional</label>
                                 <div class="input-group">
-                                    <input type="number" name="precioOferta" class="form-control" value="" min="0"
-                                        step="0.01">
-
+                                    <span class="input-group-text">S/</span>
+                                    <input type="number" name="precioOferta" class="form-control" min="0" step="0.01" />
+                                    <div class="invalid-feedback">
+                                        Debe ser menor al precio regular
+                                    </div>
                                 </div>
-                                <div class="valid-feedback">Precio promocional válido</div>
-                                <div class="invalid-feedback">Debe ser menor al precio regular</div>
                             </div>
-
-                            <!-- <div class="col-md-4">
-                                <label class="form-label">Duración (días)</label>
-                                <div class="input-group">
-                                    <input type="number" name="duracion" class="form-control" value="" min="1" required>
-
-                                </div>
-                                <div class="valid-feedback">Duración válida</div>
-                                <div class="invalid-feedback">Ingrese una duración válida</div>
-                            </div> -->
 
                             <div class="col-md-6">
                                 <label class="form-label">Fecha Inicio</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control" name="inicioOferta" value="" required>
+                                <input type="date" class="form-control" name="inicioOferta" />
+                                <div class="invalid-feedback">
+                                    Seleccione una fecha válida
                                 </div>
-                                <div class="valid-feedback">Fecha válida</div>
-                                <div class="invalid-feedback">Seleccione una fecha válida</div>
                             </div>
 
                             <div class="col-md-6">
                                 <label class="form-label">Fecha Final</label>
-                                <div class="input-group">
-                                    <input type="date" class="form-control" name="finOferta" value="${fecha_final}"
-                                        required>
-                                    <!-- <span class="input-group-text">
-                                        <i class="bi bi-calendar-check"></i>
-                                    </span> -->
-                                </div>
-                                <!-- <small class="text-muted">Calculada automáticamente</small> -->
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="file" class="form-label">Foto de la membresia</label>
-
-                                <!-- data-preview="vistaPrevia" -->
-                                <input type="file" id="file" class="form-control" name="file"
-                                    accept="image/jpeg,image/jpg,image/png" required>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 d-flex align-items-center justify-content-center">
-                                    <div class="w-100 text-center">
-
-                                        <!-- <img src="" id="vistaPrevia" alt="Foto de la membresía" class="img-fluid rounded" style="max-height: 100%; object-fit: contain;"> -->
-                                    </div>
+                                <input type="date" class="form-control" name="finOferta" />
+                                <div class="invalid-feedback">
+                                    Seleccione una fecha válida
                                 </div>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Descripción</label>
-                                <div class="input-group">
-                                    <textarea class="form-control" rows="3" name="descripcion" required></textarea>
-
+                                <textarea class="form-control" rows="3" name="descripcion"></textarea>
+                                <div class="invalid-feedback">
+                                    Ingrese una descripción (mínimo 10 caracteres)
                                 </div>
-                                <div class="valid-feedback">Descripción válida</div>
-                                <div class="invalid-feedback">Ingrese una descripción (mínimo 10 caracteres)</div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Estado</label>
                                 <select class="form-select" name="estado" required>
-                                    <option value="" selected>Seleccione...</option>
-                                    <option value="activo">Activo</option>
+                                    <option value="activo" selected>Activo</option>
                                     <option value="inactivo">Inactivo</option>
                                 </select>
-                                <div class="valid-feedback">Estado válido</div>
-                                <div class="invalid-feedback">Seleccione un estado</div>
                             </div>
 
-                            <div class="col-md-6">
-                                <label class="form-label">Capacidad Máxima</label>
-                                <div class="input-group">
-                                    <input type="number" name="limiteCupos" class="form-control" min="1" required>
-
+                            <div class="col-md-4">
+                                <label class="form-label">Duración (dias)</label>
+                                <input type="number" name="duracion" class="form-control" min="1" required />
+                                <div class="valid-feedback">Duración válida</div>
+                                <div class="invalid-feedback">
+                                    Ingrese una duración válida
                                 </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Capacidad</label>
+                                <input type="number" name="limiteCupos" class="form-control" min="1" required />
                                 <div class="valid-feedback">Capacidad válida</div>
-                                <div class="invalid-feedback">Ingrese una capacidad válida</div>
+                                <div class="invalid-feedback">
+                                    Ingrese una capacidad válida
+                                </div>
                             </div>
 
-                            <!-- <div class="col-12">
-                                <div class="alert alert-info">
-                                    <i class="bi bi-info-circle me-2"></i>
-                                    <strong>Socios inscritos actualmente:</strong> 35
-                                </div>
-                            </div> -->
-                            <div class="col-12 d-flex justify-content-end">
-                                <button type="button" class="btn btn-secondary w-25 m-1"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary w-25 m-1">Crear</button>
+                            <div class="col-md-12">
+                                <label for="membership-image" class="form-label">
+                                    Foto de la membresia
+                                </label>
+                                <input type="file" class="form-control" name="file"
+                                    accept="image/jpeg,image/jpg,image/png" id="membershipForm-image" />
+                            </div>
+                            <div class="col-12 img-container">
+                                <img th:src="@{/img/form/image-preview.png}" alt="Foto de la membresía"
+                                    id="membershipForm-imagePreview" />
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal membresia editar -->
-        <div th:each="membresia : ${detalleCardMenbresia}">
-            <div class="modal fade" th:id="|editarMembresia__${membresia.menbresiaId}|" tabindex="-1"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Editar Membresía</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="row g-3 needs-validation" id="editarMembresiaForm" novalidate>
-                                <div class="col-md-6">
-                                    <label class="form-label">Nombre del Plan</label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="nombre"
-                                            th:value="${membresia.nombre}" required>
-
-                                    </div>
-                                    <div class="valid-feedback">Nombre válido</div>
-                                    <div class="invalid-feedback">Ingrese un nombre válido (mínimo 3 caracteres)</div>
-                                </div>
-
-
-
-                                <div class="col-md-3">
-                                    <label class="form-label">Precio Regular (S/)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" name="precio"
-                                            th:value="${membresia.precio}" min="1" step="0.01" required>
-
-                                    </div>
-                                    <div class="valid-feedback">Precio válido</div>
-                                    <div class="invalid-feedback">Ingrese un precio válido</div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="form-label">Precio Promocional (S/)</label>
-                                    <div class="input-group">
-                                        <input type="number" name="precioOferta" class="form-control"
-                                            th:value="${membresia.precioOferta}" min="0" step="0.01">
-
-                                    </div>
-                                    <div class="valid-feedback">Precio promocional válido</div>
-                                    <div class="invalid-feedback">Debe ser menor al precio regular</div>
-                                </div>
-
-                                <!-- <div class="col-md-6">
-                                    <label class="form-label">Duración (días)</label>
-                                    <div class="input-group">
-                                        <input type="number" name="duracion" class="form-control"
-                                            th:value="${membresia.duracion}" min="1" required>
-
-                                    </div>
-                                    <div class="valid-feedback">Duración válida</div>
-                                    <div class="invalid-feedback">Ingrese una duración válida</div>
-                                </div> -->
-                                <div class="col-md-6">
-                                    <label class="form-label">Fecha Inicio</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" name="inicioOferta"
-                                            th:value="${membresia.inicioOferta}" required>
-
-                                    </div>
-                                    <div class="valid-feedback">Fecha válida</div>
-                                    <div class="invalid-feedback">Seleccione una fecha válida</div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Fecha Final</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" name="finOferta"
-                                            th:value="${membresia.finOferta}" required>
-                                        <span class="input-group-text">
-                                            <i class="bi bi-calendar-check"></i>
-                                        </span>
-                                    </div>
-                                    <!-- <small class="text-muted">Calculada automáticamente</small> -->
-
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Estado</label>
-                                    <select class="form-select" name="estado" required>
-                                        <option value="" th:selected="${membresia.estado == null}">Seleccione...
-                                        </option>
-                                        <option value="activo" th:selected="${membresia.estado}">Activo</option>
-                                        <option value="inactivo" th:selected="${!membresia.estado}">Inactivo</option>
-                                    </select>
-                                    <div class="valid-feedback">Estado válido</div>
-                                    <div class="invalid-feedback">Seleccione un estado</div>
-                                </div>
-
-
-
-                                <div class="col-md-6">
-                                    <label class="form-label">Capacidad Máxima</label>
-                                    <div class="input-group">
-                                        <input type="number" name="limiteCupos" th:value="${membresia.limiteCupos}"
-                                            class="form-control" min="1" required>
-
-                                    </div>
-                                    <div class="valid-feedback">Capacidad válida</div>
-                                    <div class="invalid-feedback">Ingrese una capacidad válida</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 d-flex align-items-center justify-content-center">
-                                        <div class="w-100 text-center">
-                                            <label for="file" class="form-label">Foto de la membresía</label>
-                                            <img th:src="@{${membresia.imagen}}"
-                                                th:id="|vistaPrevia${membresia.menbresiaId}|" alt="Foto de la membresía"
-                                                class="img-fluid rounded"
-                                                style="max-height: 100%; object-fit: contain;">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="descripcion" class="form-label">Descripción</label>
-                                        <textarea id="descripcion" class="form-control" rows="8"
-                                            th:text="${membresia.descripcion}" name="descripcion" required></textarea>
-                                        <div class="valid-feedback">Descripción válida</div>
-                                        <div class="invalid-feedback">Ingrese una descripción (mínimo 10 caracteres)
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-12">
-                                    <label for="file" class="form-label">Reemplazar foto de la membresia</label>
-                                    <input type="file" th:attr="data-preview=|vistaPrevia${membresia.menbresiaId}|"
-                                        id="file" class="form-control" width="100%" name="file"
-                                        accept="image/jpeg,image/jpg,image/png">
-                                    <input type="hidden" name="imagenActual" th:value="${membresia.imagen}" />
-                                    <!-- <input type="file" id="file" class="form-control" name="file" accept="image/jpeg,image/jpg,image/png"
-                                required> -->
-                                </div>
-
-                                <!-- <div class="col-12">
-                                <div class="alert alert-info">
-                                    <i class="bi bi-info-circle me-2"></i>
-                                    <strong>Socios inscritos actualmente:</strong> 12
-                                </div>
-                            </div> -->
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="button" class="btn btn-secondary w-25 m-1"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary w-25 m-1 actualizarMembresia"
-                                        th:attr="data-id=${membresia.menbresiaId}">Actualizar</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-
-                        </div>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                            Cerrar
+                        </button>
+                        <button type="submit" class="btn btn-primary" form="membershipForm">
+                            Crear Membresia
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modal Confirmacion Eliminar -->
-        <div th:each="membresia : ${detalleCardMenbresia}">
-            <div class="modal fade" th:id="|eliminarMembresia__${membresia.menbresiaId}|" tabindex="-1"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Confirmar Eliminación</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="text-center">
-                                <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
-                                <h6 class="mt-3">¿Está seguro de que desea eliminar la membresia "<span
-                                        class="text-danger" th:text="${membresia.nombre}"></span>"?</h6>
-                                <p class="text-muted">Esta acción no se puede deshacer y afectará a los socios
-                                    asociados.
-                                </p>
-                                <!-- <div class="alert alert-warning">
+        <div class="modal fade" id="membershipDeleteModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmar Eliminación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem"></i>
+                            <h6 class="mt-3">
+                                ¿Está seguro de que desea eliminar la membresia "<span class="text-danger"
+                                    id="deleteMembershipName"></span>"?
+                            </h6>
+                            <p class="text-muted">
+                                Esta acción no se puede deshacer y afectará a los socios
+                                asociados.
+                            </p>
+                            <!-- <div class="alert alert-warning">
                                 <i class="bi bi-people-fill me-2"></i>
                                 <strong>35 socios</strong> tienen esta membresía actualmente
                             </div> -->
-                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-danger eliminarMembresia"
-                                th:attr="data-id=${membresia.menbresiaId}">
-                                <i class="bi bi-trash me-2"></i>Eliminar
-                            </button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="button" class="btn btn-danger eliminarMembresia" data-id="0"
+                            id="deleteMembershipBtn">
+                            <i class="bi bi-trash me-2"></i>Eliminar
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+    </th:block>
 
+    <th:block th:fragment="script">
+        <script th:inline="javascript">
+            const membershipListRaw = /*[[${membershipList}]]*/[]
+            console.log(membershipListRaw)
+        </script>
         <script type="module" th:src="@{/js/membresias/main.js}"></script>
-
     </th:block>
 </body>
 

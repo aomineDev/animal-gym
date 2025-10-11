@@ -49,7 +49,7 @@ public class Socio extends Persona {
     @ManyToOne
     @JoinColumn(name = "membresia_id")
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    private Membresia menbresia;
+    private Membresia membresia;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "socio_id")

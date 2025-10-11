@@ -27,11 +27,13 @@ public class RutinasController {
     model.addAttribute("title", "Animal GYM | Rutinas");
     model.addAttribute("content", "rutinas :: content");
     model.addAttribute("modal", "rutinas :: modals");
+    model.addAttribute("script", "");
+
     model.addAttribute("activePage", "rutinas");
     model.addAttribute("socios", socioServiceImpl.findAll());
     model.addAttribute("usuarios", usuarioServiceImpl.findAll());
     model.addAttribute("ejercicios", ejercicioServiceImpl.findAll());
 
-    return "layout";
+    return "dashboard";
   }
 }

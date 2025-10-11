@@ -24,9 +24,10 @@ public class HomeController {
     model.addAttribute("title", "Animal GYM | Home");
     model.addAttribute("content", "home :: content");
     model.addAttribute("modal", "home :: modal");
+    model.addAttribute("script", "home :: script");
     model.addAttribute("activePage", "home");
     model.addAttribute("charData", charData);
 
-    return "layout";
+    return "dashboard";
   }
 }

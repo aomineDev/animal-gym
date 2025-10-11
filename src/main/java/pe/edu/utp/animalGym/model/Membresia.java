@@ -24,12 +24,12 @@ public class Membresia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "membresia_id")
-    private Integer menbresiaId;
+    private Integer membresiaId;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "duracion", nullable = false)
@@ -38,13 +38,13 @@ public class Membresia {
     @Column(name = "precio", nullable = false)
     private Double precio;
 
-    @Column(name = "precio_oferta", nullable = false)
+    @Column(name = "precio_oferta")
     private Double precioOferta;
 
-    @Column(name = "inicio_oferta", nullable = false)
+    @Column(name = "inicio_oferta")
     private LocalDate inicioOferta;
 
-    @Column(name = "fin_oferta", nullable = false)
+    @Column(name = "fin_oferta")
     private LocalDate finOferta;
 
     @Column(name = "imagen", nullable = false)
