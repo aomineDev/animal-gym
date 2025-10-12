@@ -29,6 +29,13 @@ public class UsuariosApiController {
         return ResponseEntity.ok(usuarioService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> find(@PathVariable Integer id) {
+        return usuarioService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));

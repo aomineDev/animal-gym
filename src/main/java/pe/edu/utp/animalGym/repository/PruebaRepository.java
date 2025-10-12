@@ -14,9 +14,6 @@ public class PruebaRepository {
   private Integer nextId = 1;
 
   public PruebaRepository() {
-    save(new Prueba("Prueba 1"));
-    save(new Prueba("Prueba 2"));
-    save(new Prueba("Prueba 3"));
   }
 
   public List<Prueba> findAll() {
