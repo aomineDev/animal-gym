@@ -562,9 +562,9 @@
                                     <label class="form-label">Membresía</label>
                                     <select id="membresia" class="form-select" required>
                                         <option value="">Seleccione...</option>
-                                        <option th:each="membresia : ${membresias}" th:value="${membresia.menbresiaId}"
+                                        <option th:each="membresia : ${membresias}" th:value="${membresia.membresiaId}"
                                             th:text="${membresia.nombre}"
-                                            th:selected="${membresia.menbresiaId == socio.membresia.menbresiaId}">
+                                            th:selected="${membresia.membresiaId == socio.membresia.membresiaId}">
                                         </option>
                                     </select>
                                     <div class="valid-feedback">Membresía válida</div>
