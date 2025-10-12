@@ -3,6 +3,7 @@ export const membershipContainer = document.getElementById(
 )
 
 export const membershipForm = document.getElementById('membershipForm')
+
 export const membershipFormModal = document.getElementById(
   'membershipFormModal'
 )
