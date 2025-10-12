@@ -69,7 +69,7 @@
                 ></span>
                 <small
                   class="text-muted ms-1"
-                  th:classappend="${membresia.precioOferta} ? text-decoration-line-through"
+                  th:classappend="${membresia.precioOferta} ? 'text-decoration-line-through'"
                 >
                   <span
                     th:text="${#numbers.formatCurrency(membresia.precio)}"
