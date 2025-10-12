@@ -10,7 +10,7 @@ import Service from '../../service/index.js'
 import StorageService from '../../service/storage.js'
 import FORM_ACTIONS from '../../constants/formActions.js'
 import { claseList } from '../store.js'
-import { renderNewClaseCard } from '../render.js'
+import { renderNewClaseCard, renderUpdatedClaseCard } from '../render.js'
 import { TOAST_TYPES, showToast } from '../../bootstrap/toast.js'
 
 const claseService = new Service('clases')
@@ -18,31 +18,6 @@ const storageService = new StorageService('clases')
 const bsModal = bootstrap.Modal.getOrCreateInstance(claseFormModal)
 const defaultClaseImage = '/img/clases/default.png'
 const defaultFormClaseImage = '/img/form/image-preview.png'
-
-export default function registerClaseFormModalEvents() {
-  claseForm.addEventListener('submit', handleFormSubmit)
-
-  // claseFormModal.addEventListener('show.bs.modal', (e) => {
-  //   const button = e.relatedTarget
-  //   const id = button.datased.id
-
-  //   if (id) {
-  //     claseForm.dataset.type = FORM_ACTIONS.UPDATE
-  //     claseForm.dataset.id = id
-  //     claseFormModalTitle.textContent = 'Actualizar Clase'
-  //     claseFormSubmit.textContent = 'Guardar Clase'
-
-  //     //AUN FALTA EL FILL
-  //   } else {
-  //     claseForm.dataset.type = FORM_ACTIONS.CREATE
-  //     claseFormModalTitle.textContent = 'Nueva Clase'
-  //     claseFormSubmit.textContent = 'Crear Clase'
-  //     claseFormImagePreview.src = defaultClaseImage
-  //   }
-  // })
-
-  claseFormImage.addEventListener('change', handleImageChange)
-}
 
 async function handleFormSubmit(e) {
   if (!this.checkValidity()) return
@@ -92,8 +67,17 @@ async function handleFormSubmit(e) {
       claseList[data.claseId] = data
 
       showToast('Clase creada con exito!', TOAST_TYPES.SUCCESS)
-    }
+    } else if (this.dataset.type === FORM_ACTIONS.UPDATE) {
+      const id = this.dataset.id
 
+      const data = await claseService.update(clase, id)
+      console.log(data)
+
+      renderUpdatedClaseCard(data)
+      claseList[data.claseId] = data
+
+      showToast('Clase actualizada con exito!', TOAST_TYPES.SUCCESS)
+    }
     bsModal.hide()
   } catch (error) {
     showToast('No se pudo crear la clase', TOAST_TYPES.ERROR)
@@ -109,10 +93,62 @@ function handleImageChange(e) {
   claseFormImagePreview.src = imageURL
 }
 
+function fillClaseForm(clase) {
+  claseForm.nombre.value = clase.nombre
+  claseForm.intensidad.value = clase.intensidad
+  claseForm.capacidad.value = clase.capacidad
+  claseForm.fecha.value = clase.fecha
+  claseForm.horaInicio.value = clase.horaInicio
+  claseForm.horaFin.value = clase.horaFin
+  claseForm.descripcion.value = clase.descripcion
+  claseForm.objetivo.value = clase.objetivo
+  claseForm.entrenador.value = clase.empleado.personaId
+
+  if (clase.imagen === defaultClaseImage)
+    claseFormImagePreview.src = defaultFormClaseImage
+  else claseFormImagePreview.src = clase.imagen
+
+  if (clase.empleado && clase.empleado.persona) {
+    claseForm.entrenador.value = clase.entrenador.persona.personaId
+  }
+}
+
+export default function registerClaseFormModalEvents() {
+  claseForm.addEventListener('submit', handleFormSubmit)
+
+  claseFormModal.addEventListener('show.bs.modal', (e) => {
+    const button = e.relatedTarget
+    const id = button.dataset.id
+
+    if (id) {
+      claseForm.dataset.type = FORM_ACTIONS.UPDATE
+      claseForm.dataset.id = id
+      claseFormModalTitle.textContent = 'Actualizar Clase'
+      claseFormSubmit.textContent = 'Guardar Clase'
+
+      fillClaseForm(claseList[id])
+    } else {
+      claseForm.dataset.type = FORM_ACTIONS.CREATE
+      claseFormModalTitle.textContent = 'Nueva Clase'
+      claseFormSubmit.textContent = 'Crear Clase'
+      claseFormImagePreview.src = defaultFormClaseImage
+    }
+  })
+
+  claseFormImage.addEventListener('change', handleImageChange)
+}
+
 function calcularDuracion(horaInicio, horaFin) {
-  const inicio = new Date(`1970-01-01T${horaInicio}:00`)
-  const fin = new Date(`1970-01-01T${horaFin}:00`)
-  return Math.floor((fin - inicio) / (1000 * 60))
+  if (!horaInicio || !horaFin) return 0
+
+  const [hInicio, mInicio] = horaInicio.split(':').map(Number)
+  const [hFin, mFin] = horaFin.split(':').map(Number)
+
+  let duracion = hFin * 60 + mFin - (hInicio * 60 + mInicio)
+
+  if (duracion < 0) duracion += 24 * 60
+
+  return duracion
 }
 
 function calcularEstado(fecha, horaInicio, horaFin) {

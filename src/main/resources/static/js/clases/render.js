@@ -4,3 +4,10 @@ import { claseContainer } from './dom.js'
 export function renderNewClaseCard(clase) {
   claseContainer.insertAdjacentHTML('afterbegin', ClaseCard(clase))
 }
+
+export function renderUpdatedClaseCard(clase) {
+  const claseCard = claseContainer.querySelector(
+    `div[data-id="${clase.claseId}"]`
+  )
+  if (claseCard) claseCard.outerHTML = ClaseCard(clase)
+}
