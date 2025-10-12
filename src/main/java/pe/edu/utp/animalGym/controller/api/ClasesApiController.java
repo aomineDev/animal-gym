@@ -45,11 +45,13 @@ public class ClasesApiController {
 
     @PostMapping
     public ResponseEntity<Clase> save(@RequestBody Clase clase) {
+
         return ResponseEntity.status(HttpStatus.CREATED).body(claseService.save(clase));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Clase> update(@PathVariable Integer id, @RequestBody Clase clase) {
+
         return ResponseEntity.ok(claseService.save(clase));
     }
 
