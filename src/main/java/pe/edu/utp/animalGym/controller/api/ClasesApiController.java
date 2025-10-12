@@ -59,22 +59,6 @@ public class ClasesApiController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        try {
-            String carpetaUploads = "uploads/clases/";
-            String nombreArchivo = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            Path ruta = Paths.get(carpetaUploads + nombreArchivo);
-
-            Files.write(ruta, file.getBytes());
-
-            return ResponseEntity.ok("/uploads/clases/" + nombreArchivo);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al subir la imagen");
-        }
-    }
-
     /* Filtros */
     @GetMapping("/filtrar")
     public ResponseEntity<List<Clase>> filtrar(@RequestParam(required = false) String nombre,

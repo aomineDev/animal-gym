@@ -22,8 +22,8 @@ public class ClasesController {
     model.addAttribute("title", "Animal GYM | Clase");
 
     model.addAttribute("content", "clases :: content");
-    model.addAttribute("modal", "clases :: modals");
-    model.addAttribute("script", "");
+    model.addAttribute("modal", "clases :: modal");
+    model.addAttribute("script", "clases :: script");
 
     model.addAttribute("activePage", "clases");
 

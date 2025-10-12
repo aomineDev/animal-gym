@@ -35,7 +35,7 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "rol_id")
-    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Rol rol;
 
     @OneToOne
