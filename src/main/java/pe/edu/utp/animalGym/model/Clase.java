@@ -40,7 +40,7 @@ public class Clase {
     @Column(name = "nombre", nullable = false, length = 20)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "capacidad", nullable = false)
@@ -61,13 +61,13 @@ public class Clase {
     @Column(name = "estado", nullable = false, length = 20)
     private String estado;
 
-    @Column(name = "objetivo", nullable = false)
+    @Column(name = "objetivo")
     private String objetivo;
 
     @Column(name = "intensidad", nullable = false, length = 20)
     private String intensidad;
 
-    @Column(name = "imagen", nullable = false)
+    @Column(name = "imagen")
     private String imagen;
 
     @ManyToOne

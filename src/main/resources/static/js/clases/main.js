@@ -1,15 +1,5 @@
-import {
-  crearClaseEvents,
-  eliminarClaseEvents,
-  editarClaseEvents,
-  agregarSocioClase,
-  eliminarSocioClase,
-} from "./events/modalEvents.js";
+import registerClaseFormModalEvents from './events/formModal.js'
 
-document.addEventListener("DOMContentLoaded", () => {
-  crearClaseEvents();
-  editarClaseEvents();
-  eliminarClaseEvents();
-  agregarSocioClase();
-  eliminarSocioClase();
-});
+document.addEventListener('DOMContentLoaded', () => {
+  registerClaseFormModalEvents()
+})
