@@ -43,6 +43,7 @@ public class ClasesApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Clase> update(@PathVariable Integer id, @RequestBody Clase clase) {
+        clase.setClaseId(id);
         return ResponseEntity.ok(claseService.save(clase));
     }
 
