@@ -28,7 +28,7 @@ public class RolServiceImpl implements RolService {
 
     @Override
     public Rol save(Rol entity) {
-        return save(entity);
+        return repository.save(entity);
     }
 
     @Override

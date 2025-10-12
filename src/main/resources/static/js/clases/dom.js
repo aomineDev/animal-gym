@@ -1,3 +1,17 @@
-export const modalCrearClase = document.getElementById("crearClase");
-export const formCrearClase = document.getElementById("formCrearClase");
-export const sectionCards = document.getElementById("section__card");
+export const claseContainer = document.getElementById('clase-container')
+
+export const claseForm = document.getElementById('claseForm')
+
+export const claseFormModal = document.getElementById('claseFormModal')
+
+export const claseFormModalTitle = claseFormModal.querySelector('.modal-title')
+
+export const claseFormSubmit = claseFormModal.querySelector(
+  'button[type="submit"]'
+)
+
+export const claseFormImage = claseFormModal.querySelector('#claseForm-image')
+
+export const claseFormImagePreview = claseFormModal.querySelector(
+  '#claseForm-imagePreview'
+)

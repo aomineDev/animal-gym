@@ -1,19 +1,13 @@
 package pe.edu.utp.animalGym.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Prueba {
   private Integer id;
   private String name;
-
-  public Prueba(String name) {
-    this.name = name;
-  }
 }

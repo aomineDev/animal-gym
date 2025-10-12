@@ -1,19 +1,12 @@
 package pe.edu.utp.animalGym.controller.api;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
 import pe.edu.utp.animalGym.model.Clase;
 import pe.edu.utp.animalGym.service.ClaseService;
 
@@ -59,22 +52,6 @@ public class ClasesApiController {
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
         claseService.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        try {
-            String carpetaUploads = "uploads/clases/";
-            String nombreArchivo = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            Path ruta = Paths.get(carpetaUploads + nombreArchivo);
-
-            Files.write(ruta, file.getBytes());
-
-            return ResponseEntity.ok("/uploads/clases/" + nombreArchivo);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al subir la imagen");
-        }
     }
 
     /* Filtros */
