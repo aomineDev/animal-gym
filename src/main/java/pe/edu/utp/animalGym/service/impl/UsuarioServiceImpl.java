@@ -45,19 +45,19 @@ public class UsuarioServiceImpl implements UsuarioService {
     repository.deleteById(id);
   }
 
-  @Override
-  public Usuario saveUsuario(UsuarioDTO dto) {
-    Usuario usuario = new Usuario();
-    usuario.setClave(dto.getClave());
+  // @Override
+  // public Usuario saveUsuario(UsuarioDTO dto) {
+  // Usuario usuario = new Usuario();
+  // usuario.setClave(dto.getClave());
 
-    Rol rol = rolRepository.findById(dto.getRolId())
-        .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
-    usuario.setRol(rol);
+  // Rol rol = rolRepository.findById(dto.getRolId())
+  // .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+  // usuario.setRol(rol);
 
-    Empleado empleado = empleadoRepository.findById(dto.getPersonaId())
-        .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
-    usuario.setPersona(empleado);
+  // Empleado empleado = empleadoRepository.findById(dto.getPersonaId())
+  // .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+  // usuario.setPersona(empleado);
 
-    return repository.save(usuario);
-  }
+  // return repository.save(usuario);
+  // }
 }

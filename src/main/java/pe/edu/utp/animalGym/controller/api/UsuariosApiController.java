@@ -38,9 +38,8 @@ public class UsuariosApiController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> saveU(@RequestBody UsuarioDTO dto) {
-        Usuario usuario = usuarioService.saveUsuario(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
+    public ResponseEntity<Usuario> saveU(@RequestBody Usuario usuario) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
     }
 
     @DeleteMapping("/{id}")

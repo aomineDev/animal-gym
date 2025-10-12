@@ -14,6 +14,7 @@ import StorageService from '../../service/storage.js'
 import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
 
 import { empledoList } from '../store.js'
+import { PERSONA_TYPE } from '../../constants/personaType.js'
 import { renderEmpleadoCard, renderEmpleadoActualizar } from '../render.js'
 const empleadoServicio = new Service('empleados');
 const usuarioServicio = new Service('usuarios');
@@ -21,6 +22,8 @@ const storageService = new StorageService('empleados');
 const bsModal = bootstrap.Modal.getOrCreateInstance(empleadoFormularioModal);
 //imagen del formulario
 const defaultFormImagen = '/img/form/image-preview.png';
+
+const tipo = PERSONA_TYPE.EMPLEADO
 
 async function handleFormSubmit(e) {
   if (!this.checkValidity()) return
@@ -46,6 +49,7 @@ async function handleFormSubmit(e) {
     if (file) imagen = await storageService.upload(file)
 
     const empleado = {
+      tipo,
       dni,
       nombre,
       apellido,
@@ -65,9 +69,14 @@ async function handleFormSubmit(e) {
       console.log(clave)
       console.log((rol))
       const usuario = {
-        clave: clave,
-        rolId: parseInt(rol),
-        personaId: data.personaId,
+        clave,
+        rol: {
+          rolId: parseInt(rol)
+        },
+        personaId: {
+          tipo,
+          personaId: data.personaId,
+        }
       }
       const dataUsuario = await usuarioServicio.save(usuario);
 
