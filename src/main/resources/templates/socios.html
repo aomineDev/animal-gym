@@ -66,7 +66,7 @@
                                 th:text="${socio.estado} ? 'Activo' : 'Inactivo'"></span>
                         </td>
                         <!-- <td></td> -->
-                        <td th:text="${socio.menbresia != null ? socio.menbresia.nombre : 'Sin membresía'}"></td>
+                        <td th:text="${socio.membresia != null ? socio.membresia.nombre : 'Sin membresía'}"></td>
                         <td th:text="${socio.fechaIngreso}"></td>
                         <td>
                             <div class="dropdown">
@@ -214,7 +214,7 @@
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between">
                                                     <span><i class="bi bi-card-checklist me-2"></i>Plan actual:</span>
-                                                    <span class="fw-bold" th:text="${socio.menbresia.nombre}"></span>
+                                                    <span class="fw-bold" th:text="${socio.membresia.nombre}"></span>
                                                 </li>
                                                 <li class="list-group-item d-flex justify-content-between">
                                                     <span><i class="bi bi-person-badge me-2"></i>DNI:</span>
@@ -562,9 +562,9 @@
                                     <label class="form-label">Membresía</label>
                                     <select id="membresia" class="form-select" required>
                                         <option value="">Seleccione...</option>
-                                        <option th:each="membresia : ${membresias}" th:value="${membresia.menbresiaId}"
+                                        <option th:each="membresia : ${membresias}" th:value="${membresia.membresiaId}"
                                             th:text="${membresia.nombre}"
-                                            th:selected="${membresia.menbresiaId == socio.menbresia.menbresiaId}">
+                                            th:selected="${membresia.membresiaId == socio.membresia.membresiaId}">
                                         </option>
                                     </select>
                                     <div class="valid-feedback">Membresía válida</div>
