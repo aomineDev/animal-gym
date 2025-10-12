@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityManager;
 import pe.edu.utp.animalGym.model.Empleado;
 import pe.edu.utp.animalGym.model.Rol;
 import pe.edu.utp.animalGym.model.Usuario;
@@ -25,6 +27,9 @@ public class UsuarioServiceImpl implements UsuarioService {
   @Autowired
   private EmpleadoRepository empleadoRepository;
 
+  @Autowired
+  private EntityManager entityManager;
+
   @Override
   public List<Usuario> findAll() {
     return repository.findAll();
@@ -36,8 +41,13 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
+  @Transactional
   public Usuario save(Usuario entity) {
-    return repository.save(entity);
+    Usuario usuario = repository.save(entity);
+
+    entityManager.refresh(usuario);
+
+    return usuario;
   }
 
   @Override
