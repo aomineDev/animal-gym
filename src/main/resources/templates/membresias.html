@@ -44,9 +44,10 @@
               <h5 class="fw-semibold mb-2" th:text="${membresia.nombre}"></h5>
             </a>
             <h6 class="fw-semibold text-secondary">
-              S/ <span th:text="${membresia.precioOferta}"></span>
-              <small class="text-decoration-line-through text-muted ms-1">S/ <span
-                  th:text="${membresia.precio}"></span></small>
+              <span th:text="${#numbers.formatCurrency(membresia.precioOferta)}"></span>
+              <small class="text-decoration-line-through text-muted ms-1">
+                <span th:text="${#numbers.formatCurrency(membresia.precio)}"></span>
+              </small>
               <span class="ms-2 small text-muted">
                 <i class="bi bi-clock"></i>
                 <span th:text="${membresia.duracion}"></span> dias
@@ -225,7 +226,6 @@
   <th:block th:fragment="script">
     <script th:inline="javascript">
       const membershipListRaw = /*[[${membershipList}]]*/[]
-      console.log("membershipListRaw", membershipListRaw)
     </script>
     <script type="module" th:src="@{/js/membresias/main.js}"></script>
   </th:block>
