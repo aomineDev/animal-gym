@@ -3,7 +3,6 @@ import {
   tableTitle,
   agregarSocioForm,
   agregarSocioBtn,
-  eliminarSocioBtn,
   sociosInscritosTable,
 } from '../dom.js'
 import { renderSociosInscritos, renderDeleteRow } from '../render.js'
@@ -13,8 +12,6 @@ import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 
 const service = new Service('clases')
 const serviceSocios = new Service('socios')
-const serviceReservas = new Service('reservaClase')
-const bsModal = bootstrap.Modal.getOrCreateInstance(gestionarInscritosModal)
 
 function renderTableInscritos(e) {
   const button = e.relatedTarget
@@ -68,14 +65,16 @@ async function handleFormSubmit(e) {
     socio: socioEncontrado,
   }
 
-  const dataReserva = await serviceReservas.save(reservaClase)
-
   try {
-    clase.reservas.push(dataReserva)
-    let data = await service.update(clase, id)
-    console.log(data)
-    claseList[data.claseId] = data
-    renderSociosInscritos(data)
+    const res = await fetch(`/api/clases/${id}/reservas`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(reservaClase),
+    })
+
+    const claseActualizada = await res.json()
+    claseList[id] = claseActualizada
+    renderSociosInscritos(claseActualizada)
 
     showToast('Socio inscrito correctamente!', TOAST_TYPES.SUCCESS)
   } catch (error) {
@@ -92,18 +91,12 @@ async function handleDeleteSocio(e) {
     console.log('la clase ', claseId, ' y su reserva', reservaId)
 
     try {
-      serviceReservas.delete(reservaId)
+      const res = await fetch(`/api/clases/${claseId}/reservas/${reservaId}`, {
+        method: 'DELETE',
+      })
+      const claseActualizada = await res.json()
 
-      let clase = claseList[claseId]
-
-      clase.reservas = clase.reservas.filter(
-        (r) => String(r.reservaClaseId) !== String(reservaId)
-      )
-
-      let nuevaClase = await service.update(clase, claseId)
-
-      claseList[nuevaClase.claseId] = nuevaClase
-
+      claseList[claseId] = claseActualizada
       renderDeleteRow(reservaId)
 
       showToast(
