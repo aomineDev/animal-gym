@@ -9,7 +9,7 @@ export default function (clase) {
           <td>${reserva.socio.dni}</td>
           <td>${reserva.fecha}</td>
           <td>
-            <button class="btn btn-sm btn-danger" id="eliminarSocioBtn">
+            <button class="btn btn-sm btn-danger eliminarSocioBtn" data-id="${clase.claseId}" data-reserva-id="${reserva.reservaClaseId}">
               Eliminar
             </button>
           </td>

@@ -99,4 +99,4 @@ export const agregarSocioBtn =
   agregarSocioForm.querySelector('#agregarSocioBtn')
 
 export const eliminarSocioBtn =
-  sociosInscritosTable.querySelector('#eliminarSocioBtn')
+  sociosInscritosTable.querySelector('.eliminarSocioBtn')

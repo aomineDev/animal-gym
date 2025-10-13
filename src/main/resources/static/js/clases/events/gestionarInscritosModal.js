@@ -6,7 +6,7 @@ import {
   eliminarSocioBtn,
   sociosInscritosTable,
 } from '../dom.js'
-import { renderSociosInscritos } from '../render.js'
+import { renderSociosInscritos, renderDeleteRow } from '../render.js'
 import { claseList } from '../store.js'
 import Service from '../../service/index.js'
 import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
@@ -74,6 +74,7 @@ async function handleFormSubmit(e) {
     clase.reservas.push(dataReserva)
     let data = await service.update(clase, id)
     console.log(data)
+    claseList[data.claseId] = data
     renderSociosInscritos(data)
 
     showToast('Socio inscrito correctamente!', TOAST_TYPES.SUCCESS)
@@ -84,7 +85,36 @@ async function handleFormSubmit(e) {
 }
 
 async function handleDeleteSocio(e) {
-  console.log('eliminar')
+  if (e.target.classList.contains('eliminarSocioBtn')) {
+    const claseId = e.target.dataset.id
+    const reservaId = e.target.dataset.reservaId
+
+    console.log('la clase ', claseId, ' y su reserva', reservaId)
+
+    try {
+      serviceReservas.delete(reservaId)
+
+      let clase = claseList[claseId]
+
+      clase.reservas = clase.reservas.filter(
+        (r) => String(r.reservaClaseId) !== String(reservaId)
+      )
+
+      let nuevaClase = await service.update(clase, claseId)
+
+      claseList[nuevaClase.claseId] = nuevaClase
+
+      renderDeleteRow(reservaId)
+
+      showToast(
+        'Socio eliminado correctamente de la clase',
+        TOAST_TYPES.SUCCESS
+      )
+    } catch (error) {
+      console.error('Error:', error)
+      showToast('Error al eliminar socio de la clase', TOAST_TYPES.ERROR)
+    }
+  }
 }
 
 export function registerInscritosModalEvents() {
@@ -94,5 +124,5 @@ export function registerInscritosModalEvents() {
   )
 
   agregarSocioForm.addEventListener('submit', handleFormSubmit)
-  eliminarSocioBtn.addEventListener('click', handleDeleteSocio)
+  sociosInscritosTable.addEventListener('click', handleDeleteSocio)
 }
