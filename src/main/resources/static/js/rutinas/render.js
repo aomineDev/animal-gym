@@ -1,5 +1,10 @@
+import SocioRutinaRow from './components/SocioRutinaRow.js'
 import RutinaRow from './components/RutinaRow.js'
-import { rutinaTable } from './dom.js'
+import { rutinaTable, rutinaSocioTable } from './dom.js'
+
+export function renderSocioRutinaTable(socios) {
+  rutinaSocioTable.innerHTML = socios.map(SocioRutinaRow).join('')
+}
 
 export function renderRutinaTable(socio) {
   if (!socio.rutinas || socio.rutinas.length === 0) {
