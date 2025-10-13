@@ -39,3 +39,23 @@ export const claseDetailObjetivo = claseDetailModal.querySelector(
 export const claseDetailEntrenador = claseDetailModal.querySelector(
   '#claseDetail-entrenador'
 )
+export const claseDetailIntensidad = claseDetailModal.querySelector(
+  '#claseDetail-intensidad'
+)
+export const claseDetailDuracion = claseDetailModal.querySelector(
+  '#claseDetail-duracion'
+)
+export const claseDetailFecha =
+  claseDetailModal.querySelector('#claseDetail-fecha')
+export const claseDetailHoraInicio = claseDetailModal.querySelector(
+  '#claseDetail-horaInicio'
+)
+export const claseDetailHoraFin = claseDetailModal.querySelector(
+  '#claseDetail-horaFin'
+)
+export const claseDetailCapacidad = claseDetailModal.querySelector(
+  '#claseDetail-capacidad'
+)
+export const claseDetailEstado = claseDetailModal.querySelector(
+  '#claseDetail-estado'
+)
