@@ -11,3 +11,9 @@ export function renderUpdatedClaseCard(clase) {
   )
   if (claseCard) claseCard.outerHTML = ClaseCard(clase)
 }
+
+export function renderDeletedClaseCard(id) {
+  const card = claseContainer.querySelector('div[data-id="' + id + '"]')
+
+  if (card) card.remove()
+}
