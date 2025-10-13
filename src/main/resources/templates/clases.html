@@ -118,7 +118,7 @@
               <!-- fecha -->
               <div class="col-md-4">
                 <label class="form-label">Fecha</label>
-                <input type="date" name="fecha" class="form-control" required />
+                <input type="date" id="claseForm-date" name="fecha" class="form-control" required />
                 <div class="invalid-feedback">
                   Seleccione una fecha válida
                 </div>
@@ -127,7 +127,7 @@
               <!-- horaInicio -->
               <div class="col-md-4">
                 <label class="form-label">Hora Inicio</label>
-                <input type="time" name="horaInicio" class="form-control" required />
+                <input type="time" id="claseForm-horaInicio" name="horaInicio" class="form-control" required />
                 <div class="invalid-feedback">
                   Seleccione una hora válida
                 </div>
@@ -136,7 +136,7 @@
               <!-- horaFin -->
               <div class="col-md-4">
                 <label class="form-label">Hora Fin</label>
-                <input type="time" name="horaFin" class="form-control" required />
+                <input type="time" id="claseForm-horaFin" name="horaFin" class="form-control" required />
                 <div class="invalid-feedback">
                   Seleccione una hora válida
                 </div>
@@ -195,6 +195,117 @@
             <button type="submit" class="btn btn-primary" form="claseForm">
               Crear Clase
             </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Ver detalles -->
+    <div class="modal fade" id="claseDetailModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header p-0 position-relative">
+            <img class="img-fluid w-100 rounded-top" id="claseDetail-imagen"
+              style="max-height: 300px; object-fit: cover" src="" alt="" />
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body" id="modalDetailClase">
+            <!-- Título y descripción -->
+            <div class="mb-4 text-center">
+              <h3 class="fw-bold" id="claseDetail-nombre"></h3>
+              <p class="text-muted" id="claseDetail-descripcion"></p>
+            </div>
+
+            <div class="mb-4">
+              <h5 class="mb-2">
+                <i class="bi bi-bullseye me-2"></i> Objetivo
+              </h5>
+              <p id="claseDetail-objetivo"></p>
+            </div>
+
+            <div class="mb-4">
+              <h5 class="mb-2">
+                <i class="bi bi-person-badge me-2"></i> Entrenador
+              </h5>
+              <div class="d-flex gap-2 border border-2 rounded-3 p-3 align-items-center">
+                <i class="bi bi-person-fill fs-4 text-primary"></i>
+                <h5 class="mb-0" id="claseDetail-entrenador"></h5>
+              </div>
+            </div>
+
+            <div class="row g-3 text-center">
+              <div class="col-12 col-md-4">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-lightning-charge-fill me-1"></i>
+                    Intensidad
+                  </h6>
+                  <!-- <h5 class="mb-0" id="claseDetail-intensidad" classappend="
+                    ${clase.intensidad} == 'Baja' ? ' text-success' :
+                    (${clase.intensidad} == 'Media' ? ' text-warning' :
+                    (${clase.intensidad} == 'Alta' ? ' text-danger' : ' text-dark'))
+                "></h5> -->
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-clock-fill me-1"></i> Duración
+                  </h6>
+                  <h5 id="claseDetail-duracion"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-calendar-event-fill me-1"></i> Fecha
+                  </h6>
+                  <h5 id="claseDetail-fecha"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-alarm-fill me-1"></i> Hora Inicio
+                  </h6>
+                  <h5 id="claseDetail-horaInicio"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-alarm me-1"></i> Hora Fin
+                  </h6>
+                  <h5 id="claseDetail-horaFin"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-people-fill me-1"></i> Capacidad
+                  </h6>
+                  <h5 id="claseDetail-capacidad"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-check-circle-fill me-1"></i> Estado
+                  </h6>
+                  <!-- <h5 class="text-primary" id="claseDetail-estado" "${clase.estado}"
+                    classappend="${clase.estado} == 'Programado' ? ' text-primary' : (${clase.estado} == 'En curso' ? ' text-success' : (${clase.estado} == 'Finalizado' ? ' text-danger' : ' text-dark'))">
+                  </h5> -->
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
