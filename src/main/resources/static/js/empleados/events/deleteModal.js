@@ -1,0 +1,31 @@
+import { empleadoModalEliminar, empleadoBtnEliminar } from '../dom.js'
+
+import { empledoList } from '../store.js'
+
+import Service from '../../service/index.js'
+
+import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
+
+import { rendeEmpleadoEliminar } from '../render.js'
+
+const service = new Service('empleados');
+const bsModal = bootstrap.Modal.getOrcreateInstance(empleadoModalEliminar);
+
+async function eliminarMembresia() {
+
+  const id = this.dataset.id;
+  try {
+    await service.delete(id)
+    rendeEmpleadoEliminar(id)
+    delete empledoList[id]
+    bsModal.hide();
+    showToast('Empleado eliminado ', TOAST_TYPES.SUCCESS)
+  } catch (error) {
+    showToast('Error al eliminar empleado', TOAST_TYPES.ERROR)
+
+  }
+}
+
+export default function eliminarEmpleadoModal() {
+
+}

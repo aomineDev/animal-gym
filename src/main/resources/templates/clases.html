@@ -1,781 +1,324 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <body>
-    <th:block th:fragment="content">
-      <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Clases</h2>
-          <button
-            class="btn btn-success"
-            data-bs-toggle="modal"
-            data-bs-target="#crearClase"
-          >
-            <i class="bi bi-plus" id="btnAbrirCrear"></i>Crear clase
-          </button>
-        </div>
 
-        <!-- Drecha -->
-        <div class="col-12">
-          <div class="row" id="section__card">
-            <!-- CARTA -->
-            <div
-              class="col-12 col-md-6 col-xl-3"
-              th:each="clase : ${clases}"
-              th:attr="id=|clase-card-${clase.claseId}|"
-            >
-              <div class="mt-4 border-0 card overflow-hidden rounded-4">
-                <div class="overflow-hidden">
-                  <img
-                    th:src="@{${clase.imagen}}"
-                    class="card-img-top w-100"
-                    th:alt="${clase.nombre}"
-                    style="height: 200px; object-fit: cover"
-                  />
-                </div>
-
-                <div class="row d-flex align-items-center card-body">
-                  <div class="col-9">
-                    <h5 class="card-title mb-1" th:text="${clase.nombre}"></h5>
-                    <p
-                      class="text-muted mb-1"
-                      th:text="${clase.descripcion}"
-                    ></p>
-                    <span
-                      class="badge bg-outline-primary text-primary"
-                      th:text="${clase.estado}"
-                      th:classappend="${clase.estado} == 'Programado' ? ' text-primary' : (${clase.estado} == 'En curso' ? ' text-success' : (${clase.estado} == 'Finalizado' ? ' text-danger' : (${clase.estado} == 'Cancelada' ? ' text-secondary' : ' text-dark')))"
-                    ></span>
-                  </div>
-
-                  <div class="col-3 text-end">
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-link text-dark p-0"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                      >
-                        <i class="bi bi-three-dots-vertical"></i>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a
-                            class="dropdown-item"
-                            href="#"
-                            data-bs-toggle="modal"
-                            th:attr="data-bs-target=|#verClase__${clase.claseId}|"
-                          >
-                            Ver detalles
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            class="dropdown-item"
-                            href="#"
-                            data-bs-toggle="modal"
-                            th:attr="data-bs-target=|#editarClase__${clase.claseId}|"
-                          >
-                            Editar
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            class="dropdown-item"
-                            href="#"
-                            data-bs-toggle="modal"
-                            th:attr="data-bs-target=|#gestionarInscritos__${clase.claseId}|"
-                          >
-                            Gestionar Inscritos
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            class="dropdown-item text-danger"
-                            href="#"
-                            data-bs-toggle="modal"
-                            th:attr="data-bs-target=|#eliminarClase__${clase.claseId}|"
-                          >
-                            Eliminar
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<body>
+  <th:block th:fragment="content">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Clases</h2>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#claseFormModal">
+          <i class="bi bi-plus-circle me-2"></i>Crear clase
+        </button>
       </div>
 
-      <!-- Toast -->
-      <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="toast" class="toast align-items-center border-0" role="alert">
-          <div class="d-flex">
-            <div class="toast-body"></div>
-            <button
-              type="button"
-              class="btn-close btn-close-white me-2 m-auto"
-              data-bs-dismiss="toast"
-            ></button>
-          </div>
-        </div>
-      </div>
-    </th:block>
-
-    <!-- Mis modales -->
-    <th:block th:fragment="modals">
-      <!-- Modal Crear clase-->
-      <div class="modal fade" id="crearClase" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content rounded-4">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                Crear Clase
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <form id="formCrearClase" class="row needs-validation" novalidate>
-                <!-- nombre-->
-                <div class="mb-3 col-md-6">
-                  <label for="nombre" class="form-label"
-                    >Nombre de la clase</label
-                  >
-                  <input
-                    type="text"
-                    name="nombre"
-                    class="form-control"
-                    required
-                  />
-                </div>
-
-                <!-- imagen -->
-                <div class="col-md-6">
-                  <label for="file" class="form-label">Foto de la clase</label>
-                  <input
-                    type="file"
-                    id="file"
-                    class="form-control"
-                    name="file"
-                    accept="image/jpeg,image/jpg,image/png"
-                    required
-                  />
-                </div>
-
-                <!-- descripcion -->
-                <div class="mb-3 col-md-6">
-                  <label for="descripcion" class="form-label"
-                    >Descripción</label
-                  >
-                  <textarea
-                    name="descripcion"
-                    id="descripcion"
-                    class="form-control"
-                    rows="3"
-                    placeholder="Escribe una breve descripción de la clase"
-                    required
-                  ></textarea>
-                </div>
-
-                <!-- objetivo -->
-                <div class="mb-3 col-md-6">
-                  <label for="objetivo" class="form-label">Objetivo</label>
-                  <textarea
-                    name="objetivo"
-                    id="objetivo"
-                    class="form-control"
-                    rows="3"
-                    placeholder="Escribe el objetivo de la clase"
-                    required
-                  ></textarea>
-                </div>
-
-                <!-- capacidad -->
-                <div class="mb-3 col-md-6">
-                  <label for="capacidad" class="form-label">Capacidad</label>
-                  <input
-                    type="number"
-                    name="capacidad"
-                    id="capacidad"
-                    class="form-control"
-                    min="1"
-                    required
-                  />
-                </div>
-
-                <!-- fecha -->
-                <div class="mb-3 col-md-6">
-                  <label for="fecha" class="form-label">Fecha</label>
-                  <input
-                    type="date"
-                    name="fecha"
-                    id="fecha"
-                    class="form-control"
-                    required
-                  />
-                </div>
-
-                <!-- horaInicio -->
-                <div class="mb-3 col-md-6">
-                  <label for="horaInicio" class="form-label">Hora Inicio</label>
-                  <input
-                    type="time"
-                    name="horaInicio"
-                    id="horaInicio"
-                    class="form-control"
-                    required
-                  />
-                </div>
-
-                <!-- horaInicio -->type="time"
-                <div class="mb-3 col-md-6">
-                  <label for="horaFin" class="form-label">Hora Fin</label>
-                  <input
-                    name="horaFin"
-                    id="horaFin"
-                    class="form-control"
-                    required
-                  />
-                </div>
-
-                <!-- Intensidad -->
-                <div class="mb-3 col-md-6">
-                  <label for="intensidad" class="form-label">Intensidad</label>
-                  <select
-                    name="intensidad"
-                    class="form-select"
-                    id="select_intensidad"
-                    required
-                  >
-                    <option value="">Seleccione la intensidad</option>
-                    <option value="Baja">Baja</option>
-                    <option value="Media">Media</option>
-                    <option value="Alta">Alta</option>
-                  </select>
-                </div>
-
-                <!-- Entrenador -->
-                <div class="mb-3 col-md-6">
-                  <label for="entrenador" class="form-label">Entrenador</label>
-                  <select
-                    name="entrenador"
-                    class="form-select"
-                    id="select_entrenador"
-                    required
-                  >
-                    <option value="">Seleccione un entrenador</option>
-                    <option
-                      th:each="usuario: ${usuarios}"
-                      th:if="${usuario.rol.rolId == 2}"
-                      th:value="${usuario.persona.personaId}"
-                      th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}"
-                    ></option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-primary col-5 ms-3">
-                  Crear clase
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Ver detalles -->
-      <div th:each="clase : ${clases}">
-        <div
-          class="modal fade"
-          th:id="|verClase__${clase.claseId}|"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <div class="modal-header p-0 position-relative">
-                <img
-                  class="img-fluid w-100 rounded-top"
-                  style="max-height: 300px; object-fit: cover"
-                  th:src="${clase.imagen}"
-                  th:alt="${clase.nombre}"
-                />
-                <button
-                  type="button"
-                  class="btn-close position-absolute top-0 end-0 m-2"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+      <!-- Drecha -->
+      <div class="col-12">
+        <div class="row" id="clase-container">
+          <!-- CARTA -->
+          <div class="col-12 col-md-6 col-xl-3" th:each="clase : ${clases}" th:data-id="${clase.claseId}">
+            <div class="mt-4 border-0 card overflow-hidden rounded-4">
+              <div class="overflow-hidden">
+                <img th:src="${clase.imagen}" class="card-img-top w-100" th:alt="${clase.nombre}"
+                  style="height: 200px; object-fit: cover" />
               </div>
 
-              <div class="modal-body" id="modalDetailClase">
-                <!-- Título y descripción -->
-                <div class="mb-4 text-center">
-                  <h3 class="fw-bold" th:text="${clase.nombre}"></h3>
-                  <p class="text-muted" th:text="${clase.descripcion}"></p>
+              <div class="row d-flex align-items-center card-body">
+                <div class="col-9">
+                  <h5 class="card-title mb-1" th:text="${clase.nombre}"></h5>
+                  <p class="text-muted mb-1" th:text="${clase.descripcion}"></p>
+                  <span class="badge bg-outline-primary text-primary" th:text="${clase.estado}"
+                    th:classappend="${clase.estado} == 'Programado' ? ' text-primary' : (${clase.estado} == 'En curso' ? ' text-success' : (${clase.estado} == 'Finalizado' ? ' text-danger' : ' text-dark'))"></span>
                 </div>
 
-                <!-- Objetivo -->
-                <div class="mb-4">
-                  <h5 class="mb-2">
-                    <i class="bi bi-bullseye me-2"></i> Objetivo
-                  </h5>
-                  <p th:text="${clase.objetivo}"></p>
-                </div>
-
-                <!-- Entrenador -->
-                <div class="mb-4">
-                  <h5 class="mb-2">
-                    <i class="bi bi-person-badge me-2"></i> Entrenador
-                  </h5>
-                  <div
-                    class="d-flex gap-2 border border-2 rounded-3 p-3 align-items-center"
-                  >
-                    <i class="bi bi-person-fill fs-4 text-primary"></i>
-                    <h5
-                      class="mb-0"
-                      th:text="${clase.empleado.nombre + ' ' + clase.empleado.apellido}"
-                    ></h5>
-                  </div>
-                </div>
-
-                <!-- Información -->
-                <div class="row g-3 text-center">
-                  <div class="col-12 col-md-4">
-                    <div class="border border-2 rounded-3 p-3 h-100">
-                      <h6 class="mb-2">
-                        <i class="bi bi-lightning-charge-fill me-1"></i>
-                        Intensidad
-                      </h6>
-                      <h5
-                        class="mb-0"
-                        th:text="${clase.intensidad}"
-                        th:classappend="
-        ${clase.intensidad} == 'Baja' ? ' text-success' :
-        (${clase.intensidad} == 'Media' ? ' text-warning' :
-        (${clase.intensidad} == 'Alta' ? ' text-danger' : ' text-dark'))
-    "
-                      ></h5>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-4">
-                    <div class="border border-2 rounded-3 p-3 h-100">
-                      <h6 class="mb-2">
-                        <i class="bi bi-clock-fill me-1"></i> Duración
-                      </h6>
-                      <h5 th:text="${clase.duracion} + ' minutos'"></h5>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-4">
-                    <div class="border border-2 rounded-3 p-3 h-100">
-                      <h6 class="mb-2">
-                        <i class="bi bi-calendar-event-fill me-1"></i> Fecha
-                      </h6>
-                      <h5 th:text="${clase.fecha}"></h5>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <div class="border border-2 rounded-3 p-3 h-100">
-                      <h6 class="mb-2">
-                        <i class="bi bi-alarm-fill me-1"></i> Hora Inicio
-                      </h6>
-                      <h5 th:text="${clase.horaInicio}+ ' h'"></h5>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <div class="border border-2 rounded-3 p-3 h-100">
-                      <h6 class="mb-2">
-                        <i class="bi bi-alarm me-1"></i> Hora Fin
-                      </h6>
-                      <h5 th:text="${clase.horaFin} + ' h'"></h5>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <div class="border border-2 rounded-3 p-3 h-100">
-                      <h6 class="mb-2">
-                        <i class="bi bi-people-fill me-1"></i> Capacidad
-                      </h6>
-                      <h5 th:text="${clase.capacidad} + ' personas'"></h5>
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <div class="border border-2 rounded-3 p-3 h-100">
-                      <h6 class="mb-2">
-                        <i class="bi bi-check-circle-fill me-1"></i> Estado
-                      </h6>
-                      <h5
-                        class="text-primary"
-                        th:text="${clase.estado}"
-                        th:classappend="${clase.estado} == 'Programado' ? ' text-primary' : (${clase.estado} == 'En curso' ? ' text-success' : (${clase.estado} == 'Finalizado' ? ' text-danger' : (${clase.estado} == 'Cancelada' ? ' text-secondary' : ' text-dark')))"
-                      ></h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Editar -->
-      <div th:each="clase: ${clases}">
-        <div
-          class="modal fade"
-          th:id="|editarClase__${clase.claseId}|"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content rounded-4">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                  Editar Clase
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form
-                  th:attr="data-id=${clase.claseId}"
-                  class="editarClaseForm row needs-validation"
-                  novalidate
-                >
-                  <!-- nombre-->
-                  <div class="mb-3 col-md-6">
-                    <label for="nombre" class="form-label"
-                      >Nombre de la clase</label
-                    >
-                    <input
-                      type="text"
-                      name="nombre"
-                      class="form-control"
-                      th:value="${clase.nombre}"
-                      required
-                    />
-                  </div>
-
-                  <!-- imagen -->
-                  <div class="col-md-6">
-                    <label for="file" class="form-label"
-                      >Foto de la clase</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control"
-                      name="file"
-                      accept="image/jpeg,image/jpg,image/png"
-                      required
-                    />
-                  </div>
-
-                  <!-- descripcion -->
-                  <div class="mb-3 col-md-6">
-                    <label for="descripcion" class="form-label"
-                      >Descripción</label
-                    >
-                    <textarea
-                      name="descripcion"
-                      class="form-control"
-                      rows="3"
-                      placeholder="Escribe una breve descripción de la clase"
-                      th:text="${clase.descripcion}"
-                      required
-                    ></textarea>
-                  </div>
-
-                  <!-- objetivo -->
-                  <div class="mb-3 col-md-6">
-                    <label for="objetivo" class="form-label">Objetivo</label>
-                    <textarea
-                      name="objetivo"
-                      class="form-control"
-                      rows="3"
-                      placeholder="Escribe el objetivo de la clase"
-                      th:text="${clase.objetivo}"
-                      required
-                    ></textarea>
-                  </div>
-
-                  <!-- capacidad -->
-                  <div class="mb-3 col-md-6">
-                    <label for="capacidad" class="form-label">Capacidad</label>
-                    <input
-                      type="number"
-                      name="capacidad"
-                      class="form-control"
-                      min="1"
-                      th:value="${clase.capacidad}"
-                      required
-                    />
-                  </div>
-
-                  <!-- fecha -->
-                  <div class="mb-3 col-md-6">
-                    <label for="fecha" class="form-label">Fecha</label>
-                    <input
-                      type="date"
-                      name="fecha"
-                      id="fecha"
-                      class="form-control"
-                      th:value="${clase.fecha}"
-                      required
-                    />
-                  </div>
-
-                  <!-- horaInicio -->
-                  <div class="mb-3 col-md-6">
-                    <label for="horaInicio" class="form-label"
-                      >Hora Inicio</label
-                    >
-                    <input
-                      type="time"
-                      name="horaInicio"
-                      class="form-control"
-                      th:value="${clase.horaInicio}"
-                      required
-                    />
-                  </div>
-
-                  <!-- horaInicio -->
-                  <div class="mb-3 col-md-6">
-                    <label for="horaFin" class="form-label">Hora Fin</label>
-                    <input
-                      type="time"
-                      name="horaFin"
-                      class="form-control"
-                      th:value="${clase.horaFin}"
-                      required
-                    />
-                  </div>
-
-                  <!-- Intensidad -->
-                  <div class="mb-3 col-md-6">
-                    <label for="intensidad" class="form-label"
-                      >Intensidad</label
-                    >
-                    <select
-                      name="intensidad"
-                      class="form-select"
-                      id="select_crear"
-                      required
-                    >
-                      <option value="" th:selected="${clase.intensidad == ''}">
-                        Seleccione la intensidad
-                      </option>
-                      <option
-                        value="Baja"
-                        th:selected="${clase.intensidad == 'Baja'}"
-                      >
-                        Baja
-                      </option>
-                      <option
-                        value="Media"
-                        th:selected="${clase.intensidad == 'Media'}"
-                      >
-                        Media
-                      </option>
-                      <option
-                        value="Alta"
-                        th:selected="${clase.intensidad == 'Alta'}"
-                      >
-                        Alta
-                      </option>
-                    </select>
-                  </div>
-
-                  <!-- Entrenador -->
-                  <div class="mb-3 col-md-6">
-                    <label for="entrenador" class="form-label"
-                      >Entrenador</label
-                    >
-                    <select
-                      name="entrenador"
-                      class="form-select"
-                      id="select_crear"
-                      required
-                    >
-                      <option value="">Seleccione un entrenador</option>
-                      <option
-                        th:each="usuario: ${usuarios}"
-                        th:if="${usuario.rol.rolId == 2}"
-                        th:value="${usuario.persona.personaId}"
-                        th:text="${usuario.persona.nombre + ' ' + usuario.persona.apellido}"
-                        th:selected="${usuario.persona.personaId == clase.empleado.personaId}"
-                      />
-                    </select>
-                  </div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary col-5 ms-3 btnActualizarClase"
-                  >
-                    Actualizar clase
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Gestionar inscritos-->
-      <div th:each="clase: ${clases}">
-        <div
-          class="modal fade"
-          th:id="|gestionarInscritos__${clase.claseId}|"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content rounded-4 p-3">
-              <div class="modal-header">
-                <h1
-                  class="modal-title fs-5"
-                  id="staticBackdropLabel"
-                  th:text="${clase.nombre}"
-                ></h1>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <!-- Título -->
-                <div class="mb-4 text-center">
-                  <h3 class="h5">Tabla de socios inscritos</h3>
-                </div>
-
-                <!-- Tabla de socios -->
-                <table class="table table-hover align-middle">
-                  <!-- cabezeras de la tabla -->
-                  <thead class="table-light">
-                    <tr class="text-center">
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>DNI</th>
-                      <th>Fecha inscripción</th>
-                      <th>Acción</th>
-                    </tr>
-                  </thead>
-                  <!-- contenido de la tabla -->
-                  <tbody
-                    th:id="|tablaSociosInscritos__${clase.claseId}|"
-                    class="text-center"
-                  >
-                    <tr th:each="reserva : ${clase.reservas}">
-                      <td th:text="${reserva.socio.nombre}"></td>
-                      <td th:text="${reserva.socio.apellido}"></td>
-                      <td th:text="${reserva.socio.dni}"></td>
-                      <td th:text="${reserva.fecha}"></td>
-                      <td>
-                        <button
-                          class="btn btn-sm btn-danger btnEliminarReserva"
-                          th:data-reserva-id="${reserva.reservaClaseId}"
-                          th:data-clase-id="${clase.claseId}"
-                        >
-                          Eliminar
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <!-- Formulario de búsqueda y agregar socio -->
-                <form
-                  th:attr="data-id=${clase.claseId}"
-                  class="row g-2 align-items-center mt-4 needs-validation agregarSocioForm"
-                  novalidate
-                >
-                  <!-- Campo DNI -->
-                  <div class="col-md-8">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Ingrese DNI del socio"
-                      pattern="[0-9]{8}"
-                      name="dni"
-                      required
-                    />
-                    <input
-                      type="hidden"
-                      th:name="claseId"
-                      th:value="${clase.claseId}"
-                    />
-                  </div>
-                  <!-- Botón agregar -->
-                  <div class="col-md-4 text-start">
-                    <button
-                      type="submit"
-                      class="btn btn-primary w-100 btnAgregarSocio"
-                    >
-                      Agregar
+                <div class="col-3 text-end">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots-vertical"></i>
                     </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#claseDetailModal"
+                          th:data-id="${clase.claseId}">
+                          Ver detalles
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#claseFormModal"
+                          th:data-id="${clase.claseId}">
+                          Editar
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                          data-bs-target="#gestionarInscritosModal" th:data-id="${clase.claseId}">
+                          Gestionar Inscritos
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                          data-bs-target="#claseDeleteModal" th:data-id="${clase.claseId}">
+                          Eliminar
+                        </a>
+                      </li>
+                    </ul>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </th:block>
 
-      <!-- Modal Eliminar -->
-      <div th:each="clase: ${clases}">
-        <div
-          class="modal fade"
-          th:id="|eliminarClase__${clase.claseId}|"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Eliminar</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+  <!-- Mis modales -->
+  <th:block th:fragment="modal">
+    <!-- Modal de clase-->
+    <div class="modal fade" id="claseFormModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Nueva clase
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="claseForm" class="row g-3 needs-validation clase-form" data-type="create" novalidate>
+              <!-- nombre-->
+              <div class="col-md-4">
+                <label class="form-label">Nombre de la clase</label>
+                <input type="text" class="form-control" name="nombre" pattern="[\w\s]{3,}" required />
+                <div class="valid-feedback">Nombre válido</div>
+                <div class="invalid-feedback">
+                  Ingrese un nombre válido (mínimo 3 caracteres)
+                </div>
               </div>
-              <div class="modal-body">
-                <p>¿Estas seguro que deseas eliminar?</p>
+
+              <!-- Intensidad -->
+              <div class="col-md-4">
+                <label class="form-label">Intensidad</label>
+                <select name="intensidad" class="form-select" required>
+                  <option value="Baja" selected>Baja</option>
+                  <option value="Media">Media</option>
+                  <option value="Alta">Alta</option>
+                </select>
               </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-danger btnConfirmarEliminar"
-                  th:attr="data-id=${clase.claseId}"
-                >
-                  Confirmar eliminacion
-                </button>
+
+              <!-- capacidad -->
+              <div class="col-md-4">
+                <label class="form-label">Capacidad</label>
+                <input type="number" name="capacidad" class="form-control" min="1" required />
+                <div class="valid-feedback">Capacidad válida</div>
+                <div class="invalid-feedback">
+                  Ingrese una capacidad válida
+                </div>
+              </div>
+
+              <!-- fecha -->
+              <div class="col-md-4">
+                <label class="form-label">Fecha</label>
+                <input type="date" id="claseForm-date" name="fecha" class="form-control" required />
+                <div class="invalid-feedback">
+                  Seleccione una fecha válida
+                </div>
+              </div>
+
+              <!-- horaInicio -->
+              <div class="col-md-4">
+                <label class="form-label">Hora Inicio</label>
+                <input type="time" id="claseForm-horaInicio" name="horaInicio" class="form-control" required />
+                <div class="invalid-feedback">
+                  Seleccione una hora válida
+                </div>
+              </div>
+
+              <!-- horaFin -->
+              <div class="col-md-4">
+                <label class="form-label">Hora Fin</label>
+                <input type="time" id="claseForm-horaFin" name="horaFin" class="form-control" required />
+                <div class="invalid-feedback">
+                  Seleccione una hora válida
+                </div>
+              </div>
+
+              <!-- descripcion -->
+              <div class="col-md-4">
+                <label class="form-label">Descripción</label>
+                <textarea name="descripcion" class="form-control" rows="2"
+                  placeholder="Escribe una breve descripción de la clase" required></textarea>
+                <div class="invalid-feedback">
+                  Ingrese una descripción (mínimo 10 caracteres)
+                </div>
+              </div>
+
+              <!-- objetivo -->
+              <div class="col-md-4">
+                <label class="form-label">Objetivo</label>
+                <textarea name="objetivo" class="form-control" rows="2" placeholder="Escribe el objetivo de la clase"
+                  required></textarea>
+                <div class="invalid-feedback">
+                  Ingrese un objetivo (mínimo 10 caracteres)
+                </div>
+              </div>
+
+              <!-- Entrenador -->
+              <div class="col-md-4">
+                <label class="form-label">Entrenador</label>
+                <select name="entrenador" class="form-select" required>
+                  <option value="">Seleccione un entrenador</option>
+                  <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
+                    th:value="${usuario.persona.personaId}"
+                    th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}">
+                  </option>
+                </select>
+              </div>
+
+              <!-- imagen -->
+              <div class="col-md-12">
+                <label for="clase-image" class="form-label">
+                  Foto de la clase
+                </label>
+                <input type="file" class="form-control" name="file" id="claseForm-image"
+                  accept="image/jpeg,image/jpg,image/png" />
+              </div>
+
+              <div class="col-12 img-container">
+                <img th:src="@{/img/form/image-preview.png}" alt="Foto de la clase" id="claseForm-imagePreview" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <button type="submit" class="btn btn-primary" form="claseForm">
+              Crear Clase
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Ver detalles -->
+    <div class="modal fade" id="claseDetailModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header p-0 position-relative">
+            <img class="img-fluid w-100 rounded-top" id="claseDetail-imagen"
+              style="max-height: 300px; object-fit: cover" src="" alt="" />
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body" id="modalDetailClase">
+            <!-- Título y descripción -->
+            <div class="mb-4 text-center">
+              <h3 class="fw-bold" id="claseDetail-nombre"></h3>
+              <p class="text-muted" id="claseDetail-descripcion"></p>
+            </div>
+
+            <div class="mb-4">
+              <h5 class="mb-2">
+                <i class="bi bi-bullseye me-2"></i> Objetivo
+              </h5>
+              <p id="claseDetail-objetivo"></p>
+            </div>
+
+            <div class="mb-4">
+              <h5 class="mb-2">
+                <i class="bi bi-person-badge me-2"></i> Entrenador
+              </h5>
+              <div class="d-flex gap-2 border border-2 rounded-3 p-3 align-items-center">
+                <i class="bi bi-person-fill fs-4 text-primary"></i>
+                <h5 class="mb-0" id="claseDetail-entrenador"></h5>
+              </div>
+            </div>
+
+            <div class="row g-3 text-center">
+              <div class="col-12 col-md-4">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-lightning-charge-fill me-1"></i>
+                    Intensidad
+                  </h6>
+                  <!-- <h5 class="mb-0" id="claseDetail-intensidad" classappend="
+                    ${clase.intensidad} == 'Baja' ? ' text-success' :
+                    (${clase.intensidad} == 'Media' ? ' text-warning' :
+                    (${clase.intensidad} == 'Alta' ? ' text-danger' : ' text-dark'))
+                "></h5> -->
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-clock-fill me-1"></i> Duración
+                  </h6>
+                  <h5 id="claseDetail-duracion"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-calendar-event-fill me-1"></i> Fecha
+                  </h6>
+                  <h5 id="claseDetail-fecha"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-alarm-fill me-1"></i> Hora Inicio
+                  </h6>
+                  <h5 id="claseDetail-horaInicio"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-alarm me-1"></i> Hora Fin
+                  </h6>
+                  <h5 id="claseDetail-horaFin"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-people-fill me-1"></i> Capacidad
+                  </h6>
+                  <h5 id="claseDetail-capacidad"></h5>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="border border-2 rounded-3 p-3 h-100">
+                  <h6 class="mb-2">
+                    <i class="bi bi-check-circle-fill me-1"></i> Estado
+                  </h6>
+                  <!-- <h5 class="text-primary" id="claseDetail-estado" "${clase.estado}"
+                    classappend="${clase.estado} == 'Programado' ? ' text-primary' : (${clase.estado} == 'En curso' ? ' text-success' : (${clase.estado} == 'Finalizado' ? ' text-danger' : ' text-dark'))">
+                  </h5> -->
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </th:block>
 
-      <script type="module" th:src="@{/js/clases/main.js}"></script>
-    </th:block>
-  </body>
+  <th:block th:fragment="script">
+    <script th:inline="javascript">
+      const claseListRaw = /*[[${clases}]]*/[]
+      console.log(claseListRaw)
+    </script>
+    <script type="module" th:src="@{/js/clases/main.js}"></script>
+  </th:block>
+</body>
+
 </html>

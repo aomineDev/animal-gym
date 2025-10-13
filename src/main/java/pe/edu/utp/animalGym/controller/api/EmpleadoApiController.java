@@ -2,16 +2,10 @@ package pe.edu.utp.animalGym.controller.api;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import pe.edu.utp.animalGym.model.Ejercicio;
 import pe.edu.utp.animalGym.model.Empleado;
 import pe.edu.utp.animalGym.service.EmpleadoService;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,21 +43,23 @@ public class EmpleadoApiController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(empleado));
     }
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
-        try {
-            String carpetaUploads = "uploads/empleados/";
-            String nombreArchivo = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            Path ruta = Paths.get(carpetaUploads + nombreArchivo);
+    // @PostMapping("/upload")
+    // public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile
+    // file) {
+    // try {
+    // String carpetaUploads = "uploads/empleados/";
+    // String nombreArchivo = System.currentTimeMillis() + "_" +
+    // file.getOriginalFilename();
+    // Path ruta = Paths.get(carpetaUploads + nombreArchivo);
 
-            Files.write(ruta, file.getBytes());
-            // devuelve la ruta en string donde fue guardado
-            return ResponseEntity.ok("/uploads/empleados/" + nombreArchivo);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error al subir la imagen");
-        }
-    }
+    // Files.write(ruta, file.getBytes());
+    // // devuelve la ruta en string donde fue guardado
+    // return ResponseEntity.ok("/uploads/empleados/" + nombreArchivo);
+    // } catch (IOException e) {
+    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    // .body("Error al subir la imagen");
+    // }
+    // }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
@@ -73,7 +69,9 @@ public class EmpleadoApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Empleado> update(@PathVariable Integer id, @RequestBody Empleado empleado) {
+        empleado.setPersonaId(id);
         return ResponseEntity.ok(service.save(empleado));
+
     }
 
     @GetMapping("/buscar")

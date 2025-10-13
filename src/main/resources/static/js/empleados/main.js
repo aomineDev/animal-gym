@@ -1,7 +1,5 @@
-import { actualizarEmpleadoUsuario, crearEmpleado, elminarEmpleado } from "./events/modalEvents.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    crearEmpleado();
-    elminarEmpleado();
-    actualizarEmpleadoUsuario();
-});
+import registrarEmpleado from "./events/formModal.js"
+document.addEventListener('DOMContentLoaded', () => {
+    registrarEmpleado();
+})

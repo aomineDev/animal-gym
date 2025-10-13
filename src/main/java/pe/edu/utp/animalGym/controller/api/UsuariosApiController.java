@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.animalGym.model.Usuario;
+import pe.edu.utp.animalGym.model.UsuarioDTO;
 import pe.edu.utp.animalGym.service.UsuarioService;
 
 @RestController
@@ -29,8 +30,15 @@ public class UsuariosApiController {
         return ResponseEntity.ok(usuarioService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> find(@PathVariable Integer id) {
+        return usuarioService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping
-    public ResponseEntity<Usuario> save(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> saveU(@RequestBody Usuario usuario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.save(usuario));
     }
 

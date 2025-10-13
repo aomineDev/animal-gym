@@ -1,4 +1,4 @@
-.card-img-top {        
+.card-img-top {
   transition: transform 0.5s ease;
 }
 
@@ -6,26 +6,18 @@
   transform: scale(1.1);
 }
 
-.w-90 {
-  width: 90% !important;
-}
-
-.w-30 {
-  width: 30% !important;
-}
-
-.w-40 {
-  width: 40% !important;
-}
-
 .btn__filter {
-  bottom: 50px; 
-  right: 50px; 
-  width: 60px; 
+  bottom: 50px;
+  right: 50px;
+  width: 60px;
   height: 60px;
 }
 
 .card-separation {
-  flex: 1 1 30%; 
+  flex: 1 1 30%;
   min-width: 120px
+}
+
+.clase-form .img-container {
+  height: 150px;
 }

@@ -8,5 +8,4 @@ import pe.edu.utp.animalGym.model.Usuario;
 @Repository
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-
 }

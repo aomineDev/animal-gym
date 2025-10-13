@@ -34,6 +34,7 @@ public class StorageController {
     Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
     return ResponseEntity.ok("/" + destiny + filename);
+
   }
 
 }
