@@ -1,15 +1,5 @@
-import {
-  renderFilaEvents,
-  crearRutinaEvents,
-  eliminarRutinaEvents,
-  editarRutinaEvents,
-  agregarEjercicioEvents,
-} from "./events/modalEvents.js";
+import rutinaSocioDetailModalEvents from './events/detailModal.js'
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderFilaEvents();
-  crearRutinaEvents();
-  eliminarRutinaEvents();
-  editarRutinaEvents();
-  agregarEjercicioEvents();
-});
+document.addEventListener('DOMContentLoaded', () => {
+  rutinaSocioDetailModalEvents()
+})
