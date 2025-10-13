@@ -80,3 +80,23 @@ export const claseDetailCapacidad = claseDetailModal.querySelector(
 export const claseDetailEstado = claseDetailModal.querySelector(
   '#claseDetail-estado'
 )
+
+//Para gestionar inscritos
+export const gestionarInscritosModal = document.getElementById(
+  'gestionarInscritosModal'
+)
+
+export const tableTitle = gestionarInscritosModal.querySelector('.table-title')
+
+export const sociosInscritosTable = gestionarInscritosModal.querySelector(
+  '#sociosInscritosTable'
+)
+
+export const agregarSocioForm =
+  gestionarInscritosModal.querySelector('#agregarSocioForm')
+
+export const agregarSocioBtn =
+  agregarSocioForm.querySelector('#agregarSocioBtn')
+
+export const eliminarSocioBtn =
+  sociosInscritosTable.querySelector('#eliminarSocioBtn')

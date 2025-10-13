@@ -335,6 +335,64 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Gestionar inscritos-->
+    <div class="modal fade" id="gestionarInscritosModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4 p-3">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Gestionar socios inscritos</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Título -->
+            <div class="mb-4 text-center">
+              <h5 class="table-title"></h5>
+            </div>
+
+            <!-- Tabla de socios -->
+            <table class="table table-hover align-middle">
+              <!-- cabezeras de la tabla -->
+              <thead class="table-light">
+                <tr class="text-center">
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>DNI</th>
+                  <th>Fecha inscripción</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <!-- contenido de la tabla -->
+              <tbody id="sociosInscritosTable" class="text-center">
+                <tr id="noSociosRow">
+                  <td colspan="5" class="text-muted py-4">
+                    Aún no hay socios inscritos
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Formulario de búsqueda y agregar socio -->
+            <form id="agregarSocioForm" class="row g-2 align-items-center mt-4 needs-validation" novalidate>
+              <!-- Campo DNI -->
+              <div class="col-md-8">
+                <input type="text" class="form-control" placeholder="Ingrese DNI del socio" pattern="[0-9]{8}"
+                  name="dni" required />
+                <div class="invalid-feedback">
+                  Ingrese un dni válido (8 digitos)
+                </div>
+              </div>
+              <!-- Botón agregar -->
+              <div class="col-md-4 text-start">
+                <button type="submit" id="agregarSocioBtn" data-id="0" class="btn btn-primary w-100">
+                  Agregar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </th:block>
 
   <th:block th:fragment="script">
