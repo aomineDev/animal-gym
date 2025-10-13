@@ -36,7 +36,7 @@ public class Rutina {
     @Column(name = "rutina_id")
     private Integer rutinaId;
 
-    @Column(name = "nombre", length = 20, nullable = false)
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
 
     @Column(name = "descripcion", nullable = false)

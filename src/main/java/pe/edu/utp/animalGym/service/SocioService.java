@@ -8,7 +8,7 @@ import pe.edu.utp.animalGym.model.Socio;
 
 public interface SocioService extends ApiService<Socio> {
 
-    Socio addRutina(Integer socioId, Rutina nuevaRutina);
+    Socio saveRutina(Integer socioId, Rutina nuevaRutina);
 
     List<Socio> buscarPorEstado(Boolean estado);
 

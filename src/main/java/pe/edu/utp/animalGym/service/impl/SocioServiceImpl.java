@@ -64,16 +64,17 @@ public class SocioServiceImpl implements SocioService {
 
     // list de rutinas
     @Transactional
-    public Socio addRutina(Integer socioId, Rutina nuevaRutina) {
+    public Socio saveRutina(Integer socioId, Rutina rutina) {
         Socio socio = partnerRepository.findById(socioId)
-                .orElseThrow(() -> new RuntimeException("Socio no encontrada"));
+                .orElseThrow(() -> new RuntimeException("Socio no encontrado"));
 
-        // Guardamos la rutina
-        Rutina rutinaGuardada = rutinaRepository.save(nuevaRutina);
-        socio.getRutinas().add(rutinaGuardada);
+        validarEmpleado(rutina);
 
-        // Si trae empleado con id, buscarlo en repo
-        validarEmpleado(nuevaRutina);
+        Rutina guardada = rutinaRepository.save(rutina); // Inserta o actualiza según tenga ID o no
+
+        if (!socio.getRutinas().contains(guardada)) {
+            socio.getRutinas().add(guardada);
+        }
 
         return partnerRepository.save(socio);
     }
