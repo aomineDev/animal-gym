@@ -38,6 +38,7 @@ public class ClasesApiController {
 
     @PostMapping
     public ResponseEntity<Clase> save(@RequestBody Clase clase) {
+
         return ResponseEntity.status(HttpStatus.CREATED).body(claseService.save(clase));
     }
 
