@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.utp.animalGym.model.Usuario;
-import pe.edu.utp.animalGym.model.UsuarioDTO;
 import pe.edu.utp.animalGym.service.UsuarioService;
 
 @RestController

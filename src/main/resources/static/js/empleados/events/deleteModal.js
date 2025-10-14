@@ -9,9 +9,9 @@ import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
 import { rendeEmpleadoEliminar } from '../render.js'
 
 const service = new Service('empleados');
-const bsModal = bootstrap.Modal.getOrcreateInstance(empleadoModalEliminar);
+const bsModal = bootstrap.Modal.getOrCreateInstance(empleadoModalEliminar);
 
-async function eliminarMembresia() {
+async function eliminarEmpleado() {
 
   const id = this.dataset.id;
   try {
@@ -28,4 +28,10 @@ async function eliminarMembresia() {
 
 export default function eliminarEmpleadoModal() {
 
+  empleadoModalEliminar.addEventListener('show.bs.modal', (e) => {
+    const button = e.relatedTarget
+    const id = button.dataset.id
+    empleadoBtnEliminar.dataset.id = id
+  })
+  empleadoBtnEliminar.addEventListener('click', eliminarEmpleado)
 }

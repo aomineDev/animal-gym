@@ -22,7 +22,7 @@ public class SociosController {
 
         model.addAttribute("content", "socios :: content");
         model.addAttribute("modal", "socios :: modal");
-        model.addAttribute("script", "");
+        model.addAttribute("script", "socios :: script");
 
         model.addAttribute("activePage", "socios");
 

@@ -5,6 +5,7 @@ export const empledoList = empleadoLista.reduce((acc, curr) => {
 
 
 export const usuarioList = usuarioLista.reduce((acc, curr) => {
-  acc[curr.usuario]
-}
+  acc[curr.persona.personaId] = curr
+  return acc
+}, {}
 )

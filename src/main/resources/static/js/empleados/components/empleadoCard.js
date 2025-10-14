@@ -1,4 +1,4 @@
-export default function (empleado) {
+export default function (empleado, usuario) {
     const {
         personaId,
         nombre,
@@ -6,6 +6,11 @@ export default function (empleado) {
         imagen
     } = empleado
 
+    const {
+        rol: {
+            nombreRol
+        }
+    } = usuario
     return /*html*/ `
 
 <div class="col-12 col-md-6 col-xl-3" data-id = ${personaId}>
@@ -22,7 +27,7 @@ export default function (empleado) {
                                     <h5 class="card-title mb-1">
                                       ${nombre} ${apellido}
                                     </h5>
-                                    
+                                      <p class="text-muted mb-1">${nombreRol}</p>
                                 </div>
                                 <div class="col-3 text-end">
                                     <div class="dropdown">
