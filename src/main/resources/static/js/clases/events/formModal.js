@@ -16,6 +16,7 @@ import { PERSONA_TYPE } from '../../constants/personaType.js'
 import { claseList } from '../store.js'
 import { renderNewClaseCard, renderUpdatedClaseCard } from '../render.js'
 import { TOAST_TYPES, showToast } from '../../bootstrap/Toast.js'
+import { validateDateNow, validateRange } from '../../service/validateInput.js'
 
 const claseService = new Service('clases')
 const storageService = new StorageService('clases')
@@ -95,14 +96,7 @@ async function handleFormSubmit(e) {
 
 function handelDateChange(e) {
   const input = e.target
-
-  const fechaSeleccionada = new Date(input.value)
-  fechaSeleccionada.setHours(0, 0, 0, 0)
-
-  if (input.value < new Date().toISOString().split('T')[0]) {
-    input.value = ''
-    showToast('La fecha no puede ser anterior a hoy', TOAST_TYPES.WARNING)
-  }
+  validateDateNow(input)
 }
 
 function handleHoraInicioChange(e) {
@@ -143,28 +137,7 @@ function handleHoraFinChange(e) {
   const inputHoraInicio = claseFormHoraInicio.value
   const inputHoraFin = e.target
 
-  if (!inputHoraInicio) {
-    inputHoraFin.value = ''
-    showToast('Rellene la hora de inicio primero', TOAST_TYPES.WARNING)
-    return
-  }
-
-  const [horaInicio, minutoInicio] = inputHoraInicio.split(':').map(Number)
-  const [horaFin, minutoFin] = inputHoraFin.value.split(':').map(Number)
-
-  const horaInicioDate = new Date()
-  horaInicioDate.setHours(horaInicio, minutoInicio, 0, 0)
-
-  const horaFinDate = new Date()
-  horaFinDate.setHours(horaFin, minutoFin, 0, 0)
-
-  if (horaFinDate <= horaInicioDate) {
-    inputHoraFin.value = ''
-    showToast(
-      'La hora de fin debe ser posterior a la hora de inicio',
-      TOAST_TYPES.WARNING
-    )
-  }
+  validateRange(inputHoraInicio, inputHoraFin, 'hora')
 }
 
 function handleImageChange(e) {
