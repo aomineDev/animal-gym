@@ -21,3 +21,11 @@ export const rutinaFormModalTitle =
 export const rutinaFormSubmit = rutinaFormModal.querySelector(
   'button[type="submit"]'
 )
+
+export const rutinaFormFechaInicio = rutinaForm.querySelector(
+  '#rutinaForm-fechaInicio'
+)
+
+export const rutinaFormFechaFin = rutinaForm.querySelector(
+  '#rutinaForm-fechaFin'
+)
