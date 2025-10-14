@@ -15,7 +15,8 @@ import FORM_ACTIONS from '../../constants/formActions.js'
 import { PERSONA_TYPE } from '../../constants/personaType.js'
 import { claseList } from '../store.js'
 import { renderNewClaseCard, renderUpdatedClaseCard } from '../render.js'
-import { TOAST_TYPES, showToast } from '../../bootstrap/Toast.js'
+// import { TOAST_TYPES, showToast } from '../../bootstrap/Toast.js'
+import { TOAST_TYPES, showToast } from '../../bootstrap/toast.js'
 
 const claseService = new Service('clases')
 const storageService = new StorageService('clases')
