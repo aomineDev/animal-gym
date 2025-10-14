@@ -44,6 +44,5 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "persona_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    // @JsonIgnore
     private Persona persona;
 }

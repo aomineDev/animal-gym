@@ -13,7 +13,7 @@ import Service from '../../service/index.js'
 import StorageService from '../../service/storage.js'
 import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
 
-import { empledoList } from '../store.js'
+import { empledoList, usuarioList } from '../store.js'
 import { PERSONA_TYPE } from '../../constants/personaType.js'
 import { renderEmpleadoCard, renderEmpleadoActualizar } from '../render.js'
 const empleadoServicio = new Service('empleados');
@@ -73,7 +73,7 @@ async function handleFormSubmit(e) {
         rol: {
           rolId: parseInt(rol)
         },
-        personaId: {
+        persona: {
           tipo,
           personaId: data.personaId,
         }
@@ -82,8 +82,11 @@ async function handleFormSubmit(e) {
 
       console.log(data)
       console.log(usuario)
-      renderEmpleadoCard(data)
+      console.log(dataUsuario)
+
+      renderEmpleadoCard(data, dataUsuario)
       empledoList[data.personaId] = data;
+      usuarioList[dataUsuario.persona.personaId] = dataUsuario;
       showToast('Empleado creado con exito', TOAST_TYPES.SUCCESS)
     } else {
       if (this.dataset.type === FORM_ACTIONS.UPDATE) {
@@ -98,18 +101,12 @@ async function handleFormSubmit(e) {
   } catch (error) {
     showToast('Error', TOAST_TYPES.ERROR)
     console.log(error);
-    if (error.response) {
-      console.error('❌ Error del backend:', error.response.data);
-    } else if (error.request) {
-      console.error('⚠️ No hubo respuesta del servidor:', error.request);
-    } else {
-      console.error('🧩 Error en la configuración:', error.message);
-    }
+
   }
 
 }
 
-function rellenarEmpleado(empleado) {
+function rellenarEmpleado(empleado, usuario) {
   empleadoFormulario.dni.value = empleado.dni;
   empleadoFormulario.nombre.value = empleado.nombre;
   empleadoFormulario.apellido.value = empleado.apellido;
@@ -122,6 +119,10 @@ function rellenarEmpleado(empleado) {
   empleadoFormulario.especialidad.value = empleado.especialidad;
   empleadoFormulario.tipoContrato.value = empleado.tipoContrato;
   empleadoFormImagenPreview.src = empleado.imagen
+  empleadoFormulario.usuarioDni.value = empleado.dni;
+  empleadoFormulario.contraseña.value = usuario.clave
+  //usuario
+  empleadoFormulario.rol.value = usuario.rol.rolId
 }
 function handleImageChange(e) {
   const imageFile = this.files[0]
@@ -139,7 +140,7 @@ export default function registrarEmpleado() {
       empleadoFormulario.dataset.id = id
       tituloModal.textContent = 'Actualizar empleado'
       empleadoFormularioSubmit.textContent = 'Guardar empleado'
-      rellenarEmpleado(empledoList[id])
+      rellenarEmpleado(empledoList[id], usuarioList[id])
     } else {
       empleadoFormulario.dataset.type = FORM_ACTIONS.CREATE
       tituloModal.textContent = 'Nuevo empleado'

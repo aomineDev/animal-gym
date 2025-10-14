@@ -454,8 +454,8 @@
 import { empleadoContainerCard } from "./dom.js"
 import empleadoCard from "./components/empleadoCard.js"
 
-export function renderEmpleadoCard(empleado) {
-  empleadoContainerCard.insertAdjacentHTML('afterbegin', empleadoCard(empleado))
+export function renderEmpleadoCard(empleado, usuario) {
+  empleadoContainerCard.insertAdjacentHTML('afterbegin', empleadoCard(empleado, usuario))
 }
 
 export function renderEmpleadoActualizar(empleado) {
