@@ -61,8 +61,6 @@ function estadoClase(estado) {
       return 'bg-outline-success text-success'
     case 'Finalizado':
       return 'bg-outline-danger text-danger'
-    case 'Cancelada':
-      return 'bg-outline-secondary text-secondary'
     default:
       return 'bg-outline-dark text-dark'
   }

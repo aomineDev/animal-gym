@@ -9,7 +9,7 @@ import {
 import FORM_ACTIONS from '../../constants/formActions.js'
 import Service from '../../service/index.js'
 import StorageService from '../../service/storage.js'
-import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
+import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 import {
   renderNewMembershipCard,
   renderUpdatedMembershipCard,

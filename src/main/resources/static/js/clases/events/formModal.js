@@ -5,12 +5,17 @@ import {
   claseFormModal,
   claseFormModalTitle,
   claseFormSubmit,
+  claseFormDate,
+  claseFormHoraInicio,
+  claseFormHoraFin,
 } from '../dom.js'
 import Service from '../../service/index.js'
 import StorageService from '../../service/storage.js'
 import FORM_ACTIONS from '../../constants/formActions.js'
+import { PERSONA_TYPE } from '../../constants/personaType.js'
 import { claseList } from '../store.js'
 import { renderNewClaseCard, renderUpdatedClaseCard } from '../render.js'
+// import { TOAST_TYPES, showToast } from '../../bootstrap/Toast.js'
 import { TOAST_TYPES, showToast } from '../../bootstrap/toast.js'
 
 const claseService = new Service('clases')
@@ -18,6 +23,7 @@ const storageService = new StorageService('clases')
 const bsModal = bootstrap.Modal.getOrCreateInstance(claseFormModal)
 const defaultClaseImage = '/img/clases/default.png'
 const defaultFormClaseImage = '/img/form/image-preview.png'
+const tipo = PERSONA_TYPE.EMPLEADO
 
 async function handleFormSubmit(e) {
   if (!this.checkValidity()) return
@@ -55,6 +61,7 @@ async function handleFormSubmit(e) {
       estado,
       imagen,
       empleado: {
+        tipo,
         personaId: empleado,
       },
     }
@@ -70,6 +77,8 @@ async function handleFormSubmit(e) {
     } else if (this.dataset.type === FORM_ACTIONS.UPDATE) {
       const id = this.dataset.id
 
+      console.log(id)
+      console.log(clase)
       const data = await claseService.update(clase, id)
       console.log(data)
 
@@ -82,6 +91,80 @@ async function handleFormSubmit(e) {
   } catch (error) {
     showToast('No se pudo crear la clase', TOAST_TYPES.ERROR)
     console.log(error)
+  }
+}
+
+function handelDateChange(e) {
+  const input = e.target
+
+  const fechaSeleccionada = new Date(input.value)
+  fechaSeleccionada.setHours(0, 0, 0, 0)
+
+  if (input.value < new Date().toISOString().split('T')[0]) {
+    input.value = ''
+    showToast('La fecha no puede ser anterior a hoy', TOAST_TYPES.WARNING)
+  }
+}
+
+function handleHoraInicioChange(e) {
+  const inputHoraInicio = e.target
+  const inputFecha = claseFormDate.value
+
+  if (!inputFecha) {
+    inputHoraInicio.value = ''
+    showToast('Seleccione primero una fecha', TOAST_TYPES.WARNING)
+    return
+  }
+
+  const [year, month, day] = inputFecha.split('-').map(Number)
+  const fechaSeleccionada = new Date(year, month - 1, day)
+  const hoy = new Date()
+
+  hoy.setHours(0, 0, 0, 0)
+  fechaSeleccionada.setHours(0, 0, 0, 0)
+
+  if (fechaSeleccionada.getTime() === hoy.getTime()) {
+    const [hora, minuto] = inputHoraInicio.value.split(':').map(Number)
+    const horaSeleccionada = new Date()
+    horaSeleccionada.setHours(hora, minuto, 0, 0)
+
+    const ahora = new Date()
+
+    if (horaSeleccionada < ahora) {
+      inputHoraInicio.value = ''
+      showToast(
+        'La hora no puede ser anterior a la hora actual',
+        TOAST_TYPES.WARNING
+      )
+    }
+  }
+}
+
+function handleHoraFinChange(e) {
+  const inputHoraInicio = claseFormHoraInicio.value
+  const inputHoraFin = e.target
+
+  if (!inputHoraInicio) {
+    inputHoraFin.value = ''
+    showToast('Rellene la hora de inicio primero', TOAST_TYPES.WARNING)
+    return
+  }
+
+  const [horaInicio, minutoInicio] = inputHoraInicio.split(':').map(Number)
+  const [horaFin, minutoFin] = inputHoraFin.value.split(':').map(Number)
+
+  const horaInicioDate = new Date()
+  horaInicioDate.setHours(horaInicio, minutoInicio, 0, 0)
+
+  const horaFinDate = new Date()
+  horaFinDate.setHours(horaFin, minutoFin, 0, 0)
+
+  if (horaFinDate <= horaInicioDate) {
+    inputHoraFin.value = ''
+    showToast(
+      'La hora de fin debe ser posterior a la hora de inicio',
+      TOAST_TYPES.WARNING
+    )
   }
 }
 
@@ -135,7 +218,10 @@ export default function registerClaseFormModalEvents() {
     }
   })
 
+  claseFormDate.addEventListener('change', handelDateChange)
   claseFormImage.addEventListener('change', handleImageChange)
+  claseFormHoraInicio.addEventListener('change', handleHoraInicioChange)
+  claseFormHoraFin.addEventListener('change', handleHoraFinChange)
 }
 
 function calcularDuracion(horaInicio, horaFin) {
