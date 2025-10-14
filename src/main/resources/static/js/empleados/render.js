@@ -458,12 +458,12 @@ export function renderEmpleadoCard(empleado, usuario) {
   empleadoContainerCard.insertAdjacentHTML('afterbegin', empleadoCard(empleado, usuario))
 }
 
-export function renderEmpleadoActualizar(empleado) {
+export function renderEmpleadoActualizar(empleado, usuario) {
   const empleadoCards = empleadoContainerCard.querySelector(
 
     `div[data-id="${empleado.personaId}"]`
   )
-  if (empleadoCards) empleadoCards.outerHTML = empleadoCard(empleado);
+  if (empleadoCards) empleadoCards.outerHTML = empleadoCard(empleado, usuario);
 }
 
 export function rendeEmpleadoEliminar(id) {

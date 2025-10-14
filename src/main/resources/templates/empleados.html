@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-</head>
 
 <body>
     <th:block th:fragment="content">
@@ -67,10 +66,10 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <!-- <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    th:attr="data-bs-target=|#verDetalle__${empleado.personaId}|">
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#verDetalle" th:data-id="${empleado.personaId}">
                                                     Ver detalles
-                                                </a> -->
+                                                </a>
                                             </li>
                                             <li>
                                                 <a class="dropdown-item" href="#" data-bs-toggle="modal"
@@ -116,115 +115,98 @@
                     </div>
                     <div class="modal-body">
                         <!-- formulario del modal -->
-                        <form id="empleadoForm" class="needs-validation" novalidate data-type="create">
+                        <form id="empleadoForm" class="needs-validation row g-3 empleado-formulario" novalidate
+                            data-type="create">
 
                             <!-- Sección Datos Personales -->
-                            <div class="form-section mb-4">
-                                <h6 class="section-title text-primary border-bottom pb-2 mb-3"> Datos Personales</h6>
-                                <div class="row g-3">
-                                    <!-- dni -->
-                                    <div class="col-md-6">
-                                        <label for="dni" class="form-label">DNI *</label>
-                                        <input type="text" id="dni" class="form-control" name="dni" pattern="[0-9]{8}"
-                                            maxlength="8" required />
-                                        <div class="valid-feedback">Dni válido</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un Dni valido
-                                        </div>
-                                    </div>
-
-                                    <!-- file -->
-                                    <!-- <div class="col-md-6">
-                                        <label for="file" class="form-label">Foto del empleado</label>
-                                        <input type="file" id="file" class="form-control" name="file"
-                                            accept="image/jpeg,image/jpg,image/png" required>
-                                    </div> -->
-
-                                    <!-- nombre -->
-                                    <div class="col-md-6">
-                                        <label for="nombre" class="form-label">Nombre *</label>
-                                        <input type="text" id="nombre" name="nombre" class="form-control"
-                                            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
-
-                                        <div class="valid-feedback">Nombre válido</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un nombre valido
-                                        </div>
-                                    </div>
-
-                                    <!-- apellido -->
-                                    <div class="col-md-6">
-                                        <label for="apellido" class="form-label">Apellido *</label>
-                                        <input type="text" id="apellido" name="apellido" class="form-control"
-                                            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
-
-                                        <div class="valid-feedback">Apellido válido</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un apellido valido
-                                        </div>
-                                    </div>
-
-                                    <!-- telefono -->
-                                    <div class="col-md-4">
-                                        <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" id="telefono" class="form-control" name="telefono"
-                                            pattern="9[0-9]{8}" placeholder="9XXXXXXXX" required />
-
-                                        <div class="valid-feedback">Telefono válido</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un telefono valido
-                                        </div>
-                                    </div>
-
-                                    <!-- genero -->
-                                    <div class="col-md-4">
-                                        <label for="genero" class="form-label">Género</label>
-                                        <select id="genero" class="form-select" name="genero" required>
-                                            <option value="">Seleccionar...</option>
-                                            <option value="Masculino">Masculino</option>
-                                            <option value="Femenino">Femenino</option>
-                                        </select>
-                                        <div class="valid-feedback">Genero válido</div>
-                                        <div class="invalid-feedback">
-                                            Seleccione un genero
-                                        </div>
-                                    </div>
-
-                                    <!-- email -->
-                                    <div class="col-md-4">
-                                        <label for="email" class="form-label">Correo electrónico *</label>
-                                        <input type="email" id="email" class="form-control" name="email"
-                                            pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
-
-                                        <div class="valid-feedback">Email válido</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un email valido
-                                        </div>
-                                    </div>
-
-                                    <!-- fechaNacimiento-->
-                                    <div class="col-md-6">
-                                        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
-                                        <input type="date" id="fechaNacimiento" class="form-control"
-                                            name="fechaNacimiento" required />
-                                        <div class="valid-feedback">Fecha valida</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un fecha
-                                        </div>
-                                    </div>
-
-                                    <!-- fechaIngreso -->
-                                    <div class="col-md-6">
-                                        <label for="fechaIngreso" class="form-label">Fecha de ingreso</label>
-                                        <input type="date" id="fechaIngreso" class="form-control" name="fechaIngreso"
-                                            required />
-                                        <div class="valid-feedback">Fecha válida</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese una fecha valida
-                                        </div>
-                                    </div>
+                            <!-- dni -->
+                            <div class="col-md-4">
+                                <label for="dni" class="form-label">DNI *</label>
+                                <input type="text" id="dni" class="form-control" name="dni" pattern="[0-9]{8}"
+                                    maxlength="8" required />
+                                <div class="valid-feedback">Dni válido</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un Dni valido
                                 </div>
                             </div>
+                            <!-- nombre -->
+                            <div class="col-md-4">
+                                <label for="nombre" class="form-label">Nombre *</label>
+                                <input type="text" id="nombre" name="nombre" class="form-control"
+                                    pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+
+                                <div class="valid-feedback">Nombre válido</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un nombre valido
+                                </div>
+                            </div>
+                            <!-- apellido -->
+                            <div class="col-md-4">
+                                <label for="apellido" class="form-label">Apellido *</label>
+                                <input type="text" id="apellido" name="apellido" class="form-control"
+                                    pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" required />
+
+                                <div class="valid-feedback">Apellido válido</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un apellido valido
+                                </div>
+                            </div>
+                            <!-- telefono -->
+                            <div class="col-md-4">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="tel" id="telefono" class="form-control" name="telefono" pattern="9[0-9]{8}"
+                                    placeholder="9XXXXXXXX" required />
+
+                                <div class="valid-feedback">Telefono válido</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un telefono valido
+                                </div>
+                            </div>
+                            <!-- genero -->
+                            <div class="col-md-4">
+                                <label for="genero" class="form-label">Género</label>
+                                <select id="genero" class="form-select" name="genero" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>
+                                <div class="valid-feedback">Genero válido</div>
+                                <div class="invalid-feedback">
+                                    Seleccione un genero
+                                </div>
+                            </div>
+                            <!-- email -->
+                            <div class="col-md-4">
+                                <label for="email" class="form-label">Correo electrónico *</label>
+                                <input type="email" id="email" class="form-control" name="email"
+                                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required />
+
+                                <div class="valid-feedback">Email válido</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un email valido
+                                </div>
+                            </div>
+                            <!-- fechaNacimiento-->
+                            <div class="col-md-6">
+                                <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                                <input type="date" id="fechaNacimiento" class="form-control" name="fechaNacimiento"
+                                    required />
+                                <div class="valid-feedback">Fecha valida</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un fecha
+                                </div>
+                            </div>
+                            <!-- fechaIngreso -->
+                            <div class="col-md-6">
+                                <label for="fechaIngreso" class="form-label">Fecha de ingreso</label>
+                                <input type="date" id="fechaIngreso" class="form-control" name="fechaIngreso"
+                                    required />
+                                <div class="valid-feedback">Fecha válida</div>
+                                <div class="invalid-feedback">
+                                    Ingrese una fecha valida
+                                </div>
+                            </div>
+                            <!-- input imagen -->
                             <div class="col-md-12">
                                 <label for="membership-image" class="form-label">
                                     Foto del empleado
@@ -232,93 +214,79 @@
                                 <input type="file" class="form-control" name="file"
                                     accept="image/jpeg,image/jpg,image/png" id="empleadoForm-image" />
                             </div>
+                            <!-- imagenpreview -->
                             <div class="col-12 img-container">
-                                <img th:src="@{/img/form/image-preview.png}" alt="Foto de la membresía"
+                                <img th:src="@{/img/form/image-preview.png}" alt="Foto del empleado"
                                     id="empleadoForm-imagePreview" />
                             </div>
                             <!-- Sección Datos Laborales -->
-                            <div class="form-section mb-4">
-                                <h6 class="section-title text-primary border-bottom pb-2 mb-3">Datos Laborales</h6>
-                                <div class="row g-3">
-                                    <!-- salario -->
-                                    <div class="col-md-4">
-                                        <label for="salario" class="form-label">Salario *</label>
-                                        <input type="number" id="salario" class="form-control" name="salario"
-                                            step="0.01" min="0" required />
-                                        <div class="valid-feedback">Salario valido</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un salario valido
-                                        </div>
-                                    </div>
-
-                                    <!--tipoContrato-->
-                                    <div class="col-md-4">
-                                        <label for="tipoContrato" class="form-label">Tipo de contrato</label>
-                                        <select id="tipoContrato" class="form-select" name="tipoContrato" required>
-                                            <option value="">Seleccionar...</option>
-                                            <option value="Anual">Indefinido</option>
-                                            <option value="Temporal">Temporal</option>
-                                        </select>
-                                        <div class="valid-feedback">Tipo de contrato válido</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese un tipo de contrato valido
-                                        </div>
-                                    </div>
-
-                                    <!-- especialidad -->
-                                    <div class="col-md-4">
-                                        <label for="especialidad" class="form-label">Especialidad</label>
-                                        <input type="text" id="especialidad" class="form-control" name="especialidad"
-                                            required />
-                                        <div class="valid-feedback">Especialidad válida</div>
-                                        <div class="invalid-feedback">
-                                            Ingrese una especialidad valida
-                                        </div>
-                                    </div>
+                            <!-- salario -->
+                            <div class="col-md-4">
+                                <label for="salario" class="form-label">Salario *</label>
+                                <input type="number" id="salario" class="form-control" name="salario" step="0.01"
+                                    min="0" required />
+                                <div class="valid-feedback">Salario valido</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un salario valido
                                 </div>
                             </div>
-
+                            <!--tipoContrato-->
+                            <div class="col-md-4">
+                                <label for="tipoContrato" class="form-label">Tipo de contrato</label>
+                                <select id="tipoContrato" class="form-select" name="tipoContrato" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Anual">Indefinido</option>
+                                    <option value="Temporal">Temporal</option>
+                                </select>
+                                <div class="valid-feedback">Tipo de contrato válido</div>
+                                <div class="invalid-feedback">
+                                    Ingrese un tipo de contrato valido
+                                </div>
+                            </div>
+                            <!-- especialidad -->
+                            <div class="col-md-4">
+                                <label for="especialidad" class="form-label">Especialidad</label>
+                                <input type="text" id="especialidad" class="form-control" name="especialidad"
+                                    required />
+                                <div class="valid-feedback">Especialidad válida</div>
+                                <div class="invalid-feedback">
+                                    Ingrese una especialidad valida
+                                </div>
+                            </div>
                             <!-- Sección Datos de Usuario -->
-                            <div class="form-section mb-4">
-                                <h6 class="section-title text-primary border-bottom pb-2 mb-3">Datos de Usuario</h6>
+                            <!-- Nota informativa -->
+                            <div class="alert alert-info py-2 mb-3 mt-3">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Nota:</strong> El nombre de usuario será automáticamente el DNI
+                                ingresado.
+                            </div>
+                            <!--usernameDisplay -->
+                            <div class="col-md-4">
+                                <label for="usernameDisplay" class="form-label">Nombre de
+                                    Usuario</label>
+                                <input type="text" class="form-control" id="usuarioDni" readonly
+                                    placeholder="Se generará con el DNI" style="background-color: #f8f9fa;">
+                                <div class="form-text">Este será el nombre para iniciar sesión (basado
+                                    en el
+                                    DNI)</div>
+                            </div>
+                            <!-- rol_id -->
+                            <div class="col-md-4">
+                                <label for="rol_id" class="form-label">Rol *</label>
+                                <select name="rol" id="rol" class="form-select crearRol" required>
+                                    <option value="">Seleccione un rol...</option>
+                                    <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
+                                        th:text="${rol.nombreRol}">
+                                    </option>
+                                </select>
 
-                                <!-- Nota informativa -->
-                                <div class="alert alert-info py-2 mb-3">
-                                    <i class="fas fa-info-circle me-2"></i>
-                                    <strong>Nota:</strong> El nombre de usuario será automáticamente el DNI ingresado.
-                                </div>
-
-                                <div class="row g-3">
-                                    <!--usernameDisplay -->
-                                    <div class="col-md-6">
-                                        <label for="usernameDisplay" class="form-label">Nombre de Usuario</label>
-                                        <input type="text" class="form-control" id="usuarioDni" readonly
-                                            placeholder="Se generará con el DNI" style="background-color: #f8f9fa;">
-                                        <div class="form-text">Este será el nombre para iniciar sesión (basado en el
-                                            DNI)</div>
-                                    </div>
-
-                                    <!-- rol_id -->
-                                    <div class="col-md-6">
-                                        <label for="rol_id" class="form-label">Rol *</label>
-                                        <select name="rol" id="rol" class="form-select crearRol">
-                                            <option value="">Seleccione un rol...</option>
-                                            <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}"
-                                                th:text="${rol.nombreRol}">
-                                            </option>
-                                        </select>
-
-                                    </div>
-
-                                    <!-- contraseña -->
-                                    <div class="col-md-6">
-                                        <label for="contraseña" class="form-label">Contraseña *</label>
-                                        <input type="password" id="contraseña" class="form-control" name="contraseña"
-                                            minlength="6" />
-                                        <div class="form-text">Mínimo 6 caracteres</div>
-
-                                    </div>
-                                </div>
+                            </div>
+                            <!-- contraseña -->
+                            <div class="col-md-4">
+                                <label for="contraseña" class="form-label">Contraseña *</label>
+                                <input type="password" id="contraseña" class="form-control" name="contraseña"
+                                    minlength="6" required />
+                                <div class="form-text">Mínimo 6 caracteres</div>
                             </div>
                         </form>
                     </div>
@@ -376,210 +344,185 @@
         </div>
 
         <!-- verDettales -->
-        <div th:each="empleado : ${empleadoTabla}">
-            <div class="modal fade" th:id="|verDetalle__${empleado.personaId}|" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
+        <div class="modal fade" id="verDetalle" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content" id="detalleModal">
 
-                        <!-- Header con gradiente Bootstrap -->
-                        <div class="modal-header bg-primary text-white position-relative">
-                            <div class="container-fluid">
-                                <div class="row align-items-center">
-                                    <!-- <div class="col-auto">
-                                        <img th:src="${empleado.foto}" th:alt="${empleado.nombre}"
-                                            class="rounded-circle border border-3 border-white"
-                                            style="width: 80px; height: 80px; object-fit: cover;">
-                                    </div> -->
-                                    <div class="col">
-                                        <h3 class="modal-title mb-1 fw-bold"
-                                            th:text="${empleado.nombre + ' ' + empleado.apellido}"></h3>
-                                        <!-- <span class="badge bg-light text-primary fs-6"
-                                            th:each="usuario:${contenedorUser}"
-                                            th:if="${usuario.persona.personaId==empleado.personaId}"
-                                            th:text="${usuario.rol.nombreRol}"></span> -->
+                    <!-- Header con gradiente Bootstrap -->
+                    <div class="modal-header bg-primary text-white position-relative">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <img id="imagen-detalle" alt="" src=""
+                                        class="rounded-circle border border-3 border-white"
+                                        style="width: 80px; height: 80px; object-fit: cover;">
+                                </div>
+                                <div class="col">
+                                    <h3 id="nombre-detalle" class="modal-title mb-1 fw-bold"></h3>
+                                    <h3 id="apellido-detalle" class="modal-title mb-1 fw-bold"></h3>
+
+                                    <span class="badge bg-light text-primary fs-6"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Body del Modal -->
+                    <div class="modal-body p-4">
+
+                        <!-- Información Personal -->
+                        <div class="mb-4">
+                            <h5 class="text-primary mb-3 border-bottom border-primary pb-2">
+                                <i class="bi bi-person-fill me-2"></i>Información Personal
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-person text-primary me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">NOMBRE COMPLETO</small>
+                                            </div>
+                                            <h6 class="mb-0" id="nombre-completo-detalle">
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-calendar-heart text-primary me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">FECHA NACIMIENTO</small>
+                                            </div>
+                                            <h6 class="mb-0" id="fecha-nacimiento-detalle"></h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
 
-                        <!-- Body del Modal -->
-                        <div class="modal-body p-4">
-
-                            <!-- Información Personal -->
-                            <div class="mb-4">
-                                <h5 class="text-primary mb-3 border-bottom border-primary pb-2">
-                                    <i class="bi bi-person-fill me-2"></i>Información Personal
-                                </h5>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-person text-primary me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">NOMBRE COMPLETO</small>
-                                                </div>
-                                                <h6 class="mb-0" th:text="${empleado.nombre + ' ' + empleado.apellido}">
-                                                </h6>
+                        <!-- Información de Contacto -->
+                        <div class="mb-4">
+                            <h5 class="text-success mb-3 border-bottom border-success pb-2">
+                                <i class="bi bi-telephone-fill me-2"></i>Información de Contacto
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-phone text-success me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">TELÉFONO</small>
                                             </div>
+                                            <h6 class="mb-0" id="telefono-detalle"></h6>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-calendar-heart text-primary me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">FECHA NACIMIENTO</small>
-                                                </div>
-                                                <h6 class="mb-0" th:text="${empleado.fechaNacimiento}"></h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-envelope text-success me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">EMAIL</small>
                                             </div>
+                                            <h6 class="mb-0" id="email-detalle"></h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Información de Contacto -->
-                            <div class="mb-4">
-                                <h5 class="text-success mb-3 border-bottom border-success pb-2">
-                                    <i class="bi bi-telephone-fill me-2"></i>Información de Contacto
-                                </h5>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-phone text-success me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">TELÉFONO</small>
-                                                </div>
-                                                <h6 class="mb-0" th:text="${empleado.telefono}"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-envelope text-success me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">EMAIL</small>
-                                                </div>
-                                                <h6 class="mb-0" th:text="${empleado.email}"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Información Laboral -->
-                            <div class="mb-4">
-                                <h5 class="text-info mb-3 border-bottom border-info pb-2">
-                                    <i class="bi bi-briefcase-fill me-2"></i>Información Laboral
-                                </h5>
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-award text-info me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">ROL</small>
-                                                </div>
-                                                <!-- <span class="badge bg-light text-primary fs-6"
-                                                    th:each="usuario:${contenedorUser}"
-                                                    th:if="${usuario.persona.personaId==empleado.personaId}"
-                                                    th:text="${usuario.rol.nombreRol}"></span> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-star text-info me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">ESPECIALIDAD</small>
-                                                </div>
-                                                <h6 class="mb-0" th:text="${empleado.especialidad}"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-file-text text-info me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">TIPO CONTRATO</small>
-                                                </div>
-                                                <h6 class="mb-0" th:text="${empleado.tipoContrato}"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Fechas Importantes -->
-                            <div class="mb-4">
-                                <h5 class="text-warning mb-3 border-bottom border-warning pb-2">
-                                    <i class="bi bi-calendar-check me-2"></i>Fechas Importantes
-                                </h5>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-calendar-plus text-warning me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">FECHA INGRESO</small>
-                                                </div>
-                                                <h6 class="mb-0" th:text="${empleado.fechaIngreso}"></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="col-md-6">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="bi bi-hourglass-split text-warning me-2 fs-5"></i>
-                                                    <small class="text-muted fw-semibold">TIEMPO EN EMPRESA</small>
-                                                </div>
-                                                <h6 class="mb-0">
-                                                    <span
-                                                        th:with="fechaActual=${#dates.createNow()}, 
-                                                          diasTrabajados=${#dates.daysBetween(empleado.fechaIngreso, fechaActual)}"
-                                                        th:text="${#numbers.formatInteger(diasTrabajados / 365, 0)} + ' años, ' + 
-                                                          ${#numbers.formatInteger((diasTrabajados % 365) / 30, 0)} + ' meses'">
-                                                    </span>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                </div>
-                            </div>
-
-                            <!-- Información Salarial -->
-                            <div class="mb-4">
-                                <h5 class="text-danger mb-3 border-bottom border-danger pb-2">
-                                    <i class="bi bi-cash-stack me-2"></i>Información Salarial
-                                </h5>
-                                <div class="row g-3">
-                                    <div class="col-md-12">
-                                        <div class="card border-0 bg-light">
-                                            <div class="card-body p-3">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="bi bi-currency-dollar text-danger me-2 fs-5"></i>
-                                                        <small class="text-muted fw-semibold">SALARIO MENSUAL</small>
-                                                    </div>
-                                                    <h4 class="mb-0 text-danger fw-bold">
-                                                        S/. <span
-                                                            th:text="${#numbers.formatDecimal(empleado.salario, 1, 2)}"></span>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
-                        <!-- Footer
+                        <!-- Información Laboral -->
+                        <div class="mb-4">
+                            <h5 class="text-info mb-3 border-bottom border-info pb-2">
+                                <i class="bi bi-briefcase-fill me-2"></i>Información Laboral
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-award text-info me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">ROL</small>
+                                            </div>
+                                            <span class="badge bg-light text-primary fs-6" id="rol-detalle"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-star text-info me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">ESPECIALIDAD</small>
+                                            </div>
+                                            <h6 class="mb-0" id="especialidad-detalle"></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-file-text text-info me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">TIPO CONTRATO</small>
+                                            </div>
+                                            <h6 class="mb-0" id="contrato-detalle"></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fechas Importantes -->
+                        <div class="mb-4">
+                            <h5 class="text-warning mb-3 border-bottom border-warning pb-2">
+                                <i class="bi bi-calendar-check me-2"></i>Fechas Importantes
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="card border-0 bg-light h-100">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="bi bi-calendar-plus text-warning me-2 fs-5"></i>
+                                                <small class="text-muted fw-semibold">FECHA INGRESO</small>
+                                            </div>
+                                            <h6 class="mb-0" id="fecha-ingreso-detalle"></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información Salarial -->
+                        <div class="mb-4">
+                            <h5 class="text-danger mb-3 border-bottom border-danger pb-2">
+                                <i class="bi bi-cash-stack me-2"></i>Información Salarial
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="card border-0 bg-light">
+                                        <div class="card-body p-3">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-currency-dollar text-danger me-2 fs-5"></i>
+                                                    <small class="text-muted fw-semibold">SALARIO MENSUAL</small>
+                                                </div>
+                                                <h4 class="mb-0 text-danger fw-bold">
+                                                    S/. <span id="salario-detalle"></span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer
                         <div class="modal-footer bg-light border-top-0">
                             <small class="text-muted me-auto">
                                 <i class="bi bi-info-circle me-1"></i>
@@ -594,7 +537,6 @@
                             </button>
                         </div> -->
 
-                    </div>
                 </div>
             </div>
         </div>
