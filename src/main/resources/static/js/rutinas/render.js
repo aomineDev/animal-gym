@@ -17,6 +17,20 @@ export function renderRutinaTable(socio) {
     .join('')
 }
 
+export function renderRutinaDeleteRow(rutinaId) {
+  const btn = rutinaTable.querySelector(`button[data-rutina-id="${rutinaId}"]`)
+
+  if (btn) {
+    const fila = btn.closest('tr')
+    fila.remove()
+  }
+
+  const filasRestantes = rutinaTable.querySelectorAll('tr')
+  if (filasRestantes.length === 0) {
+    validatedTable(rutinaTable)
+  }
+}
+
 function validatedTable(rutinaTable) {
   rutinaTable.innerHTML = `
       <tr>

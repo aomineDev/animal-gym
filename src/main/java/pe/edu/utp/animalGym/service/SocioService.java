@@ -10,6 +10,8 @@ public interface SocioService extends ApiService<Socio> {
 
     Socio saveRutina(Integer socioId, Rutina nuevaRutina);
 
+    Socio deleteRutina(Integer socioId, Integer rutinaId);
+
     List<Socio> buscarPorEstado(Boolean estado);
 
     List<Socio> buscarPorRangoVencimiento(LocalDate inicio, LocalDate fin);

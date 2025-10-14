@@ -79,6 +79,16 @@ public class SocioServiceImpl implements SocioService {
         return partnerRepository.save(socio);
     }
 
+    @Transactional
+    public Socio deleteRutina(Integer socioId, Integer rutinaId) {
+        Socio socio = partnerRepository.findById(socioId)
+                .orElseThrow(() -> new RuntimeException("Socio no encontrado"));
+
+        socio.getRutinas().removeIf(r -> r.getRutinaId().equals(rutinaId));
+
+        return partnerRepository.save(socio);
+    }
+
     private void validarEmpleado(Rutina rutina) {
         if (rutina.getEmpleado() != null && rutina.getEmpleado().getPersonaId() != null) {
             Empleado empleado = empleadoRepository.findById(rutina.getEmpleado().getPersonaId())

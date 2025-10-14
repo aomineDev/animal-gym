@@ -29,3 +29,10 @@ export const rutinaFormFechaInicio = rutinaForm.querySelector(
 export const rutinaFormFechaFin = rutinaForm.querySelector(
   '#rutinaForm-fechaFin'
 )
+
+//Modal eliminar
+export const deleteModal = document.getElementById('deleteModal')
+
+export const deleteModalTitle = deleteModal.querySelector('#deleteModal-title')
+
+export const deleteBtn = deleteModal.querySelector('#deleteBtn')

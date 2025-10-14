@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import pe.edu.utp.animalGym.model.Rutina;
 import pe.edu.utp.animalGym.model.Socio;
 import pe.edu.utp.animalGym.service.SocioService;
@@ -74,6 +73,14 @@ public class SociosApiController {
         rutina.setRutinaId(rutinaId);
         Socio socio = socioService.saveRutina(socioId, rutina);
         return ResponseEntity.ok(socio);
+    }
+
+    @DeleteMapping("/{socioId}/rutinas/{rutinaId}")
+    public ResponseEntity<Socio> eliminarReserva(
+            @PathVariable Integer socioId,
+            @PathVariable Integer rutinaId) {
+        Socio socioActualizado = socioService.deleteRutina(socioId, rutinaId);
+        return ResponseEntity.ok(socioActualizado);
     }
 
     // http://localhost:8080/api/socios/buscar?estado=false

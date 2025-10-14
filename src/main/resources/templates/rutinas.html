@@ -206,25 +206,31 @@
     </div>
 
     <!-- Modal Eliminar -->
-    <div th:each="socio: ${socios}">
-      <div th:each="rutina: ${socio.rutinas}">
-        <div class="modal fade" th:id="|eliminarRutina__${rutina.rutinaId}|" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Eliminar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p>¿Estas seguro que deseas eliminar esta rutina?</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger btnConfirmarEliminar" th:attr="data-id=${rutina.rutinaId}"
-                  th:data-socio-id="${socio.personaId}">Confirmar
-                  eliminacion</button>
-              </div>
+    <div class="modal fade" id="deleteModal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar Eliminación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem"></i>
+              <h6 class="mt-3">
+                ¿Está seguro de que desea eliminar "<span class="text-danger" id="deleteModal-title"></span>"?
+              </h6>
+              <p class="text-muted">
+                Esta acción no se puede revertir.
+              </p>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-danger" data-id="0" id="deleteBtn">
+              <i class="bi bi-trash me-2"></i>Eliminar
+            </button>
           </div>
         </div>
       </div>
@@ -311,7 +317,6 @@
   <th:block th:fragment="script">
     <script th:inline="javascript">
       const socioListRaw = /*[[${socios}]]*/[]
-      console.log(socioListRaw)
     </script>
     <script type="module" th:src="@{/js/rutinas/main.js}"></script>
   </th:block>
