@@ -3,4 +3,11 @@ export const partnerList = partnerListRaw.reduce((acc, curr) => {
 
   return acc
 }, {})
-console.log(partnerList)
+
+export const membershipList = membershipListRaw.reduce((acc, curr) => {
+  acc[curr.membresiaId] = curr
+
+  return acc
+}, {})
+console.log('obj partner', partnerList)
+console.log('obj membership', membershipList)

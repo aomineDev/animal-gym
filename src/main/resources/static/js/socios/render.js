@@ -13,8 +13,8 @@ export function renderUpdatedPartnerCard(partner) {
   if (partnerCard) partnerCard.outerHTML = MembershipCard(partner)
 }
 
-export function renderDeletedPartnerCard(id) {
-  const card = partnerContainer.querySelector('div[data-id="' + id + '"]')
+export function renderDeletedPartnerItem(id) {
+  const item = partnerContainer.querySelector('div[data-id="' + id + '"]')
 
-  if (card) card.remove()
+  if (item) item.remove()
 }
