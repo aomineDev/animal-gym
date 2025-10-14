@@ -10,8 +10,8 @@ export default function (detalleRutina) {
         🏋️ ${detalleRutina.ejercicio.nombre} — <span class="ms-2 text-secondary small">${detalleRutina.diaSemana}
 </span>
       </button>
-      <button class="btn btn-sm btn-outline-danger me-3 ms-2 eliminarDetalleBtn" data-id="1">
-        <i class="bi bi-trash"></i>
+      <button data-bs-toggle="modal" data-type="detalle" data-bs-target=#deleteModal class="btn btn-sm btn-outline-danger me-3 ms-2" data-detalle-id="${detalleRutina.detalleRutinaId}">
+        <i class="bi bi-trash" ></i>
       </button>
     </h2>
 

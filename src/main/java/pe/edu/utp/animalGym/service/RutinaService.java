@@ -7,4 +7,6 @@ public interface RutinaService extends ApiService<Rutina> {
 
     Rutina saveRutinaDetalle(Integer rutinaId, DetalleRutina nuevoDetalle);
 
+    Rutina deleteRutinaDetalle(Integer rutinaId, Integer detalleRutinaId);
+
 }

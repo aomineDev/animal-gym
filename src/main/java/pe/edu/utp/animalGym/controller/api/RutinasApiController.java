@@ -61,4 +61,12 @@ public class RutinasApiController {
         return ResponseEntity.ok(rutina);
     }
 
+    @DeleteMapping("/{rutinaId}/detalles/{detalleRutinaId}")
+    public ResponseEntity<Rutina> deleteDetalleRutina(
+            @PathVariable Integer rutinaId,
+            @PathVariable Integer detalleRutinaId) {
+        Rutina rutinaActualizada = service.deleteRutinaDetalle(rutinaId, detalleRutinaId);
+        return ResponseEntity.ok(rutinaActualizada);
+    }
+
 }
