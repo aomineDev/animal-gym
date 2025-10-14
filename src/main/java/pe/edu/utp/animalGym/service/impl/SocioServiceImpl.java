@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import pe.edu.utp.animalGym.model.Empleado;
 import pe.edu.utp.animalGym.model.Rutina;
 import pe.edu.utp.animalGym.model.Socio;
@@ -61,23 +63,28 @@ public class SocioServiceImpl implements SocioService {
     }
 
     // list de rutinas
-    @Override
-    public Socio addRutina(Integer socioId, Rutina nuevaRutina) {
+    @Transactional
+    public Socio saveRutina(Integer socioId, Rutina rutina) {
         Socio socio = partnerRepository.findById(socioId)
-                .orElseThrow(() -> new RuntimeException("Socio no encontrada"));
+                .orElseThrow(() -> new RuntimeException("Socio no encontrado"));
 
-        nuevaRutina = rutinaRepository.save(nuevaRutina);
-        socio.getRutinas().add(nuevaRutina);
+        validarEmpleado(rutina);
 
-        // Si trae empleado con id, buscarlo en repo
-        if (nuevaRutina.getEmpleado() != null && nuevaRutina.getEmpleado().getPersonaId() != null) {
-            Empleado empleado = empleadoRepository.findById(nuevaRutina.getEmpleado().getPersonaId())
-                    .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
-            nuevaRutina.setEmpleado(empleado);
-            ;
+        Rutina guardada = rutinaRepository.save(rutina); // Inserta o actualiza según tenga ID o no
+
+        if (!socio.getRutinas().contains(guardada)) {
+            socio.getRutinas().add(guardada);
         }
 
         return partnerRepository.save(socio);
+    }
+
+    private void validarEmpleado(Rutina rutina) {
+        if (rutina.getEmpleado() != null && rutina.getEmpleado().getPersonaId() != null) {
+            Empleado empleado = empleadoRepository.findById(rutina.getEmpleado().getPersonaId())
+                    .orElseThrow(() -> new EntityNotFoundException("Empleado no encontrado"));
+            rutina.setEmpleado(empleado);
+        }
     }
 
     @Override

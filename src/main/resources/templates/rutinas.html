@@ -13,7 +13,7 @@
       <!-- Tabla con rutinas activas -->
       <div class="table-responsive">
         <h3 class="text-center mt-5">Tabla de socios</h3>
-        <table id="tablaPrincipal" class="table table-hover align-middle">
+        <table id="rutinaSocioTable" class="table table-hover align-middle">
           <thead class="table-light">
             <tr>
               <th>Nombre</th>
@@ -24,8 +24,8 @@
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody id="rutinaTable">
-            <tr th:each="socio : ${socios}" th:id="|socio-fila-${socio.personaId}|">
+          <tbody id="rutinaSocioTable-body">
+            <tr th:each="socio : ${socios}" th:data-id="${socio.personaId}">
               <td th:text="${socio.nombre}"></td>
               <td th:text="${socio.dni}"></td>
               <td>
@@ -53,8 +53,8 @@
                   </button>
                   <ul class="dropdown-menu">
                     <li>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                        th:attr="data-bs-target=|#detalleSocioModal__${socio.personaId}|">
+                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target=#rutinaSocioDetailModal
+                        th:data-id="${socio.personaId}">
                         <i class="bi bi-eye me-2"></i>Ver detalle
                       </a>
                     </li>
@@ -65,128 +65,54 @@
           </tbody>
         </table>
       </div>
-
-      <!-- Toast -->
-      <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="toast" class="toast align-items-center border-0" role="alert">
-          <div class="d-flex">
-            <div class="toast-body">
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-          </div>
-        </div>
-      </div>
   </th:block>
 
-  <th:block th:fragment="modals">
+  <th:block th:fragment="modal">
 
     <!-- Modal Detalle de Socio -->
-    <div th:each="socio : ${socios}">
-      <div class="modal fade" th:id="|detalleSocioModal__${socio.personaId}|" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
-          <div class="modal-content rounded-4 p-3">
+    <div class="modal fade" id="rutinaSocioDetailModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="modal-content rounded-4 p-3">
 
-            <!-- Header -->
-            <div class="modal-header">
-              <h5 class="modal-title" th:text="'Detalle de Rutinas - Socio: ' + ${socio.nombre + ' ' + socio.apellido}">
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+          <!-- Header -->
+          <div class="modal-header">
+            <h5 class="modal-title">
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
 
-            <!-- Body -->
-            <div class="modal-body">
-              <div class="row g-4">
+          <!-- Body -->
+          <div class="modal-body">
+            <div class="row g-4">
 
-                <!-- Tabla Rutinas -->
-                <div class="col-12 col-lg-6">
-                  <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
-                    <h6 class="mb-0">Rutinas</h6>
-                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#crearRutina"
-                      th:data-socio-id="${socio.personaId}">+
-                      Agregar rutina</button>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table table-hover table-bordered align-middle">
-                      <thead class="table-light text-center">
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Descripcion</th>
-                          <th>Objetivo</th>
-                          <th>Inicio</th>
-                          <th>Fin</th>
-                          <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody th:id="|tablaRutinasModal__${socio.personaId}|" class="text-center">
-                        <tr th:each="rutina : ${socio.rutinas}" class="fila-rutina"
-                          th:data-rutina-id="${rutina.rutinaId}" th:data-socio-id="${socio.personaId}">
-                          <td th:text="${rutina.nombre}"></td>
-                          <td th:text="${rutina.descripcion}"></td>
-                          <td th:text="${rutina.objetivo}"></td>
-                          <td th:text="${rutina.fechaInicio}"></td>
-                          <td th:text="${rutina.fechaFin}"></td>
-                          <td>
-                            <div class="dropdown">
-                              <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots-vertical"></i>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li>
-                                  <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    th:attr="data-bs-target=|#editarRutina__${rutina.rutinaId}|">
-                                    <i class="bi bi-pencil me-2"></i>Editar
-                                  </a>
-                                </li>
-                                <li>
-                                  <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                    th:attr="data-bs-target=|#agregarEjercicio__${rutina.rutinaId}|">
-                                    + Agrega ejercicio
-                                  </a>
-                                </li>
-                                <li>
-                                  <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                  <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                                    th:attr="data-bs-target=|#eliminarRutina__${rutina.rutinaId}|">
-                                    Eliminar
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+              <!-- Tabla Rutinas -->
+              <div class="col-12 col-lg-6">
+                <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+                  <h6 class="mb-0">Rutinas</h6>
+                  <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#rutinaFormModal"><i
+                      class="bi bi-plus-circle me-2"></i>
+                    Agregar rutina</button>
                 </div>
-
-                <!-- Tabla Ejercicios -->
-                <div class="col-12 col-lg-6">
-                  <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
-                    <h6 class="mb-0">Ejercicios</h6>
-                  </div>
-                  <div class="table-responsive">
-                    <table id="tablaEjercicios" class="table table-hover table-bordered align-middle">
-                      <thead class="table-light text-center">
-                        <tr>
-                          <th>Día Semana</th>
-                          <th>Ejercicio</th>
-                          <th>Series</th>
-                          <th>Reps</th>
-                          <th>Peso (kg)</th>
-                          <th>Calorias</th>
-                          <th>Descanso (seg)</th>
-                          <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody class="text-center">
-                        <tr>
-                          <td colspan="8" class="text-muted">Selecciona una rutina para ver sus ejercicios</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                <div class="table-responsive">
+                  <table class="table table-hover table-bordered align-middle">
+                    <thead class="table-light text-center">
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Objetivo</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody th:id="rutinaTable-body" class="text-center">
+                      <tr id="noRutinasRow">
+                        <td colspan="6" class="text-muted py-4">
+                          Este socio no cuenta con rutinas
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -195,24 +121,30 @@
       </div>
     </div>
 
-    <!-- Modal Crear rutina-->
-    <div class="modal fade" id="crearRutina" tabindex="-1" aria-hidden="true">
+    <!-- Modal rutina-->
+    <div class="modal fade" id="rutinaFormModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content rounded-4">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear Rutina</h1> <button type="button"
-              class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Nueva Rutina</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="formCrearRutina" class="row needs-validation crearRutinaForm" novalidate>
+            <form id="rutinaForm" class="row needs-validation" data-type="create" novalidate>
 
               <!-- nombre-->
-              <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la rutina</label>
-                <input type="text" name="nombre" class="form-control" required>
+              <div class="mb-3 col-md-6">
+                <label for="nombre" class="form-label">Nombre de la rutina</label>
+                <input type="text" name="nombre" class="form-control" pattern="[\w\s]{3,}" required>
+                <div class="valid-feedback">Nombre válido</div>
+                <div class="invalid-feedback">
+                  Ingrese un nombre válido (mínimo 3 caracteres)
+                </div>
               </div>
 
               <!-- Entrenador -->
-              <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label>
+              <div class="mb-3 col-md-6">
+                <label for="entrenador" class="form-label">Entrenador</label>
                 <select name="entrenador" class="form-select" id="select_entrenador" required>
                   <option value="">Seleccione un entrenador</option>
                   <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
@@ -223,87 +155,51 @@
               </div>
 
               <!-- descripcion -->
-              <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
-                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
+              <div class="mb-3 col-md-6">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea name="descripcion" class="form-control" rows="3"
                   placeholder="Escribe una breve descripción de la rutina" required></textarea>
+                <div class="invalid-feedback">
+                  Ingrese una descripción (mínimo 10 caracteres)
+                </div>
               </div>
 
               <!-- objetivo -->
-              <div class="mb-3 col-md-6"> <label for="objetivo" class="form-label">Objetivo</label>
-                <textarea name="objetivo" id="objetivo" class="form-control" rows="3"
-                  placeholder="Escribe el objetivo de la rutina" required></textarea>
+              <div class="mb-3 col-md-6">
+                <label for="objetivo" class="form-label">Objetivo</label>
+                <textarea name="objetivo" class="form-control" rows="3" placeholder="Escribe el objetivo de la rutina"
+                  required></textarea>
+                <div class="invalid-feedback">
+                  Ingrese un objetivo (mínimo 10 caracteres)
+                </div>
               </div>
 
               <!-- fechaInicio -->
-              <div class="mb-3 col-md-6"> <label for="fechaInicio" class="form-label">Fecha Inicio</label> <input
-                  type="date" name="fechaInicio" class="form-control" required> </div>
+              <div class="mb-3 col-md-6">
+                <label for="fechaInicio" class="form-label">Fecha Inicio</label> <input type="date" name="fechaInicio"
+                  class="form-control" required>
+                <div class="invalid-feedback">
+                  Seleccione una fecha válida
+                </div>
+              </div>
 
               <!-- fechaFin -->
-              <div class="mb-3 col-md-6"> <label for="fechaFin" class="form-label">Fecha Fin</label> <input type="date"
-                  name="fechaFin" class="form-control" required> </div>
-              <button type="submit" class="btn btn-primary col-5 ms-3 btnCrearRutina">Crear rutina</button>
+              <div class="mb-3 col-md-6">
+                <label for="fechaFin" class="form-label">Fecha Fin</label> <input type="date" name="fechaFin"
+                  class="form-control" required>
+                <div class="invalid-feedback">
+                  Seleccione una fecha válida
+                </div>
+              </div>
             </form>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Editar rutina-->
-    <div th:each="socio : ${socios}">
-      <div th:each="rutina : ${socio.rutinas}">
-        <div class="modal fade" th:id="|editarRutina__${rutina.rutinaId}|" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content rounded-4">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar Rutina</h1> <button type="button"
-                  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form class="row needs-validation editarRutinaForm" novalidate>
-
-                  <!-- nombre-->
-                  <div class="mb-3 col-md-6"> <label for="nombre" class="form-label">Nombre de la rutina</label>
-                    <input type="text" name="nombre" class="form-control" th:value="${rutina.nombre}" required>
-                  </div>
-
-                  <!-- Entrenador -->
-                  <div class="mb-3 col-md-6"> <label for="entrenador" class="form-label">Entrenador</label> <select
-                      name="entrenador" class="form-select" id="select_entrenador" required>
-                      <option value="">Seleccione un entrenador</option>
-                      <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
-                        th:value="${usuario.persona.personaId}"
-                        th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}"
-                        th:selected="${usuario.persona.personaId == rutina.empleado.personaId}">
-                      </option>
-                    </select>
-                  </div>
-
-                  <!-- descripcion -->
-                  <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
-                    <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
-                      placeholder="Escribe una breve descripción de la rutina" th:text="${rutina.descripcion}"
-                      required></textarea>
-                  </div>
-
-                  <!-- objetivo -->
-                  <div class="mb-3 col-md-6"> <label for="objetivo" class="form-label">Objetivo</label>
-                    <textarea name="objetivo" id="objetivo" class="form-control" rows="3"
-                      placeholder="Escribe el objetivo de la rutina" th:text="${rutina.objetivo}" required></textarea>
-                  </div>
-
-                  <!-- fechaInicio -->
-                  <div class="mb-3 col-md-6"> <label for="fechaInicio" class="form-label">Fecha Inicio</label> <input
-                      type="date" name="fechaInicio" class="form-control" th:value="${rutina.fechaInicio}" required>
-                  </div>
-
-                  <!-- fechaFin -->
-                  <div class="mb-3 col-md-6"> <label for="fechaFin" class="form-label">Fecha Fin</label> <input
-                      type="date" name="fechaFin" class="form-control" th:value="${rutina.fechaFin}" required> </div>
-                  <button type="submit" class="btn btn-primary col-5 ms-3 btnEditarRutina"
-                    th:data-socio-id="${socio.personaId}" th:data-id="${rutina.rutinaId}">Editar rutina</button>
-                </form>
-              </div>
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+              Cerrar
+            </button>
+            <button type="submit" class="btn btn-primary" form="rutinaForm">
+              Crear Rutina
+            </button>
           </div>
         </div>
       </div>
@@ -348,8 +244,8 @@
                 <form class="row needs-validation agregarEjercicioForm" novalidate>
 
                   <!-- Dia de semana -->
-                  <div class="mb-3 col-md-6"> <label for="diaSemana" class="form-label">Dia de entreno</label> <select
-                      name="diaSemana" class="form-select" required>
+                  <div class="mb-3 col-md-6"> <label for="diaSemana" class="form-label">Dia de entreno</label>
+                    <select name="diaSemana" class="form-select" required>
                       <option value="">Seleccione un dia</option>
                       <option value="Lunes">Lunes</option>
                       <option value="Martes">Martes</option>
@@ -410,9 +306,14 @@
         </div>
       </div>
     </div>
+  </th:block>
 
+  <th:block th:fragment="script">
+    <script th:inline="javascript">
+      const socioListRaw = /*[[${socios}]]*/[]
+      console.log(socioListRaw)
+    </script>
     <script type="module" th:src="@{/js/rutinas/main.js}"></script>
-
   </th:block>
 </body>
 

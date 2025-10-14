@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pe.edu.utp.animalGym.model.Clase;
+import pe.edu.utp.animalGym.model.ReservaClase;
 import pe.edu.utp.animalGym.service.ClaseService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,6 +53,24 @@ public class ClasesApiController {
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
         claseService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    /* Reservas */
+    @DeleteMapping("/{claseId}/reservas/{reservaId}")
+    public ResponseEntity<Clase> eliminarReserva(
+            @PathVariable Integer claseId,
+            @PathVariable Integer reservaId) {
+        Clase claseActualizada = claseService.eliminarReserva(claseId, reservaId);
+        return ResponseEntity.ok(claseActualizada);
+    }
+
+    @PostMapping("/{claseId}/reservas")
+    public ResponseEntity<Clase> agregarReserva(
+            @PathVariable Integer claseId,
+            @RequestBody ReservaClase reserva) {
+
+        Clase claseActualizada = claseService.agregarReserva(claseId, reserva);
+        return ResponseEntity.ok(claseActualizada);
     }
 
     /* Filtros */

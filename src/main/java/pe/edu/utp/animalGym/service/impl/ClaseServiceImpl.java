@@ -7,16 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import pe.edu.utp.animalGym.model.Clase;
 import pe.edu.utp.animalGym.model.Empleado;
+import pe.edu.utp.animalGym.model.ReservaClase;
 import pe.edu.utp.animalGym.repository.ClaseRepository;
 import pe.edu.utp.animalGym.repository.EmpleadoRepository;
+import pe.edu.utp.animalGym.repository.ReservaClaseRepository;
 import pe.edu.utp.animalGym.service.ClaseService;
 
 @Service
 public class ClaseServiceImpl implements ClaseService {
   @Autowired
   private ClaseRepository repository;
+
+  @Autowired
+  private ReservaClaseRepository reservaRepository;
 
   @Autowired
   private EmpleadoRepository empleadoRepository;
@@ -68,6 +74,29 @@ public class ClaseServiceImpl implements ClaseService {
 
     if (clase.getEmpleado() == null)
       clase.setEmpleado(existente.getEmpleado());
+  }
+
+  /* Reservas */
+  @Transactional
+  public Clase agregarReserva(Integer claseId, ReservaClase reserva) {
+    Clase clase = repository.findById(claseId)
+        .orElseThrow(() -> new RuntimeException("Clase no encontrada"));
+
+    // Guardamos la reserva en la BD
+    ReservaClase reservaGuardada = reservaRepository.save(reserva);
+    clase.getReservas().add(reservaGuardada);
+
+    return repository.save(clase);
+  }
+
+  @Transactional
+  public Clase eliminarReserva(Integer claseId, Integer reservaId) {
+    Clase clase = repository.findById(claseId)
+        .orElseThrow(() -> new RuntimeException("Clase no encontrada"));
+
+    clase.getReservas().removeIf(r -> r.getReservaClaseId().equals(reservaId));
+
+    return repository.save(clase);
   }
 
 }

@@ -5,7 +5,7 @@ import {
 } from '../dom.js'
 import { membershipList } from '../store.js'
 import Service from '../../service/index.js'
-import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
+import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 import { renderDeletedMembershipCard } from '../render.js'
 
 const service = new Service('membresias')

@@ -58,10 +58,21 @@ public class SociosApiController {
 
     // list rutina
     @PostMapping("/{socioId}/rutinas")
-    public ResponseEntity<Socio> addRutina(
+    public ResponseEntity<Socio> saveRutina(
             @PathVariable Integer socioId,
             @RequestBody Rutina rutina) {
-        Socio socio = socioService.addRutina(socioId, rutina);
+        Socio socio = socioService.saveRutina(socioId, rutina);
+        return ResponseEntity.ok(socio);
+    }
+
+    @PutMapping("/{socioId}/rutinas/{rutinaId}")
+    public ResponseEntity<Socio> updateRutina(
+            @PathVariable Integer socioId,
+            @PathVariable Integer rutinaId,
+            @RequestBody Rutina rutina) {
+
+        rutina.setRutinaId(rutinaId);
+        Socio socio = socioService.saveRutina(socioId, rutina);
         return ResponseEntity.ok(socio);
     }
 
