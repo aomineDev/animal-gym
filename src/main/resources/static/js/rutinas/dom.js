@@ -36,3 +36,15 @@ export const deleteModal = document.getElementById('deleteModal')
 export const deleteModalTitle = deleteModal.querySelector('#deleteModal-title')
 
 export const deleteBtn = deleteModal.querySelector('#deleteBtn')
+
+//Detalle rutina
+export const detalleRutinaContainer = rutinaSocioDetailModal.querySelector(
+  '#detalleRutinaContainer'
+)
+
+export const detalleRutinaFormModal = document.getElementById(
+  'detalleRutinaFormModal'
+)
+
+export const detalleRutinaForm =
+  detalleRutinaFormModal.querySelector('#detalleRutinaForm')

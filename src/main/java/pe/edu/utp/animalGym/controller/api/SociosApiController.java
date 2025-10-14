@@ -75,14 +75,6 @@ public class SociosApiController {
         return ResponseEntity.ok(socio);
     }
 
-    @DeleteMapping("/{socioId}/rutinas/{rutinaId}")
-    public ResponseEntity<Socio> eliminarReserva(
-            @PathVariable Integer socioId,
-            @PathVariable Integer rutinaId) {
-        Socio socioActualizado = socioService.deleteRutina(socioId, rutinaId);
-        return ResponseEntity.ok(socioActualizado);
-    }
-
     // http://localhost:8080/api/socios/buscar?estado=false
     @GetMapping("/buscar")
     public ResponseEntity<List<Socio>> buscarPorEstado(@RequestParam Boolean estado) {

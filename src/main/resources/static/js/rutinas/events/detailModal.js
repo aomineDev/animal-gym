@@ -3,6 +3,7 @@ import {
   rutinaSocioDetailModalTitle,
   rutinaFormModal,
   deleteModal,
+  rutinaTable,
 } from '../dom.js'
 import { socioList } from '../store.js'
 import { renderRutinaTable } from '../render.js'
@@ -13,6 +14,7 @@ export default function rutinaSocioDetailModalEvents() {
     const id = button.dataset.id
     rutinaFormModal.dataset.id = id
     deleteModal.dataset.id = id
+    rutinaTable.dataset.id = id
 
     rutinaSocioDetailModalTitle.textContent =
       'Detalle de Rutinas - ' +

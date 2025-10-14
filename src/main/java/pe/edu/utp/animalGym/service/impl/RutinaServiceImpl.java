@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import pe.edu.utp.animalGym.model.DetalleRutina;
 import pe.edu.utp.animalGym.model.Ejercicio;
 import pe.edu.utp.animalGym.model.Empleado;
@@ -71,62 +72,20 @@ public class RutinaServiceImpl implements RutinaService {
     }
 
     /* PARA EL DETALLE */
-    @Override
-    public Rutina addDetalle(Integer rutinaId, DetalleRutina nuevoDetalle) {
+    @Transactional
+    public Rutina saveRutinaDetalle(Integer rutinaId, DetalleRutina nuevoDetalle) {
         Rutina rutina = repository.findById(rutinaId)
                 .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
 
-        // Generar ID secuencial manualmente
-        int nextId = rutina.getDetalleRutinaList().stream()
-                .mapToInt(DetalleRutina::getDetalleRutinaId)
-                .max()
-                .orElse(0) + 1;
-
-        nuevoDetalle.setDetalleRutinaId(nextId);
-        rutina.getDetalleRutinaList().add(nuevoDetalle);
-
-        // Si trae empleado con id, buscarlo en repo
         if (nuevoDetalle.getEjercicio() != null && nuevoDetalle.getEjercicio().getEjercicioId() != null) {
             Ejercicio ejercicio = ejercicioRepository.findById(nuevoDetalle.getEjercicio().getEjercicioId())
                     .orElseThrow(() -> new RuntimeException("Ejercicio no encontrado"));
             nuevoDetalle.setEjercicio(ejercicio);
-            ;
         }
+
+        rutina.getDetalleRutinaList().add(nuevoDetalle);
 
         return repository.save(rutina);
     }
-
-    // public Rutina updateDetalle(Integer rutinaId, Integer detalleId,
-    // DetalleRutina detalleEditado) {
-    // Rutina rutina = repository.findById(rutinaId)
-    // .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
-
-    // DetalleRutina existente = rutina.getDetalleRutinaList().stream()
-    // .filter(d -> d.getDetalleId().equals(detalleId))
-    // .findFirst()
-    // .orElseThrow(() -> new RuntimeException("Detalle no encontrado"));
-
-    // // Actualizar campos
-    // existente.setEjercicio(detalleEditado.getEjercicio());
-    // existente.setSeries(detalleEditado.getSeries());
-    // existente.setRepeticiones(detalleEditado.getRepeticiones());
-    // existente.setPeso(detalleEditado.getPeso());
-
-    // return repository.save(rutina);
-    // }
-
-    // public Rutina removeDetalle(Integer rutinaId, Integer detalleId) {
-    // Rutina rutina = repository.findById(rutinaId)
-    // .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
-
-    // boolean eliminado = rutina.getDetalleRutinaList()
-    // .removeIf(d -> d.getDetalleId().equals(detalleId));
-
-    // if (!eliminado) {
-    // throw new RuntimeException("Detalle no encontrado");
-    // }
-
-    // return repository.save(rutina);
-    // }
 
 }

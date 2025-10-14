@@ -2,18 +2,19 @@ import { deleteModal, deleteModalTitle, deleteBtn } from '../dom.js'
 import { socioList } from '../store.js'
 import { TOAST_TYPES, showToast } from '../../bootstrap/Toast.js'
 import { renderRutinaDeleteRow, renderSocioRutinaTable } from '../render.js'
+import Service from '../../service/index.js'
 
 const bsModal = bootstrap.Modal.getOrCreateInstance(deleteModal)
+const serviceRutina = new Service('rutinas')
+const serviceSocio = new Service('socios')
 
 async function handleDelete() {
   const rutinaId = this.dataset.rutinaId
   const socioId = this.dataset.id
 
   try {
-    const res = await fetch(`/api/socios/${socioId}/rutinas/${rutinaId}`, {
-      method: 'DELETE',
-    })
-    const socioActualizado = await res.json()
+    await serviceRutina.delete(rutinaId)
+    const socioActualizado = await serviceSocio.findById(socioId)
 
     socioList[socioId] = socioActualizado
 

@@ -1,6 +1,6 @@
 export default function (rutina) {
   return /* html */ `
-    <tr>
+    <tr class="rutina-row" data-rutina-id="${rutina.rutinaId}">
       <td>${rutina.nombre}</td>
       <td>${rutina.descripcion}</td>
       <td>${rutina.objetivo}</td>
@@ -20,7 +20,7 @@ export default function (rutina) {
             </li>
             <li>
               <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                data-bs-target=#ejercicioFormModal data-rutina-id="${rutina.rutinaId}">
+                data-bs-target=#detalleRutinaFormModal data-rutina-id="${rutina.rutinaId}">
                 + Agrega ejercicio
               </a>
             </li>

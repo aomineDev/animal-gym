@@ -54,10 +54,10 @@ public class RutinasApiController {
     }
 
     @PostMapping("/{rutinaId}/detalles")
-    public ResponseEntity<Rutina> addDetalle(
+    public ResponseEntity<Rutina> saveRutinaDetalle(
             @PathVariable Integer rutinaId,
             @RequestBody DetalleRutina detalle) {
-        Rutina rutina = service.addDetalle(rutinaId, detalle);
+        Rutina rutina = service.saveRutinaDetalle(rutinaId, detalle);
         return ResponseEntity.ok(rutina);
     }
 

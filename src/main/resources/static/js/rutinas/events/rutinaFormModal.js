@@ -19,8 +19,6 @@ const bsModal = bootstrap.Modal.getOrCreateInstance(rutinaFormModal)
 async function handleFormSubmit(e) {
   const socioId = e.target.dataset.socioId //recepciono el id del socio don data-socio-id
 
-  console.log(this.dataset.type)
-
   if (!this.checkValidity()) return
 
   const nombre = this.nombre.value.trim()

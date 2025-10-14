@@ -5,6 +5,6 @@ import pe.edu.utp.animalGym.model.Rutina;
 
 public interface RutinaService extends ApiService<Rutina> {
 
-    Rutina addDetalle(Integer rutinaId, DetalleRutina nuevoDetalle);
+    Rutina saveRutinaDetalle(Integer rutinaId, DetalleRutina nuevoDetalle);
 
 }
