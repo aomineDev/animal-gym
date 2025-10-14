@@ -3,7 +3,8 @@ import {
   empleadoFormulario,
   empleadoFormularioModal,
   empleadoFormularioSubmit,
-  tituloModal, empleadoFormImagenPreview
+  tituloModal, empleadoFormImagenPreview,
+  // dniInput
 } from '../dom.js'
 
 import FORM_ACTIONS from '../../constants/formActions.js'
@@ -24,6 +25,12 @@ const bsModal = bootstrap.Modal.getOrCreateInstance(empleadoFormularioModal);
 const defaultFormImagen = '/img/form/image-preview.png';
 
 const tipo = PERSONA_TYPE.EMPLEADO
+const dnibd = await empleadoServicio.findAll();
+console.log(dnibd)
+const dnis = dnibd.map(empleado => empleado.dni);
+
+console.log(dnis);
+
 
 async function handleFormSubmit(e) {
   if (!this.checkValidity()) return
@@ -45,6 +52,7 @@ async function handleFormSubmit(e) {
   //usuario
   const clave = this.contraseña.value.trim();
   const rol = this.rol.value;
+
   try {
     if (file) imagen = await storageService.upload(file)
 
@@ -65,9 +73,10 @@ async function handleFormSubmit(e) {
     }
 
     if (this.dataset.type === FORM_ACTIONS.CREATE) {
+
+
       const data = await empleadoServicio.save(empleado);
-      console.log(clave)
-      console.log((rol))
+
       const usuario = {
         clave,
         rol: {
@@ -78,21 +87,38 @@ async function handleFormSubmit(e) {
           personaId: data.personaId,
         }
       }
+
       const dataUsuario = await usuarioServicio.save(usuario);
 
-      console.log(data)
-      console.log(usuario)
-      console.log(dataUsuario)
-
       renderEmpleadoCard(data, dataUsuario)
+
       empledoList[data.personaId] = data;
-      usuarioList[dataUsuario.persona.personaId] = dataUsuario;
+      console.log(empledoList[data.personaId] = data
+      )
+      console.log(usuarioList[dataUsuario.persona.personaId] = dataUsuario)
+
       showToast('Empleado creado con exito', TOAST_TYPES.SUCCESS)
     } else {
       if (this.dataset.type === FORM_ACTIONS.UPDATE) {
+
         const id = this.dataset.id;
         const data = await empleadoServicio.update(empleado, id);
-        renderEmpleadoActualizar(data);
+
+        const usuario = {
+          clave,
+          rol: {
+            rolId: parseInt(rol)
+          }
+        }
+        const usuarioExiste = usuarioList[id];
+        console.log(usuarioExiste)
+        const usuarioId = usuarioExiste.usuarioId;
+        console.log("el id usario es " + usuarioId)
+        const dataUsuario = await usuarioServicio.update(usuario, usuarioId)
+        console.log("actualiza" + dataUsuario.clave)
+        console.log(JSON.stringify(dataUsuario, null, 2));
+        renderEmpleadoActualizar(data, dataUsuario);
+
         empledoList[data.personaId] = data;
         showToast('Empleado actualizada con exito!', TOAST_TYPES.SUCCESS)
       }
@@ -105,6 +131,7 @@ async function handleFormSubmit(e) {
   }
 
 }
+
 
 function rellenarEmpleado(empleado, usuario) {
   empleadoFormulario.dni.value = empleado.dni;
@@ -124,6 +151,11 @@ function rellenarEmpleado(empleado, usuario) {
   //usuario
   empleadoFormulario.rol.value = usuario.rol.rolId
 }
+
+// function handleDniChange(e) {
+//   console.log("HOla cambie de campo")
+// }
+
 function handleImageChange(e) {
   const imageFile = this.files[0]
   const imageURL = URL.createObjectURL(imageFile)
@@ -143,10 +175,14 @@ export default function registrarEmpleado() {
       rellenarEmpleado(empledoList[id], usuarioList[id])
     } else {
       empleadoFormulario.dataset.type = FORM_ACTIONS.CREATE
+
       tituloModal.textContent = 'Nuevo empleado'
       empleadoFormularioSubmit.textContent = 'Crear empleado'
       empleadoFormImagenPreview.src = defaultFormImagen
     }
+    //const dniInput = empleadoFormularioModal.querySelector('#dni');
+    //dniInput.addEventListener('change', handleDniChange);
+
   })
   empleadoFormImagenInput.addEventListener('change', handleImageChange)
 }

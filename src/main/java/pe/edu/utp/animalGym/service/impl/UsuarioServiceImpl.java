@@ -40,13 +40,39 @@ public class UsuarioServiceImpl implements UsuarioService {
     return repository.findById(id);
   }
 
+  // @Override
+  // @Transactional
+  // public Usuario save(Usuario entity) {
+  // Usuario usuario = repository.save(entity);
+
+  // entityManager.refresh(usuario);
+
+  // return usuario;
+  // }
   @Override
   @Transactional
   public Usuario save(Usuario entity) {
+    // Si tiene ID, es UPDATE
+    if (entity.getUsuarioId() != null) {
+      Usuario existente = repository.findById(entity.getUsuarioId())
+          .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+      existente.setClave(entity.getClave());
+
+      if (entity.getRol() != null && entity.getRol().getRolId() != null) {
+        Rol rol = rolRepository.findById(entity.getRol().getRolId())
+            .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
+        existente.setRol(rol);
+      }
+
+      entityManager.flush();
+      entityManager.refresh(existente);
+      return existente;
+    }
+
+    // Si no tiene ID, es CREATE
     Usuario usuario = repository.save(entity);
-
     entityManager.refresh(usuario);
-
     return usuario;
   }
 

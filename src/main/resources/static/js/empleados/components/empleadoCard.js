@@ -37,10 +37,9 @@ export default function (empleado, usuario) {
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <!-- <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    >
+                                                 <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#verDetalle" data-id=${personaId}>
                                                     Ver detalles
-                                                </a> -->
+                                                </a> 
                                             </li>
                                             <li>
                                                 <a class="dropdown-item" href="#" data-bs-toggle="modal"

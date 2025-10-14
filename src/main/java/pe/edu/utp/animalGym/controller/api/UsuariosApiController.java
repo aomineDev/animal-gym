@@ -1,6 +1,7 @@
 package pe.edu.utp.animalGym.controller.api;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pe.edu.utp.animalGym.model.Rol;
 import pe.edu.utp.animalGym.model.Usuario;
+import pe.edu.utp.animalGym.service.RolService;
 import pe.edu.utp.animalGym.service.UsuarioService;
 
 @RestController
@@ -23,6 +26,8 @@ public class UsuariosApiController {
 
     @Autowired
     UsuarioService usuarioService;
+    @Autowired
+    RolService rolService;
 
     @GetMapping
     public ResponseEntity<List<Usuario>> findAll() {
@@ -49,6 +54,26 @@ public class UsuariosApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> update(@PathVariable Integer id, @RequestBody Usuario usuario) {
+        usuario.setUsuarioId(id);
         return ResponseEntity.ok(usuarioService.save(usuario));
     }
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Usuario> update(@PathVariable Integer id, @RequestBody
+    // Usuario usuario) {
+    // Optional<Usuario> usuarioExistenteOpt = usuarioService.findById(id);
+    // if (usuarioExistenteOpt.isEmpty()) {
+    // return ResponseEntity.notFound().build();
+    // }
+
+    // Usuario usuarioExistente = usuarioExistenteOpt.get();
+    // usuarioExistente.setClave(usuario.getClave());
+    // usuarioExistente.setRol(usuario.getRol());
+
+    // // **Nunca cambiar persona**, solo mantener la existente**
+    // usuarioExistente.setPersona(usuarioExistente.getPersona());
+
+    // Usuario updated = usuarioService.save(usuarioExistente);
+    // return ResponseEntity.ok(updated);
+    // }
+
 }
