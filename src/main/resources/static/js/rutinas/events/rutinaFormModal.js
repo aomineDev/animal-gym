@@ -5,6 +5,7 @@ import {
   rutinaFormSubmit,
   rutinaFormFechaInicio,
   rutinaFormFechaFin,
+  rutinaSocioDetailModal,
 } from '../dom.js'
 import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 import { PERSONA_TYPE } from '../../constants/personaType.js'
@@ -15,11 +16,10 @@ import { validateDateNow, validateRange } from '../../service/validateInput.js'
 
 const tipo = PERSONA_TYPE.EMPLEADO
 const bsModal = bootstrap.Modal.getOrCreateInstance(rutinaFormModal)
+const bsModalPadre = bootstrap.Modal.getOrCreateInstance(rutinaSocioDetailModal)
 
 async function handleFormSubmit(e) {
   const socioId = e.target.dataset.socioId //recepciono el id del socio don data-socio-id
-
-  console.log(this.dataset.type)
 
   if (!this.checkValidity()) return
 
@@ -126,6 +126,12 @@ export default function registerRutinaFormModalEvents() {
       rutinaFormModalTitle.textContent = 'Nueva Rutina'
       rutinaFormSubmit.textContent = 'Crear Rutina'
     }
+  })
+
+  rutinaFormModal.addEventListener('hidden.bs.modal', (e) => {
+    const socioId = e.target.dataset.id
+    rutinaSocioDetailModal.dataset.id = socioId
+    bsModalPadre.show()
   })
 
   rutinaFormFechaInicio.addEventListener('change', handleFechaInicioChange)
