@@ -8,13 +8,13 @@ export function renderNewPartnerCard(partner) {
 
 export function renderUpdatedPartnerCard(partner) {
   const partnerCard = partnerContainer.querySelector(
-    `div[data-id="${partner.personaId}"]`
+    `tr[data-id="${partner.personaId}"]`
   )
-  if (partnerCard) partnerCard.outerHTML = MembershipCard(partner)
+  if (partnerCard) partnerCard.outerHTML = PartnerCard(partner)
 }
 
 export function renderDeletedPartnerItem(id) {
-  const item = partnerContainer.querySelector('div[data-id="' + id + '"]')
+  const item = partnerContainer.querySelector('tr[data-id="' + id + '"]')
 
   if (item) item.remove()
 }
