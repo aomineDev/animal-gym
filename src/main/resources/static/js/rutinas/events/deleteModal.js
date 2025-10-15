@@ -2,14 +2,19 @@ import {
   deleteModal,
   deleteModalTitle,
   deleteBtn,
-  rutinaTable,
+  rutinaSocioDetailModal,
 } from '../dom.js'
 import { socioList } from '../store.js'
 import { TOAST_TYPES, showToast } from '../../bootstrap/Toast.js'
-import { renderRutinaDeleteRow, renderSocioRutinaTable } from '../render.js'
+import {
+  renderDetalleRutinaAcoordion,
+  renderRutinaDeleteRow,
+  renderSocioRutinaTable,
+} from '../render.js'
 import Service from '../../service/index.js'
 
 const bsModal = bootstrap.Modal.getOrCreateInstance(deleteModal)
+const bsModalPadre = bootstrap.Modal.getOrCreateInstance(rutinaSocioDetailModal)
 const serviceRutina = new Service('rutinas')
 const serviceSocio = new Service('socios')
 
@@ -46,6 +51,14 @@ async function handleDelete() {
       socioList[socioId] = socioActualizado
 
       console.log(socioActualizado)
+
+      renderDetalleRutinaAcoordion(
+        socioList[socioId].rutinas
+          .find((r) => r.rutinaId === parseInt(rutinaId))
+          .detalleRutinaList.find(
+            (r) => r.detalleRutinaId === parseInt(detalleId)
+          )
+      )
 
       showToast('Detalle Rutina eliminado correctamente', TOAST_TYPES.SUCCESS)
     }
@@ -93,6 +106,13 @@ export default function registerDeleteModalEvents() {
 
       deleteModalTitle.textContent = `Detalle #${detalleRutina.diaSemana} - ${detalleRutina.ejercicio.nombre}`
     }
+  })
+
+  deleteModal.addEventListener('hidden.bs.modal', () => {
+    const socioId = deleteModal.dataset.id
+
+    rutinaSocioDetailModal.dataset.id = socioId
+    bsModalPadre.show()
   })
 
   deleteBtn.addEventListener('click', handleDelete)
