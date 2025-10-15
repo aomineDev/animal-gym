@@ -4,15 +4,17 @@ import {
   empleadoFormularioModal,
   empleadoFormularioSubmit,
   tituloModal, empleadoFormImagenPreview,
-  // dniInput
+  dniInput,
+  telefonoInput,
+  emailInput
 } from '../dom.js'
-
+import { validatePersona } from '../../service/validateInput.js'
 import FORM_ACTIONS from '../../constants/formActions.js'
 
 import Service from '../../service/index.js'
 
 import StorageService from '../../service/storage.js'
-import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
+import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 
 import { empledoList, usuarioList } from '../store.js'
 import { PERSONA_TYPE } from '../../constants/personaType.js'
@@ -23,13 +25,7 @@ const storageService = new StorageService('empleados');
 const bsModal = bootstrap.Modal.getOrCreateInstance(empleadoFormularioModal);
 //imagen del formulario
 const defaultFormImagen = '/img/form/image-preview.png';
-
 const tipo = PERSONA_TYPE.EMPLEADO
-const dnibd = await empleadoServicio.findAll();
-console.log(dnibd)
-const dnis = dnibd.map(empleado => empleado.dni);
-
-console.log(dnis);
 
 
 async function handleFormSubmit(e) {
@@ -152,9 +148,11 @@ function rellenarEmpleado(empleado, usuario) {
   empleadoFormulario.rol.value = usuario.rol.rolId
 }
 
-// function handleDniChange(e) {
-//   console.log("HOla cambie de campo")
-// }
+function handelValidatePerson(e) {
+  validatePersona(emailInput, telefonoInput, dniInput, empleadoServicio)
+}
+
+
 
 function handleImageChange(e) {
   const imageFile = this.files[0]
@@ -165,8 +163,11 @@ export default function registrarEmpleado() {
   empleadoFormulario.addEventListener('submit', handleFormSubmit)
 
   empleadoFormularioModal.addEventListener('show.bs.modal', (e) => {
+
     const button = e.relatedTarget
     const id = button.dataset.id
+
+
     if (id) {
       empleadoFormulario.dataset.type = FORM_ACTIONS.UPDATE
       empleadoFormulario.dataset.id = id
@@ -180,9 +181,10 @@ export default function registrarEmpleado() {
       empleadoFormularioSubmit.textContent = 'Crear empleado'
       empleadoFormImagenPreview.src = defaultFormImagen
     }
-    //const dniInput = empleadoFormularioModal.querySelector('#dni');
-    //dniInput.addEventListener('change', handleDniChange);
 
   })
   empleadoFormImagenInput.addEventListener('change', handleImageChange)
+  dniInput.addEventListener('change', handelValidatePerson);
+  emailInput.addEventListener('change', handelValidatePerson)
+  telefonoInput.addEventListener('change', handelValidatePerson)
 }

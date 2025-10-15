@@ -18,7 +18,10 @@ export const empleadoFormularioSubmit = empleadoFormularioModal.querySelector('b
 export const empleadoFormImagenInput = empleadoFormularioModal.querySelector('#empleadoForm-image')
 
 export const empleadoFormImagenPreview = empleadoFormularioModal.querySelector('#empleadoForm-imagePreview')
-// export const dniInput = empleadoFormulario.querySelector('#dni');
+export const dniInput = empleadoFormularioModal.querySelector('#dni-input');
+export const telefonoInput = empleadoFormularioModal.querySelector('#telefono-input');
+export const emailInput = empleadoFormularioModal.querySelector('#email-input');
+
 //eliminar
 
 export const empleadoModalEliminar = document.getElementById('modalEliminar');

@@ -1,4 +1,4 @@
-import { rutinaTable, detalleRutinaFormModal } from '../dom.js'
+import { rutinaTable, detalleRutinaFormModal, deleteModal } from '../dom.js'
 import { socioList } from '../store.js'
 import { renderDetalleRutinaAcoordion } from '../render.js'
 
@@ -8,6 +8,7 @@ export default function registerRutinaRowClickEvents() {
     if (!row) return
 
     const rutinaId = row.dataset.rutinaId
+    deleteModal.dataset.rutinaId = rutinaId
     const socioId = rutinaTable.dataset.id
 
     detalleRutinaFormModal.dataset.id = rutinaId //le envio la rutina clickeada

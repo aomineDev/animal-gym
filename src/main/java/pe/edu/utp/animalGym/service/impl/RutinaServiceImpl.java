@@ -88,4 +88,16 @@ public class RutinaServiceImpl implements RutinaService {
         return repository.save(rutina);
     }
 
+    @Transactional
+    public Rutina deleteRutinaDetalle(Integer rutinaId, Integer detalleRutinaId) {
+
+        Rutina rutina = repository.findById(rutinaId)
+                .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
+
+        rutina.getDetalleRutinaList()
+                .removeIf(detalle -> detalle.getDetalleRutinaId().equals(detalleRutinaId));
+
+        return repository.save(rutina);
+    }
+
 }

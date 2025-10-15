@@ -29,7 +29,7 @@ export default function (rutina) {
             </li>
             <li>
               <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                data-bs-target=#deleteModal data-rutina-id="${rutina.rutinaId}">
+                data-bs-target=#deleteModal data-rutina-id="${rutina.rutinaId}" data-type="rutina">
                 Eliminar
               </a>
             </li>

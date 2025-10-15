@@ -1,4 +1,8 @@
-import { detalleRutinaForm, detalleRutinaFormModal } from '../dom.js'
+import {
+  detalleRutinaForm,
+  detalleRutinaFormModal,
+  rutinaSocioDetailModal,
+} from '../dom.js'
 import Service from '../../service/index.js'
 import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 import { renderDetalleRutinaAcoordion } from '../render.js'
@@ -6,6 +10,7 @@ import { socioList } from '../store.js'
 
 const serviceSocios = new Service('socios')
 const bsModal = bootstrap.Modal.getOrCreateInstance(detalleRutinaFormModal)
+const bsModalPadre = bootstrap.Modal.getOrCreateInstance(rutinaSocioDetailModal)
 
 async function handleFormSubmit() {
   const rutinaId = this.dataset.id //rutina seleccionada
@@ -69,5 +74,12 @@ export default function registerDetalleRutinaFormModalEvents() {
 
     detalleRutinaForm.dataset.id = rutinaId
     detalleRutinaForm.dataset.socioId = socioId
+  })
+
+  detalleRutinaFormModal.addEventListener('hidden.bs.modal', (e) => {
+    const socioId = e.target.dataset.socioId
+
+    rutinaSocioDetailModal.dataset.id = socioId
+    bsModalPadre.show()
   })
 }
