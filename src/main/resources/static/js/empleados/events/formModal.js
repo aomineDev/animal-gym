@@ -8,13 +8,13 @@ import {
   telefonoInput,
   emailInput
 } from '../dom.js'
-import { validatePersona } from '../../service/validateETD.js'
+import { validatePersona } from '../../service/validateInput.js'
 import FORM_ACTIONS from '../../constants/formActions.js'
 
 import Service from '../../service/index.js'
 
 import StorageService from '../../service/storage.js'
-import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
+import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 
 import { empledoList, usuarioList } from '../store.js'
 import { PERSONA_TYPE } from '../../constants/personaType.js'
@@ -26,12 +26,6 @@ const bsModal = bootstrap.Modal.getOrCreateInstance(empleadoFormularioModal);
 //imagen del formulario
 const defaultFormImagen = '/img/form/image-preview.png';
 const tipo = PERSONA_TYPE.EMPLEADO
-
-// const dnibd = await empleadoServicio.findAll();
-// console.log(dnibd)
-// const dnis = dnibd.map(empleado => empleado.dni);
-
-// console.log(dnis);
 
 
 async function handleFormSubmit(e) {
