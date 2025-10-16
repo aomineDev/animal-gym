@@ -24,11 +24,11 @@ export default function (partner) {
       <td>
         <img src="${imagen}" class="profile-img" alt="foto">
       </td>
-      <td>${nombre} + ' ' + ${apellido}</td>
+      <td>${nombre} ${apellido}</td>
       <td>${email}</td>
       <td>+51 ${telefono}</td>
       <td>
-        <span class="${estado} ? 'badge bg-success' : 'badge bg-danger'">${
+        <span class="${estado ? 'badge bg-success' : 'badge bg-danger'}">${
     estado ? 'Activo' : 'Inactivo'
   } </span>
       </td>

@@ -11,15 +11,18 @@ import {
 import FORM_ACTIONS from '../../constants/formActions.js'
 import Service from '../../service/index.js'
 import StorageService from '../../service/storage.js'
-import { showToast, TOAST_TYPES } from '../../bootstrap/toast.js'
+import { validateDateNow, validateRange } from '../../service/validateInput.js'
+import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 import { renderNewPartnerCard, renderUpdatedPartnerCard } from '../render.js'
 import { partnerList } from '../store.js'
+import { PERSONA_TYPE } from '../../constants/personaType.js'
 
 const partnerService = new Service('socios')
 const storageService = new StorageService('socios') //upload image
 const bsModal = bootstrap.Modal.getOrCreateInstance(partnerFormModal)
 const defaultFormPartnerImage = '/img/form/image-preview.png'
 const defaultPartnerImage = '/img/membresias/default.png'
+const tipo = PERSONA_TYPE.SOCIO
 
 export default function registerPartnerFormModalEvents() {
   partnerForm.addEventListener('submit', handleFormSubmit)
@@ -48,16 +51,78 @@ export default function registerPartnerFormModalEvents() {
   partnerFormImage.addEventListener('change', handleImageChange)
 }
 
-function handleFormSubmit() {
+async function handleFormSubmit() {
   if (!this.checkValidity()) return
+  const personaId = this.dataset.id
   const nombre = this.nombre.value.trim()
-  const apellido = this.apellido.vlaue.trim()
+  const apellido = this.apellido.value.trim()
   const dni = this.dni.value
   const telefono = this.telefono.value
   const email = this.email.value
   const fechaNacimiento = this.fechaNacimiento.value
-  console.log('falta submit')
-  return
+  const membresiaId = parseInt(this.membresia.value)
+  const fechaIngreso = this.fechaIngreso.value
+  const peso = parseFloat(this.peso.value)
+  const altura = parseFloat(this.altura.value)
+  const estado = this.estado.value === 'activo'
+  const genero = 'femenino'
+  const fechaVencimiento = '2025-10-29'
+  const puntos = 100
+  const file = this.file.files[0]
+  let imagen =
+    this.dataset.type === FORM_ACTIONS.CREATE
+      ? defaultPartnerImage
+      : partnerList[this.dataset.id].imagen
+  console.log(imagen)
+
+  try {
+    if (file) imagen = await storageService.upload(file)
+
+    const partner = {
+      nombre,
+      apellido,
+      dni,
+      telefono,
+      email,
+      fechaNacimiento,
+      membresia: { membresiaId },
+      fechaIngreso,
+      peso,
+      altura,
+      estado,
+      imagen,
+      genero,
+      puntos,
+      fechaVencimiento,
+      tipo,
+    }
+
+    if (this.dataset.type === FORM_ACTIONS.CREATE) {
+      const data = await partnerService.save(partner)
+      console.log(data)
+      renderNewPartnerCard(data)
+
+      partnerList[data.personaId] = data
+
+      showToast('Socio creado con exito!', TOAST_TYPES.SUCCESS)
+    } else if (this.dataset.type === FORM_ACTIONS.UPDATE) {
+      partner.personaId = personaId
+      const id = this.dataset.id
+      const data = await partnerService.update(partner, id)
+      console.log(data)
+      renderUpdatedPartnerCard(data)
+
+      partnerList[data.personaId] = data
+      console.log(partnerList)
+
+      showToast('Socio actualizado con exito!', TOAST_TYPES.SUCCESS)
+    }
+
+    bsModal.hide()
+  } catch (error) {
+    showToast('No se pudo crear al socio', TOAST_TYPES.ERROR)
+    console.log(error)
+  }
 }
 
 function handleImageChange() {

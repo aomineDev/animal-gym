@@ -13,6 +13,7 @@ import pe.edu.utp.animalGym.model.Empleado;
 import pe.edu.utp.animalGym.model.Rutina;
 import pe.edu.utp.animalGym.model.Socio;
 import pe.edu.utp.animalGym.repository.EmpleadoRepository;
+import pe.edu.utp.animalGym.repository.MembresiaRepository;
 import pe.edu.utp.animalGym.repository.RutinaRepository;
 import pe.edu.utp.animalGym.repository.SocioRepository;
 import pe.edu.utp.animalGym.service.SocioService;
@@ -22,6 +23,10 @@ public class SocioServiceImpl implements SocioService {
 
     @Autowired
     private SocioRepository partnerRepository;
+
+    // ** para buscar la membresia
+    @Autowired
+    private MembresiaRepository membresiaRepository;
 
     @Autowired
     private EmpleadoRepository empleadoRepository;
@@ -52,6 +57,13 @@ public class SocioServiceImpl implements SocioService {
                 entity.setRutinas(existente.getRutinas());
             }
 
+        }
+
+        // si el socio biene solo con id de membresia
+        if (entity.getMembresia() != null && entity.getMembresia().getMembresiaId() != null) {
+            var membresia = membresiaRepository.findById(entity.getMembresia().getMembresiaId())
+                    .orElseThrow(() -> new RuntimeException("Membresía no encontrada"));
+            entity.setMembresia(membresia);
         }
 
         return partnerRepository.save(entity);

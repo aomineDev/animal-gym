@@ -46,6 +46,7 @@ public class SociosApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Socio> update(@PathVariable Integer id, @RequestBody Socio socio) {
+        socio.setPersonaId(id);// AGREGADO para validar que sea el mismo socio del id
         return ResponseEntity.ok(socioService.save(socio));
     }
 
