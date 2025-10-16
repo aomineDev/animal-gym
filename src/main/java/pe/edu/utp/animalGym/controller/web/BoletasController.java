@@ -19,7 +19,8 @@ public class BoletasController {
 		model.addAttribute("content", "boletas :: content");
 		model.addAttribute("modal", "boletas :: modals");
 		model.addAttribute("activePage", "boletas");
-		model.addAttribute("script", "");
+		model.addAttribute("script", "boletas::script");
+		model.addAttribute("activePage", "boletas");
 
 		model.addAttribute("tablaBoleta", servicio.findAll());
 		return "dashboard";
