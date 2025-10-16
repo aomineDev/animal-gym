@@ -9,15 +9,36 @@
             <h2> <i class="bi bi-receipt"></i>
                 Gestión de boletas</h2>
         </div>
-
+        <div class="d-lg-none mb-4">
+            <button class="btn btn-outline-secondary w-100" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#filtroOffcanvas" aria-controls="filtroOffcanvas">
+                <i class="bi bi-funnel me-2"></i>Filtros
+            </button>
+        </div>
         <div class="container my-5">
             <div class="row g-4">
-                <!-- FILTRO -->
-                <div class="col-12 col-lg-3">
-                    <div class="card shadow-sm border-0 p-3 h-100">
-                        <h5 class="mb-3 text-primary"><i class="bi bi-funnel-fill me-2"></i>Filtrar boletas</h5>
+                <aside class="col-12 col-lg-3 mb-4 offcanvas-lg offcanvas-start bg-white p-4 rounded-4 shadow-sm"
+                    style="overflow: visible;" tabindex="-1" id="filtroOffcanvas"
+                    aria-labelledby="filtroOffcanvasLabel">
+                    <div class="offcanvas-header d-flex d-lg-none">
+                        <h5 class="offcanvas-title" id="filtroOffcanvasLabel">
+                            <i class="bi bi-funnel me-2"></i>Filtrar Boletas
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
 
+                    <div class="offcanvas-body p-0 p-lg-0 filtro-card">
                         <form id="form__filter">
+                            <h5 class="mb-3 d-none d-lg-block">
+                                <i class="bi bi-funnel me-2"></i>Filtrar Boletas
+                            </h5>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-white border-end-0">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" id="buscar-socio-input" class="form-control border-start-0"
+                                    placeholder="Buscar socio por nombre..." />
+                            </div>
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Fecha de emision</label>
                                 <input type="date" id="fecha-input" class="form-control">
@@ -40,8 +61,7 @@
 
                         </form>
                     </div>
-                </div>
-
+                </aside>
                 <!-- TABLA -->
                 <div class="col-12 col-lg-9">
                     <div class="card shadow-sm border-0 p-3">
@@ -93,7 +113,6 @@
                 </div>
             </div>
         </div>
-
     </th:block>
 
 

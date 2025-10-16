@@ -1,18 +1,19 @@
 import { fechaInput, tablaFilas, rangeInput, empleadoSelectInput, rangeValue, tablaBoleta } from "../dom.js";
 import { boletaList } from "../store.js";
-
+import { renderRow } from "../render.js";
 
 const data = Object.values(boletaList);
 
 
 //funcion propida de bootstrap para el input range
-rangeInput.addEventListener('input', function () {
-  rangeValue.textContent = rangeInput.value;
-  rangeValue.textContent = this.value;
-})
+rangeInput.addEventListener('input',
+  function range() {
+    rangeValue.textContent = rangeInput.value;
+    rangeValue.textContent = this.value;
+  })
 
 
-function rangoDePrecios() {
+function filtros() {
   const precioMax = parseFloat(rangeInput.value);
   const fecha = fechaInput.value;
 
@@ -20,49 +21,15 @@ function rangoDePrecios() {
     const cumpleFecha = !fecha || b.fechaEmision === fecha;
     const cumplePrecio = parseFloat(b.precioTotal) >= precioMax;
     return cumpleFecha && cumplePrecio;
+
   });
 
-  pintarTabla(resultados);
+  renderRow(resultados, tablaBoleta)
 }
 
-function pintarTabla(resultados) {
-  if (resultados.length === 0) {
-    tablaBoleta.innerHTML = '<tr><td colspan="6" class="text-center">No se encontraron resultados</td></tr>';
-    return;
-  }
-
-  const filas = resultados.map(b => `
-    <tr>
-      <td>${b.boletaId}</td>
-      <td>${b.fechaEmision}</td>
-      <td>${b.hora}</td>
-      <td>${b.grabado}</td>
-      <td>${b.precioTotal}</td>
-      <td>
-        <div class="dropdown">
-          <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-            <i class="bi bi-three-dots-vertical"></i>
-          </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item verBoleta" href="#"
-                 data-bs-target="#verBoleta"
-                 data-bs-toggle="modal"
-                 data-id="${b.boletaId}">
-                <i class="bi bi-eye me-2"></i>Detalles
-              </a>
-            </li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-
-  tablaBoleta.innerHTML = filas;
-}
-export default function call() {
-  fechaInput.addEventListener('change', rangoDePrecios)
-  rangeInput.addEventListener('input', rangoDePrecios)
+export default function filter() {
+  fechaInput.addEventListener('change', filtros)
+  rangeInput.addEventListener('input', filtros)
   // empleadoSelectInput.addEventListener('change', filtros)
 }
 
