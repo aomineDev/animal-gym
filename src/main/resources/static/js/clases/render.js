@@ -2,6 +2,22 @@ import ClaseCard from './components/ClaseCard.js'
 import Row from './components/Row.js'
 import { claseContainer, sociosInscritosTable } from './dom.js'
 
+export function renderClaseList(filtradas) {
+  if (filtradas.length === 0) {
+    claseContainer.innerHTML = `
+        <div class="text-center text-muted mt-4">
+          <i class="bi bi-emoji-frown"></i>
+          <p class="mb-0">No se encontraron clases con ese nombre</p>
+        </div>
+      `
+  } else {
+    claseContainer.innerHTML = ''
+    Object.values(filtradas).forEach((clase) => {
+      claseContainer.insertAdjacentHTML('beforeend', ClaseCard(clase))
+    })
+  }
+}
+
 export function renderNewClaseCard(clase) {
   claseContainer.insertAdjacentHTML('afterbegin', ClaseCard(clase))
 }

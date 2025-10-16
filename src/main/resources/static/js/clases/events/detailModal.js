@@ -62,12 +62,16 @@ function colorIntensidad(intensidad, claseDetailIntensidad) {
 function estadoClase(estado, claseDetailEstado) {
   switch (estado) {
     case 'Programado':
-      claseDetailEstado.classList.add('bg-outline-primary text-primary')
+      claseDetailEstado.classList.add('bg-outline-primary', 'text-primary')
+      break
     case 'En curso':
-      claseDetailEstado.classList.add('bg-outline-success text-success')
+      claseDetailEstado.classList.add('bg-outline-success', 'text-success')
+      break
     case 'Finalizado':
-      claseDetailEstado.classList.add('bg-outline-danger text-danger')
+      claseDetailEstado.classList.add('bg-outline-danger', 'text-danger')
+      break
     default:
-      claseDetailEstado.classList.add('bg-outline-dark text-dark')
+      claseDetailEstado.classList.add('bg-outline-dark', 'text-dark')
+      break
   }
 }

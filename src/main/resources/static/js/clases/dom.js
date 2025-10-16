@@ -100,3 +100,6 @@ export const agregarSocioBtn =
 
 export const eliminarSocioBtn =
   sociosInscritosTable.querySelector('.eliminarSocioBtn')
+
+//Filtros
+export const buscarClaseInput = document.getElementById('buscarClaseInput')
