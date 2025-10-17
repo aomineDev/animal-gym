@@ -49,7 +49,7 @@ export default function (empleado, usuario) {
                                             </li>
                                             <li>
                                                 <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                                                    data-id="${personaId}" data-bs-target="#modalEliminar">
+                                                    data-bs-target="#modalEliminar" data-id="${personaId}" >
                                                     Eliminar
                                                 </a>
                                             </li>

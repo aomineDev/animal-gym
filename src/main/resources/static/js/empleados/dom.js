@@ -1,6 +1,4 @@
-// //llamar al formulario
-// export const formulario = document.getElementById("formEmpleado");
-// export const cajaDeCartas = document.getElementById("empleado_card");
+
 
 //contenedor de las cartas
 export const empleadoContainerCard = document.getElementById('empleadoContainerCard')
