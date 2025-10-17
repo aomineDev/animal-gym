@@ -19,9 +19,10 @@
       </div>
 
       <div class="row">
-        <!-- FILTRO IZQUIERDA -->
-        <aside class="col-12 col-lg-3 mb-4 offcanvas-lg offcanvas-start bg-white p-4 rounded-4 shadow-sm"
+        <!-- columna izquierda -->
+        <aside class="col-12 col-lg-3 mt-4 mb-4 offcanvas-lg offcanvas-start bg-white p-4 rounded-4 shadow-sm"
           style="overflow: visible;" tabindex="-1" id="filtroOffcanvas" aria-labelledby="filtroOffcanvasLabel">
+
           <div class="offcanvas-header d-flex d-lg-none">
             <h5 class="offcanvas-title" id="filtroOffcanvasLabel">
               <i class="bi bi-funnel me-2"></i>Filtrar clases
@@ -75,10 +76,11 @@
           </div>
         </aside>
 
+        <!-- columna derecha -->
         <div class="col-12 col-lg-9">
           <div class="row" id="clase-container">
             <!-- CARTA -->
-            <div class="col-12 col-md-6 col-xl-3" th:each="clase : ${clases}" th:data-id="${clase.claseId}">
+            <div class="col-12 col-md-6 col-xl-4" th:each="clase : ${clases}" th:data-id="${clase.claseId}">
               <div class="mt-4 border-0 card overflow-hidden rounded-4">
                 <div class="overflow-hidden">
                   <img th:src="${clase.imagen}" class="card-img-top w-100" th:alt="${clase.nombre}"
@@ -136,20 +138,6 @@
 
   <!-- Mis modales -->
   <th:block th:fragment="modal">
-
-    <div class="modal fade" id="filtroModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content rounded-4">
-          <div class="modal-header">
-            <h5 class="modal-title">Filtrar Clases</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <form class="form__filter"></form>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Modal de clase-->
     <div class="modal fade" id="claseFormModal" tabindex="-1" aria-hidden="true">
