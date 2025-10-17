@@ -49,11 +49,6 @@ public class ClaseServiceImpl implements ClaseService {
     repository.deleteById(id);
   }
 
-  @Override
-  public List<Clase> filtrar(String nombre, String estado, String intensidad) {
-    return repository.filtrar(nombre, estado, intensidad);
-  }
-
   private void validarEmpleado(Clase clase) {
     if (clase.getEmpleado() != null && clase.getEmpleado().getPersonaId() != null) {
       Empleado empleado = empleadoRepository.findById(clase.getEmpleado().getPersonaId())
