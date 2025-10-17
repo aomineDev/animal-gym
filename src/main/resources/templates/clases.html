@@ -31,7 +31,7 @@
           </div>
 
           <div class="offcanvas-body p-0 p-lg-0">
-            <form class="form__filter">
+            <form class="formFilter">
               <h5 class="mb-3 d-none d-lg-block">
                 <i class="bi bi-funnel me-2"></i>Filtrar clases
               </h5>
@@ -45,23 +45,18 @@
               </div>
 
               <div class="mb-3">
-                <label for="fechaFilter" class="form-label">Fecha</label>
-                <input type="date" id="fechaFilter" class="form-control" />
+                <label class="form-label fw-semibold">Fecha inicio</label>
+                <input type="date" id="fechaInicioInput" class="form-control">
               </div>
 
               <div class="mb-3">
-                <label for="duracionFilter" class="form-label">Duración</label>
-                <select id="duracionFilter" class="form-select">
-                  <option value="">Todas</option>
-                  <option value="20">20m</option>
-                  <option value="40">40m</option>
-                  <option value="60">60m</option>
-                </select>
+                <label class="form-label fw-semibold">Fecha de fin</label>
+                <input type="date" id="fechaFinInput" class="form-control" disabled>
               </div>
 
               <div class="mb-3">
-                <label for="estadoFilter" class="form-label">Estado</label>
-                <select id="estadoFilter" class="form-select">
+                <label for="estadoInput" class="form-label">Estado</label>
+                <select id="estadoInput" class="form-select">
                   <option value="">Todos</option>
                   <option value="Programado">Programado</option>
                   <option value="En curso">En curso</option>
@@ -69,8 +64,18 @@
                 </select>
               </div>
 
-              <button type="button" class="btn btn-primary w-100">
-                <i class="bi bi-check-circle me-2"></i>Aplicar filtros
+              <div class="mb-3">
+                <label for="intensidadInput" class="form-label">Intensidad</label>
+                <select id="intensidadInput" class="form-select">
+                  <option value="">Todos</option>
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </div>
+
+              <button type="button" id="resetFiltrosBtn" class="btn btn-primary w-100">
+                <i class="bi bi-check-circle me-2"></i>Resetear filtros
               </button>
             </form>
           </div>

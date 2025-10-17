@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pe.edu.utp.animalGym.model.Clase;
 import pe.edu.utp.animalGym.model.ReservaClase;
@@ -72,13 +71,4 @@ public class ClasesApiController {
         Clase claseActualizada = claseService.agregarReserva(claseId, reserva);
         return ResponseEntity.ok(claseActualizada);
     }
-
-    /* Filtros */
-    @GetMapping("/filtrar")
-    public ResponseEntity<List<Clase>> filtrar(@RequestParam(required = false) String nombre,
-            @RequestParam(required = false) String estado,
-            @RequestParam(required = false) String intensidad) {
-        return ResponseEntity.ok(claseService.filtrar(nombre, estado, intensidad));
-    }
-
 }

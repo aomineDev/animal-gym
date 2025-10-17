@@ -103,3 +103,13 @@ export const eliminarSocioBtn =
 
 //Filtros
 export const buscarClaseInput = document.getElementById('buscarClaseInput')
+
+export const fechaInicioInput = document.getElementById('fechaInicioInput')
+
+export const fechaFinInput = document.getElementById('fechaFinInput')
+
+export const estadoInput = document.getElementById('estadoInput')
+
+export const intensidadInput = document.getElementById('intensidadInput')
+
+export const resetFiltrosBtn = document.getElementById('resetFiltrosBtn')
