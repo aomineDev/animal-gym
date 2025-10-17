@@ -6,6 +6,7 @@ export default function Row(boleta) {
     <td>${boleta.hora}</td>
     <td>${boleta.grabado}</td>
     <td>${boleta.precioTotal}</td>
+  <td>  ${boleta.socio.nombre}</td>
     <td>
       <div class="dropdown">
         <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">

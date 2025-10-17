@@ -1,10 +1,13 @@
 export const formularioFilter = document.getElementById('form__filter');
 export const rangeInput = formularioFilter.querySelector('#range-input');
 export const rangeValue = formularioFilter.querySelector('#range-value');
-export const fechaInput = formularioFilter.querySelector('#fecha-input')
-export const tablaBoleta = document.getElementById('tablaBoleta')
-export const tablaFilas = tablaBoleta.querySelectorAll('tr');
+export const fechaI = formularioFilter.querySelector('#fecha-inicio')
+export const fechaF = formularioFilter.querySelector('#fecha-fin')
 export const empleadoSelectInput = formularioFilter.querySelector('#empleado-select-input')
+export const socioInput = formularioFilter.querySelector('#buscar-socio-input')
+
+export const tablaBoleta = document.getElementById('tablaBoleta')
+
 
 //campos boleta ver detalles
 export const verBoleta = document.getElementById('verBoleta')
@@ -20,3 +23,4 @@ export const boletaSocioMembresia = modalDetalle.querySelector('#boleta-socio-me
 export const boletaGrabado = modalDetalle.querySelector('#boleta-grabado')
 export const boletaIgv = modalDetalle.querySelector('#boleta-igv')
 export const boletaTotal = modalDetalle.querySelector('#boleta-total')
+export const fechaRango = formularioFilter.querySelector('#fecha-rango')

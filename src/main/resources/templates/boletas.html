@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-</head>
 
 <body>
     <th:block th:fragment="content">
+
         <!-- titulo -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2> <i class="bi bi-receipt"></i>
@@ -32,6 +32,8 @@
                             <h5 class="mb-3 d-none d-lg-block">
                                 <i class="bi bi-funnel me-2"></i>Filtrar Boletas
                             </h5>
+                            <label class="form-label fw-semibold">Nombre Socio</label>
+
                             <div class="input-group mb-3">
                                 <span class="input-group-text bg-white border-end-0">
                                     <i class="bi bi-search"></i>
@@ -40,14 +42,20 @@
                                     placeholder="Buscar socio por nombre..." />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label fw-semibold">Fecha de emision</label>
-                                <input type="date" id="fecha-input" class="form-control">
+                                <label class="form-label fw-semibold">Fecha inicio</label>
+                                <input type="date" id="fecha-inicio" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <label for="range4" class="form-label">Rango de precios</label>
+                                <label class="form-label fw-semibold">Fecha de fin</label>
+                                <input type="date" id="fecha-fin" class="form-control" disabled>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Rango de precios</label>
                                 <input type="range" class="form-range" min="0" max="1000" value="0" id="range-input">
                                 <output for="range4" id="range-value" aria-hidden="true"></output>
                             </div>
+
 
                             <!-- <div class="mb-3">
                                 <label class="form-label fw-semibold">Empleados</label>
@@ -85,9 +93,9 @@
                                         <td data-filtro="fecha" th:text="${boleta.fechaEmision}"></td>
                                         <td th:text="${boleta.hora}"></td>
                                         <!-- <td data-filtro="empleado" th:text="${boleta.empleado.nombre}"></td> -->
-                                        <!-- <td th:text="${boleta.socio.nombre}"></td>
-                                        <td th:text="${boleta.socio.menbresia.nombre}"></td>  -->
-                                        <td data-filtro="total" th:text="${boleta.precioTotal}"></td>
+                                        <td th:text="${boleta.socio.nombre}"></td>
+                                        <!-- <td th:text="${boleta.socio.menbresia.nombre}"></td>  -->
+                                        <td th:text="${boleta.precioTotal}"></td>
                                         <td>
                                             <div class="dropdown">
                                                 <button class="btn btn-link text-dark p-0" type="button"
@@ -231,8 +239,12 @@
             const boletaLista = /*[[${tablaBoleta}]]*/[]
             console.log(boletaLista)
         </script>
+
         <script type="module" th:src="@{/js/boletas/main.js}"></script>
+
     </th:block>
+
+
 
 </body>
 

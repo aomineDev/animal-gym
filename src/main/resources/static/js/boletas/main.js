@@ -4,5 +4,6 @@ import filter from './events/formFiltrar.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   boletaDetalle();
-  filter()
-})
+  filter();
+});
+
