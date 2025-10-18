@@ -2,97 +2,147 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
+
     <th:block th:fragment="content">
-        <div class="container">
+        <div class="container my-4">
 
-            <!-- gestion empleado + icono -->
-            <div class="mb-4">
-                <h2><i class="bi bi-people me-2"></i>Gestión de empleados</h2>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="bi bi-people me-2"></i></i>Gestión de Empleados</h2>
+                <button class="btn btn-primary d-none d-lg-inline-flex" data-bs-toggle="modal"
+                    data-bs-target="#empleadoModal">
+                    <i class="bi bi-person-plus me-2"></i>Crear empleado
+                </button>
             </div>
+            <div class="row">
+                <!-- filter -->
+                <aside class="col-12 col-lg-3 mt-4 mb-4 offcanvas-lg offcanvas-start bg-white p-4 rounded-4 shadow-sm"
+                    style="overflow: visible;" tabindex="-1" id="filtroOffcanvas"
+                    aria-labelledby="filtroOffcanvasLabel">
 
-            <!--Buscador + select rol + nuevo empleado-->
-            <div class="row g-3 mb-5">
+                    <div class="offcanvas-header d-flex d-lg-none">
+                        <h5 class="offcanvas-title" id="filtroOffcanvasLabel">
+                            <i class="bi bi-funnel me-2"></i>Filtrar empleados
+                        </h5>
+                    </div>
 
-                <div class="col-md-4 col-12">
-                    <input type="text" class="form-control" id="buscarEmpleadoPorNombre"
-                        placeholder="Buscar por nombre">
-                </div>
+                    <div class="offcanvas-body p-0 p-lg-0">
+                        <form class="formFilter">
+                            <h5 class="mb-3 d-none d-lg-block">
+                                <i class="bi bi-funnel me-2"></i>Filtrar empleados
+                            </h5>
 
-                <div class="col-md-4 col-12">
-                    <select name="rol_id" class="form-select crearRol" required>
-                        <option value="">Seleccione un rol...</option>
-                        <option th:each="rol : ${contenedorRol}" th:value="${rol.rolId}" th:text="${rol.nombreRol}">
-                        </option>
-                    </select>
-                </div>
+                            <label class="form-label fw-semibold">Buscar empleado</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-white border-end-0">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" id="empleadoInput" class="form-control border-start-0"
+                                    placeholder="Buscar empleado por nombre..." />
 
-                <div class="col-md-4 col-12">
-                    <button type="submit" class="btn btn-primary w-100" data-bs-toggle="modal"
-                        data-bs-target="#empleadoModal">
-                        <i class="bi bi-person-plus me-2"></i>Nuevo empleado
-                    </button>
-                </div>
-
-            </div>
-
-            <div class="col-12">
-                <div class="row" id="empleadoContainerCard">
-                    <!-- CARTA -->
-                    <div class="col-12 col-md-6 col-xl-3" th:each="empleado : ${empleadoTabla}"
-                        th:data-id="${empleado.personaId}">
-                        <div class="mt-4 border-0 card overflow-hidden rounded-4">
-
-                            <div class="overflow-hidden">
-                                <img th:src="${empleado.imagen}" class="card-img-top w-100"
-                                    style=" height:200px; object-fit:cover;">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Buscar Rol</label>
+                                <select name="rol_id" class="form-select" id="rolInput">
+                                    <option value="">Seleccione un rol...</option>
+                                    <option th:each="rol : ${contenedorRol}" th:value="${rol.nombreRol}"
+                                        th:text="${rol.nombreRol}">
+                                    </option>
+                                </select>
                             </div>
 
-                            <div class="row d-flex align-items-center card-body">
 
-                                <div class="col-9">
-                                    <h5 class="card-title mb-1"
-                                        th:text="${empleado.nombre} + ' ' + ${empleado.apellido}">
-                                    </h5>
+                            <button type="button" id="resetFiltrosBtn" class="btn btn-primary w-100">
+                                <i class="bi bi-check-circle me-2"></i>Resetear filtros
+                            </button>
+                        </form>
+                    </div>
+                </aside>
+                <!-- cards -->
+                <div class="col-12 col-lg-9">
+                    <div class="row" id="empleadoContainerCard">
+                        <!-- CARTA -->
+                        <div class="col-12 col-md-6 col-xl-4" th:each="empleado : ${empleadoTabla}"
+                            th:data-id="${empleado.personaId}">
+                            <div class="mt-4 border-0 card overflow-hidden rounded-4">
 
-                                    <p class="text-muted mb-1" th:each="usuario : ${contenedorUser}"
-                                        th:if="${usuario.persona.personaId ==empleado.personaId}"
-                                        th:text="${usuario.rol.nombreRol}"></p>
+                                <div class="overflow-hidden">
+                                    <img th:src="${empleado.imagen}" class="card-img-top w-100"
+                                        style=" height:200px; object-fit:cover;">
                                 </div>
-                                <div class="col-3 text-end">
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-dark p-0" type="button"
-                                            data-bs-toggle="dropdown">
-                                            <i class="bi bi-three-dots-vertical"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#verDetalle" th:data-id="${empleado.personaId}">
-                                                    Ver detalles
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#empleadoModal" th:data-id=${empleado.personaId}>
-                                                    Editar
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                                                    th:data-id="${empleado.personaId}" data-bs-target="#modalEliminar">
-                                                    Eliminar
-                                                </a>
-                                            </li>
-                                        </ul>
+
+                                <div class="row d-flex align-items-center card-body">
+
+                                    <div class="col-9">
+                                        <h5 class="card-title mb-1"
+                                            th:text="${empleado.nombre} + ' ' + ${empleado.apellido}">
+                                        </h5>
+
+                                        <p class="text-muted mb-1" th:each="usuario : ${contenedorUser}"
+                                            th:if="${usuario.persona.personaId ==empleado.personaId}"
+                                            th:text="${usuario.rol.nombreRol}"></p>
+                                    </div>
+                                    <div class="col-3 text-end">
+                                        <div class="dropdown">
+                                            <button class="btn btn-link text-dark p-0" type="button"
+                                                data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots-vertical"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#verDetalle" th:data-id="${empleado.personaId}">
+                                                        Ver detalles
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#empleadoModal"
+                                                        th:data-id=${empleado.personaId}>
+                                                        Editar
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                                                        th:data-id="${empleado.personaId}"
+                                                        data-bs-target="#modalEliminar">
+                                                        Eliminar
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+            <!-- botones -->
+            <div class="fab-container d-lg-none">
+                <!-- Opciones -->
+                <div class="fab-actions">
+                    <button class="btn btn-success rounded-circle shadow" data-bs-toggle="modal"
+                        data-bs-target="#empleadoModal" title="Agregar">
+                        <i class="bi bi-plus-circle"></i>
+                    </button>
+                    <button class="btn btn-warning rounded-circle shadow" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#filtroOffcanvas" aria-controls="filtroOffcanvas" title="Filtrar">
+                        <i class="bi bi-funnel"></i>
+                    </button>
+                </div>
+
+                <!-- Principal -->
+                <button class="fab-main btn btn-primary rounded-circle shadow">
+                    <i class="bi bi-plus-lg"></i>
+                </button>
             </div>
         </div>
     </th:block>
+
+
+    <!-- Modales -->
     <th:block th:fragment="modals">
         <!-- modal crear empleado -->
         <div class="modal fade" tabindex="-1" id="empleadoModal">

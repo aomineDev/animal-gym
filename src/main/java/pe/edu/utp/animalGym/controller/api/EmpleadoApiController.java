@@ -28,9 +28,7 @@ public class EmpleadoApiController {
 
     @GetMapping
     public ResponseEntity<List<Empleado>> findAll() {
-
         return ResponseEntity.ok(service.findAll());
-
     }
 
     @GetMapping("/{id}")
@@ -42,24 +40,6 @@ public class EmpleadoApiController {
     public ResponseEntity<Empleado> save(@RequestBody Empleado empleado) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(empleado));
     }
-
-    // @PostMapping("/upload")
-    // public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile
-    // file) {
-    // try {
-    // String carpetaUploads = "uploads/empleados/";
-    // String nombreArchivo = System.currentTimeMillis() + "_" +
-    // file.getOriginalFilename();
-    // Path ruta = Paths.get(carpetaUploads + nombreArchivo);
-
-    // Files.write(ruta, file.getBytes());
-    // // devuelve la ruta en string donde fue guardado
-    // return ResponseEntity.ok("/uploads/empleados/" + nombreArchivo);
-    // } catch (IOException e) {
-    // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-    // .body("Error al subir la imagen");
-    // }
-    // }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
