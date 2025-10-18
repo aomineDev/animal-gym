@@ -6,6 +6,21 @@ import { detalleRutinaContainer } from './dom.js'
 
 export function renderSocioRutinaTable(socios) {
   rutinaSocioTable.innerHTML = socios.map(SocioRutinaRow).join('')
+
+  if (socios.length === 0) {
+    rutinaSocioTable.innerHTML = `
+          <tr>
+            <td colspan="6" class="text-muted py-4">
+              No se encontraron coincidencias
+            </td>
+          </tr>
+        `
+  } else {
+    rutinaSocioTable.innerHTML = ''
+    Object.values(socios).forEach((socio) => {
+      rutinaSocioTable.insertAdjacentHTML('beforeend', SocioRutinaRow(socio))
+    })
+  }
 }
 
 export function renderRutinaTable(socio) {
