@@ -16,51 +16,41 @@
 
           <div class="offcanvas-header d-flex d-lg-none">
             <h5 class="offcanvas-title" id="filtroOffcanvasLabel">
-              <i class="bi bi-funnel me-2"></i>Filtrar clases
+              <i class="bi bi-funnel me-2"></i>Filtrar socios
             </h5>
           </div>
 
           <div class="offcanvas-body p-0 p-lg-0">
             <form class="formFilter">
               <h5 class="mb-3 d-none d-lg-block">
-                <i class="bi bi-funnel me-2"></i>Filtrar clases
+                <i class="bi bi-funnel me-2"></i>Filtrar socios
               </h5>
 
               <div class="input-group mb-3">
                 <span class="input-group-text bg-white border-end-0">
                   <i class="bi bi-search"></i>
                 </span>
-                <input type="text" id="buscarClaseInput" class="form-control border-start-0"
-                  placeholder="Buscar clase por nombre..." />
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Fecha inicio</label>
-                <input type="date" id="fechaInicioInput" class="form-control">
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label fw-semibold">Fecha de fin</label>
-                <input type="date" id="fechaFinInput" class="form-control" disabled>
+                <input type="text" id="buscarInput" class="form-control border-start-0"
+                  placeholder="Buscar por nombre o DNI..." />
               </div>
 
               <div class="mb-3">
                 <label for="estadoInput" class="form-label">Estado</label>
                 <select id="estadoInput" class="form-select">
                   <option value="">Todos</option>
-                  <option value="Programado">Programado</option>
-                  <option value="En curso">En curso</option>
-                  <option value="Finalizado">Finalizado</option>
+                  <option value="Socios con rutina">Socios con rutina</option>
+                  <option value="Socios sin rutina">Socios sin rutina</option>
                 </select>
               </div>
 
               <div class="mb-3">
-                <label for="intensidadInput" class="form-label">Intensidad</label>
-                <select id="intensidadInput" class="form-select">
-                  <option value="">Todos</option>
-                  <option value="Alta">Alta</option>
-                  <option value="Media">Media</option>
-                  <option value="Baja">Baja</option>
+                <label for="entrenadorInput" class="form-label">Entrenador</label>
+                <select id="entrenadorInput" class="form-select" required>
+                  <option value="">Seleccione un entrenador</option>
+                  <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
+                    th:value="${usuario.persona.personaId}"
+                    th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}">
+                  </option>
                 </select>
               </div>
 

@@ -48,3 +48,12 @@ export const detalleRutinaFormModal = document.getElementById(
 
 export const detalleRutinaForm =
   detalleRutinaFormModal.querySelector('#detalleRutinaForm')
+
+//Filtros
+export const buscarInput = document.getElementById('buscarInput')
+
+export const entrenadorInput = document.getElementById('entrenadorInput')
+
+export const estadoInput = document.getElementById('estadoInput')
+
+export const resetFiltrosBtn = document.getElementById('resetFiltrosBtn')
