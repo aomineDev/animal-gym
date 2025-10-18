@@ -55,3 +55,5 @@ export const fechaIngresoDetalle = modalDetalle.querySelector("#fecha-ingreso-de
 // === Información Salarial ===
 export const salarioDetalle = modalDetalle.querySelector("#salario-detalle");
 //change
+export const rolInput = document.getElementById('rolInput')
+export const empleadoInput = document.getElementById('empleadoInput')
