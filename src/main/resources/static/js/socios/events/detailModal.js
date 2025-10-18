@@ -1,4 +1,9 @@
-import { partnerProfileModal, partnerProfileFields } from '../dom.js'
+import PartnerAccordion from '../components/PartnerAccordion.js'
+import {
+  partnerProfileModal,
+  partnerProfileFields,
+  partnerAccordionContainer,
+} from '../dom.js'
 import { partnerList } from '../store.js'
 
 /**
@@ -25,4 +30,5 @@ function fillPartnerProfileModal(obj) {
   partnerProfileFields.email.textContent = obj.email
   partnerProfileFields.estado.textContent = obj.estado ? 'Activo' : 'Inactivo'
   partnerProfileFields.img.src = obj.imagen
+  partnerAccordionContainer.innerHTML = PartnerAccordion(obj.rutinas)
 }

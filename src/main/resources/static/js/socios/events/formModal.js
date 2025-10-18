@@ -11,7 +11,11 @@ import {
 import FORM_ACTIONS from '../../constants/formActions.js'
 import Service from '../../service/index.js'
 import StorageService from '../../service/storage.js'
-import { validateDateNow, validateRange } from '../../service/validateInput.js'
+import {
+  validateDateNow,
+  validatePersona,
+  validateRange,
+} from '../../service/validateInput.js'
 import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
 import { renderNewPartnerCard, renderUpdatedPartnerCard } from '../render.js'
 import { partnerList } from '../store.js'
@@ -49,10 +53,18 @@ export default function registerPartnerFormModalEvents() {
   })
 
   partnerFormImage.addEventListener('change', handleImageChange)
+  partnerForm.dni.addEventListener('change', handelValidatePerson)
+  partnerForm.email.addEventListener('change', handelValidatePerson)
+  partnerForm.telefono.addEventListener('change', handelValidatePerson)
+  partnerForm.fechaIngreso.addEventListener('change', handleDate)
+  partnerForm.fechaNacimiento.addEventListener('change', () =>
+    handleValidateEdadMinima(partnerForm.fechaNacimiento)
+  )
 }
 
 async function handleFormSubmit() {
   if (!this.checkValidity()) return
+  let membershipDurationId = this.membresia.value.split('|')
   const personaId = this.dataset.id
   const nombre = this.nombre.value.trim()
   const apellido = this.apellido.value.trim()
@@ -60,13 +72,17 @@ async function handleFormSubmit() {
   const telefono = this.telefono.value
   const email = this.email.value
   const fechaNacimiento = this.fechaNacimiento.value
-  const membresiaId = parseInt(this.membresia.value)
+  const membresiaId = parseInt(membershipDurationId[0])
   const fechaIngreso = this.fechaIngreso.value
   const peso = parseFloat(this.peso.value)
   const altura = parseFloat(this.altura.value)
   const estado = this.estado.value === 'activo'
-  const genero = 'femenino'
-  const fechaVencimiento = '2025-10-29'
+  const genero = this.genero.value
+  const fechaVencimiento = new Date(
+    new Date(fechaIngreso).setDate(
+      new Date(fechaIngreso).getDate() + parseInt(membershipDurationId[1])
+    )
+  )
   const puntos = 100
   const file = this.file.files[0]
   let imagen =
@@ -140,13 +156,47 @@ function fillPartnerForm(obj) {
   partnerForm.telefono.value = obj.telefono
   partnerForm.email.value = obj.email
   partnerForm.fechaNacimiento.value = obj.fechaNacimiento
-  partnerForm.membresia.value = obj.membresia.membresiaId
+  partnerForm.membresia.value =
+    obj.membresia.membresiaId + '|' + obj.membresia.duracion
   partnerForm.fechaIngreso.value = obj.fechaIngreso
   partnerForm.peso.value = obj.peso
+  partnerForm.genero.value = obj.genero
   partnerForm.altura.value = obj.altura
   partnerForm.estado.value = obj.estado ? 'activo' : 'inactivo'
 
   if (obj.imagen === defaultPartnerImage)
     partnerFormImagePreview.src = defaultFormPartnerImage
   else partnerFormImagePreview.src = obj.imagen
+}
+
+//validaciones
+function handelValidatePerson() {
+  validatePersona(
+    partnerForm.email,
+    partnerForm.telefono,
+    partnerForm.dni,
+    partnerService
+  )
+}
+
+function handleDate() {
+  validateDateNow(partnerForm.fechaIngreso)
+}
+
+function handleValidateEdadMinima(input, edadMinima = 16) {
+  const fechaNacimiento = new Date(input.value)
+
+  const hoy = new Date()
+  const edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
+  const mes = hoy.getMonth() - fechaNacimiento.getMonth()
+
+  const edadReal =
+    mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())
+      ? edad - 1
+      : edad
+
+  if (edadReal < edadMinima) {
+    input.value = ''
+    showToast(`Debe tener al menos ${edadMinima} años`, TOAST_TYPES.WARNING)
+  }
 }

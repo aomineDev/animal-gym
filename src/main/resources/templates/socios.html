@@ -16,23 +16,23 @@
         <input type="text" class="form-control" id="buscarSocio" placeholder="Buscar socio...">
       </div>
       <div class="col-md-3 col-6">
-        <select class="form-select">
+        <select id="filterEstado" class="form-select">
           <option selected>Todos los estados</option>
           <option>Activo</option>
           <option>Inactivo</option>
-          <option>Vencido</option>
         </select>
       </div>
       <div class="col-md-3 col-6">
-        <select class="form-select">
-          <option selected>Todos los planes</option>
-          <option>Mensual</option>
-          <option>Trimestral</option>
-          <option>Anual</option>
+        <select id="filterMembership" name="filterMembership" class="form-select" required>
+          <option value="">Seleccione la membresia...</option>
+          <option th:each="membresia : ${membresias}"
+            th:text="${membresia.nombre +' - '+ membresia.duracion + ' días.'}"
+            th:value="${membresia.membresiaId  + '|' + membresia.duracion}"></option>
         </select>
       </div>
       <div class="col-md-2 col-12">
-        <button type="submit" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#partnerFormModal">
+        <button type="submit" class="btn btn-primary w-100 d-none d-lg-inline-flex" data-bs-toggle="modal"
+          data-bs-target="#partnerFormModal">
           <i class="bi bi-person-plus me-2"></i>Nuevo Socio
         </button>
       </div>
@@ -130,6 +130,30 @@
         </li>
       </ul>
     </nav>
+
+    <!-- Filtros en movil  -->
+    <div class="fab-container d-lg-none">
+      <!-- Opciones -->
+      <div class="fab-actions">
+        <!-- BOTONES -->
+        <button class="btn btn-success rounded-circle shadow" data-bs-toggle="modal" data-bs-target="#partnerFormModal"
+          title="Agregar">
+          <i class="bi bi-plus-circle"></i>
+        </button>
+
+        <!-- <button class="btn btn-warning rounded-circle shadow" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#filtroOffcanvas" aria-controls="filtroOffcanvas" title="Filtrar">
+          <i class="bi bi-funnel"></i>
+        </button> -->
+      </div>
+
+      <!-- Principal -->
+      <button class="fab-main btn btn-primary rounded-circle shadow">
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </div>
+
+
   </th:block>
 
   <th:block th:fragment="modal">
@@ -241,7 +265,9 @@
                       <span class="badge bg-primary">Rutinas inscritas</span>
                     </div>
 
-                    <div class="table-responsive">
+                    <div id="partnerAccordionContainer"></div>
+
+                    <!-- <div class="table-responsive">
                       <table class="table table-sm table-hover">
                         <thead class="table-light">
                           <tr>
@@ -274,7 +300,7 @@
                           </tr>
                         </tbody>
                       </table>
-                    </div>
+                    </div> -->
 
                     <!--<div class="mt-3">
 																				<div class="d-flex justify-content-between align-items-center">
@@ -311,32 +337,7 @@
           </div>
           <div class="modal-body">
             <form id="partnerForm" class="row g-3 needs-validation" novalidate data-type="create">
-              <div class="col-md-6">
-                <label class="form-label">Nombre</label>
-                <div class="input-group">
-                  <input type="text" id="nombre" name="nombre" class="form-control"
-                    pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$" required>
-                  <span class="input-group-text">
-                    <i class="bi bi-person"></i>
-                  </span>
-                  <div class="valid-feedback">Nombre válido</div>
-                  <div class="invalid-feedback">Ingrese un nombre válido</div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label">Apellido</label>
-                <div class="input-group">
-                  <input type="text" id="apellido" name="apellido" class="form-control" required>
-                  <span class="input-group-text">
-                    <i class="bi bi-person"></i>
-                  </span>
-                  <div class="valid-feedback">Apellido válido</div>
-                  <div class="invalid-feedback">Ingrese un apellido válido</div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label class="form-label">DNI</label>
                 <div class="input-group">
                   <input type="text" id="dni" name="dni" class="form-control" pattern="^\d{8}$" maxlength="8" required>
@@ -348,7 +349,7 @@
                 </div>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label class="form-label">Teléfono</label>
                 <div class="input-group">
                   <input type="tel" id="telefono" name="telefono" class="form-control" pattern="^[9]\d{8}$"
@@ -374,29 +375,73 @@
               </div>
 
               <div class="col-md-6">
+                <label class="form-label">Nombre</label>
+                <div class="input-group">
+                  <input type="text" id="nombre" name="nombre" class="form-control"
+                    pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$" required>
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+                  <div class="valid-feedback">Nombre válido</div>
+                  <div class="invalid-feedback">Ingrese un nombre válido</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Apellido</label>
+                <div class="input-group">
+                  <input type="text" id="apellido" name="apellido" class="form-control" required>
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+                  <div class="valid-feedback">Apellido válido</div>
+                  <div class="invalid-feedback">Ingrese un apellido válido</div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Genero</label>
+                <select name="genero" class="form-select" required="">
+                  <option value="">Seleccione...</option>
+                  <option value="masculino">masculino</option>
+                  <option value="femenino">femenino</option>
+                </select>
+                <div class="valid-feedback">Genero válida</div>
+                <div class="invalid-feedback">Seleccione una genero</div>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Fecha de Ingreso</label>
+                <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" required>
+                <div class="valid-feedback">Fecha válida</div>
+                <div class="invalid-feedback">Seleccione una fecha válida</div>
+              </div>
+
+              <div class="col-md-4">
                 <label class="form-label">Fecha de Nacimiento</label>
                 <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" required>
                 <div class="valid-feedback">Fecha válida</div>
                 <div class="invalid-feedback">Seleccione una fecha válida</div>
               </div>
 
+
+
+
+
+
               <div class="col-md-6">
                 <label class="form-label">Membresía</label>
                 <select id="membresia" name="membresia" class="form-select" required>
                   <option value="">Seleccione...</option>
-                  <option th:each="membresia : ${membresias}" th:text="${membresia.nombre}"
-                    th:value="${membresia.membresiaId}"></option>
+                  <option th:each="membresia : ${membresias}"
+                    th:text="${membresia.nombre +' - '+ membresia.duracion + ' días.'}"
+                    th:value="${membresia.membresiaId  + '|' + membresia.duracion}"></option>
                 </select>
                 <div class="valid-feedback">Membresía válida</div>
                 <div class="invalid-feedback">Seleccione una membresía</div>
               </div>
 
-              <div class="col-md-6">
-                <label class="form-label">Fecha de Ingreso</label>
-                <input type="date" id="fechaIngreso" name="fechaIngreso" class="form-control" required>
-                <div class="valid-feedback">Fecha válida</div>
-                <div class="invalid-feedback">Seleccione una fecha válida</div>
-              </div>
+
 
               <div class="col-md-4">
                 <label class="form-label">Peso (kg) <small class="text-muted">(opcional)</small></label>
@@ -456,170 +501,7 @@
       </div>
     </div>
 
-    <!-- Modal Editar Socio -->
-    <!-- <div th:each="socio : ${socios}">
-      <div class="modal fade" th:id="|editarSocio__${socio.personaId}|" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Editar Socio</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-              <form id="socioForm" class="row g-3 needs-validation" novalidate>
 
-                <div class="col-md-6">
-                  <label class="form-label">Nombre</label>
-                  <div class="input-group">
-                    <input type="text" id="nombre" th:value="${socio.nombre}" class="form-control"
-                      pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$" required>
-                    <span class="input-group-text">
-                      <i class="bi bi-person"></i>
-                    </span>
-                  </div>
-                  <div class="valid-feedback">Nombre válido</div>
-                  <div class="invalid-feedback">Ingrese un nombre válido</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Apellido</label>
-                  <div class="input-group">
-                    <input type="text" id="apellido" th:value="${socio.apellido}" class="form-control" required>
-                    <span class="input-group-text">
-                      <i class="bi bi-person"></i>
-                    </span>
-                  </div>
-                  <div class="valid-feedback">Apellido válido</div>
-                  <div class="invalid-feedback">Ingrese un apellido válido</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">DNI</label>
-                  <div class="input-group">
-                    <input type="text" id="dni" class="form-control" th:value="${socio.dni}" pattern="^\d{8}$"
-                      maxlength="8" required>
-                    <span class="input-group-text">
-                      <i class="bi bi-card-text"></i>
-                    </span>
-                  </div>
-                  <div class="valid-feedback">DNI válido</div>
-                  <div class="invalid-feedback">Ingrese un DNI válido (8 dígitos)</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Teléfono</label>
-                  <div class="input-group">
-                    <input type="tel" id="telefono" th:value="${socio.telefono}" class="form-control"
-                      pattern="^[9]\d{8}$" maxlength="9" required>
-                    <span class="input-group-text">
-                      <i class="bi bi-telephone"></i>
-                    </span>
-                  </div>
-                  <div class="valid-feedback">Teléfono válido</div>
-                  <div class="invalid-feedback">Ingrese un número válido (9 dígitos)</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Correo</label>
-                  <div class="input-group">
-                    <input type="email" id="correo" th:value="${socio.email}" class="form-control" required>
-                    <span class="input-group-text">
-                      <i class="bi bi-envelope"></i>
-                    </span>
-                  </div>
-                  <div class="valid-feedback">Correo válido</div>
-                  <div class="invalid-feedback">Ingrese un correo válido</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Fecha de Nacimiento</label>
-                  <div class="input-group">
-                    <input type="date" id="fechaNacimiento" th:value="${socio.fechaNacimiento}" class="form-control"
-                      required>
-                    
-                  </div>
-                  <div class="valid-feedback">Fecha válida</div>
-                  <div class="invalid-feedback">Seleccione una fecha válida</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Membresía</label>
-                  <select id="membresia" class="form-select" required>
-                    <option value="">Seleccione...</option>
-                    <option th:each="membresia : ${membresias}" th:value="${membresia.membresiaId}"
-                      th:text="${membresia.nombre}"
-                      th:selected="${membresia.membresiaId == socio.membresia.membresiaId}">
-                    </option>
-                  </select>
-                  <div class="valid-feedback">Membresía válida</div>
-                  <div class="invalid-feedback">Seleccione una membresía</div>
-                </div>
-
-                <div class="col-md-6">
-                  <label class="form-label">Fecha de Ingreso</label>
-                  <div class="input-group">
-                    <input type="date" id="fechaIngreso" th:value="${socio.fechaIngreso}" class="form-control" required>
-    
-                  </div>
-                  <div class="valid-feedback">Fecha válida</div>
-                  <div class="invalid-feedback">Seleccione una fecha válida</div>
-                </div>
-
-                <div class="col-md-4">
-                  <label class="form-label">Peso (kg) <small class="text-muted">(opcional)</small></label>
-                  <div class="input-group">
-                    <input type="number" id="peso" th:value="${socio.peso}" class="form-control" min="30" max="200"
-                      step="0.1">
-                    <span class="input-group-text">
-                      <i class="bi bi-speedometer"></i>
-                    </span>
-                  </div>
-                  <div class="valid-feedback">Peso válido</div>
-                  <div class="invalid-feedback">Ingrese un peso válido (30-200 kg)</div>
-                </div>
-
-                <div class="col-md-4">
-                  <label class="form-label">Altura (m) <small class="text-muted">(opcional)</small></label>
-                  <div class="input-group">
-                    <input type="number" id="altura" th:value="${socio.altura}" class="form-control" min="1" max="2.5"
-                      step="0.01">
-                    <span class="input-group-text">
-                      <i class="bi bi-arrows-vertical"></i>
-                    </span>
-                  </div>
-                  <div class="valid-feedback">Altura válida</div>
-                  <div class="invalid-feedback">Ingrese una altura válida (1.20-2.20 m)</div>
-                </div>
-
-                <div class="col-md-4">
-                  <label class="form-label">Estado</label>
-                  <select id="estado" class="form-select" required>
-                    <option value="">Seleccione...</option>
-                    <option value="activo" th:selected="${socio.estado == true}">Activo</option>
-                    <option value="inactivo" th:selected="${socio.estado == false}">Inactivo
-                    </option>
-                  </select>
-                  <div class="valid-feedback">Estado válido</div>
-                  <div class="invalid-feedback">Seleccione un estado</div>
-                </div>
-
-                <div class="text-center">
-
-                  <div>
-                    <img th:src="${socio.imagen}" alt="Foto socio" class="img-thumbnail" style="max-width: 150px;">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary" onclick="">Guardar</button>
-                </div>
-              </form>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div> -->
 
   </th:block>
 

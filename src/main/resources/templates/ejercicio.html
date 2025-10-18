@@ -6,52 +6,52 @@
   <th:block th:fragment="content">
 
     <!-- PRINCIPAL -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2><i class="bi bi-people me-2"></i>Gestión de Ejercicios</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2><i class="bi bi-people me-2"></i>Gestión de Ejercicios</h2>
 
-        </div>
+    </div>
 
-        <!-- Filtros -->
-        <div class="row g-2 mb-3">
-            <div class="col-md-9">
-                <input type="text" class="form-control" id="buscarEjercicio" placeholder="Buscar ejercicio...">
-            </div>
-           
-            <div class="col-md-3 col-12">
-                <button type="submit" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#nuevoEjercicio">
-                    <i class="bi bi-person-plus me-2"></i>Nuevo Ejercicio
+    <!-- Filtros -->
+    <div class="row g-2 mb-3">
+      <div class="col-md-9">
+        <input type="text" class="form-control" id="buscarEjercicio" placeholder="Buscar ejercicio...">
+      </div>
+
+      <div class="col-md-3 col-12">
+        <button type="submit" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#ejercicioFormModal">
+          <i class="bi bi-person-plus me-2"></i>Nuevo Ejercicio
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabla de Socios -->
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>id</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Grupo Muscular</th>
+            <th>Equipo</th>
+            <th>Acciones</th>
+
+          </tr>
+        </thead>
+        <tbody id="ejercicio-container">
+          <tr th:each="ejercicio : ${ejercicios}" th:data-id="${ejercicio.ejercicioId}">
+            <td th:text="${ejercicio.ejercicioId}"></td>
+            <td th:text="${ejercicio.nombre}"></td>
+            <td th:text="${ejercicio.descripcion}"></td>
+            <td th:text="${ejercicio.grupoMuscular}"></td>
+            <td th:text="${ejercicio.equipo}"></td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-three-dots-vertical"></i>
                 </button>
-            </div>
-        </div>
-
-        <!-- Tabla de Socios -->
-        <div class="table-responsive">
-            <table class="table table-hover align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th>id</th>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Grupo Muscular</th>
-                        <th>Equipo</th>
-                        <th>Acciones</th>
-                       
-                    </tr>
-                </thead>
-                <tbody id="listaEjercicio">
-            <tr th:each="ejercicio : ${ejercicios}" th:id="|elementEjercicio_${ejercicio.ejercicioId}|">
-                <td th:text="${ejercicio.ejercicioId}"></td>
-                <td th:text="${ejercicio.nombre}"></td>
-                <td th:text="${ejercicio.descripcion}"></td>
-                <td th:text="${ejercicio.grupoMuscular}"></td>
-                <td th:text="${ejercicio.equipo}"></td>
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-three-dots-vertical"></i>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <!-- <li>
+                <ul class="dropdown-menu">
+                  <!-- <li>
                                 <a class="dropdown-item"
                                    href="#"
                                    data-bs-toggle="modal"
@@ -59,242 +59,175 @@
                                     <i class="bi bi-eye me-2"></i>Ver perfil
                                 </a>
                             </li> -->
-                            <li>
-                                <a class="dropdown-item"
-                                   href="#"
-                                   data-bs-toggle="modal"
-                                   
-                                   th:attr="data-bs-target=|#editarEjercicio__${ejercicio.ejercicioId}|">
-                                    <i class="bi bi-pencil me-2"></i>Editar
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item text-danger"
-                                   href="#"
-                                   data-bs-toggle="modal"
-                                   
-                                   th:attr="data-bs-target=|#eliminarEjercicio__${ejercicio.ejercicioId}|">
-                                    <i class="bi bi-trash me-2"></i>Eliminar
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
+                  <li>
+                    <a class="dropdown-item" href="#" data-bs-toggle="modal" th:data-id="${ejercicio.ejercicioId}"
+                      data-bs-target="#ejercicioFormModal">
+                      <i class="bi bi-pencil me-2"></i>Editar
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                      data-bs-target="#ejercicioDeleteModal" th:data-id="${ejercicio.ejercicioId}">
+                      <i class="bi bi-trash me-2"></i>Eliminar
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
         </tbody>
-            </table>
-        </div>
-        <!-- Fin tabla Socios -->
+      </table>
+    </div>
+    <!-- Fin tabla Socios -->
 
-        <!-- Paginación -->
-        <nav aria-label="Paginación de socios">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <span class="page-link">...</span>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">8</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Siguiente</a>
-                </li>
-            </ul>
-        </nav>
+    <!-- Paginación -->
+    <nav aria-label="Paginación de socios">
+      <ul class="pagination justify-content-center">
+        <!-- <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Anterior</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <span class="page-link">...</span>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">8</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">Siguiente</a>
+        </li> -->
+      </ul>
+    </nav>
 
-        <!-- Toast -->
-        <div class="toast-container position-fixed top-0 end-0 p-3">
-        <div id="toast" class="toast align-items-center border-0" role="alert">
-            <div class="d-flex">
-            <div class="toast-body">
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-            </div>
+    <!-- Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="toast" class="toast align-items-center border-0" role="alert">
+        <div class="d-flex">
+          <div class="toast-body">
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
         </div>
-        </div>
+      </div>
+    </div>
 
   </th:block>
 
   <th:block th:fragment="modal">
 
-    <!-- Modal editar -->
-    <div th:each="e : ${ejercicios}">
-        <div class="modal fade"  th:id="|editarEjercicio__${e.ejercicioId}|" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar Ejercicio</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="socioForm" class="row g-3 needs-validation" novalidate>
-        
-                            <div class="col-md-6">
-                                <label class="form-label">Nombre</label>
-                                <div class="input-group">
-                                    <input type="text" id="nombre" name="nombre" th:value="${e.nombre}" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
-                                        required>
-                                    <span class="input-group-text">
-                                        <i class="bi bi-person"></i>
-                                    </span>
-                                </div>
-                                <div class="valid-feedback">des</div>
-                                <div class="invalid-feedback">Ingrese un nombre válido</div>
-                            </div>
-        
-                            <div class="col-md-6">
-                                <label class="form-label">Grupo Muscular</label>
-                                <div class="input-group">
-                                    <input type="text" id="apellido" name="grupoMuscular" th:value="${e.grupoMuscular}" class="form-control" required>
-                                    <span class="input-group-text">
-                                        <i class="bi bi-person"></i>
-                                    </span>
-                                </div>
-                                <div class="valid-feedback">Apellido válido</div>
-                                <div class="invalid-feedback">Ingrese un apellido válido</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Equipo</label>
-                                <div class="input-group">
-                                    <input type="text" id="equipo" name="equipo" th:value="${e.equipo}" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
-                                        required>
-                                    <span class="input-group-text">
-                                        <i class="bi bi-person"></i>
-                                    </span>
-                                </div>
-                                <div class="valid-feedback">dess</div>
-                                <div class="invalid-feedback">Ingrese un nombre válido</div>
-                            </div>
-        
-                            <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
-                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
-                                th:text="${e.descripcion}" required></textarea>
-                            </div>
-                            
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary actualizarEjercicio" th:attr="data-id=${e.ejercicioId}">Actualizar</button>
-                            </div>
-                        </form>
-                    </div>
-        
-                </div>
-            </div>
-        </div>
-        </div>
-
     <!-- Modal eliminar -->
-    <div th:each="e : ${ejercicios}">
-        <div class="modal fade" th:id="|eliminarEjercicio__${e.ejercicioId}|" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirmar Eliminación</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="text-center">
-                            <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
-                            <h6 class="mt-3">¿Está seguro de que desea eliminar este ejercicio?</h6>
-                            <p class="text-muted">Esta acción no se puede deshacer.</p>
-                            <div class="alert alert-danger">
-                                <i class="bi bi-person-x me-2"></i>
-                                Se eliminará toda la información del ejercicio: <strong th:text="${e.nombre}"></strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger btnEliminarEjercicio" th:attr="data-id=${e.ejercicioId}">
-                            <i class="bi bi-trash me-2"></i>Eliminar Definitivamente
-                        </button>
-                    </div>
-                </div>
+    <div class="modal fade" id="ejercicioDeleteModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirmar Eliminación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center">
+              <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+              <h6 class="mt-3">¿Está seguro de que desea eliminar este ejercicio?</h6>
+              <p class="text-muted">Esta acción no se puede deshacer.</p>
+              <div class="alert alert-danger">
+                <i class="bi bi-person-x me-2"></i>
+                Se eliminará toda la información del ejercicio: "<span class="text-danger"
+                  id="deleteEjercicioName"></span>"
+              </div>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger btnEliminarEjercicio" data-id="0" id="deleteEjercicioBtn">
+              <i class="bi bi-trash me-2"></i>Eliminar Definitivamente
+            </button>
+          </div>
         </div>
-        </div>
+      </div>
+    </div>
 
-    <!-- Modal nuevo -->
-        <div class="modal fade"  id="nuevoEjercicio" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Nuevo Ejercicio</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formCrearEjercicio" class="row g-3 needs-validation" novalidate>
-        
-                            <div class="col-md-6">
-                                <label class="form-label">Nombre</label>
-                                <div class="input-group">
-                                    <input type="text" id="nombre" name="nombre" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
-                                        required>
-                                    <span class="input-group-text">
-                                        <i class="bi bi-person"></i>
-                                    </span>
-                                </div>
-                                <div class="valid-feedback">Nombre valido</div>
-                                <div class="invalid-feedback">Ingrese un nombre válido</div>
-                            </div>
-        
-                            <div class="col-md-6">
-                                <label class="form-label">Grupo Muscular</label>
-                                <div class="input-group">
-                                    <input type="text" id="grupoMuscular" name="grupoMuscular" class="form-control" required>
-                                    <span class="input-group-text">
-                                        <i class="bi bi-person"></i>
-                                    </span>
-                                </div>
-                                <div class="valid-feedback">Grupo muscular válido</div>
-                                <div class="invalid-feedback">Ingrese un grupo muscular válido</div>
-                            </div>
+    <!-- Modal ejercicio -->
+    <div class="modal fade" id="ejercicioFormModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Nuevo Ejercicio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="ejercicioForm" class="row g-3 needs-validation" novalidate data-type="create">
 
-                            <div class="col-md-6">
-                                <label class="form-label">Equipo</label>
-                                <div class="input-group">
-                                    <input type="text" id="equipo" name="equipo" class="form-control" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$"
-                                        required>
-                                    <span class="input-group-text">
-                                        <i class="bi bi-person"></i>
-                                    </span>
-                                </div>
-                                <div class="valid-feedback">Equipo valido</div>
-                                <div class="invalid-feedback">Ingrese un equipo válido</div>
-                            </div>
-        
-                            <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
-                                <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
-                                 required></textarea>
-                            </div>
-                            
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary" >Guardar</button>
-                            </div>
-                        </form>
-                    </div>
-        
+              <div class="col-md-6">
+                <label class="form-label">Nombre</label>
+                <div class="input-group">
+                  <input type="text" id="nombre" name="nombre" class="form-control"
+                    pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$" required>
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
                 </div>
-            </div>
-        </div>
-        </div>
+                <div class="valid-feedback">Nombre valido</div>
+                <div class="invalid-feedback">Ingrese un nombre válido</div>
+              </div>
 
-        <script type="module" th:src="@{/js/ejercicios/main.js}"></script>
+              <div class="col-md-6">
+                <label class="form-label">Grupo Muscular</label>
+                <div class="input-group">
+                  <input type="text" id="grupoMuscular" name="grupoMuscular" class="form-control" required>
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+                </div>
+                <div class="valid-feedback">Grupo muscular válido</div>
+                <div class="invalid-feedback">Ingrese un grupo muscular válido</div>
+              </div>
 
+              <div class="col-md-6">
+                <label class="form-label">Equipo</label>
+                <div class="input-group">
+                  <input type="text" id="equipo" name="equipo" class="form-control"
+                    pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,50}$" required>
+                  <span class="input-group-text">
+                    <i class="bi bi-person"></i>
+                  </span>
+                </div>
+                <div class="valid-feedback">Equipo valido</div>
+                <div class="invalid-feedback">Ingrese un equipo válido</div>
+              </div>
+
+              <div class="mb-3 col-md-6"> <label for="descripcion" class="form-label">Descripción</label>
+                <textarea name="descripcion" id="descripcion" class="form-control" rows="1" required></textarea>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </th:block>
+
+  <th:block th:fragment="script">
+    <script th:inline="javascript">
+      const ejercicioListRaw = /*[[${ejercicios}]]*/[]
+      console.log('Lista Ejercicio ', ejercicioListRaw);
+    </script>
+    <script type="module" th:src="@{/js/ejercicios/main.js}"></script>
   </th:block>
 </body>
 

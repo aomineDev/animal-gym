@@ -15,6 +15,7 @@ import {
   renderUpdatedMembershipCard,
 } from '../render.js'
 import { membershipList } from '../store.js'
+import { validateRange } from '../../service/validateInput.js'
 
 const membershipService = new Service('membresias')
 const storageService = new StorageService('membresias')
@@ -39,8 +40,6 @@ async function handleFormSubmit(e) {
     this.dataset.type === FORM_ACTIONS.CREATE
       ? defaultMembershipImage
       : membershipList[this.dataset.id].imagen
-
-  // validacion calendario
 
   try {
     if (file) imagen = await storageService.upload(file)
@@ -132,6 +131,35 @@ export default function registerMembershipFormModalEvents() {
   })
 
   membershipFormImage.addEventListener('change', handleImageChange)
+  membershipForm.addEventListener('change', handleFechaChange)
+  membershipForm.precio.addEventListener('input', validarPrecio)
+  membershipForm.precioOferta.addEventListener('input', validarPrecio)
+}
+
+function handleFechaChange() {
+  validateRange(membershipForm.inicioOferta, membershipForm.finOferta, 'fecha')
+}
+
+function validarPrecio() {
+  const { precio, precioOferta } = membershipForm
+  const valPrecio = parseFloat(precio.value)
+  const valOferta = parseFloat(precioOferta.value)
+
+  if (!(valPrecio > 0)) {
+    showToast('Primero ingresa el precio normal', TOAST_TYPES.WARNING)
+    precioOferta.value = ''
+    precio.focus()
+    return
+  }
+
+  if (valOferta > valPrecio) {
+    showToast(
+      'El precio promocional debe ser menor al normal',
+      TOAST_TYPES.WARNING
+    )
+    precioOferta.value = ''
+    precioOferta.focus()
+  }
 }
 
 // import { formulario, fileInput, vistaImg } from "../dom.js";

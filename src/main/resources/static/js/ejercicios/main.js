@@ -1,10 +1,10 @@
-import { crearEjercicio, eliminarEjercicio, actualizarEjercicio} from "./events/modalEvents.js";
-// import {paginacion} from "./events/pagination.js";
+import registerEjercicioDeleteModalEvents from './events/DeleteModal.js'
+import filteredEjercicios from './events/ejercicioFilterEvents.js'
+import registerEjercicioFormModalEvents from './events/formModal.js'
 
-document.addEventListener("DOMContentLoaded", () => {
-    crearEjercicio();
-    eliminarEjercicio();
-    actualizarEjercicio();
-
-    // paginacion();
-});
+document.addEventListener('DOMContentLoaded', () => {
+  registerEjercicioDeleteModalEvents()
+  registerEjercicioFormModalEvents()
+  // paginacion()
+  filteredEjercicios()
+})

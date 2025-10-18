@@ -46,3 +46,12 @@ const fieldIds = [
 export const partnerProfileFields = Object.fromEntries(
   fieldIds.map((id) => [id, partnerProfileModal.querySelector(`#${id}`)])
 )
+
+export const filterByMembership = document.querySelector('#filterMembership')
+
+export const filterEstado = document.getElementById('filterEstado')
+export const buscarSocio = document.getElementById('buscarSocio')
+
+export const partnerAccordionContainer = document.querySelector(
+  '#partnerAccordionContainer'
+)

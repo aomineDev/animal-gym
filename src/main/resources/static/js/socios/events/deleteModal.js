@@ -1,5 +1,9 @@
 import Service from '../../service/index.js'
-import { deletePartnerBtn, deletePartnerName } from '../dom.js'
+import {
+  deletePartnerBtn,
+  deletePartnerName,
+  partnerDeleteModal,
+} from '../dom.js'
 import { partnerList } from '../store.js'
 
 import { showToast, TOAST_TYPES } from '../../bootstrap/Toast.js'
