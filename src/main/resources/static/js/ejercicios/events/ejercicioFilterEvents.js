@@ -1,10 +1,10 @@
 import EjercicioCard from '../components/EjercicioCard.js'
 import { buscarEjercicio, ejercicioContainer } from '../dom.js'
-import { renderEjercicios } from '../render.js'
+import { renderEjerciciosFilter } from '../render.js'
 import { ejercicioList } from '../store.js'
 
 export default function filteredEjercicios() {
-  renderEjercicios(ejercicioList, ejercicioContainer)
+  renderEjerciciosFilter(ejercicioList, ejercicioContainer)
 
   buscarEjercicio.addEventListener('input', handleFilterByName)
 }

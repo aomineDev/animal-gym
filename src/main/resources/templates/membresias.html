@@ -5,9 +5,28 @@
   <th:block th:fragment="content">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Membresías</h2>
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#membershipFormModal">
+      <button class="btn btn-primary d-none d-lg-inline-flex" data-bs-toggle="modal"
+        data-bs-target="#membershipFormModal">
         <i class="bi bi-plus-circle me-2"></i>Nueva Membresía
       </button>
+    </div>
+
+    <!-- filtros -->
+    <div class="row g-2 mb-3">
+      <div class="col-md-6 col-12">
+        <select id="filterMembership" name="filterMembership" class="form-select" required="">
+          <option value="">Buscar membresia...</option>
+          <option th:each="membresia : ${membershipList}" th:value="${membresia.membresiaId + '|'+ membresia.duracion}"
+            th:text="${membresia.nombre + ' - ' + membresia.duracion +' dias'}"></option>
+        </select>
+      </div>
+      <div class="col-md-6 col-12">
+        <select id="filterEstado" class="form-select">
+          <option selected="">Todos los estados</option>
+          <option>Activo</option>
+          <option>Inactivo</option>
+        </select>
+      </div>
     </div>
 
     <div class="row g-4" id="membership-container">
@@ -73,9 +92,9 @@
     <div class="fab-container d-lg-none">
       <!-- Opciones -->
       <div class="fab-actions">
-        <button class="btn btn-warning rounded-circle shadow" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#filtroOffcanvas" aria-controls="filtroOffcanvas" title="Filtrar">
-          <i class="bi bi-funnel"></i>
+        <button class="btn btn-success rounded-circle shadow" type="button" data-bs-toggle="modal"
+          data-bs-target="#membershipFormModal" aria-controls="filtroOffcanvas" title="Filtrar">
+          <i class="bi bi-plus-circle"></i>
         </button>
       </div>
 
@@ -95,6 +114,8 @@
             <h5 class="modal-title">Nueva Membresía</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
+
+
           <div class="modal-body">
             <form class="row g-3 needs-validation membership-form" id="membershipForm" novalidate data-type="create">
               <div class="col-md-6">

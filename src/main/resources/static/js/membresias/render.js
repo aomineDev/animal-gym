@@ -21,3 +21,12 @@ export function renderDeletedMembershipCard(id) {
   if (card) card.remove()
 }
 
+export function renderFilterMembershipCard(membershipData) {
+  membershipContainer.innerHTML = ''
+  Object.values(membershipData).forEach((membership) => {
+    membershipContainer.insertAdjacentHTML(
+      'beforeend',
+      MembershipCard(membership)
+    )
+  })
+}

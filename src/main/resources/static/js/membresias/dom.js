@@ -31,3 +31,7 @@ export const deleteMembershipName = membershipDeleteModal.querySelector(
 export const deleteMembershipBtn = membershipDeleteModal.querySelector(
   '#deleteMembershipBtn'
 )
+
+export const filterByMembership = document.querySelector('#filterMembership')
+
+export const filterEstado = document.querySelector('#filterEstado')
