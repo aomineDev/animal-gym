@@ -10,90 +10,56 @@ import { claseList } from '../store.js'
 import { renderClaseList } from '../render.js'
 import { validateRange } from '../../service/validateInput.js'
 
-function handleNameChange() {
-  const term = this.value.toLowerCase().trim()
-  const clases = Object.values(claseList)
-  const filtradas = clases.filter((clase) =>
-    clase.nombre.toLowerCase().includes(term)
-  )
-  renderClaseList(filtradas, 'con ese nombre')
-}
-
-function handleFechaInicioChange() {
-  fechaFinInput.disabled = !fechaInicioInput.value
-  if (!fechaInicioInput.value) {
-    fechaFinInput.value = ''
-  }
-  filtrarPorFecha()
-}
-
-function handleFechaFinChange() {
-  validateRange(fechaInicioInput, fechaFinInput, 'fecha')
-  filtrarPorFecha()
-}
-
 function parseDateLocal(dateString) {
   if (!dateString) return null
   const [y, m, d] = dateString.split('T')[0].split('-').map(Number)
   return new Date(y, m - 1, d)
 }
 
-function filtrarPorFecha() {
+function aplicarFiltros() {
+  const term = buscarClaseInput.value.toLowerCase().trim()
+  const estadoSeleccionado = estadoInput.value
+  const intensidadSeleccionada = intensidadInput.value
   const fechaInicio = parseDateLocal(fechaInicioInput.value)
   const fechaFin = parseDateLocal(fechaFinInput.value)
 
-  const clases = Object.values(claseList)
+  let clases = Object.values(claseList)
 
-  const filtradas = clases.filter((clase) => {
+  clases = clases.filter((clase) => {
+    const nombreMatch = clase.nombre.toLowerCase().includes(term)
+    const estadoMatch =
+      !estadoSeleccionado || clase.estado === estadoSeleccionado
+    const intensidadMatch =
+      !intensidadSeleccionada || clase.intensidad === intensidadSeleccionada
+
     const fechaClase = parseDateLocal(clase.fecha)
-    if (!fechaClase) return false
+    const fechaMatch =
+      (!fechaInicio || fechaClase >= fechaInicio) &&
+      (!fechaFin || fechaClase <= fechaFin)
 
-    if (fechaInicio && fechaClase < fechaInicio) return false
-    if (fechaFin && fechaClase > fechaFin) return false
-    return true
+    return nombreMatch && estadoMatch && intensidadMatch && fechaMatch
   })
 
-  console.log(filtradas)
-
-  renderClaseList(filtradas, 'en ese rango de fechas')
+  renderClaseList(clases)
 }
 
-function handleEstadoChange() {
-  const estadoSeleccionado = estadoInput.value
-
-  if (!estadoSeleccionado) {
-    renderClaseList(Object.values(claseList), 'con ese estado')
-    return
-  }
-
-  const clasesFiltradas = Object.values(claseList).filter(
-    (clase) => clase.estado === estadoSeleccionado
-  )
-
-  renderClaseList(clasesFiltradas, 'con ese estado')
+function handleFechaInicioChange() {
+  fechaFinInput.disabled = !fechaInicioInput.value
+  if (!fechaInicioInput.value) fechaFinInput.value = ''
+  aplicarFiltros()
 }
 
-function handleIntensidadChange() {
-  const intensidadSeleccionado = intensidadInput.value
-
-  if (!intensidadSeleccionado) {
-    renderClaseList(Object.values(claseList), 'con esa intensidad')
-    return
-  }
-
-  const clasesFiltradas = Object.values(claseList).filter(
-    (clase) => clase.intensidad === intensidadSeleccionado
-  )
-
-  renderClaseList(clasesFiltradas, 'con esa intensidad')
+function handleFechaFinChange() {
+  validateRange(fechaInicioInput, fechaFinInput, 'fecha')
+  aplicarFiltros()
 }
 
 export default function claseFilterEvents() {
-  buscarClaseInput.addEventListener('input', handleNameChange)
+  buscarClaseInput.addEventListener('input', aplicarFiltros)
   fechaInicioInput.addEventListener('change', handleFechaInicioChange)
   fechaFinInput.addEventListener('change', handleFechaFinChange)
-  estadoInput.addEventListener('change', handleEstadoChange)
-  intensidadInput.addEventListener('change', handleIntensidadChange)
+  estadoInput.addEventListener('change', aplicarFiltros)
+  intensidadInput.addEventListener('change', aplicarFiltros)
 
   resetFiltrosBtn.addEventListener('click', () => {
     buscarClaseInput.value = ''

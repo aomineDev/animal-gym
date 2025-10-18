@@ -2,12 +2,12 @@ import ClaseCard from './components/ClaseCard.js'
 import Row from './components/Row.js'
 import { claseContainer, sociosInscritosTable } from './dom.js'
 
-export function renderClaseList(filtradas, msg) {
+export function renderClaseList(filtradas) {
   if (filtradas.length === 0) {
     claseContainer.innerHTML = `
         <div class="text-center text-muted mt-4">
           <i class="bi bi-emoji-frown"></i>
-          <p class="mb-0">No se encontraron clases ${msg}</p>
+          <p class="mb-0">No se encontraron clases según los filtros aplicados</p>
         </div>
       `
   } else {

@@ -7,65 +7,44 @@ import {
 import { socioList } from '../store.js'
 import { renderSocioRutinaTable } from '../render.js'
 
-function handleNameChange() {
-  const term = this.value.toLowerCase().trim()
-  const socio = Object.values(socioList)
-  const filtradas = socio.filter(
-    (socio) =>
-      socio.nombre.toLowerCase().includes(term) ||
-      socio.dni.toLowerCase().includes(term)
-  )
-  renderSocioRutinaTable(filtradas)
-}
-
-function handleEstadoChange() {
+function aplicarFiltros() {
+  const term = buscarInput.value.toLowerCase().trim()
   const estadoSeleccionado = estadoInput.value
-
-  if (!estadoSeleccionado) {
-    renderSocioRutinaTable(Object.values(socioList))
-    return
-  }
-
-  let sociosFiltrados = []
-
-  if (estadoSeleccionado === 'Socios con rutina') {
-    sociosFiltrados = Object.values(socioList).filter(
-      (socio) => socio.rutinas.length !== 0
-    )
-  } else if (estadoSeleccionado === 'Socios sin rutina') {
-    sociosFiltrados = Object.values(socioList).filter(
-      (socio) => socio.rutinas.length === 0
-    )
-  }
-
-  renderSocioRutinaTable(sociosFiltrados)
-}
-
-function handleEntrenadorChange() {
   const entrenadorId = entrenadorInput.value
 
-  if (!entrenadorId) {
-    renderSocioRutinaTable(Object.values(socioList))
-    return
-  }
+  let socios = Object.values(socioList)
 
-  const sociosFiltrados = Object.values(socioList).filter((socio) =>
-    socio.rutinas.some((rutina) => rutina.empleado.personaId == entrenadorId)
-  )
+  socios = socios.filter((socio) => {
+    const nombreDniMatch =
+      !term ||
+      socio.nombre.toLowerCase().includes(term) ||
+      socio.dni.toLowerCase().includes(term)
 
-  renderSocioRutinaTable(sociosFiltrados)
+    const tieneRutina = socio.rutinas && socio.rutinas.length > 0
+    const estadoMatch =
+      !estadoSeleccionado ||
+      (estadoSeleccionado === 'Socios con rutina' && tieneRutina) ||
+      (estadoSeleccionado === 'Socios sin rutina' && !tieneRutina)
+
+    const entrenadorMatch =
+      !entrenadorId ||
+      socio.rutinas.some((rutina) => rutina.empleado.personaId == entrenadorId)
+
+    return nombreDniMatch && estadoMatch && entrenadorMatch
+  })
+
+  renderSocioRutinaTable(socios)
 }
 
 export default function rutinaFilterEvents() {
-  buscarInput.addEventListener('input', handleNameChange)
-  estadoInput.addEventListener('change', handleEstadoChange)
-  entrenadorInput.addEventListener('change', handleEntrenadorChange)
+  buscarInput.addEventListener('input', aplicarFiltros)
+  estadoInput.addEventListener('change', aplicarFiltros)
+  entrenadorInput.addEventListener('change', aplicarFiltros)
 
   resetFiltrosBtn.addEventListener('click', () => {
     buscarInput.value = ''
     estadoInput.value = ''
     entrenadorInput.value = ''
-
     renderSocioRutinaTable(Object.values(socioList))
   })
 }

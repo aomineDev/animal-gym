@@ -1,23 +1,58 @@
-/*color de las cartas*/
+/* ====== CARTAS DE MEMBRESÍA ====== */
 .custom-card {
     background-color: #0A0A0A;
     border: 1px solid #2c2c2c;
+    border-radius: 10px;
     min-width: 280px;
-    /* Mantiene tamaño uniforme */
     max-width: 400px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
+    position: relative;
 }
 
-/*color del boton*/
-.color-btn {
-    background-color: #444444;
+/* Efecto hover elegante */
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(255, 0, 0, 0.25);
+    border-color: var(--red);
 }
 
+/* Título y precios */
+.custom-card .card-title {
+    letter-spacing: 1px;
+}
 
 .custom-card hr {
-    opacity: 0.5;
+    opacity: 0.4;
+    border-top: 1px solid #555;
 }
 
-/* Scroll más elegante */
+/* ====== BOTONES ====== */
+.btn-mebresias {
+    background-color: #444444;
+    color: #fff;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-mebresias:hover {
+    background-color: var(--red) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+/* Variante adicional */
+.color-btn {
+    background-color: #444444;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.color-btn:hover {
+    background-color: #b3121a !important;
+    transform: scale(1.05);
+}
+
+/* ====== SCROLL PERSONALIZADO ====== */
 .overflow-auto::-webkit-scrollbar {
     height: 8px;
 }
@@ -27,11 +62,24 @@
     border-radius: 10px;
 }
 
-.btn-mebresias {
-    transition: all 0.3s ease;
-
+/* ====== ELEMENTOS INTERNOS ====== */
+.custom-card .text-danger {
+    color: var(--red) !important;
 }
 
-.btn-mebresias:hover {
-    background-color: var(--red) !important;
+.custom-card .card-body {
+    background: linear-gradient(180deg, #0a0a0a 0%, #141414 100%);
+}
+
+/* Precio destacado */
+.custom-card .fs-1,
+.custom-card .fs-2 {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 576px) {
+    .custom-card {
+        max-width: 95%;
+    }
 }
