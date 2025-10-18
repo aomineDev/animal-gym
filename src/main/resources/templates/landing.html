@@ -4,6 +4,7 @@
 <body>
   <th:block th:fragment="content">
     <div class="body_client">
+      <!-- Header -->
       <header>
         <div class="header__menu">
           <nav class="navbar navbar-expand-lg bg-black d-flex fixed-top">
@@ -21,10 +22,10 @@
               </button>
 
               <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-                <div class="navbar-nav mx-auto text-center title-3">
+                <div class="navbar-nav mx-auto text-center title-4">
                   <a class="nav-link text-white" href="#">INICIO</a>
                   <a class="nav-link text-white" href="#nosotros">NOSOTROS</a>
-                  <a class="nav-link text-white" href="#menbresias">MEMBRESiAS</a>
+                  <a class="nav-link text-white" href="#membresias">MEMBRESiAS</a>
                   <a class="nav-link text-white" href="#clases">CLASES</a>
                   <a class="nav-link text-white" href="#contacto">CONTACTO</a>
                 </div>
@@ -38,471 +39,321 @@
           </nav>
         </div>
 
-        <!-- Carrusel -->
+        <!-- Carrusel Moderno -->
         <div class="header__info">
-          <div id="carouselExampleCaptions" class="carousel slide vh-100" data-bs-ride="carousel">
+          <div id="carouselGym" class="carousel slide vh-100" data-bs-ride="carousel" data-bs-interval="6000">
 
+            <!-- Indicadores -->
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselGym" data-bs-slide-to="0" class="active"
+                aria-current="true"></button>
+              <button type="button" data-bs-target="#carouselGym" data-bs-slide-to="1"></button>
             </div>
 
+            <!-- Slides -->
             <div class="carousel-inner h-100">
 
-              <div class="carousel-item active h-100">
-                <img src="img/header/header1.jpg" class="d-block w-100 h-100" alt="..." style="object-fit: cover;">
+              <!-- Slide 1 -->
+              <div class="carousel-item active h-100 position-relative">
+                <img src="img/header/header1.jpg" class="d-block w-100 h-100" alt="Gimnasio moderno"
+                  style="object-fit: cover;">
+                <!-- Gradiente Oscuro -->
+                <div class="overlay position-absolute top-0 start-0 w-100 h-100"
+                  style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%);">
+                </div>
+
+                <!-- Contenido -->
                 <div
-                  class="carousel-caption d-flex flex-column justify-content-center align-items-start h-100 text-start">
-                  <h1 class="fw-bold mb-3 display-4 display-md-3 display-sm-6 title-1"><span
-                      style="color:var(--red)">Bienvenido a Nuestro</span> Gimnasio</h1>
-                  <p class="lead d-none d-md-block">Transforma tu cuerpo, mejora tu vida.</p>
-                  <a href="#menbresias" class="btn bg-red-gym fw-bold text-white rounded-0 px-4 py-2 mt-3">VER
-                    PLANES</a>
+                  class="carousel-caption d-flex flex-column justify-content-center align-items-start h-100 text-start px-5 animate__animated animate__fadeInUp">
+                  <h1 class="fw-bold display-3 text-white mb-3 title-1">
+                    <span style="color: var(--red)">Bienvenido a</span><br> Nuestro Gimnasio
+                  </h1>
+                  <p class="lead text-white-50 mb-4 fs-5">Transforma tu cuerpo, mejora tu vida. Vive la experiencia
+                    fitness.</p>
+                  <a href="#menbresias" class="btn bg-red-gym text-white fw-bold rounded-1 px-5 py-3 shadow-lg">
+                    VER PLANES
+                  </a>
                 </div>
               </div>
 
-              <div class="carousel-item h-100">
-                <img src="img/header/image.png" class="d-block w-100 h-100" alt="..." style="object-fit: cover;">
+              <!-- Slide 2 -->
+              <div class="carousel-item h-100 position-relative">
+                <img src="img/header/image.png" class="d-block w-100 h-100" alt="Entrenamiento personalizado"
+                  style="object-fit: cover;">
+                <div class="overlay position-absolute top-0 start-0 w-100 h-100"
+                  style="background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%);">
+                </div>
+
                 <div
-                  class="carousel-caption d-flex flex-column justify-content-center align-items-start h-100 text-start">
-                  <h1 class="fw-bold mb-3 display-4 display-md-3 display-sm-6 title-1"><span
-                      style="color:var(--red)">Entrena
-                      con</span> los Mejores</h1>
-                  <p class="lead d-none d-md-block">Planes flexibles y resultados garantizados.</p>
-                  <a href="#clases" class="btn bg-red-gym fw-bold text-white rounded-0 px-4 py-2 mt-3">VER
-                    CLASES</a>
+                  class="carousel-caption d-flex flex-column justify-content-center align-items-start h-100 text-start px-5 animate__animated animate__fadeInUp">
+                  <h1 class="fw-bold display-3 text-white mb-3 title-1">
+                    <span style="color: var(--red)">Entrena con</span><br> los Mejores
+                  </h1>
+                  <p class="lead text-white-50 mb-4 fs-5">Planes flexibles, entrenadores expertos y resultados reales.
+                  </p>
+                  <a href="#clases" class="btn bg-red-gym text-white fw-bold rounded-1 px-5 py-3 shadow-lg">
+                    VER CLASES
+                  </a>
                 </div>
               </div>
             </div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-              data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <!-- Controles -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselGym" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
               <span class="visually-hidden">Anterior</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-              data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselGym" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
               <span class="visually-hidden">Siguiente</span>
             </button>
           </div>
         </div>
       </header>
 
-      <section class="container-fluid min-vh-100 d-flex align-items-center justify-content-center py-5" id="nosotros">
-        <div class="row align-items-center justify-content-center g-4 w-100 px-3 px-md-5">
+      <!-- Nosotros -->
+      <section id="nosotros"
+        class="container-fluid min-vh-100 d-flex align-items-center justify-content-center py-5 position-relative"
+        style="background-color: var(--dark-lighten); overflow: hidden;">
 
-          <!-- Columna de imágenes -->
+        <div class="row align-items-center justify-content-center g-5 w-100 px-3 px-md-5">
           <div class="col-12 col-md-6 d-flex justify-content-center">
-            <div class="d-flex flex-column flex-sm-row flex-md-column flex-lg-row align-items-center w-100 gap-3">
-              <div class="overflow-hidden shadow w-100 w-sm-50 w-md-100 w-lg-50" style="max-height: 350px;">
+            <div class="d-flex flex-column flex-sm-row flex-md-column flex-lg-row align-items-center w-100 gap-4">
+              <div class="overflow-hidden rounded-2 shadow-lg position-relative img-wrapper">
                 <img class="img-fluid" src="img/header/nosotros1.jpg" alt="Nosotros 1"
-                  style="height: 100%; width: 100%; object-fit: cover;">
+                  style="height: 100%; width: 100%; object-fit: cover; transition: transform 0.8s ease;">
               </div>
-              <div class="overflow-hidden shadow w-100 w-sm-50 w-md-100 w-lg-50" style="max-height: 350px;">
+
+              <div class="overflow-hidden rounded-2 shadow-lg position-relative img-wrapper">
                 <img class="img-fluid" src="img/header/nosotros2.jpg" alt="Nosotros 2"
-                  style="height: 100%; width: 100%; object-fit: cover;">
+                  style="height: 100%; width: 100%; object-fit: cover; transition: transform 0.8s ease;">
               </div>
             </div>
           </div>
 
-          <!-- Columna de texto -->
-          <div class="col-12 col-md-6 d-flex flex-column justify-content-center text-white">
-            <h2 class="fw-bold mb-3 display-4 display-md-3 display-sm-6 title-1">
+          <div class="col-12 col-md-6 text-white animate__animated animate__fadeInRight">
+            <h2 class="fw-bold mb-4 display-5 title-1">
               <span style="color:var(--red)">Sobre</span> Nosotros
             </h2>
 
-            <p>
+            <p class="fs-5 text-white-50 mb-3">
               En <strong>Animal Gym</strong> creemos que el entrenamiento no solo transforma el cuerpo,
               sino también la mente y el estilo de vida. Nuestro gimnasio está diseñado para quienes buscan
               superar sus límites, alcanzar sus metas y formar parte de una comunidad motivada por la disciplina
               y la constancia.
             </p>
-            <p>
+            <p class="fs-5 text-white-50 mb-4">
               Contamos con entrenadores especializados, programas personalizados y un ambiente moderno
-              equipado con todo lo necesario para potenciar tu rendimiento. Ya seas principiante o atleta
-              avanzado,
+              equipado con todo lo necesario para potenciar tu rendimiento. Ya seas principiante o atleta avanzado,
               en <strong>Animal Gym</strong> encontrarás el espacio ideal para crecer y mantener un estilo de vida
               saludable.
             </p>
+
+            <a href="#clases" class="btn bg-red-gym text-white fw-bold rounded-1 px-5 py-3 shadow-lg">
+              DESCUBRIR CLASES
+            </a>
           </div>
         </div>
       </section>
 
-      <!-- menbresias -->
-      <section class="vh-100 d-flex align-items-center" style="background-color:var(--dark);" id="menbresias">
-        <div class="container">
-          <div class="col-12 text-center mb-5">
-            <h2 class="fw-bold mb-3 display-4 display-md-3 display-sm-6 title-1" style="color:var(--red);">Membresias
+      <!-- Membresías -->
+      <section id="membresias" class="vh-100 d-flex align-items-center position-relative"
+        style="background: linear-gradient(180deg, var(--dark) 0%, #111 100%); overflow: hidden;">
+
+        <div class="container text-center text-white">
+          <div class="mb-5">
+            <h2 class="fw-bold display-4 title-1">
+              <span style="color:var(--red)">Nuestras</span> Membresías
             </h2>
-            <!--text-danger  por var-->
-            <p class="lead text-white">Encuentra la membresia perfecta para ti</p>
+            <p class="lead text-white-50">Elige el plan que mejor se adapte a tus metas</p>
           </div>
-          <!-- Contenedor flexible con scroll horizontal -->
+
+          <!-- Contenedor scroll horizontal -->
+          <div class="overflow-auto pb-3">
+            <div class="d-flex flex-nowrap justify-content-center gap-4"
+              style="min-width: fit-content; padding-inline: 2rem;">
+              <!-- Carta -->
+              <div class="card custom-card border-0 shadow-lg flex-shrink-0 rounded-2 overflow-hidden position-relative"
+                style="background-color: var(--dark-lighten); width: 320px;" th:each="membresia : ${membresias}">
+
+                <div class="card-body text-center p-4 text-white">
+                  <h5 class="text-uppercase fw-bold mb-2 text-danger title-3" th:text="${membresia.nombre}"></h5>
+
+                  <hr class="border-secondary w-50 mx-auto">
+
+                  <p class="fs-2 fw-bold text-danger mb-1" th:text="'S/ ' + ${membresia.precio}"></p>
+                  <p class="text-white-50 text-decoration-line-through mb-3" th:if="${membresia.precioOferta != null}"
+                    th:text="'S/ ' + ${membresia.precioOferta}"></p>
+
+                  <p class="lead text-white-50 mb-4" th:text="${membresia.descripcion}"></p>
+
+                  <div class="d-flex justify-content-center align-items-center mb-4">
+                    <i class="bi bi-stopwatch text-danger fs-4 me-2"></i>
+                    <span class="fw-bold fs-5" th:text="'Duración: ' + ${membresia.duracion} + ' días'"></span>
+                  </div>
+
+                  <div class="d-flex justify-content-center align-items-center mb-4">
+                    <i class="bi bi-people-fill text-danger fs-4 me-2"></i>
+                    <span class="fw-bold fs-6" th:text="'Cupos disponibles: ' + ${membresia.limiteCupos}"></span>
+                  </div>
+
+                  <a href="#" class="btn bg-red-gym text-white fw-bold rounded-1 px-4 py-2 mt-2 shadow-sm">
+                    Elegir Plan <i class="bi bi-arrow-right ms-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clases -->
+      <section id="clases" class="py-5 vh-100 d-flex align-items-center" style="background-color: var(--dark-lighten);">
+        <div class="container">
+          <div class="text-center mb-5">
+            <h2 class="display-4 fw-bold title-1 text-white">
+              <span style="color: var(--red)">Nuestras</span> Clases
+            </h2>
+            <p class="lead text-white">Encuentra la actividad perfecta para ti</p>
+          </div>
+
+          <!-- Scroll de Clases -->
           <div class="d-flex flex-nowrap overflow-auto gap-4 pb-2 justify-content-around">
 
-            <!-- Card 1 -->
-            <div class="card custom-card flex-shrink-0">
-              <div class="card-body text-center p-4">
-                <h5 class="card-title text-uppercase fw-bold text-danger mb-3 title-3">Plan basico</h5>
-                <p class="text-white mb-2 fw-bold title-3">Mensual</p>
-                <hr class="border-secondary w-50 mx-auto">
-                <p class="fs-1 fw-bold text-danger mb-3">S/199.99</p>
-                <p class="fs-3 fw-bold text-decoration-line-through text-white mb-1">S/299.99</p>
-                <p class="text-white lead mt-4">
-                  Todo incluido: cardio, pesas, clases grupales y entrenadores.<br>
-                  <span class="lead">Ideal para resultados rápidos.</span>
-                </p>
-                <p class="fw-bold mt-4">
-                  <i class="bi bi-stopwatch text-white me-2 fs-3"></i>
-                  <span class="text-danger fs-4">31 días</span>
-                </p>
-                <a th:href="@{/inscripcion}"
-                  class="btn fw-bold text-white rounded-0 px-4 py-2 mt-4 btn-mebresias color-btn">Elegir
-                  Plan <i class="bi bi-arrow-right fs-4 d-flex justify-content-center"></i></a>
+            <div class="col-lg-4 col-md-6 col-12 mb-4" th:each="clase : ${clases}">
+              <div class="card class-card border-0 shadow-lg rounded-0 overflow-hidden position-relative">
+
+                <div class="card-img-top position-absolute w-100 h-100 rounded-0"
+                  th:style="'background: url(' + ${clase.imagen} + ') center/cover;'">
+                </div>
+
+                <div
+                  class="position-absolute bottom-0 w-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
+                  style="height: 60px;">
+                  <h5 class="text-white mb-0 ms-5" th:text="${clase.nombre}"></h5>
+
+                  <div class="position-absolute d-flex align-items-center justify-content-center shadow"
+                    style="width: 60px; height: 60px; left: 20px; bottom: 15px; background: var(--red);">
+                    <i class="fas fa-dumbbell text-white fs-4"></i>
+                  </div>
+                </div>
+
+                <div
+                  class="class-overlay position-absolute top-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
+                  style="background: var(--red);">
+                  <i class="fas fa-dumbbell text-white display-3 mb-3"></i>
+                  <h4 class="text-white fw-bold mb-2" th:text="${clase.nombre}"></h4>
+                  <p class="text-white" th:text="${clase.descripcion}"></p>
+                </div>
+
               </div>
             </div>
-            <!-- Card 2 -->
-            <div class="card custom-card flex-shrink-0">
-              <div class="card-body text-center p-4">
-                <h5 class="card-title text-uppercase fw-bold text-danger mb-3 title-3">Plan Premium</h5>
-                <p class="text-white mb-2 fw-bold title-3">Mensual</p>
-                <hr class="border-secondary w-50 mx-auto">
-                <p class="fs-1 fw-bold text-danger mb-3">S/399.99</p>
-                <p class="fs-3 fw-bold text-decoration-line-through text-white mb-1">S599.99</p>
-                <p class="text-white lead mt-4">
-                  Todo incluido: cardio, pesas, clases grupales y entrenadores.<br>
-                  <span class="lead">Ideal para resultados rápidos.</span>
-                </p>
-                <p class="fw-bold mt-4">
-                  <i class="bi bi-stopwatch text-white me-2 fs-3"></i>
-                  <span class="text-danger fs-4">31 días</span>
-                </p>
-                <a th:href="@{/inscripcion}"
-                  class="btn fw-bold text-white rounded-0 px-4 py-2 mt-4 btn-mebresias color-btn">Elegir
-                  Plan <i class="bi bi-arrow-right fs-4 d-flex justify-content-center"></i></a>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Contacto -->
+      <section id="contacto" class="py-5 vh-100 d-flex align-items-center" style="background-color: #000;">
+        <div class="container">
+          <div class="d-flex flex-column flex-lg-row align-items-stretch gap-4">
+
+            <!-- 📨 Formulario -->
+            <div class="flex-fill p-4 p-md-5 shadow-lg" style="background-color: #0a0a0a;">
+              <h3 class="fw-bold text-white mb-4 title-3 text-uppercase">
+                ¡Contáctanos!
+              </h3>
+
+              <form class="contact-form h-100 d-flex flex-column">
+                <div class="mb-3">
+                  <label for="nombre" class="form-label fw-semibold text-white-50">Nombre</label>
+                  <input type="text" id="nombre"
+                    class="form-control form-control-lg bg-transparent text-white border-0 border-bottom border-secondary rounded-0"
+                    placeholder="Tu nombre completo">
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label fw-semibold text-white-50">Email</label>
+                  <input type="email" id="email"
+                    class="form-control form-control-lg bg-transparent text-white border-0 border-bottom border-secondary rounded-0"
+                    placeholder="tu@email.com">
+                </div>
+
+                <div class="mb-4">
+                  <label for="mensaje" class="form-label fw-semibold text-white-50">Mensaje</label>
+                  <textarea id="mensaje"
+                    class="form-control form-control-lg bg-transparent text-white border-0 border-bottom border-secondary rounded-0"
+                    rows="5" placeholder="Escribe tu mensaje aquí..."></textarea>
+                </div>
+
+                <button type="submit"
+                  class="btn btn-lg px-5 py-3 fw-bold text-white border-0 rounded-0 shadow-sm align-self-start"
+                  style="background-color: var(--red); transition: all 0.3s ease;">
+                  <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                </button>
+              </form>
+            </div>
+
+            <!-- 📍 Información + Mapa -->
+            <div class="flex-fill position-relative overflow-hidden" style="background-color: #0a0a0a;">
+              <div class="d-flex flex-column h-100 justify-content-between">
+
+                <!-- Info -->
+                <div class="p-4 p-md-5" style="background-color: transparent;">
+                  <!-- Teléfono -->
+                  <div class="d-flex align-items-center mb-4">
+                    <div class="me-3 d-flex align-items-center justify-content-center"
+                      style="width: 55px; height: 55px; background-color: var(--red); flex-shrink: 0;">
+                      <i class="fas fa-phone text-white fs-5"></i>
+                    </div>
+                    <div>
+                      <h6 class="fw-bold text-white mb-1">Llámanos</h6>
+                      <p class="text-white-50 mb-0">+51 987 654 321</p>
+                    </div>
+                  </div>
+
+                  <!-- Dirección -->
+                  <div class="d-flex align-items-center mb-4">
+                    <div class="me-3 d-flex align-items-center justify-content-center"
+                      style="width: 55px; height: 55px; background-color: var(--red); flex-shrink: 0;">
+                      <i class="fas fa-map-marker-alt text-white fs-5"></i>
+                    </div>
+                    <div>
+                      <h6 class="fw-bold text-white mb-1">Dirección</h6>
+                      <p class="text-white-50 mb-0">Lima, Ate - Santa Clara</p>
+                    </div>
+                  </div>
+
+                  <!-- Horarios -->
+                  <div class="d-flex align-items-center">
+                    <div class="me-3 d-flex align-items-center justify-content-center"
+                      style="width: 55px; height: 55px; background-color: var(--red); flex-shrink: 0;">
+                      <i class="fas fa-clock text-white fs-5"></i>
+                    </div>
+                    <div>
+                      <h6 class="fw-bold text-white mb-1">Horarios</h6>
+                      <p class="text-white-50 mb-0">Lun-Vie: 6AM-10PM<br>Sáb-Dom: 7AM-8PM</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mapa -->
+                <div class="flex-grow-1" style="min-height: 300px;">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3346494781736!2d-76.92474492404258!3d-12.046389441514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c734c6b4b507%3A0x37c0c94a6820a5f5!2sAte%2C%20Lima%2C%20Peru!5e0!3m2!1sen!2sus!4v1697365200000!5m2!1sen!2sus"
+                    width="100%" height="100%" style="border:0; filter: grayscale(100%) brightness(0.6);"
+                    allowfullscreen="" loading="lazy"></iframe>
+                </div>
+
               </div>
             </div>
-            <!-- Card 3-->
-            <div class="card custom-card flex-shrink-0">
-              <div class="card-body text-center p-4">
-                <h5 class="card-title text-uppercase fw-bold text-danger mb-3 title-3">Plan Familiar</h5>
-                <p class="text-white mb-2 fw-bold title-3">Mensual</p>
-                <hr class="border-secondary w-50 mx-auto">
-                <p class="fs-1 fw-bold text-danger mb-3">S/499.99</p>
-                <p class="fs-3 fw-bold text-decoration-line-through text-white mb-1">S/699.99</p>
-                <p class="text-white lead mt-4">
-                  Todo incluido: cardio, pesas, clases grupales y entrenadores.<br>
-                  <span class="lead">Ideal para resultados rápidos.</span>
-                </p>
-                <p class="fw-bold mt-4">
-                  <i class="bi bi-stopwatch text-white me-2 fs-3"></i>
-                  <span class="text-danger fs-4">31 días</span>
-                </p>
-                <a th:href="@{/inscripcion}"
-                  class="btn fw-bold text-white rounded-0 px-4 py-2 mt-4 btn-mebresias color-btn">Elegir
-                  Plan <i class="bi bi-arrow-right fs-4 d-flex justify-content-center"></i></a>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
 
-      <div class="py-5" style="background-color: var(--dark-lighten);">
-        <div class="container">
-          <!-- Seccion 1 Clases -->
-          <div id="clases" class="row py-5 min-vh-100">
-            <!-- <div class="row py-5" style="background-color: var(--dark)"> -->
-            <div class="col-12 text-center mb-3">
-              <h2 class="display-4 fw-bold title-1 text-white"><span style="color:var(--red)">Nuestras</span> Clases
-              </h2>
-              <!--text-danger  por var-->
-              <p class="lead text-white">Encuentra la actividad perfecta para ti</p>
-            </div>
-
-            <!-- Scrool Clases -->
-            <div class="d-flex flex-nowrap overflow-auto gap-4 pb-2 justify-content-around">
-              <!-- fila 1 -->
-              <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <div class="card class-card border-0 shadow-lg rounded-0 overflow-hidden position-relative">
-                  <div class="card-img-top position-absolute w-100 h-100 rounded-0"
-                    style="background: url('img/index/fuerza.jpg') center/cover;">
-                  </div>
-
-
-                  <div
-                    class="position-absolute bottom-0 w-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
-                    style="height: 60px;">
-                    <h5 class="text-white mb-0 ms-5">Fuerza</h5>
-
-                    <div
-                      class="position-absolute rounded-0 d-flex align-items-center justify-content-center border border-0 border-white shadow"
-                      style="width: 60px; height: 60px; left: 20px; bottom: 15px;background:var(--red);">
-                      <i class="fas fa-dumbbell text-white fs-4"></i>
-                    </div>
-                  </div>
-
-
-                  <div
-                    class="class-overlay position-absolute top-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                    style="background: var(--red);">
-                    <i class="fas fa-dumbbell text-white display-3 mb-3"></i>
-                    <h4 class="text-white fw-bold mb-2">Fuerza</h4>
-                    <p class="text-white">Desarrolla tu fuerza muscular con entrenamientos de peso libre
-                      y
-                      máquinas
-                      especializadas.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <div class="card class-card border-0 shadow-lg rounded-0 overflow-hidden position-relative">
-                  <div class="card-img-top position-absolute w-100 h-100 rounded-0"
-                    style="background: url('img/index/ride.jpg') center/cover;">
-                  </div>
-
-                  <div
-                    class="position-absolute bottom-0 w-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
-                    style="height: 60px;">
-                    <h5 class="text-white mb-0 ms-5">Ciclismo</h5>
-                    <div
-                      class="position-absolute rounded-0 d-flex align-items-center justify-content-center border border-0 border-white shadow"
-                      style="width: 60px; height: 60px; left: 20px; bottom: 15px;background:var(--red);">
-                      <i class="fas fa-bicycle text-white fs-4"></i>
-                    </div>
-                  </div>
-
-                  <div
-                    class="class-overlay position-absolute top-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                    style="background: var(--red);">
-                    <i class="fas fa-bicycle text-white display-3 mb-3"></i>
-                    <h4 class="text-white fw-bold mb-2">Ciclismo</h4>
-                    <p class="text-white">Pedalea hacia tus objetivos con clases de spinning dinámicas y
-                      motivadoras.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <div class="card class-card border-0 shadow-lg rounded-0 overflow-hidden position-relative">
-                  <div class="card-img-top position-absolute w-100 h-100 rounded-0"
-                    style="background: url('img/index/cardio.jpg') center/cover;">
-                  </div>
-
-                  <div
-                    class="position-absolute bottom-0 w-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
-                    style="height: 60px;">
-                    <h5 class="text-white mb-0 ms-5">Cardio</h5>
-                    <div
-                      class="position-absolute rounded-0 d-flex align-items-center justify-content-center border border-0 border-white shadow"
-                      style="width: 60px; height: 60px; left: 20px; bottom: 15px;background:var(--red);">
-                      <i class="fas fa-heartbeat text-white fs-4"></i>
-                    </div>
-                  </div>
-
-                  <div
-                    class="class-overlay position-absolute top-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                    style="background: var(--red);">
-                    <i class="fas fa-heartbeat text-white display-3 mb-3"></i>
-                    <h4 class="text-white fw-bold mb-2">Cardio</h4>
-                    <p class="text-white">Mejora tu resistencia cardiovascular con entrenamientos de
-                      alta
-                      intensidad.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- fila 2 -->
-              <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <div class="card class-card border-0 shadow-lg rounded-0 overflow-hidden position-relative">
-                  <div class="card-img-top position-absolute w-100 h-100 rounded-0"
-                    style="background: url('img/index/mind.jpg') center/cover;">
-                  </div>
-
-                  <div
-                    class="position-absolute bottom-0 w-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
-                    style="height: 60px;">
-                    <h5 class="text-white mb-0 ms-5">Cuerpo y Mente</h5>
-                    <div
-                      class="position-absolute rounded-0 d-flex align-items-center justify-content-center border border-0 border-white shadow"
-                      style="width: 60px; height: 60px; left: 20px; bottom: 15px;background:var(--red);">
-                      <i class="fas fa-leaf text-white fs-4"></i>
-                    </div>
-                  </div>
-
-                  <div
-                    class="class-overlay position-absolute top-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                    style="background: var(--red);">
-                    <i class="fas fa-leaf text-white display-3 mb-3"></i>
-                    <h4 class="text-white fw-bold mb-2">Cuerpo y Mente</h4>
-                    <p class="text-white">Conecta cuerpo y mente con yoga, pilates y técnicas de
-                      relajación.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <div class="card class-card border-0 shadow-lg rounded-0 overflow-hidden position-relative">
-                  <div class="card-img-top position-absolute w-100 h-100 rounded-0"
-                    style="background: url('img/index/dance.jpg') center/cover;">
-                  </div>
-
-                  <div
-                    class="position-absolute bottom-0 w-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
-                    style="height: 60px;">
-                    <h5 class="text-white mb-0 ms-5">Danza</h5>
-                    <div
-                      class="position-absolute rounded-0 d-flex align-items-center justify-content-center border border-0 border-white shadow"
-                      style="width: 60px; height: 60px; left: 20px; bottom: 15px;background:var(--red);">
-                      <i class="fas fa-music text-white fs-4"></i>
-                    </div>
-                  </div>
-
-                  <div
-                    class="class-overlay position-absolute top-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                    style="background: var(--red);">
-                    <i class="fas fa-music text-white display-3 mb-3"></i>
-                    <h4 class="text-white fw-bold mb-2">Danza</h4>
-                    <p class="text-white">Diviértete mientras te ejercitas con clases de baile y zumba.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-6 col-12 mb-4">
-                <div class="card class-card border-0 shadow-lg rounded-0 overflow-hidden position-relative">
-                  <div class="card-img-top position-absolute w-100 h-100 rounded-0"
-                    style="background: url('img/index/speciality.jpg') center/cover;">
-                  </div>
-
-                  <div
-                    class="position-absolute bottom-0 w-100 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center"
-                    style="height: 60px;">
-                    <h5 class="text-white mb-0 ms-5">Especialidades</h5>
-                    <div
-                      class="position-absolute rounded-0 d-flex align-items-center justify-content-center border border-0 border-white shadow"
-                      style="width: 60px; height: 60px; left: 20px; bottom: 15px;background:var(--red);">
-                      <i class="fas fa-star text-white fs-4"></i>
-                    </div>
-                  </div>
-
-                  <div
-                    class="class-overlay position-absolute top-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                    style="background: var(--red);">
-                    <i class="fas fa-star text-white display-3 mb-3"></i>
-                    <h4 class="text-white fw-bold mb-2">Especialidades</h4>
-                    <p class="text-white">Entrena con programas especializados diseñados por nuestros
-                      expertos.</p>
-                  </div>
-                </div>
-              </div>
-            </div><!--End scroll Clases-->
-          </div>
-
-          <!-- Seccion 2 Contacto -->
-          <div class="row py-2 min-vh-100" id="contacto">
-            <div class="col-12">
-              <div class="d-flex flex-column flex-lg-row align-items-stretch gap-4">
-
-                <div class="flex-fill p-1 rounded-0 shadow-lg" style="background-color: var(--dark)">
-                  <h3 class="fw-bold text-white mb-4 title-3">¡Contáctanos!</h3>
-                  <form class="contact-form h-100 d-flex flex-column">
-                    <div class="mb-3">
-                      <label for="nombre" class="form-label fw-bold text-white title-3 title-3">Nombre</label>
-                      <input type="text" class="form-control form-control-lg border-2 rounded-3" id="nombre"
-                        placeholder="Tu nombre completo">
-                    </div>
-                    <div class="mb-3">
-                      <label for="email" class="form-label fw-bold text-white title-3 title-3">Email</label>
-                      <input type="email" class="form-control form-control-lg border-2 rounded-3" id="email"
-                        placeholder="tu@email.com">
-                    </div>
-                    <div class="mb-3">
-                      <label for="mensaje" class="form-label fw-bold text-white title-3 title-3">Mensaje</label>
-                      <textarea class="form-control form-control-lg border-2 rounded-3" id="mensaje" rows="5"
-                        placeholder="Escribe tu mensaje aquí..."></textarea>
-                    </div>
-                    <div class="d-grid d-md-block mb-3">
-                      <button type="submit" class="btn btn-lg px-5 rounded-0 fw-bold text-white "
-                        style="background-color: var(--red)">
-                        <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
-                      </button>
-                    </div>
-                  </form>
-                </div>
-
-
-                <div class="flex-fill position-relative rounded-0 overflow-hidden shadow-lg pl-3"
-                  style="background: url('img/index/bg.png') center/cover;">
-
-                  <!-- flex-md-row -->
-                  <div class="d-flex flex-column bg-white rounded-0 shadow-lg h-100" style="gap:25px; padding:0px;">
-
-                    <div class="d-flex flex-column  rounded-0 shadow-lg h-100"
-                      style="gap:25px; padding:10px; background-color: var(--dark);">
-                      <!--flex-md-row-->
-
-
-
-                      <div class="d-flex flex-column justify-content-center" style="flex: 1; min-width: 220px;">
-
-                        <div class="d-flex align-items-center mb-3 p-2">
-                          <div class="rounded-0 d-flex align-items-center justify-content-center me-3"
-                            style="width: 50px; height: 50px;background-color: var(--red);">
-                            <i class="fas fa-phone text-white"></i>
-                          </div>
-                          <div>
-                            <h6 class="fw-bold mb-1 text-white title-3">Llámanos</h6>
-                            <p class="mb-0 text-white">+51 987 654 321</p>
-                          </div>
-                        </div>
-
-
-                        <div class="d-flex align-items-center mb-3 p-2">
-                          <div class="rounded-0 d-flex align-items-center justify-content-center me-3"
-                            style="width: 50px; height: 50px; background-color: var(--red);">
-                            <i class="fas fa-map-marker-alt text-white"></i>
-                          </div>
-                          <div>
-                            <h6 class="fw-bold mb-1 text-white title-3">Dirección</h6>
-                            <p class="text-white mb-0">Lima, Ate - Santa Clara</p>
-                          </div>
-                        </div>
-
-
-                        <div class="d-flex align-items-center p-2">
-                          <div class="rounded-0 d-flex align-items-center justify-content-center me-3"
-                            style="width: 50px; height: 50px;background-color: var(--red);">
-                            <i class="fas fa-clock text-white"></i>
-                          </div>
-                          <div>
-                            <h6 class="fw-bold mb-1 text-white title-3">Horarios</h6>
-                            <p class="text-white mb-0">Lun-Vie: 6AM-10PM<br>Sáb-Dom:
-                              7AM-8PM</p>
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <div class="flex-grow-1 rounded-3 overflow-hidden shadow-sm">
-                        <iframe
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3346494781736!2d-76.92474492404258!3d-12.046389441514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c734c6b4b507%3A0x37c0c94a6820a5f5!2sAte%2C%20Lima%2C%20Peru!5e0!3m2!1sen!2sus!4v1697365200000!5m2!1sen!2sus"
-                          width="100%" height="100%" style="border:0; min-height:300px;" allowfullscreen=""
-                          loading="lazy"></iframe>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- Footer -->
       <footer class="dark text-light" style="background-color: var(--dark);">
         <div class="container container-fooder">
           <div class="d-flex justify-content-between align-items-center caja-img" style="height: 20vh;">

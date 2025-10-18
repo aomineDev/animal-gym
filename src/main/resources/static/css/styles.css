@@ -1,5 +1,6 @@
 /* Global */
 @import './global/_global.css';
+@import './global/_floating-button.css';
 
 /* Componentes */
 @import './components/_sidedbar.css';
@@ -24,4 +25,5 @@
 @import './layout/client/_mebresias.css';
 @import './layout/client/_footer.css';
 @import './layout/client/_inscripcion.css';
+@import './layout/client/_contacto.css';
 @import './layout/admin/_empleado.css';

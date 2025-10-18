@@ -21,3 +21,12 @@
 .clase-form .img-container {
   height: 150px;
 }
+
+@media (min-width: 992px) {
+
+  #filtroOffcanvas {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+  }
+}

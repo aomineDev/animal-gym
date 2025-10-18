@@ -1,6 +1,6 @@
 export default function ({ claseId, nombre, descripcion, estado, imagen }) {
   return /*html*/ `
-          <div class="col-12 col-md-6 col-xl-3" data-id="${claseId}">
+          <div class="col-12 col-md-6 col-xl-4" data-id="${claseId}">
             <div class="mt-4 border-0 card overflow-hidden rounded-4">
               <div class="overflow-hidden">
                 <img src="${imagen}" class="card-img-top w-100" alt="${nombre}"

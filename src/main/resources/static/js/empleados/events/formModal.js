@@ -27,7 +27,6 @@ const bsModal = bootstrap.Modal.getOrCreateInstance(empleadoFormularioModal);
 const defaultFormImagen = '/img/form/image-preview.png';
 const tipo = PERSONA_TYPE.EMPLEADO
 
-
 async function handleFormSubmit(e) {
   if (!this.checkValidity()) return
 

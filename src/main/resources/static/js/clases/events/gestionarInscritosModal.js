@@ -110,7 +110,7 @@ async function handleDeleteSocio(e) {
   }
 }
 
-export function registerInscritosModalEvents() {
+export default function registerInscritosModalEvents() {
   gestionarInscritosModal.addEventListener(
     'show.bs.modal',
     renderTableInscritos

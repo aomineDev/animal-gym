@@ -4,67 +4,136 @@
 
 <body>
   <th:block th:fragment="content">
-    <div class="container">
-      <!-- Principal -->
+    <div class="container my-4">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2><i class="bi bi-people me-2"></i>Gestión de Rutinas</h2>
       </div>
 
-      <!-- Tabla con rutinas activas -->
-      <div class="table-responsive">
-        <h3 class="text-center mt-5">Tabla de socios</h3>
-        <table id="rutinaSocioTable" class="table table-hover align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>Nombre</th>
-              <th>DNI</th>
-              <th>Nombres rutinas</th>
-              <th>Fecha Inicio</th>
-              <th>Fecha Fin</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="rutinaSocioTable-body">
-            <tr th:each="socio : ${socios}" th:data-id="${socio.personaId}">
-              <td th:text="${socio.nombre}"></td>
-              <td th:text="${socio.dni}"></td>
-              <td>
-                <div class="d-flex flex-column">
-                  <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.nombre}"
-                    class="badge bg-primary mb-1 align-self-start"></span>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex flex-column">
-                  <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.fechaInicio}"
-                    class="badge bg-success mb-1 align-self-start"></span>
-                </div>
-              </td>
-              <td>
-                <div class="d-flex flex-column">
-                  <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.fechaFin}"
-                    class="badge bg-warning mb-1 align-self-start"></span>
-                </div>
-              </td>
-              <td>
-                <div class="dropdown">
-                  <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                    <i class="bi bi-three-dots-vertical"></i>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target=#rutinaSocioDetailModal
-                        th:data-id="${socio.personaId}">
-                        <i class="bi bi-eye me-2"></i>Ver detalle
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row">
+        <!-- columna izquierda -->
+        <aside class="col-12 col-lg-3 mt-4 mb-4 offcanvas-lg offcanvas-start bg-white p-4 rounded-4 shadow-sm"
+          style="overflow: visible;" tabindex="-1" id="filtroOffcanvas" aria-labelledby="filtroOffcanvasLabel">
+
+          <div class="offcanvas-header d-flex d-lg-none">
+            <h5 class="offcanvas-title" id="filtroOffcanvasLabel">
+              <i class="bi bi-funnel me-2"></i>Filtrar socios
+            </h5>
+          </div>
+
+          <div class="offcanvas-body p-0 p-lg-0">
+            <form class="formFilter">
+              <h5 class="mb-3 d-none d-lg-block">
+                <i class="bi bi-funnel me-2"></i>Filtrar socios
+              </h5>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text bg-white border-end-0">
+                  <i class="bi bi-search"></i>
+                </span>
+                <input type="text" id="buscarInput" class="form-control border-start-0"
+                  placeholder="Buscar por nombre o DNI..." />
+              </div>
+
+              <div class="mb-3">
+                <label for="estadoInput" class="form-label">Estado</label>
+                <select id="estadoInput" class="form-select">
+                  <option value="">Todos</option>
+                  <option value="Socios con rutina">Socios con rutina</option>
+                  <option value="Socios sin rutina">Socios sin rutina</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="entrenadorInput" class="form-label">Entrenador</label>
+                <select id="entrenadorInput" class="form-select" required>
+                  <option value="">Seleccione un entrenador</option>
+                  <option th:each="usuario: ${usuarios}" th:if="${usuario.rol.rolId == 2}"
+                    th:value="${usuario.persona.personaId}"
+                    th:text="${usuario.persona.nombre} + ' ' + ${usuario.persona.apellido}">
+                  </option>
+                </select>
+              </div>
+
+              <button type="button" id="resetFiltrosBtn" class="btn btn-primary w-100">
+                <i class="bi bi-check-circle me-2"></i>Resetear filtros
+              </button>
+            </form>
+          </div>
+        </aside>
+
+        <!-- Tabla con rutinas activas -->
+        <div class="table-responsive col-12 col-lg-9">
+          <h3 class="text-center mt-5">Tabla de socios</h3>
+          <table id="rutinaSocioTable" class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>Nombre</th>
+                <th>DNI</th>
+                <th>Nombres rutinas</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="rutinaSocioTable-body">
+              <tr th:each="socio : ${socios}" th:data-id="${socio.personaId}">
+                <td th:text="${socio.nombre}"></td>
+                <td th:text="${socio.dni}"></td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.nombre}"
+                      class="badge bg-primary mb-1 align-self-start"></span>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.fechaInicio}"
+                      class="badge bg-success mb-1 align-self-start"></span>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex flex-column">
+                    <span th:each="rutina : ${socio.rutinas}" th:text="${rutina.fechaFin}"
+                      class="badge bg-warning mb-1 align-self-start"></span>
+                  </div>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target=#rutinaSocioDetailModal
+                          th:data-id="${socio.personaId}">
+                          <i class="bi bi-eye me-2"></i>Ver detalle
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      <!-- Botón flotante -->
+      <div class="fab-container d-lg-none">
+        <!-- Opciones -->
+        <div class="fab-actions">
+          <button class="btn btn-warning rounded-circle shadow" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#filtroOffcanvas" aria-controls="filtroOffcanvas" title="Filtrar">
+            <i class="bi bi-funnel"></i>
+          </button>
+        </div>
+
+        <!-- Principal -->
+        <button class="fab-main btn btn-primary rounded-circle shadow">
+          <i class="bi bi-plus-lg"></i>
+        </button>
+      </div>
+    </div>
   </th:block>
 
   <th:block th:fragment="modal">

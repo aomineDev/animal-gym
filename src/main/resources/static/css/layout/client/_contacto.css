@@ -1,0 +1,39 @@
+#contacto .form-control {
+  background-color: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+  transition: border-color 0.3s ease;
+}
+
+#contacto .form-control:focus {
+  border-color: var(--red);
+  box-shadow: none;
+  color: #fff;
+}
+
+#contacto label {
+  font-size: 0.95rem;
+}
+
+#contacto .btn {
+  background-color: var(--red);
+}
+
+#contacto .btn:hover {
+  background-color: #b3121a;
+  transform: translateY(-2px);
+}
+
+/* Íconos */
+#contacto i {
+  transition: transform 0.3s ease;
+}
+
+#contacto .d-flex.align-items-center:hover i {
+  transform: scale(1.15);
+}
+
+/* Sin marcos, sin colores blancos extra */
+#contacto .shadow-lg {
+  box-shadow: none !important;
+}

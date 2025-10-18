@@ -3,64 +3,127 @@
 
 <body>
   <th:block th:fragment="content">
-    <div class="container">
+    <div class="container my-4">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2><i class="bi bi-card-checklist me-2"></i>Gestión de Clases</h2>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#claseFormModal">
+        <button class="btn btn-primary d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#claseFormModal">
           <i class="bi bi-plus-circle me-2"></i>Crear clase
         </button>
       </div>
 
-      <!-- Drecha -->
-      <div class="col-12">
-        <div class="row" id="clase-container">
-          <!-- CARTA -->
-          <div class="col-12 col-md-6 col-xl-3" th:each="clase : ${clases}" th:data-id="${clase.claseId}">
-            <div class="mt-4 border-0 card overflow-hidden rounded-4">
-              <div class="overflow-hidden">
-                <img th:src="${clase.imagen}" class="card-img-top w-100" th:alt="${clase.nombre}"
-                  style="height: 200px; object-fit: cover" />
+      <div class="row">
+        <!-- columna izquierda -->
+        <aside class="col-12 col-lg-3 mt-4 mb-4 offcanvas-lg offcanvas-start bg-white p-4 rounded-4 shadow-sm"
+          style="overflow: visible;" tabindex="-1" id="filtroOffcanvas" aria-labelledby="filtroOffcanvasLabel">
+
+          <div class="offcanvas-header d-flex d-lg-none">
+            <h5 class="offcanvas-title" id="filtroOffcanvasLabel">
+              <i class="bi bi-funnel me-2"></i>Filtrar clases
+            </h5>
+          </div>
+
+          <div class="offcanvas-body p-0 p-lg-0">
+            <form class="formFilter">
+              <h5 class="mb-3 d-none d-lg-block">
+                <i class="bi bi-funnel me-2"></i>Filtrar clases
+              </h5>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text bg-white border-end-0">
+                  <i class="bi bi-search"></i>
+                </span>
+                <input type="text" id="buscarClaseInput" class="form-control border-start-0"
+                  placeholder="Buscar clase por nombre..." />
               </div>
 
-              <div class="row d-flex align-items-center card-body">
-                <div class="col-9">
-                  <h5 class="card-title mb-1" th:text="${clase.nombre}"></h5>
-                  <p class="text-muted mb-1" th:text="${clase.descripcion}"></p>
-                  <span class="badge bg-outline-primary text-primary" th:text="${clase.estado}"
-                    th:classappend="${clase.estado} == 'Programado' ? ' text-primary' : (${clase.estado} == 'En curso' ? ' text-success' : (${clase.estado} == 'Finalizado' ? ' text-danger' : ' text-dark'))"></span>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Fecha inicio</label>
+                <input type="date" id="fechaInicioInput" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Fecha de fin</label>
+                <input type="date" id="fechaFinInput" class="form-control" disabled>
+              </div>
+
+              <div class="mb-3">
+                <label for="estadoInput" class="form-label">Estado</label>
+                <select id="estadoInput" class="form-select">
+                  <option value="">Todos</option>
+                  <option value="Programado">Programado</option>
+                  <option value="En curso">En curso</option>
+                  <option value="Finalizado">Finalizado</option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="intensidadInput" class="form-label">Intensidad</label>
+                <select id="intensidadInput" class="form-select">
+                  <option value="">Todos</option>
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </div>
+
+              <button type="button" id="resetFiltrosBtn" class="btn btn-primary w-100">
+                <i class="bi bi-check-circle me-2"></i>Resetear filtros
+              </button>
+            </form>
+          </div>
+        </aside>
+
+        <!-- columna derecha -->
+        <div class="col-12 col-lg-9">
+          <div class="row" id="clase-container">
+            <!-- CARTA -->
+            <div class="col-12 col-md-6 col-xl-4" th:each="clase : ${clases}" th:data-id="${clase.claseId}">
+              <div class="mt-4 border-0 card overflow-hidden rounded-4">
+                <div class="overflow-hidden">
+                  <img th:src="${clase.imagen}" class="card-img-top w-100" th:alt="${clase.nombre}"
+                    style="height: 200px; object-fit: cover" />
                 </div>
 
-                <div class="col-3 text-end">
-                  <div class="dropdown">
-                    <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
-                      <i class="bi bi-three-dots-vertical"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#claseDetailModal"
-                          th:data-id="${clase.claseId}">
-                          Ver detalles
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#claseFormModal"
-                          th:data-id="${clase.claseId}">
-                          Editar
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                          data-bs-target="#gestionarInscritosModal" th:data-id="${clase.claseId}">
-                          Gestionar Inscritos
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
-                          data-bs-target="#claseDeleteModal" th:data-id="${clase.claseId}">
-                          Eliminar
-                        </a>
-                      </li>
-                    </ul>
+                <div class="row d-flex align-items-center card-body">
+                  <div class="col-9">
+                    <h5 class="card-title mb-1" th:text="${clase.nombre}"></h5>
+                    <p class="text-muted mb-1" th:text="${clase.descripcion}"></p>
+                    <span class="badge bg-outline-primary text-primary" th:text="${clase.estado}"
+                      th:classappend="${clase.estado} == 'Programado' ? ' text-primary' : (${clase.estado} == 'En curso' ? ' text-success' : (${clase.estado} == 'Finalizado' ? ' text-danger' : ' text-dark'))"></span>
+                  </div>
+
+                  <div class="col-3 text-end">
+                    <div class="dropdown">
+                      <button class="btn btn-link text-dark p-0" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-three-dots-vertical"></i>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#claseDetailModal"
+                            th:data-id="${clase.claseId}">
+                            Ver detalles
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#claseFormModal"
+                            th:data-id="${clase.claseId}">
+                            Editar
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                            data-bs-target="#gestionarInscritosModal" th:data-id="${clase.claseId}">
+                            Gestionar Inscritos
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal"
+                            data-bs-target="#claseDeleteModal" th:data-id="${clase.claseId}">
+                            Eliminar
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -68,11 +131,32 @@
           </div>
         </div>
       </div>
+
+      <!-- Botón flotante -->
+      <div class="fab-container d-lg-none">
+        <!-- Opciones -->
+        <div class="fab-actions">
+          <button class="btn btn-success rounded-circle shadow" data-bs-toggle="modal" data-bs-target="#claseFormModal"
+            title="Agregar">
+            <i class="bi bi-plus-circle"></i>
+          </button>
+          <button class="btn btn-warning rounded-circle shadow" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#filtroOffcanvas" aria-controls="filtroOffcanvas" title="Filtrar">
+            <i class="bi bi-funnel"></i>
+          </button>
+        </div>
+
+        <!-- Principal -->
+        <button class="fab-main btn btn-primary rounded-circle shadow">
+          <i class="bi bi-plus-lg"></i>
+        </button>
+      </div>
     </div>
   </th:block>
 
   <!-- Mis modales -->
   <th:block th:fragment="modal">
+
     <!-- Modal de clase-->
     <div class="modal fade" id="claseFormModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">

@@ -94,22 +94,18 @@ async function handleFormSubmit(e) {
   }
 }
 
-function handelDateChange(e) {
-  const input = e.target
-  validateDateNow(input)
+function handelDateChange() {
+  validateDateNow(claseFormDate)
 }
 
 function handleHoraInicioChange(e) {
-  const inputHoraInicio = e.target
-  const inputFecha = claseFormDate.value
-
-  if (!inputFecha) {
-    inputHoraInicio.value = ''
+  if (!claseFormDate) {
+    claseFormHoraInicio.value = ''
     showToast('Seleccione primero una fecha', TOAST_TYPES.WARNING)
     return
   }
 
-  const [year, month, day] = inputFecha.split('-').map(Number)
+  const [year, month, day] = claseFormDate.value.split('-').map(Number)
   const fechaSeleccionada = new Date(year, month - 1, day)
   const hoy = new Date()
 
@@ -117,14 +113,14 @@ function handleHoraInicioChange(e) {
   fechaSeleccionada.setHours(0, 0, 0, 0)
 
   if (fechaSeleccionada.getTime() === hoy.getTime()) {
-    const [hora, minuto] = inputHoraInicio.value.split(':').map(Number)
+    const [hora, minuto] = claseFormHoraInicio.value.split(':').map(Number)
     const horaSeleccionada = new Date()
     horaSeleccionada.setHours(hora, minuto, 0, 0)
 
     const ahora = new Date()
 
     if (horaSeleccionada < ahora) {
-      inputHoraInicio.value = ''
+      claseFormHoraInicio.value = ''
       showToast(
         'La hora no puede ser anterior a la hora actual',
         TOAST_TYPES.WARNING
@@ -133,11 +129,8 @@ function handleHoraInicioChange(e) {
   }
 }
 
-function handleHoraFinChange(e) {
-  const inputHoraInicio = claseFormHoraInicio.value
-  const inputHoraFin = e.target
-
-  validateRange(inputHoraInicio, inputHoraFin, 'hora')
+function handleHoraFinChange() {
+  validateRange(claseFormHoraInicio, claseFormHoraFin, 'hora')
 }
 
 function handleImageChange(e) {
